@@ -1,0 +1,390 @@
+%\VignetteIndexEntry{simTool}
+%\VignetteEngine{knitr::knitr}
+\documentclass{article}
+
+\begin{document}
+
+\section{Introduction}
+
+The purpose of the \texttt{simTool} package is to disengage the research from any kind
+of administrative source code which is usually an annoying necessity of a 
+simulation study.
+
+This vignette will give an introduction into the \texttt{simTool} package mainly by
+examples of growing complexity. The workhorse is the function \texttt{evalGrids}. Every
+parameter of this function will be discussed briefly and the functionality is
+illustrated by at least one example.
+
+\section{Workflow}
+
+The workflow is quite easy and natural. One defines two \texttt{data.frames}, the first
+represents the functions that generate the data sets and the second represent
+the functions that analyze the data. These two \texttt{data.frames} are passed to
+*evalGrids*, which conducts the simulation. Afterwards, the results can nicely
+be displayed as a \texttt{data.frame} be coercing the object returned by \texttt{evalGrids}
+to a \texttt{data.frame}.
+
+\section{Defining the \texttt{data.frames}  the data generation and analyzation}
+
+There 3 rules:
+\begin{itemize}
+\item the first column ( a \texttt{character} vector) defines the functions to be called
+\item the other columns are the parameters that are passed to function specified in the 
+      first column
+\item The entry \texttt{NA} will not be passed to the function specified in the first column.
+\end{itemize}
+The function \texttt{expandGrid} is a convenient function for defining such \texttt{data.frames}.
+
+We now define the data generation functions for our first simulation.
+<<>>=
+require(simTool)
+print(dg <- rbind.fill(
+  expandGrid(fun="rexp", n=c(10, 20), rate=1:2),
+  expandGrid(fun="rnorm", n=c(10, 20), mean=1:2)))
+@
+
+
+This \texttt{data.frame} represents 8 \texttt{R}-functions. For instance, the second
+row represent a function that generates 20 exponential distributed random variables
+with \texttt{rate} 1. Since \texttt{mean=NA} in the second row, this parameter is
+not passed to \texttt{rexp}.
+
+Similar, we define the \texttt{data.frame} for data analyzing functions.
+
+<<>>=
+print(pg<-rbind.fill(
+  expandGrid(proc="min"),
+  expandGrid(proc="mean", trim=c(0.1, 0.2))))
+@
+
+Hence, this \texttt{data.frame} represents 3 \texttt{R}-functions i.e. calculating the
+minimum and the arithmetic mean with \texttt{trim=0.1} and \texttt{trim=0.2} of.
+
+\section{The workhorse \texttt{evalGrids}}
+
+The workhorse \texttt{evalGrids} has the following simplified pseudo code:
+
+\verb|1  convert dg to R-functions | $\{g_1, ..., g_k\}$ \newline
+\verb|2  convert pg to R-functions | $\{f_1, ..., f_\ell\}$ \newline
+\verb|3  initialize result object| \newline
+\verb|4  append dg and pg to the result object| \newline
+\verb|5  t1 = current.time()| \newline
+\verb|6  for g in | $\{g_1, \ldots, g_k\}$ \newline
+\verb|7      for r in 1:replications (optionally in a parallel manner)| \newline
+\verb|8          data = g()| \newline
+\verb|9          for f in | $\{f_1, \ldots, f_\ell\}$ \newline
+\verb|10             append f(data) to the result object| \newline
+\verb|11         optionally append data to the result object| \newline
+\verb|12      optionally summarize the result object over all | \newline
+\verb|        replications, but separately for| $f_1, \ldots, f_\ell$ \newline
+\verb|13     optionally save the results so far obtained to HDD|  \newline
+\verb|14 t2 = current.time()| \newline
+\verb|15 Estimate the number of replications per hour from t1 and t2| \newline
+
+
+In general the object returned by \texttt{evalGrids} is a \texttt{list}
+of class \texttt{evalGrid} and can be coerced into 
+a \texttt{data.frame}. Later on, we will investigate the case if this is
+not the case.
+
+<<>>=
+dg = expandGrid(fun="rnorm", n=10, mean=1:2)
+pg = expandGrid(proc="min")
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 2)
+as.data.frame(eg)
+@
+
+The object returned by \texttt{evalGrids} will be discussed at the
+end of the vignette. But specific points about this object will
+be explained earlier.
+
+\subsection{Parameter \texttt{replications}}
+
+Of course, this parameter controls the number of replications conducted.
+<<>>=
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 3)
+as.data.frame(eg)
+@
+
+\subsection{Parameter \texttt{discardGeneratedData}}
+
+\texttt{evalGrids} saves ALL generated data sets. For small simulation
+studies this is no problem. In general, it is sometimes very handy to
+have data sets in order to investigate unusual or unexpected results.
+But saving the generated data set can be very memory consuming.
+Simply setting \texttt{discardGeneratedData = TRUE} stop saving the
+generate data. Confer command line 11 in the pseudo code.
+<<>>=
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000)
+object.size(eg)
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000,
+    discardGeneratedData = TRUE)
+object.size(eg)
+@
+The object returned by \texttt{evalGrids} will be discussed at the
+end of this vignette.
+
+\subsection{Parameter \texttt{progress}}
+
+This parameter activates a text progress bar in the console. Usually,
+this does not sense if one uses \texttt{Sweave} or \texttt{knitr},
+but for demonstration purpose we do this here.
+
+<<>>=
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10,
+    progress = TRUE)
+@ 
+
+The progress bar increases every time a new element is chosen in
+command line 6 of the pseudo code.
+
+\subsection{Parameter \texttt{post.proc}}
+
+As stated in command line 12 we can summarize the result objects over 
+all replications, but separately for all data analyzing functions.
+<<>>=
+dg = expandGrid(fun="runif", n=c(10,20,30))
+pg = expandGrid(proc=c("min", "max"))
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
+    post.proc=mean)
+as.data.frame(eg)
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
+    post.proc=c(mean, sd))
+as.data.frame(eg)
+@
+Note, by specifying the parameter \texttt{post.proc} the generated data sets
+are discarded and all individual result objects. In this example we discard
+$3 \times 1000$ data sets and $3 \times 1000 \times 2$ individual result
+objects. Although, the function \texttt{as.data.frame} or to be more precise
+\texttt{as.data.frame.evalGrid} has also a parameter \texttt{post.proc} that
+serves the same purpose, it may be necessary to summarize the results as soon
+as possible to spare memory. 
+
+We now briefly show that \texttt{post.proc} in \texttt{evalGrids} and
+\texttt{as.data.frame} yield the same results.
+
+<<>>=
+set.seed(1234)
+# summarize the result objects as soon as possible
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
+    post.proc=mean)
+as.data.frame(eg)
+set.seed(1234)
+# keeping the result objects
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000)
+# summarize the result objects by as.data.frame
+as.data.frame(eg, post.proc=mean)
+@
+
+\subsection{Parameter \texttt{ncpus} and \texttt{clusterSeed}}
+
+By specifying \texttt{ncpus} larger than 1 a cluster objected is created
+for the user and passed to the parameter \texttt{cluster} discussed in the
+next section.
+<<>>=
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, ncpus=2,
+    post.proc=mean)
+as.data.frame(eg)
+@
+As command line 6 stated, the replications are parallelized. In our case, this means
+that roughly every CPU conducts 5 replications.
+
+The parameter \texttt{clusterSeed} must be an integer vector of length 6 and
+serves the same purpose as the function \texttt{set.seed}. By default,
+\texttt{clusterSeed} equals \texttt{rep(12345, 6)}. Note, in order
+to reproduce the simulation study it is also necessary that \texttt{ncpus}
+does not change.
+<<>>=
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, ncpus=3,
+    post.proc=mean)
+as.data.frame(eg)
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, ncpus=2,
+    post.proc=mean)
+as.data.frame(eg)
+@
+
+\subsection{Parameter \texttt{cluster}}
+The user can create a cluster on its own. This also enables the user
+to distribute the replications over different computers in a network.
+<<>>=
+require(snow)
+cl = makeCluster(rep("localhost", 3), type="SOCK") 
+eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, cluster=cl,
+    post.proc=mean)
+as.data.frame(eg)
+stopCluster(cl)
+@
+As you can see our cluster consists of 3 workers. Hence, this reproduces the
+results from the last code chunk above. Further note, if the user starts the
+cluster, the user also has to stop the cluster. A cluster that is created
+within \texttt{evalGrids} by specifying \texttt{ncpus} is also stop within
+\texttt{evalGrids}.
+
+\subsection{Parameter \texttt{clusterLibraries} and \texttt{clusterGlobalObjects}}
+
+A newly created cluster is ``empty''. Hence, if the simulation study requires
+libraries or objects from the global environment, they must be transferred to 
+the cluster.
+
+Lets look at standard example from the \texttt{boot} package.
+<<>>=
+library(boot)
+ratio <- function(d, w) sum(d$x * w)/sum(d$u * w)
+city.boot <- boot(city, ratio, R = 999, stype = "w", sim = "ordinary")
+boot.ci(city.boot, conf = c(0.90, 0.95),
+        type = c("norm", "basic", "perc", "bca"))
+@
+
+The data generating function is extremely boring, because it always returns
+the data set \texttt{city} from the library \texttt{boot}.
+<<>>=
+returnCity = function(){
+  city
+}
+bootConfInt = function(data){
+city.boot <- boot(data, ratio, R = 999, stype = "w", sim = "ordinary")
+boot.ci(city.boot, conf = c(0.90, 0.95),
+        type = c("norm", "basic", "perc", "bca"))  
+}
+@
+
+The function \texttt{ratio} exists at the moment only our global environment.
+Further, we had to load the \texttt{boot} package. Hence, we load the \texttt{boot}
+package by setting \texttt{clusterLibraries = c("boot")} and transfer the function
+\texttt{ratio} by setting \texttt{clusterGlobalObjects = c("ratio)}.
+
+<<>>=
+dg = expandGrid(fun="returnCity")
+pg = expandGrid(proc="bootConfInt")
+eg = evalGrids(dg, pg, replications=10, ncpus=2,
+    clusterLibraries=c("boot"), 
+    clusterGlobalObjects=c("ratio"))
+@
+
+Of course, it is possible to set \texttt{clusterGlobalObjects=ls()}, but then of course
+all objects from the global environment are transferred to all workers.
+
+\subsection{Parameter \texttt{fallback}}
+
+If the user is afraid of a power black out, server crashes, or something else interrupting
+the simulation study, the user can pass a character to \texttt{fallback}. Then every
+time a new element in command line 6 is chosen, the results so far obtained are written
+to the file specified in \texttt{fallback}. 
+
+<<>>=
+genData = function(n){
+  n
+}
+anaData = function(data){
+  if (data == 4) stop("Simulated error that terminates the simulation")
+  data^2
+}
+dg = expandGrid(fun="genData", n=1:5)
+pg = expandGrid(proc="anaData")
+try(eg <- evalGrids(dg, pg, replications=2, fallback="simTool_fbTest"))
+@
+
+Loading the \texttt{Rdata}-file creates an \texttt{R}-object \texttt{fallBackObj}
+of the class \texttt{evalGrid}. Of course, some results are missing and 
+converting it to a \texttt{data.frame} this is indicated by the column
+\texttt{.evalGridComment}.
+
+<<>>=
+# clean the current R-session
+rm(list=ls())
+load("simTool_fbTest.Rdata")
+as.data.frame(fallBackObj)
+@
+
+\subsection{Parameter \texttt{envir}}
+
+The function \texttt{evalGrids} generates in a
+first step function calls from \texttt{dataGrid}
+and \texttt{procGrid}. In order to do this,
+\texttt{evalGrids} uses the R function
+\texttt{get}. By default, defined through
+\texttt{envir=globalenv()}, \texttt{get} 
+searches the global environment of the
+current R session. An example shows how to use
+the parameter \texttt{envir}.
+<<>>=
+# masking summary from the base package
+summary = function(x) sd(x) 
+g = function(x) quantile(x, 0.1)
+someFunc = function(){
+  summary = function(x) c(sd=sd(x), mean=mean(x))
+  
+  dg = expandGrid(fun="runif", n=100)
+  pg = expandGrid(proc=c("summary", "g"))
+
+  # the standard is to use the global
+  # environment, hence summary defined outside
+  # of someFunc() will be used
+  print(as.data.frame(evalGrids(dg, pg)))
+  cat("--------------------------------------------------\n")
+  # will use the local defined summary, but g
+  # from the global environment, because
+  # g is not locally defined.
+  print(as.data.frame(evalGrids(dg, pg, envir=environment())))
+}
+someFunc()
+@
+
+
+\subsection{The result object}
+Usually the user has not work with the object returned by \texttt{evalGrids}, because
+\texttt{as.data.frame} can coerce it to a \texttt{data.frame}. This subsection 
+In the foregoing section, we defined data generating functions
+<<>>=
+print(dg <- rbind.fill(
+  expandGrid(fun="rexp", n=c(10, 20), rate=1:2),
+  expandGrid(fun="rnorm", n=c(10, 20), mean=1:2)))
+print(pg<-rbind.fill(
+  expandGrid(proc="min"),
+  expandGrid(proc="mean", trim=c(0.1, 0.2))))
+@
+
+<<>>=
+dg
+@
+and the data analyzing functions
+<<>>=
+pg
+@
+Now, we conduct a simulation study with 100 replications and discuss the result object
+<<>>=
+eg = evalGrids(dg, pg, replications=100)
+@
+As you can see, the function always estimates the number of replications that can be
+done in one hour. The returned object is a \texttt{list}:
+<<>>=
+names(eg)
+@
+Most of them have only a documentation character. The important entry is \texttt{simulation},
+which itself is a \texttt{list}. It optionally contains ALL data that were generated and optionally
+contains ALL objects returned by the data analyzing functions. The structure of the list is
+as \texttt{eg\$simulation[[i]][[r]]\$data} is the data generated by the $i$th row in \texttt{dg}
+in the $r$th replication and \texttt{eg\$simulation[[i]][[r]]\$results[[j]]} is the object
+returned by the $j$th parameter constellation of \texttt{pg} applied to 
+\texttt{eg\$simulation[[i]][[r]]\$data}. For instance, let $i=7, r=22$, and $j=3$. We generated
+the data according to 
+<<>>=
+dg[7,]
+@
+that is \Sexpr{dg[7,"n"]} normal distributed random variables with mean \Sexpr{dg[7,"mean"]}
+and analyzed it with
+<<>>=
+pg[3,]
+@
+In the 22nd replication this leads to
+<<>>=
+eg$simulation[[7]][[22]]$results[[3]]
+@
+which can be replicated by
+<<>>=
+mean(eg$simulation[[7]][[22]]$data, trim=0.2)
+@
+
+
+
+\end{document}

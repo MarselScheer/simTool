@@ -1,0 +1,26 @@
+Package: simTool
+Type: Package
+Title: Facilitates simulation studies
+Version: 1.0
+Date: 2013-02-21
+Author: Marsel Scheer
+Maintainer: <scheer@freescience.de>
+Description: The simTool package is designed for statistical simulations that
+    have two components. One component generates the data and the other one
+    analyzes the data. The main aims of the simTool package are the reduction
+    of the administrative source code (mainly loops) and a simple applicability
+    of the package that allows the user to quickly learn how to work with the
+    simTool package. Parallel computing is also supported. Finally, convenient
+    functions are provided to summarize the simulation results.
+Depends:
+    R (>= 2.14.0),
+    reshape,
+    plyr
+Suggests:
+    ggplot2,
+    knitr,
+    snow,
+    boot,
+    RUnit
+License: GPL-3
+VignetteBuilder: knitr
