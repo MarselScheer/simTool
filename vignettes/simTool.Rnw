@@ -385,5 +385,40 @@ which can be replicated by
 mean(eg$simulation[[7]][[22]]$data, trim=0.2)
 @
 
+\section{Converting results to \texttt{data.frame}}
+
+We have already applied \texttt{as.data.frame.evalGrid} many times. This function
+also has the parameters \texttt{post.proc} and \texttt{progress}. The functionality
+of these parameter resembles the corresponding parameters of \texttt{evalGrids}.
+Hence, it remains to explain \texttt{value.fun}. Sometimes, the objects returned by
+the analyzing functions can not be automatically converted to \texttt{data.frame}.
+In such cases, the parameter \texttt{value.fun} enables the user to pre-process
+the result objects. We exemplify this by calculating linear regression models.
+
+<<>>=
+genRegData <- function(){
+  data.frame(
+    x = 1:10,
+    y = rnorm(10, mean=1:10))
+}
+@                                                                                                     
+
+<<>>=
+eg <- evalGrids(
+  expandGrid(fun="genRegData"),
+  expandGrid(proc="lm", formula=c("y ~ x", "y ~ x + I(x^2)")),
+  replications=100)
+class(eg$simulation[[1]][[1]]$results[[1]])
+@ 
+An object of class \texttt{lm} can easily be converted by
+calling \texttt{coef}.
+<<>>=
+head(df<-as.data.frame(eg, value.fun=coef))
+@
+Of course, this can be combined with \texttt{post.proc}
+<<>>=
+as.data.frame(eg, value.fun=coef, post.proc=c(mean, sd))
+@
+
 
 \end{document}
