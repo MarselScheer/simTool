@@ -159,6 +159,7 @@
 #'# the functions and parameters
 #'# that generate the data
 #'N = c(10, 50, 100)
+#'library(plyr)
 #'dg = rbind.fill(
 #'  expandGrid(fun="rbeta", n=N, shape1=4, shape2=4),
 #'  expandGrid(fun="rnorm", n=N))
@@ -188,6 +189,7 @@
 #'require(ggplot2)
 #'print(a <- arrange(cast(mdf, ... ~ ., c(mean, sd)), n))
 #'ggplot(a, aes(x=fun, y=mean, color=proc)) + geom_point(size=I(3)) + facet_grid(probs ~ n)
+#'@importFrom reshape funstofun melt melt.data.frame cast
 #'@export
 evalGrids <-
   function(dataGrid, procGrid=expandGrid(proc="length"), replications = 1, 
@@ -197,7 +199,7 @@ evalGrids <-
            clusterGlobalObjects=NULL,           
            fallback=NULL,
            envir=globalenv()) {
-    
+
     mc = match.call()
     if (!is.null(post.proc)){      
       if (length(post.proc) == 1) {

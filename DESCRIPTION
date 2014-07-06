@@ -13,13 +13,15 @@ Description: The simTool package is designed for statistical simulations that
     simTool package. Parallel computing is also supported. Finally, convenient
     functions are provided to summarize the simulation results.
 Depends:
-    R (>= 2.14.0),
-    reshape,
-    plyr
+    R (>= 2.14.0)
+Imports:
+    plyr (>= 1.8.1),
+    reshape (>= 0.8.5)
 Suggests:
     ggplot2,
     knitr,
     snow,
+    rlecuyer,
     boot,
     RUnit
 License: GPL-3

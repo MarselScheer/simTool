@@ -48,7 +48,7 @@ test.as.data.frame.evalGrid = function(){
     ret = coef(summary(lm.object))
     data.frame(covariable = rownames(ret), ret, check.names=FALSE)
   }
-  df<-as.data.frame(eg, value.fun=lm2df)
+  df<-as.data.frame(eg, value.fun=lm2df)  
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]]), lm2df(v$results[[2]])))
   tmp = arrange(tmp, Estimate)
   df = arrange(df, Estimate)
@@ -56,7 +56,8 @@ test.as.data.frame.evalGrid = function(){
 
   
   df = as.data.frame(eg, value.fun=lm2df, post.proc=mean)
-  
+  require(plyr)
+  require(reshape)
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]])))
   mtmp = melt(tmp, id=1)
   tmp1 = cast(mtmp, ... ~ variable, mean)
@@ -84,6 +85,7 @@ test.as.data.frame.evalGrid = function(){
 }
 
 test.as.data.frame.from.fallback = function(){
+  require(plyr)
   genData = function(N){N}
   brichtAb = function(data){    
     if (data == 3)

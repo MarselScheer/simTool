@@ -48,10 +48,10 @@
 #'}
 #'as.data.frame(eg, value.fun=lm2df, progress=TRUE)
 #'as.data.frame(eg, value.fun=lm2df, post.proc=c(mean, sd), progress=TRUE)
+#'@import plyr
 #'@export
 as.data.frame.evalGrid <-
   function(x, ..., value.fun = identity, post.proc=NULL, progress=FALSE) {
-    
     postFun = NULL
     if (!is.null(post.proc)){      
       if (length(post.proc) == 1) {
@@ -64,7 +64,7 @@ as.data.frame.evalGrid <-
     .progress="none"
     if (progress)
       .progress="text"    
-    
+
     with(x, {
       ddply(expandGrid(i=1:nrow(dataGrid), j=1:nrow(procGrid)), .(i, j), function(row){
         i=row[1,1]
@@ -76,7 +76,7 @@ as.data.frame.evalGrid <-
         
         
         if (nrow(ret) > 0){
-          if (!is.null(postFun)){
+          if (!is.null(postFun)){            
             ret$replication=NULL
             idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]))))
             mdf = melt(ret, measure.vars=idx)

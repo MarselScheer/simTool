@@ -183,6 +183,7 @@ as.data.frame(eg, value.fun=function(x) {
 # the functions and parameters
 # that generate the data
 N = c(10, 50, 100)
+library(plyr)
 dg = rbind.fill(
  expandGrid(fun="rbeta", n=N, shape1=4, shape2=4),
  expandGrid(fun="rnorm", n=N))

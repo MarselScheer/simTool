@@ -37,7 +37,9 @@ The function \texttt{expandGrid} is a convenient function for defining such \tex
 
 We now define the data generation functions for our first simulation.
 <<>>=
-require(simTool)
+library(simTool)
+library(plyr)
+library(reshape)
 print(dg <- rbind.fill(
   expandGrid(fun="rexp", n=c(10, 20), rate=1:2),
   expandGrid(fun="rnorm", n=c(10, 20), mean=1:2)))

@@ -1,4 +1,5 @@
 test.evalGrids = function(){
+  require(reshape)
   set.seed(15032013)
   dg = expandGrid(fun=c("runif"), n=1:4)
   eg = evalGrids(dg)
@@ -33,35 +34,4 @@ test.evalGrids = function(){
   df2 = as.data.frame(eg)
   df2$replication=NULL
   checkEquals(identical(df1, df2), TRUE)
-}
-
-test.evalGrids.NA = function(){
-  dg = expandGrid(fun="identity", x=NA)
-  pg = expandGrid(proc="identity")
-  checkException(evalGrids(dg, pg))
-  
-  dg = expandGrid(fun="identity", x=NA_character_)
-  pg = expandGrid(proc="identity")
-  eg = evalGrids(dg, pg)
-  df = as.data.frame(eg)
-  checkEquals(is.na(df$V1), TRUE)
-  
-  dg = expandGrid(fun="identity", x=NA_integer_)
-  pg = expandGrid(proc="identity")
-  eg = evalGrids(dg, pg)
-  df = as.data.frame(eg)
-  checkEquals(is.na(df$V1), TRUE)
-
-  dg = expandGrid(fun="identity", x=NA_real_)
-  pg = expandGrid(proc="identity")
-  eg = evalGrids(dg, pg)
-  df = as.data.frame(eg)
-  checkEquals(is.na(df$V1), TRUE)
-  
-  dg = expandGrid(fun="identity", x=NA_complex_)
-  pg = expandGrid(proc="identity")
-  eg = evalGrids(dg, pg)
-  df = as.data.frame(eg)
-  checkEquals(is.na(df$V1), TRUE)
-  
 }
