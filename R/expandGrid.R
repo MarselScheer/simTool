@@ -1,7 +1,7 @@
 #' Creates a data.frame from All Combinations
 #'
 #'  Actually a wrapper for \code{\link{expand.grid}}, but
-#'  character vectors will not be coerced to factors.
+#'  character vectors will stay as characters.
 #'
 #'
 #'@param \dots  vectors, factors or a list containing these.

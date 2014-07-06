@@ -1,25 +1,25 @@
-#' Converts an 'evalGrid' object into a data.frame
+#' Converts an \code{evalGrid} object into a \code{data.frame}
 #'
 #'  Converts the results contained in the 
 #'  object returned by \code{\link{evalGrids}} 
 #'  into a \code{data.frame}. If the results can not
 #'  be coerced into a data.frame automatically, the
-#'  user can provide a function. Furthermore, functions
-#'  to summarize the results over the replications
-#'  the user may provide a function.
+#'  user can provide a function to pre-process the
+#'  results (see \code{value.fun}). Furthermore, 
+#'  univariate functions to summarize the results over
+#'  the replications can be specified.
 #'
 #'  If necessary, more details than the description above 
 #'
 #'@param x  an object returned by 
 #'  \code{\link{evalGrids}}
-#'@param \dots  serves only to force the user to use the
-#'  fullnames of following two parameters.
-#'@param value.fun  A functions that converts the result
-#'  object into a data.frame
-#'@param post.proc  Functions to summarize the results over
+#'@param \dots  only for S3 method consistency
+#'@param value.fun  a functions that converts the result
+#'  object contained in \code{x} into a data.frame
+#'@param post.proc  univariate functions to summarize the results over
 #'  the replications, e.g. mean, sd.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
-#'@return  A \code{data.frame} with the parameter constellations
+#'@return  a \code{data.frame} with the parameter constellations
 #'  for the data generation and evaluation and the results
 #'  (probably summarized) in \code{data.frame} manner.
 #'@author  Marsel Scheer
@@ -31,15 +31,10 @@
 #'      x = 1:10,
 #'      y = rnorm(10, mean=1:10))
 #'}
-#'# the first parameter is ALWAYS used
-#'# for the generated data
 #'
-#'LM <- function(data, formula){
-#'  lm(formula=as.formula(formula), data=data)
-#'}
 #'eg <- evalGrids(
 #'  expandGrid(fun="genRegData"),
-#'  expandGrid(proc="LM", formula=c("y ~ x", "y ~ x + I(x^2)")),
+#'  expandGrid(proc="lm", formula=c("y ~ x", "y ~ x + I(x^2)")),
 #'  replications=5)
 #'
 #'lm2df = function(lm.object) {

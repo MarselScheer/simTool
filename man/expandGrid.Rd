@@ -13,7 +13,7 @@ See \code{\link{expand.grid}}
 }
 \description{
 Actually a wrapper for \code{\link{expand.grid}}, but
- character vectors will not be coerced to factors.
+ character vectors will stay as characters.
 }
 \examples{
 expandGrid(fun="rnorm", mean=1:4, sd=2:5)
