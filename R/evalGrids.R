@@ -35,8 +35,12 @@
 #'  If \code{cluster} is specified, then \code{ncpus} will
 #'  be ignored.
 #'@param clusterSeed  if the simulation is done in parallel
-#'  manner, then the package \code{rlecuyer} is used to
-#'  generate random numbers according to \code{clusterSeed}.
+#'  manner, then the ‘combined multiple-recursive generator’ from L'Ecuyer (1999) 
+#'  is used to generate random numbers. Thus \code{clusterSeed} must be a (signed) integer 
+#'  vector of length 6. The 6 elements of the seed are internally regarded as 
+#'  32-bit unsigned integers. Neither the first three nor the last three 
+#'  should be all zero, and they are limited to less than 4294967087 and 
+#'  4294944443 respectively.
 #'@param clusterLibraries  a character vector specifying
 #'  the packages that should be loaded by the workers.
 #'@param clusterGlobalObjects  a character vector specifying
