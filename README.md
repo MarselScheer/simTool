@@ -14,5 +14,6 @@ functions are provided to summarize the simulation results.
 To install:
 
 * For the latest version: devtools::install_github("MarselScheer/simTool", build_vignettes=FALSE)
-  or devtools::install_github("MarselScheer/simTool") if LaTeX is available
+  or devtools::install_github("MarselScheer/simTool") if LaTeX is available  
+* For the CRAN version: install.packages("simTool")
   
