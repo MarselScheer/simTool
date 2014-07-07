@@ -3,25 +3,24 @@
 #'  Converts the results contained in the 
 #'  object returned by \code{\link{evalGrids}} 
 #'  into a \code{data.frame}. If the results can not
-#'  be coerced into a data.frame automatically, the
+#'  be coerced automatically into a \code{data.frame}, the
 #'  user can provide a function to pre-process the
 #'  results (see \code{value.fun}). Furthermore, 
 #'  univariate functions to summarize the results over
 #'  the replications can be specified.
 #'
-#'  If necessary, more details than the description above 
 #'
 #'@param x  an object returned by 
 #'  \code{\link{evalGrids}}
 #'@param \dots  only for S3 method consistency
 #'@param value.fun  a functions that converts the result
-#'  object contained in \code{x} into a data.frame
+#'  object contained in \code{x} into a \code{data.frame}
 #'@param post.proc  univariate functions to summarize the results over
 #'  the replications, e.g. mean, sd.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
 #'@return  a \code{data.frame} with the parameter constellations
 #'  for the data generation and evaluation and the results
-#'  (probably summarized) in \code{data.frame} manner.
+#'  (probably summarized).
 #'@author  Marsel Scheer
 #'@seealso  \code{\link{evalGrids}}
 #'@examples

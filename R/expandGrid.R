@@ -1,4 +1,4 @@
-#' Creates a data.frame from All Combinations
+#' Creates a \code{data.frame} from All Combinations
 #'
 #'  Actually a wrapper for \code{\link{expand.grid}}, but
 #'  character vectors will stay as characters.

@@ -1,0 +1,9 @@
+Version 1.0.
+=========================
+
+Initial release
+
+* parallel computing via snow and rlecuyer
+* fallback capability
+* text progress bar
+* estimation of the number of replications per hour
