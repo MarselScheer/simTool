@@ -1,7 +1,7 @@
 simTool
 =======
 
-An R-Package that facilitates simulation studies
+An R-Package that facilitates simulation studies. It disengages the researcher from administrative source code.
 
 The *simTool* package is designed for statistical simulations that
 have two components. One component generates the data and the other one
