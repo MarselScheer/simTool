@@ -13,4 +13,6 @@ functions are provided to summarize the simulation results.
 
 To install:
 
-* devtools::install_github("MarselScheer/simTool")
+* For the latest version: devtools::install_github("MarselScheer/simTool", build_vignettes=FALSE)
+  or devtools::install_github("MarselScheer/simTool") if LaTeX is available
+  
