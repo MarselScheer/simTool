@@ -3,7 +3,7 @@ Version 1.0.
 
 Initial release
 
-* parallel computing via parallel and the ideas of L'Ecuyer 1999 for random numbers
+* parallel computing via parallel and the ideas of L'Ecuyer 1999, 2002 for random numbers
 * fallback capability
 * text progress bar
 * estimation of the number of replications per hour
