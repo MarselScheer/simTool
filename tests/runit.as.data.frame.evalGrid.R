@@ -49,6 +49,7 @@ test.as.data.frame.evalGrid = function(){
     data.frame(covariable = rownames(ret), ret, check.names=FALSE)
   }
   df<-as.data.frame(eg, value.fun=lm2df)  
+  require(plyr)
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]]), lm2df(v$results[[2]])))
   tmp = arrange(tmp, Estimate)
   df = arrange(df, Estimate)
@@ -56,7 +57,6 @@ test.as.data.frame.evalGrid = function(){
 
   
   df = as.data.frame(eg, value.fun=lm2df, post.proc=mean)
-  require(plyr)
   require(reshape)
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]])))
   mtmp = melt(tmp, id=1)
