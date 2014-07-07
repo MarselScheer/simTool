@@ -200,21 +200,13 @@ serves the same purpose as the function \texttt{set.seed}. By default,
 \texttt{clusterSeed} equals \texttt{rep(12345, 6)}. Note, in order
 to reproduce the simulation study it is also necessary that \texttt{ncpus}
 does not change.
-<<>>=
-eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, 
-    ncpus=3, post.proc=mean)
-as.data.frame(eg)
-eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, 
-    ncpus=2, post.proc=mean)
-as.data.frame(eg)
-@
 
 \subsection{Parameter \texttt{cluster}}
 The user can create a cluster on its own. This also enables the user
 to distribute the replications over different computers in a network.
 <<>>=
 require(parallel)
-cl = makeCluster(rep("localhost", 3), type="PSOCK") 
+cl = makeCluster(rep("localhost", 2), type="PSOCK") 
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, 
     cluster=cl, post.proc=mean)
 as.data.frame(eg)
