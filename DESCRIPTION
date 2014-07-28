@@ -1,7 +1,7 @@
 Package: simTool
 Type: Package
-Title: An easy to learn framework to conduct simulation studies which disengages the researcher
-    from administrative source code.
+Title: An easy to learn framework to conduct simulation studies which
+    disengages the researcher from administrative source code.
 Version: 1.0
 Date: 2013-02-21
 Author: Marsel Scheer <scheer@freescience.de>

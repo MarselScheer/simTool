@@ -47,8 +47,12 @@ If \code{cluster} is specified, then \code{ncpus} will
 be ignored.}
 
 \item{clusterSeed}{if the simulation is done in parallel
-manner, then the package \code{rlecuyer} is used to
-generate random numbers according to \code{clusterSeed}.}
+manner, then the ‘combined multiple-recursive generator’ from L'Ecuyer (1999)
+is used to generate random numbers. Thus \code{clusterSeed} must be a (signed) integer
+vector of length 6. The 6 elements of the seed are internally regarded as
+32-bit unsigned integers. Neither the first three nor the last three
+should be all zero, and they are limited to less than 4294967087 and
+4294944443 respectively.}
 
 \item{clusterLibraries}{a character vector specifying
 the packages that should be loaded by the workers.}
@@ -143,7 +147,7 @@ df = as.data.frame(eg, value.fun=coef)
 
 # since we have done 2 replication we can calculate
 # sum summary statistics
-require(reshape)
+library("reshape")
 df$replication=NULL
 mdf = melt(df, id=1:7, na.rm=TRUE)
 cast(mdf, ... ~ ., c(mean, length, sd))
@@ -170,7 +174,7 @@ as.data.frame(eg, value.fun=function(x) {
 # the functions and parameters
 # that generate the data
 N = c(10, 50, 100)
-library(plyr)
+library("plyr")
 dg = rbind.fill(
  expandGrid(fun="rbeta", n=N, shape1=4, shape2=4),
  expandGrid(fun="rnorm", n=N))
@@ -197,7 +201,7 @@ df$replication=NULL
 mdf = melt(df, id=1:8, na.rm=TRUE)
 
 # calculate, print and plot summary statistics
-require(ggplot2)
+require("ggplot2")
 print(a <- arrange(cast(mdf, ... ~ ., c(mean, sd)), n))
 ggplot(a, aes(x=fun, y=mean, color=proc)) + geom_point(size=I(3)) + facet_grid(probs ~ n)
 }

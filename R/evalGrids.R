@@ -123,7 +123,7 @@
 #'
 #'# since we have done 2 replication we can calculate
 #'# sum summary statistics
-#'require(reshape)
+#'library("reshape")
 #'df$replication=NULL
 #'mdf = melt(df, id=1:7, na.rm=TRUE)
 #'cast(mdf, ... ~ ., c(mean, length, sd))
@@ -150,7 +150,7 @@
 #'# the functions and parameters
 #'# that generate the data
 #'N = c(10, 50, 100)
-#'library(plyr)
+#'library("plyr")
 #'dg = rbind.fill(
 #'  expandGrid(fun="rbeta", n=N, shape1=4, shape2=4),
 #'  expandGrid(fun="rnorm", n=N))
@@ -177,7 +177,7 @@
 #'mdf = melt(df, id=1:8, na.rm=TRUE)
 #'
 #'# calculate, print and plot summary statistics 
-#'require(ggplot2)
+#'require("ggplot2")
 #'print(a <- arrange(cast(mdf, ... ~ ., c(mean, sd)), n))
 #'ggplot(a, aes(x=fun, y=mean, color=proc)) + geom_point(size=I(3)) + facet_grid(probs ~ n)
 #'@importFrom reshape funstofun melt melt.data.frame cast
@@ -273,7 +273,7 @@ evalGrids <-
       warning("cluster provided. Ignore argument ncpus.")
     
     if (is.null(cluster) && ncpus > 1){
-      require(parallel)
+      library("parallel")
       RNGkind("L'Ecuyer-CMRG")
       cluster = makeCluster(rep("localhost", ncpus), type="PSOCK")  
     }
