@@ -32,7 +32,7 @@ generated data sets will be part of the returned object.}
 
 \item{progress}{if \code{TRUE} a progress bar is shown in the console.}
 
-\item{post.proc}{functions to summarize the results over
+\item{post.proc}{functions to summarize the results (numeric or logical) over
 the replications, e.g. mean, sd.}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)

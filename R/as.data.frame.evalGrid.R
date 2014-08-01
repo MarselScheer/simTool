@@ -15,7 +15,7 @@
 #'@param \dots  only for S3 method consistency
 #'@param value.fun  a functions that converts the result
 #'  object contained in \code{x} into a \code{data.frame}
-#'@param post.proc  univariate functions to summarize the results over
+#'@param post.proc  univariate functions to summarize the results (numeric or logical) over
 #'  the replications, e.g. mean, sd.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
 #'@return  a \code{data.frame} with the parameter constellations
@@ -72,7 +72,9 @@ as.data.frame.evalGrid <-
         if (nrow(ret) > 0){
           if (!is.null(postFun)){            
             ret$replication=NULL
-            idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]))))
+            idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]) | is.logical(ret[,i]))))
+            if (length(idx) == 0)
+              stop("Only numeric or logical variables passed to in post.proc. But the results does not seem to have numeric or logical variables.")
             mdf = melt(ret, measure.vars=idx)
             ret = cast(mdf, ... ~ variable, postFun)
           }

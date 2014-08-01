@@ -23,7 +23,7 @@
 #'  \code{procGrid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
-#'@param post.proc  functions to summarize the results over
+#'@param post.proc  functions to summarize the results (numeric or logical) over
 #'  the replications, e.g. mean, sd.
 #'@param ncpus  a cluster of \code{ncpus} workers (R-processes)
 #'  is created on the local machine to conduct the
@@ -251,7 +251,7 @@ evalGrids <-
       if (!is.null(post.proc)){
         ret = llply(1:nrow(procGrid), function(j) {
           ret = ldply(ret, function(rep) rep$results[[j]])
-          idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]))))
+          idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]) | is.logical(ret[,i]))))
           mdf = melt(ret, measure.vars=idx)
           cast(mdf, ... ~ variable, postFun)
           })       

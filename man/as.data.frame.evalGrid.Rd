@@ -15,7 +15,7 @@
 \item{value.fun}{a functions that converts the result
 object contained in \code{x} into a \code{data.frame}}
 
-\item{post.proc}{univariate functions to summarize the results over
+\item{post.proc}{univariate functions to summarize the results (numeric or logical) over
 the replications, e.g. mean, sd.}
 
 \item{progress}{if \code{TRUE} a progress bar is shown in the console.}

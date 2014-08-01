@@ -11,6 +11,10 @@ test.as.data.frame.evalGrid = function(){
   
   checkEquals(all(df$V1==tmp), TRUE)
 
+  # check if post.proc can handle numeric and logical
+  f = function(x) x <= 0.05
+  df = as.data.frame(eg, value.fun=f, post.proc=mean)
+  
   f = function(x) c(length(x), min = min(x), max(x))
   pg = expandGrid(proc=c("f"))
   # must set environment, otherwise evalGrids will not find the function f()
@@ -82,6 +86,12 @@ test.as.data.frame.evalGrid = function(){
   
   tmp = rbind(tmp1, tmp2)
   checkEquals(all(df[,-(1:5)] == tmp), TRUE)
+  
+  dg = expandGrid(fun="runif", n=10)
+  pg = expandGrid(proc="summary")
+  
+  eg = evalGrids()
+  
 }
 
 test.as.data.frame.from.fallback = function(){
