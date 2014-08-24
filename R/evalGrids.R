@@ -23,8 +23,9 @@
 #'  \code{procGrid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
-#'@param post.proc  functions to summarize the results (numeric or logical) over
-#'  the replications, e.g. mean, sd.
+#'@param post.proc  univariate functions to summarize the results (numeric or logical) over
+#'  the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+#'  function that may return a vector.
 #'@param ncpus  a cluster of \code{ncpus} workers (R-processes)
 #'  is created on the local machine to conduct the
 #'  simulation. If \code{ncpus}

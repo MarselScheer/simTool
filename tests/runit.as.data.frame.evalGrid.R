@@ -13,7 +13,10 @@ test.as.data.frame.evalGrid = function(){
 
   # check if post.proc can handle numeric and logical
   f = function(x) x <= 0.05
-  df = as.data.frame(eg, value.fun=f, post.proc=mean)
+  df = as.data.frame(eg, value.fun=f, post.proc=c(mean, median))
+  
+  postVec = function(results) summary(results)
+  df = as.data.frame(eg, value.fun=f, post.proc=postVec)
   
   f = function(x) c(length(x), min = min(x), max(x))
   pg = expandGrid(proc=c("f"))
@@ -36,16 +39,11 @@ test.as.data.frame.evalGrid = function(){
       y = rnorm(10, mean=1:10))
   }
   
-  # the first parameter is ALWAYS used
-  # for the generated data
-  LM <- function(data, formula){
-    lm(formula=as.formula(formula), data=data)
-  }
   
   set.seed(19032013)
   eg <- evalGrids(
     expandGrid(fun="genRegData"),
-    expandGrid(proc="LM", formula=c("y ~ x", "y ~ x + I(x^2)")),
+    expandGrid(proc="lm", formula=c("y ~ x", "y ~ x + I(x^2)")),
     replications=10, envir=environment())
 
   lm2df = function(lm.object) {
@@ -85,13 +83,7 @@ test.as.data.frame.evalGrid = function(){
   tmp2 = cast(mtmp, ... ~ variable, c(mean, sd))
   
   tmp = rbind(tmp1, tmp2)
-  checkEquals(all(df[,-(1:5)] == tmp), TRUE)
-  
-  dg = expandGrid(fun="runif", n=10)
-  pg = expandGrid(proc="summary")
-  
-  eg = evalGrids()
-  
+  checkEquals(all(df[,-(1:5)] == tmp), TRUE)  
 }
 
 test.as.data.frame.from.fallback = function(){

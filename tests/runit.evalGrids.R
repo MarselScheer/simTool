@@ -34,4 +34,19 @@ test.evalGrids = function(){
   df2 = as.data.frame(eg)
   df2$replication=NULL
   checkEquals(identical(df1, df2), TRUE)
+
+  set.seed(23112013)
+  dg = expandGrid(proc="runif", n=c(5, 100, 1000))
+  pg = expandGrid(fun=c("summary", "mean"))
+  eg = evalGrids(dg, pg, replications=10)
+  postVec = function(results) c(mean=mean(results), sd=sd(results))
+  df3 = as.data.frame(eg, post.proc=postVec)
+  checkEquals(identical(df3, df2), TRUE)
+  set.seed(23112013)
+  eg = evalGrids(dg, pg, replications=10, post.proc=postVec)
+  df2 = as.data.frame(eg)
+  df2$replication=NULL
+  checkEquals(identical(df3, df2), TRUE)
+  
+
 }

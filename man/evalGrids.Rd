@@ -32,8 +32,9 @@ generated data sets will be part of the returned object.}
 
 \item{progress}{if \code{TRUE} a progress bar is shown in the console.}
 
-\item{post.proc}{functions to summarize the results (numeric or logical) over
-the replications, e.g. mean, sd.}
+\item{post.proc}{univariate functions to summarize the results (numeric or logical) over
+the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+function that may return a vector.}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)
 is created on the local machine to conduct the

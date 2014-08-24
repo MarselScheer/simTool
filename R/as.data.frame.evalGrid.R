@@ -16,7 +16,8 @@
 #'@param value.fun  a functions that converts the result
 #'  object contained in \code{x} into a \code{data.frame}
 #'@param post.proc  univariate functions to summarize the results (numeric or logical) over
-#'  the replications, e.g. mean, sd.
+#'  the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+#'  function that may return a vector.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
 #'@return  a \code{data.frame} with the parameter constellations
 #'  for the data generation and evaluation and the results
