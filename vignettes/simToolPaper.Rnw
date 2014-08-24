@@ -1,0 +1,8 @@
+% \VignetteIndexEntry{MuToss Simulation Tool Guide}
+
+\documentclass[a4paper]{article}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\begin{document}
+\includepdf[fitpaper=true,pages=-]{./jss.pdf}
+\end{document} 
