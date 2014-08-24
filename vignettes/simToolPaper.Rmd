@@ -1,0 +1,10 @@
+%\VignetteIndexEntry{JSS Essay}
+%\VignetteEngine{knitr::knitr}
+---
+title: "simToolPaper"
+author: "Marsel Scheer"
+date: "24.08.2014"
+output: html_document
+---
+
+The static JSS essay <a href="./jss.pdf">PDF</a>.
