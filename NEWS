@@ -1,4 +1,17 @@
-Version 1.0.
+Version 1.0.1
+=========================
+
+New Features:
+
+* summarizing functions process also logical results (not only numeric)
+
+Misc:
+
+* HTML vignette (LaTeX not necessary anymore)
+* additional documentation  (static pdf in JSS style)
+
+
+Version 1.0
 =========================
 
 Initial release
