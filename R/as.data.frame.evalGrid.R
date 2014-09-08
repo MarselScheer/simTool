@@ -15,8 +15,8 @@
 #'@param \dots  only for S3 method consistency
 #'@param value.fun  a functions that converts the result
 #'  object contained in \code{x} into a \code{data.frame}
-#'@param post.proc  univariate functions to summarize the results (numeric or logical) over
-#'  the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+#'@param summary.fun  univariate functions to summarize the results (numeric or logical) over
+#'  the replications, e.g. mean, sd. Alternatively, \code{summary.fun} can be one
 #'  function that may return a vector.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
 #'@return  a \code{data.frame} with the parameter constellations
@@ -42,17 +42,17 @@
 #'  data.frame(covariable = rownames(ret), ret, check.names=FALSE)
 #'}
 #'as.data.frame(eg, value.fun=lm2df, progress=TRUE)
-#'as.data.frame(eg, value.fun=lm2df, post.proc=c(mean, sd), progress=TRUE)
+#'as.data.frame(eg, value.fun=lm2df, summary.fun=c(mean, sd), progress=TRUE)
 #'@import plyr
 #'@export
 as.data.frame.evalGrid <-
-  function(x, ..., value.fun = identity, post.proc=NULL, progress=FALSE) {
+  function(x, ..., value.fun = identity, summary.fun=NULL, progress=FALSE) {
     postFun = NULL
-    if (!is.null(post.proc)){      
-      if (length(post.proc) == 1) {
-        postFun = post.proc
+    if (!is.null(summary.fun)){      
+      if (length(summary.fun) == 1) {
+        postFun = summary.fun
       } else {
-        postFun = do.call(funstofun, as.list(match.call()$post.proc[-1]))    
+        postFun = do.call(funstofun, as.list(match.call()$summary.fun[-1]))    
       }
     }
 
@@ -75,14 +75,14 @@ as.data.frame.evalGrid <-
             ret$replication=NULL
             idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]) | is.logical(ret[,i]))))
             if (length(idx) == 0)
-              stop("Only numeric or logical variables passed to in post.proc. But the results does not seem to have numeric or logical variables.")
+              stop("Only numeric or logical variables passed to in summary.fun. But the results does not seem to have numeric or logical variables.")
             mdf = melt(ret, measure.vars=idx)
             ret = cast(mdf, ... ~ variable, postFun)
           }
         } else {
           ret = data.frame(.evalGridComment="Results missing")
         }
-        if (!is.null(x$post.proc))
+        if (!is.null(x$summary.fun))
           ret$replication=NULL
         
         suppressWarnings(cbind(dataGrid[i,,drop=FALSE], procGrid[j,,drop=FALSE], ret))

@@ -4,7 +4,7 @@
 \title{Converts an \code{evalGrid} object into a \code{data.frame}}
 \usage{
 \method{as.data.frame}{evalGrid}(x, ..., value.fun = identity,
-  post.proc = NULL, progress = FALSE)
+  summary.fun = NULL, progress = FALSE)
 }
 \arguments{
 \item{x}{an object returned by
@@ -15,8 +15,8 @@
 \item{value.fun}{a functions that converts the result
 object contained in \code{x} into a \code{data.frame}}
 
-\item{post.proc}{univariate functions to summarize the results (numeric or logical) over
-the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+\item{summary.fun}{univariate functions to summarize the results (numeric or logical) over
+the replications, e.g. mean, sd. Alternatively, \code{summary.fun} can be one
 function that may return a vector.}
 
 \item{progress}{if \code{TRUE} a progress bar is shown in the console.}
@@ -53,7 +53,7 @@ lm2df = function(lm.object) {
  data.frame(covariable = rownames(ret), ret, check.names=FALSE)
 }
 as.data.frame(eg, value.fun=lm2df, progress=TRUE)
-as.data.frame(eg, value.fun=lm2df, post.proc=c(mean, sd), progress=TRUE)
+as.data.frame(eg, value.fun=lm2df, summary.fun=c(mean, sd), progress=TRUE)
 }
 \author{
 Marsel Scheer

@@ -151,7 +151,7 @@ eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10,
 The progress bar increases every time a new element is chosen in
 command line 6 of the pseudo code.
 
-## Parameter *post.proc*
+## Parameter *summary.fun*
 
 As stated in command line 12 we can summarize the result objects over 
 all replications but separately for all data analyzing functions.
@@ -159,34 +159,34 @@ all replications but separately for all data analyzing functions.
 dg = expandGrid(fun="runif", n=c(10,20,30))
 pg = expandGrid(proc=c("min", "max"))
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
-    post.proc=mean)
+    summary.fun=mean)
 as.data.frame(eg)
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
-    post.proc=c(mean, sd))
+    summary.fun=c(mean, sd))
 as.data.frame(eg)
 ```
-Note, by specifying the parameter *post.proc* the generated data sets
+Note, by specifying the parameter *summary.fun* the generated data sets
 and all individual result objects are discarded. In this example we discard
 $3 \times 1000$ data sets and $3 \times 1000 \times 2$ individual result
 objects. Although the function *as.data.frame* or to be more precise
-*as.data.frame.evalGrid* has also a parameter *post.proc* that
+*as.data.frame.evalGrid* has also a parameter *summary.fun* that
 serves the same purpose, it may be necessary to summarize the results as soon
 as possible to spare memory. 
 
-We now briefly show that *post.proc* in *evalGrids* and
+We now briefly show that *summary.fun* in *evalGrids* and
 *as.data.frame* yield the same results.
 
 ```{r}
 set.seed(1234)
 # summarize the result objects as soon as possible
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000, 
-    post.proc=mean)
+    summary.fun=mean)
 as.data.frame(eg)
 set.seed(1234)
 # keeping the result objects
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 1000)
 # summarize the result objects by as.data.frame
-as.data.frame(eg, post.proc=mean)
+as.data.frame(eg, summary.fun=mean)
 ```
 
 ## Parameter *ncpus* and *clusterSeed*
@@ -196,7 +196,7 @@ for the user and passed to the parameter *cluster* discussed in the
 next section.
 ```{r}
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, 
-    ncpus=2, post.proc=mean)
+    ncpus=2, summary.fun=mean)
 as.data.frame(eg)
 ```
 As it is stated in command line 6, the replications are parallelized. In our case, this means
@@ -215,7 +215,7 @@ to distribute the replications over different computers in a network.
 require(parallel)
 cl = makeCluster(rep("localhost", 2), type="PSOCK") 
 eg = evalGrids(dataGrid = dg, procGrid = pg, replications = 10, 
-    cluster=cl, post.proc=mean)
+    cluster=cl, summary.fun=mean)
 as.data.frame(eg)
 stopCluster(cl)
 ```
@@ -389,7 +389,7 @@ mean(eg$simulation[[7]][[22]]$data, trim=0.2)
 # Converting results to *data.frame*
 
 We have already applied *as.data.frame.evalGrid* many times. This function
-also has the parameters *post.proc* and *progress*. The functionality
+also has the parameters *summary.fun* and *progress*. The functionality
 of these parameter resembles the corresponding parameters of *evalGrids*.
 Hence, it remains to explain *value.fun*. Sometimes, the objects returned by
 the analyzing functions can not be automatically converted to *data.frame*.
@@ -416,7 +416,7 @@ calling *coef*.
 ```{r}
 head(df<-as.data.frame(eg, value.fun=coef))
 ```
-Of course, this can be combined with *post.proc*
+Of course, this can be combined with *summary.fun*
 ```{r}
-as.data.frame(eg, value.fun=coef, post.proc=c(mean, sd))
+as.data.frame(eg, value.fun=coef, summary.fun=c(mean, sd))
 ```

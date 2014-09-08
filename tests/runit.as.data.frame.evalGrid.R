@@ -11,12 +11,12 @@ test.as.data.frame.evalGrid = function(){
   
   checkEquals(all(df$V1==tmp), TRUE)
 
-  # check if post.proc can handle numeric and logical
+  # check if summary.fun can handle numeric and logical
   f = function(x) x <= 0.05
-  df = as.data.frame(eg, value.fun=f, post.proc=c(mean, median))
+  df = as.data.frame(eg, value.fun=f, summary.fun=c(mean, median))
   
   postVec = function(results) summary(results)
-  df = as.data.frame(eg, value.fun=f, post.proc=postVec)
+  df = as.data.frame(eg, value.fun=f, summary.fun=postVec)
   
   f = function(x) c(length(x), min = min(x), max(x))
   pg = expandGrid(proc=c("f"))
@@ -58,7 +58,7 @@ test.as.data.frame.evalGrid = function(){
   checkEquals(all(df[,-(1:6)] == tmp), TRUE)
 
   
-  df = as.data.frame(eg, value.fun=lm2df, post.proc=mean)
+  df = as.data.frame(eg, value.fun=lm2df, summary.fun=mean)
   require(reshape)
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]])))
   mtmp = melt(tmp, id=1)
@@ -72,7 +72,7 @@ test.as.data.frame.evalGrid = function(){
   checkEquals(all(df[,-(1:5)] == tmp), TRUE)
   
   
-  df = as.data.frame(eg, value.fun=lm2df, post.proc=c(mean, sd))
+  df = as.data.frame(eg, value.fun=lm2df, summary.fun=c(mean, sd))
   
   tmp = ldply(eg$simulation[[1]], function(v) rbind(lm2df(v$results[[1]])))
   mtmp = melt(tmp, id=1)

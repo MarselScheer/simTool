@@ -5,9 +5,9 @@
 \usage{
 evalGrids(dataGrid, procGrid = expandGrid(proc = "length"),
   replications = 1, discardGeneratedData = FALSE, progress = FALSE,
-  post.proc = NULL, ncpus = 1L, cluster = NULL, clusterSeed = rep(12345,
-  6), clusterLibraries = NULL, clusterGlobalObjects = NULL,
-  fallback = NULL, envir = globalenv())
+  summary.fun = NULL, ncpus = 1L, cluster = NULL,
+  clusterSeed = rep(12345, 6), clusterLibraries = NULL,
+  clusterGlobalObjects = NULL, fallback = NULL, envir = globalenv())
 }
 \arguments{
 \item{dataGrid}{a \code{data.frame} where the first column
@@ -32,8 +32,8 @@ generated data sets will be part of the returned object.}
 
 \item{progress}{if \code{TRUE} a progress bar is shown in the console.}
 
-\item{post.proc}{univariate functions to summarize the results (numeric or logical) over
-the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+\item{summary.fun}{univariate functions to summarize the results (numeric or logical) over
+the replications, e.g. mean, sd. Alternatively, \code{summary.fun} can be one
 function that may return a vector.}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)

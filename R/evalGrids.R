@@ -23,8 +23,8 @@
 #'  \code{procGrid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
 #'@param progress if \code{TRUE} a progress bar is shown in the console.
-#'@param post.proc  univariate functions to summarize the results (numeric or logical) over
-#'  the replications, e.g. mean, sd. Alternatively, \code{post.proc} can be one
+#'@param summary.fun  univariate functions to summarize the results (numeric or logical) over
+#'  the replications, e.g. mean, sd. Alternatively, \code{summary.fun} can be one
 #'  function that may return a vector.
 #'@param ncpus  a cluster of \code{ncpus} workers (R-processes)
 #'  is created on the local machine to conduct the
@@ -185,7 +185,7 @@
 #'@export
 evalGrids <-
   function(dataGrid, procGrid=expandGrid(proc="length"), replications = 1, 
-           discardGeneratedData=FALSE, progress=FALSE, post.proc=NULL, 
+           discardGeneratedData=FALSE, progress=FALSE, summary.fun=NULL, 
            ncpus = 1L, cluster=NULL, clusterSeed=rep(12345,6),
            clusterLibraries=NULL,
            clusterGlobalObjects=NULL,           
@@ -193,11 +193,11 @@ evalGrids <-
            envir=globalenv()) {
 
     mc = match.call()
-    if (!is.null(post.proc)){      
-      if (length(post.proc) == 1) {
-        postFun = post.proc
+    if (!is.null(summary.fun)){      
+      if (length(summary.fun) == 1) {
+        postFun = summary.fun
       } else {
-        postFun = do.call(funstofun, as.list(match.call()$post.proc[-1]))    
+        postFun = do.call(funstofun, as.list(match.call()$summary.fun[-1]))    
       }
     }
     
@@ -249,7 +249,7 @@ evalGrids <-
         }
       }
       
-      if (!is.null(post.proc)){
+      if (!is.null(summary.fun)){
         ret = llply(1:nrow(procGrid), function(j) {
           ret = ldply(ret, function(rep) rep$results[[j]])
           idx = which(sapply(1:ncol(ret), function(i) all(is.numeric(ret[,i]) | is.logical(ret[,i]))))
@@ -344,7 +344,7 @@ evalGrids <-
     #   simulation = matrix(simulation, nrow=1)
     
     ret = list(call=mc, dataGrid=dataGrid, procGrid=procGrid, simulation=simulation, 
-               post.proc = post.proc,
+               summary.fun = summary.fun,
                est.reps.per.hour=est.reps.per.hour,
                sessionInfo=sessionInfo())
     class(ret) = "evalGrid"
