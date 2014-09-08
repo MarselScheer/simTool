@@ -1,3 +1,13 @@
+Version 1.0.2
+=========================
+
+Misc:
+
+* Two parameter renamed (post.proc to summary.fun and value.fun to convert.result.fun). 
+  Of course, renaming parameters is one of the worst things one can do. On the other
+  hand, only very few users will be affected by these changes.
+
+
 Version 1.0.1
 =========================
 
