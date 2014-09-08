@@ -5,15 +5,15 @@
 #'  into a \code{data.frame}. If the results can not
 #'  be coerced automatically into a \code{data.frame}, the
 #'  user can provide a function to pre-process the
-#'  results (see \code{value.fun}). Furthermore, 
+#'  results (see \code{convert.result.fun}). Furthermore, 
 #'  univariate functions to summarize the results over
-#'  the replications can be specified.
+#'  the replications can be specified via \code{summary.fun}.
 #'
 #'
 #'@param x  an object returned by 
 #'  \code{\link{evalGrids}}
 #'@param \dots  only for S3 method consistency
-#'@param value.fun  a functions that converts the result
+#'@param convert.result.fun  a functions that converts the result
 #'  object contained in \code{x} into a \code{data.frame}
 #'@param summary.fun  univariate functions to summarize the results (numeric or logical) over
 #'  the replications, e.g. mean, sd. Alternatively, \code{summary.fun} can be one
@@ -41,12 +41,12 @@
 #'  ret = coef(summary.lm(lm.object))[, 1:2]
 #'  data.frame(covariable = rownames(ret), ret, check.names=FALSE)
 #'}
-#'as.data.frame(eg, value.fun=lm2df, progress=TRUE)
-#'as.data.frame(eg, value.fun=lm2df, summary.fun=c(mean, sd), progress=TRUE)
+#'as.data.frame(eg, convert.result.fun=lm2df, progress=TRUE)
+#'as.data.frame(eg, convert.result.fun=lm2df, summary.fun=c(mean, sd), progress=TRUE)
 #'@import plyr
 #'@export
 as.data.frame.evalGrid <-
-  function(x, ..., value.fun = identity, summary.fun=NULL, progress=FALSE) {
+  function(x, ..., convert.result.fun = identity, summary.fun=NULL, progress=FALSE) {
     postFun = NULL
     if (!is.null(summary.fun)){      
       if (length(summary.fun) == 1) {
@@ -65,7 +65,7 @@ as.data.frame.evalGrid <-
         i=row[1,1]
         j=row[1,2]  
 
-        ret = ldply(simulation[[i]], function(rep) value.fun(rep$results[[j]]))
+        ret = ldply(simulation[[i]], function(rep) convert.result.fun(rep$results[[j]]))
         if (nrow(ret) > 0)
           ret = cbind(replication=gl(length(simulation[[i]]), nrow(ret)/length(simulation[[i]])), ret)
         

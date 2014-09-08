@@ -116,11 +116,11 @@
 #'
 #'# for the data.frame we just extract the r.squared
 #'# from the fitted model
-#'as.data.frame(eg, value.fun=function(fit) c(rsq=summary(fit)$r.squared))
+#'as.data.frame(eg, convert.result.fun=function(fit) c(rsq=summary(fit)$r.squared))
 #'
 #'# for the data.frame we just extract the coefficients
 #'# from the fitted model
-#'df = as.data.frame(eg, value.fun=coef)
+#'df = as.data.frame(eg, convert.result.fun=coef)
 #'
 #'# since we have done 2 replication we can calculate
 #'# sum summary statistics
@@ -138,7 +138,7 @@
 #'
 #'
 #'# extracting the summary of the fitted.model
-#'as.data.frame(eg, value.fun=function(x) {
+#'as.data.frame(eg, convert.result.fun=function(x) {
 #'  ret = coef(summary(x))
 #'  data.frame(valueName = rownames(ret), ret, check.names=FALSE)
 #'})

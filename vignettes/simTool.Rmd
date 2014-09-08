@@ -391,9 +391,9 @@ mean(eg$simulation[[7]][[22]]$data, trim=0.2)
 We have already applied *as.data.frame.evalGrid* many times. This function
 also has the parameters *summary.fun* and *progress*. The functionality
 of these parameter resembles the corresponding parameters of *evalGrids*.
-Hence, it remains to explain *value.fun*. Sometimes, the objects returned by
+Hence, it remains to explain *convert.result.fun*. Sometimes, the objects returned by
 the analyzing functions can not be automatically converted to *data.frame*.
-In such cases, the parameter *value.fun* enables the user to pre-process
+In such cases, the parameter *convert.result.fun* enables the user to pre-process
 the result objects. We exemplify this by calculating linear regression models.
 
 ```{r}
@@ -414,9 +414,9 @@ class(eg$simulation[[1]][[1]]$results[[1]])
 An object of class *lm* can easily be converted by
 calling *coef*.
 ```{r}
-head(df<-as.data.frame(eg, value.fun=coef))
+head(df<-as.data.frame(eg, convert.result.fun=coef))
 ```
 Of course, this can be combined with *summary.fun*
 ```{r}
-as.data.frame(eg, value.fun=coef, summary.fun=c(mean, sd))
+as.data.frame(eg, convert.result.fun=coef, summary.fun=c(mean, sd))
 ```
