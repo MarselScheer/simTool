@@ -3,6 +3,7 @@
 S3method(as.data.frame,evalGrid)
 export(evalGrids)
 export(expandGrid)
+export(meanAndNormCI)
 import(plyr)
 importFrom(reshape,cast)
 importFrom(reshape,funstofun)
