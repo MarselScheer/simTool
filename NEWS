@@ -1,6 +1,10 @@
 Version 1.0.2
 =========================
 
+New Features:
+
+* The convenient function meanAndNormCI added
+
 Misc:
 
 * Two parameter renamed (post.proc to summary.fun and value.fun to convert.result.fun). 
