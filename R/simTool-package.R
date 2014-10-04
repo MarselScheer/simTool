@@ -27,8 +27,8 @@
 #'pg = expandGrid(proc="summary")
 #'eg = evalGrids(dg, pg, replications=3)
 #'as.data.frame(eg)
-#'as.data.frame(eg, post.proc=mean)
-#'as.data.frame(eg, post.proc=c(mean, sd))
+#'as.data.frame(eg, summary.fun=mean)
+#'as.data.frame(eg, summary.fun=c(mean, sd))
 #'
 NULL
 
