@@ -7,7 +7,7 @@ evalGrids(dataGrid, procGrid = expandGrid(proc = "length"),
   replications = 1, discardGeneratedData = FALSE, progress = FALSE,
   summary.fun = NULL, ncpus = 1L, cluster = NULL,
   clusterSeed = rep(12345, 6), clusterLibraries = NULL,
-  clusterGlobalObjects = NULL, fallback = NULL, envir = globalenv())
+  clusterGlobalObjects = NULL, fallback = NULL, envir = globalenv(), ...)
 }
 \arguments{
 \item{dataGrid}{a \code{data.frame} where the first column
@@ -69,6 +69,8 @@ are saved in the file specified by \code{fallback}.}
 \item{envir}{must be provided if the functions specified
 in \code{dataGrid} or \code{procGrid} are not part
 of the global environment.}
+
+\item{...}{only needed to alert the user if some deprecated arguments were used.}
 }
 \value{
 The returned object is a list of the class

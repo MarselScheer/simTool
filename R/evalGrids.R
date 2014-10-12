@@ -53,6 +53,7 @@
 #'@param envir  must be provided if the functions specified
 #'  in \code{dataGrid} or \code{procGrid} are not part
 #'  of the global environment.
+#'@param ... only needed to alert the user if some deprecated arguments were used.
 #'@return  The returned object is a list of the class
 #'  \code{evalGrid}, where the fourth element is a list of lists named 
 #'  \code{simulation}. \code{simulation[[i]][[r]]} contains:
@@ -190,8 +191,12 @@ evalGrids <-
            clusterLibraries=NULL,
            clusterGlobalObjects=NULL,           
            fallback=NULL,
-           envir=globalenv()) {
+           envir=globalenv(), ...) {
 
+    ellipsis = list(...)
+    if (is.element("post.proc", names(ellipsis))) stop("post.proc is deprecated. Please use summary.fun")
+    
+    
     mc = match.call()
     if (!is.null(summary.fun)){      
       if (length(summary.fun) == 1) {

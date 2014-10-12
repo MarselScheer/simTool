@@ -1,6 +1,6 @@
 test.as.data.frame.evalGrid = function(){
   dg = expandGrid(fun=c("runif"), n=1:4)
-  pg = expandGrid(proc=c("mean"))
+  pg = expandGrid(proc=c("mean"))  
   eg = evalGrids(dg, pg)
   df = as.data.frame(eg)
   tmp = c(
@@ -11,6 +11,9 @@ test.as.data.frame.evalGrid = function(){
   
   checkEquals(all(df$V1==tmp), TRUE)
 
+  checkException(as.data.frame(eg, value.fun=identity))
+  checkException(as.data.frame(eg, post.proc=mean))
+  
   # check if summary.fun can handle numeric and logical
   f = function(x) x <= 0.05
   df = as.data.frame(eg, convert.result.fun=f, summary.fun=c(mean, median))

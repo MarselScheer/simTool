@@ -1,7 +1,7 @@
 test.evalGrids = function(){
   require(reshape)
   set.seed(15032013)
-  dg = expandGrid(fun=c("runif"), n=1:4)
+  dg = expandGrid(fun=c("runif"), n=1:4)  
   eg = evalGrids(dg)
   checkEquals(all(eg$dataGrid == dg), TRUE)
   checkEquals(all(eg$procGrid == expandGrid(proc="length")), TRUE)
@@ -27,6 +27,7 @@ test.evalGrids = function(){
   set.seed(23112013)
   dg = expandGrid(proc="runif", n=c(5, 100, 1000))
   pg = expandGrid(fun=c("summary", "mean"))
+  checkException(evalGrids(dg, pg, post.proc=mean))  
   eg = evalGrids(dg, pg, replications=10)
   df1 = as.data.frame(eg, summary.fun=c(mean, sd))
   set.seed(23112013)

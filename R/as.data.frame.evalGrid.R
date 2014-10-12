@@ -48,6 +48,11 @@
 as.data.frame.evalGrid <-
   function(x, ..., convert.result.fun = identity, summary.fun=NULL, progress=FALSE) {
     postFun = NULL
+
+    ellipsis = list(...)
+    if (is.element("post.proc", names(ellipsis))) stop("post.proc is deprecated. Please use summary.fun")    
+    if (is.element("value.fun", names(ellipsis))) stop("value.fun is deprecated. Please use convert.result.fun")
+    
     if (!is.null(summary.fun)){      
       if (length(summary.fun) == 1) {
         postFun = summary.fun
