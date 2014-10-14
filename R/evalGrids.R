@@ -242,13 +242,13 @@ evalGrids <-
       }
       if (discardGeneratedData){
         if (!is.null(cluster)){
-          ret = parLapply(cluster, 1:replications, withOutData)
+          ret = parallel::parLapply(cluster, 1:replications, withOutData)
         } else {
           ret = lapply(1:replications, withOutData)
         }
       } else {
         if (!is.null(cluster)){
-          ret = parLapply(cluster, 1:replications, withData)
+          ret = parallel::parLapply(cluster, 1:replications, withData)
         } else {
           ret = lapply(1:replications, withData)
         }
@@ -265,7 +265,7 @@ evalGrids <-
       }
       if(!is.null(fallback)){
         if(!is.null(cluster)){
-          rs = clusterCall(cluster, function() .Random.seed)
+          rs = parallel::clusterCall(cluster, function() .Random.seed)
         } else {
           rs = .Random.seed
         }
@@ -278,16 +278,15 @@ evalGrids <-
     if (!is.null(cluster) && ncpus > 1)
       warning("cluster provided. Ignore argument ncpus.")
     
-    if (is.null(cluster) && ncpus > 1){
-      library("parallel")
+    if (is.null(cluster) && ncpus > 1){            
       RNGkind("L'Ecuyer-CMRG")
-      cluster = makeCluster(rep("localhost", ncpus), type="PSOCK")  
+      cluster = parallel::makeCluster(rep("localhost", ncpus), type="PSOCK")  
     }
     
     
     if(!is.null(cluster)){      
       if (!is.null(clusterGlobalObjects)){  
-        clusterExport(cl=cluster, varlist=clusterGlobalObjects)
+        parallel::clusterExport(cl=cluster, varlist=clusterGlobalObjects)
       }
       if (!is.null(clusterLibraries)){      
         for( L in clusterLibraries){
@@ -295,8 +294,8 @@ evalGrids <-
         }
       }
       #     parSapply(cluster, seq_len(ncpus), createID)
-      clusterExport(cl=cluster, varlist=c("df", "pf"))
-      clusterSetRNGStream(cluster, iseed=clusterSeed)
+      parallel::clusterExport(cl=cluster, varlist=c("df", "pf"))
+      parallel::clusterSetRNGStream(cluster, iseed=clusterSeed)
     }     
     t1 = Sys.time()
     if(progress){
@@ -339,7 +338,7 @@ evalGrids <-
     t2 = Sys.time()
 
     if (ncpus > 1)
-      stopCluster(cluster)
+      parallel::stopCluster(cluster)
     
     est.reps.per.hour = as.integer(replications/as.numeric(difftime(t2, t1, units="hour")))
     

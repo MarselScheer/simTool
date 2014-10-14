@@ -18,11 +18,11 @@ Depends:
     R (>= 2.14.0)
 Imports:
     plyr (>= 1.8.1),
-    reshape (>= 0.8.5)
+    reshape (>= 0.8.5),
+    parallel
 Suggests:
     ggplot2,
     knitr,
-    parallel,
     boot,
     RUnit
 License: GPL-3
