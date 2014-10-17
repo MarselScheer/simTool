@@ -289,8 +289,9 @@ evalGrids <-
         parallel::clusterExport(cl=cluster, varlist=clusterGlobalObjects)
       }
       if (!is.null(clusterLibraries)){      
-        for( L in clusterLibraries){
-          eval(call("clusterEvalQ", cl=cluster, expr=call("library", L)))
+        for( L in clusterLibraries) {
+          libCall = call("library", L)
+          parallel::clusterCall(cl=cluster, fun=function() eval(libCall))
         }
       }
       #     parSapply(cluster, seq_len(ncpus), createID)
