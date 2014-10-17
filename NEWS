@@ -1,3 +1,12 @@
+Version 1.0.3
+=========================
+
+Misc:
+
+* Adapted how libraries are loaded onto the cluster
+
+
+
 Version 1.0.2
 =========================
 
