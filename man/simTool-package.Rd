@@ -3,14 +3,16 @@
 \name{simTool-package}
 \alias{simTool}
 \alias{simTool-package}
-\title{Facilitates simulation studies}
+\title{Conduct Simulation Studies with a Minimal Amount of Source Code.}
 \description{
-The \code{simTool} package is designed for statistical simulations that have two components:
-One component generates the data and the other one analyzes the data. The main aims
-of the \code{simTool} package are the reduction of the administrative source code (mainly loops)
-and a simple applicability of the package that allows the user to quickly learn how to
-work with the \code{simTool} package. Parallel computing is also supported. Finally, convenient
-functions are provided to summarize the simulation results.
+The \code{simTool} package is designed for statistical simulations that
+have two components. One component generates the data and the other one
+analyzes the data. The main aims of the \code{simTool} package are the reduction
+of the administrative source code (mainly loops and management code for the
+results) and a simple applicability of the package that allows the user to
+quickly learn how to work with the \code{simTool} package. Parallel computing is
+also supported. Finally, convenient functions are provided to summarize the
+simulation results.
 }
 \details{
 \tabular{ll}{ Package: \tab simTool\cr Type: \tab Package\cr Version: \tab
