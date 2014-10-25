@@ -1,6 +1,6 @@
 
 
-#'Conduct Simulation Studies with a Minimal Amount of Source Code.
+#'Conduct Simulation Studies with a Minimal Amount of Source Code
 #'
 #'The \code{simTool} package is designed for statistical simulations that
 #'have two components. One component generates the data and the other one

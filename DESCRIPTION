@@ -1,6 +1,6 @@
 Package: simTool
 Type: Package
-Title: Conduct Simulation Studies with a Minimal Amount of Source Code.
+Title: Conduct Simulation Studies with a Minimal Amount of Source Code
 Version: 1.0.3
 Date: 2014-09-07
 Author: Marsel Scheer <scheer@freescience.de>

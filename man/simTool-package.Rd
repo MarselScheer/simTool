@@ -3,7 +3,7 @@
 \name{simTool-package}
 \alias{simTool}
 \alias{simTool-package}
-\title{Conduct Simulation Studies with a Minimal Amount of Source Code.}
+\title{Conduct Simulation Studies with a Minimal Amount of Source Code}
 \description{
 The \code{simTool} package is designed for statistical simulations that
 have two components. One component generates the data and the other one
