@@ -16,7 +16,7 @@ simulation results.
 }
 \details{
 \tabular{ll}{ Package: \tab simTool\cr Type: \tab Package\cr Version: \tab
-1.0\cr Date: \tab 2013-02-21\cr License: \tab GPL-3\cr }
+1.0.3\cr Date: \tab 2013-02-21\cr License: \tab GPL-3\cr }
 \code{evalGrids} is the workhorse. \code{as.data.frame} is function coercing the result object of evalGrids to
 a data.frame. \code{expandGrid} is only a convenient function
 }
