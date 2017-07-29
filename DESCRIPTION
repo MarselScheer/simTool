@@ -23,6 +23,6 @@ Suggests:
     ggplot2,
     knitr,
     boot,
-    RUnit
+    testthat
 License: GPL-3
 VignetteBuilder: knitr
