@@ -18,6 +18,7 @@ Depends:
 Imports:
     plyr (>= 1.8.1),
     reshape (>= 0.8.5),
+    dplyr (>= 0.7.2),
     parallel
 Suggests:
     ggplot2,
@@ -26,3 +27,4 @@ Suggests:
     testthat
 License: GPL-3
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1
