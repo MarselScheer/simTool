@@ -6,22 +6,23 @@
 #'  to them.
 #'
 #'
-#'@param dataGrid  a \code{data.frame} where the first column
+#'@param data_grid  a \code{data.frame} or \code{tibble} where the first column
 #'  is a character vector with function names. The other
 #'  columns contain parameters for the functions specified
 #'  in the first column. Parameters with NA are ignored.
-#'@param procGrid  similar as \code{dataGrid} the first
+#'@param proc_grid  similar as \code{data_grid} the first
 #'  column must contain function names. The other columns 
 #'  contain parameters for the functions specified in the
 #'  first column. The data generated according to 
-#'  \code{dataGrid} will always be passed to the first
+#'  \code{data_grid} will always be passed to the first
 #'  unspecified argument of the functions sepcified in the first 
-#'  column of \code{procGrid}.
+#'  column of \code{proc_grid}.
 #'@param replications  number of replications for the simulation
-#'@param discardGeneratedData  if \code{TRUE} the generated 
+#'@param discard_generated_data  if \code{TRUE} the generated 
 #'  data is deleted after all function constellations in 
-#'  \code{procGrid} have been applied. Otherwise, ALL
+#'  \code{proc_grid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
+#'@param post_analyze this is a convenience function, that is applied directly after the data analyzing function.
 #'@param summary_fun  named list of univariate function to summarize the results (numeric or logical) over
 #'  the replications, e.g. list(mean = mean, sd = sd). 
 #'@param ncpus  a cluster of \code{ncpus} workers (R-processes)
@@ -33,20 +34,20 @@
 #'  package that will be used to conduct the simulation.
 #'  If \code{cluster} is specified, then \code{ncpus} will
 #'  be ignored.
-#'@param clusterSeed  if the simulation is done in parallel
+#'@param cluster_seed if the simulation is done in parallel
 #'  manner, then the combined multiple-recursive generator from L'Ecuyer (1999) 
-#'  is used to generate random numbers. Thus \code{clusterSeed} must be a (signed) integer 
+#'  is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer 
 #'  vector of length 6. The 6 elements of the seed are internally regarded as 
 #'  32-bit unsigned integers. Neither the first three nor the last three 
 #'  should be all zero, and they are limited to less than 4294967087 and 
 #'  4294944443 respectively.
-#'@param clusterLibraries  a character vector specifying
+#'@param cluster_libraries  a character vector specifying
 #'  the packages that should be loaded by the workers.
-#'@param clusterGlobalObjects  a character vector specifying
+#'@param cluster_global_objects  a character vector specifying
 #'  the names of R objects in the global environment that should
 #'  be exported to the global environment of every worker.
 #'@param envir  must be provided if the functions specified
-#'  in \code{dataGrid} or \code{procGrid} are not part
+#'  in \code{data_grid} or \code{proc_grid} are not part
 #'  of the global environment.
 #'@return  The returned object list of the class
 #'  \code{eval_tibbles}, where the element \code{simulations} contain
@@ -58,24 +59,23 @@
 #'  create a cluster and stop it after the simulation
 #'  is done.
 #'@author  Marsel Scheer
-#'@seealso  \code{\link{as.data.frame.evalGrid}}
 #'@export
 eval_tibbles <-
-  function(dataGrid, procGrid=expandGrid(proc="length"), replications = 1, 
-           discardGeneratedData=FALSE, post_analyze = identity, 
-           summary_fun=NULL, 
-           ncpus = 1L, cluster=NULL, clusterSeed=rep(12345,6),
-           clusterLibraries=NULL,
-           clusterGlobalObjects=NULL,           
-           envir=globalenv()) {
+  function(data_grid, proc_grid = expand_tibble(proc = "length"), replications = 1, 
+           discard_generated_data = FALSE, post_analyze = identity, 
+           summary_fun = NULL, 
+           ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
+           cluster_libraries = NULL,
+           cluster_global_objects = NULL,           
+           envir = globalenv()) {
     
     mc = match.call()
 
     summary_fun = prepare_summary_fun(summary_fun)
-    df = data_grid_to_fun(dataGrid, envir)
-    pf = proc_grid_to_fun(procGrid, envir)
-    cluster = prepare_cluster(cluster, ncpus, clusterGlobalObjects, clusterLibraries, clusterSeed, df, pf)
-    sim_fun = define_simulation(pf, discardGeneratedData, cluster, replications, summary_fun, post_analyze)
+    df = data_grid_to_fun(data_grid, envir)
+    pf = proc_grid_to_fun(proc_grid, envir)
+    cluster = prepare_cluster(cluster, ncpus, cluster_global_objects, cluster_libraries, cluster_seed, df, pf)
+    sim_fun = define_simulation(pf, discard_generated_data, cluster, replications, summary_fun, post_analyze)
 
     pb = progress_bar(df)
     
@@ -99,17 +99,21 @@ eval_tibbles <-
     )
     
     
-    est.reps.per.hour = as.integer(replications/as.numeric(difftime(t2, t1, units="hour")))
+    est_reps_per_hour = as.integer(replications/as.numeric(difftime(t2, t1, units="hour")))
     
-    print(paste("Estimated replications per hour: ", est.reps.per.hour))
-    ret <- list(call = mc, dataGrid = dataGrid, procGrid = procGrid, 
-               simulation = frame_simulation(dataGrid, procGrid, simulation_list, summary_fun), 
+    ret <- list(call = mc, data_grid = data_grid, proc_grid = proc_grid, 
+               simulation = frame_simulation(data_grid, proc_grid, simulation_list, summary_fun), 
                summary_fun = summary_fun,
-               est.reps.per.hour = est.reps.per.hour,
-               sessionInfo = sessionInfo())
+               replications = replications,
+               start_time = t1,
+               end_time = t2,
+               est_reps_per_hour = est_reps_per_hour,
+               session_info = sessionInfo())
     class(ret) <- "eval_tibbles"
     ret
   }
+
+
 
 # ###############################################
 # rng = function(data, ...) {

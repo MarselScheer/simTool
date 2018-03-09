@@ -4,32 +4,34 @@
 \alias{eval_tibbles}
 \title{Workhorse for simulation studies}
 \usage{
-eval_tibbles(dataGrid, procGrid = expandGrid(proc = "length"),
-  replications = 1, discardGeneratedData = FALSE, post_analyze = identity,
-  summary_fun = NULL, ncpus = 1L, cluster = NULL,
-  clusterSeed = rep(12345, 6), clusterLibraries = NULL,
-  clusterGlobalObjects = NULL, envir = globalenv())
+eval_tibbles(data_grid, proc_grid = expand_tibble(proc = "length"),
+  replications = 1, discard_generated_data = FALSE,
+  post_analyze = identity, summary_fun = NULL, ncpus = 1L,
+  cluster = NULL, cluster_seed = rep(12345, 6), cluster_libraries = NULL,
+  cluster_global_objects = NULL, envir = globalenv())
 }
 \arguments{
-\item{dataGrid}{a \code{data.frame} where the first column
+\item{data_grid}{a \code{data.frame} or \code{tibble} where the first column
 is a character vector with function names. The other
 columns contain parameters for the functions specified
 in the first column. Parameters with NA are ignored.}
 
-\item{procGrid}{similar as \code{dataGrid} the first
+\item{proc_grid}{similar as \code{data_grid} the first
 column must contain function names. The other columns 
 contain parameters for the functions specified in the
 first column. The data generated according to 
-\code{dataGrid} will always be passed to the first
+\code{data_grid} will always be passed to the first
 unspecified argument of the functions sepcified in the first 
-column of \code{procGrid}.}
+column of \code{proc_grid}.}
 
 \item{replications}{number of replications for the simulation}
 
-\item{discardGeneratedData}{if \code{TRUE} the generated 
+\item{discard_generated_data}{if \code{TRUE} the generated 
 data is deleted after all function constellations in 
-\code{procGrid} have been applied. Otherwise, ALL
+\code{proc_grid} have been applied. Otherwise, ALL
 generated data sets will be part of the returned object.}
+
+\item{post_analyze}{this is a convenience function, that is applied directly after the data analyzing function.}
 
 \item{summary_fun}{named list of univariate function to summarize the results (numeric or logical) over
 the replications, e.g. list(mean = mean, sd = sd).}
@@ -45,23 +47,23 @@ package that will be used to conduct the simulation.
 If \code{cluster} is specified, then \code{ncpus} will
 be ignored.}
 
-\item{clusterSeed}{if the simulation is done in parallel
+\item{cluster_seed}{if the simulation is done in parallel
 manner, then the combined multiple-recursive generator from L'Ecuyer (1999) 
-is used to generate random numbers. Thus \code{clusterSeed} must be a (signed) integer 
+is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer 
 vector of length 6. The 6 elements of the seed are internally regarded as 
 32-bit unsigned integers. Neither the first three nor the last three 
 should be all zero, and they are limited to less than 4294967087 and 
 4294944443 respectively.}
 
-\item{clusterLibraries}{a character vector specifying
+\item{cluster_libraries}{a character vector specifying
 the packages that should be loaded by the workers.}
 
-\item{clusterGlobalObjects}{a character vector specifying
+\item{cluster_global_objects}{a character vector specifying
 the names of R objects in the global environment that should
 be exported to the global environment of every worker.}
 
 \item{envir}{must be provided if the functions specified
-in \code{dataGrid} or \code{procGrid} are not part
+in \code{data_grid} or \code{proc_grid} are not part
 of the global environment.}
 }
 \value{
@@ -82,9 +84,6 @@ If \code{cluster} is provided by the user the
  simulations by specifing \code{ncpus} will interally
  create a cluster and stop it after the simulation
  is done.
-}
-\seealso{
-\code{\link{as.data.frame.evalGrid}}
 }
 \author{
 Marsel Scheer

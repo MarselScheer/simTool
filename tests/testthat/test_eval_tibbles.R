@@ -111,10 +111,10 @@ expected_df = structure(list(fun = c("seq_len", "seq_len", "seq_len", "seq_len",
 
 
 test_that("Data grid that was used is preserved in the object returned by evalGrids",
-          expect_true(all(eg$dataGrid == dg)))
+          expect_true(all(eg$data_grid == dg)))
 
 test_that("Proc grid that was used is preserved in the object returned by evalGrids",
-          expect_true(all(eg$procGrid == pg)))
+          expect_true(all(eg$proc_grid == pg)))
 
 test_that("One analyzing function. Results were created and stored in simulation",{
   expect_identical(eg$simulation, expected_df)
@@ -294,7 +294,7 @@ ret_global_var = function(dummy)
 dg <- expandGrid(fun = "seq_len", length.out = 1:3)
 pg <- expandGrid(proc = "ret_global_var")
 assign("globalVar", "uploaded to cluster", envir = .GlobalEnv)
-eg <- eval_tibbles(dg, pg, rep = 10, envir = environment(), ncpus = 2, clusterGlobalObjects = c("globalVar"))
+eg <- eval_tibbles(dg, pg, rep = 10, envir = environment(), ncpus = 2, cluster_global_objects = c("globalVar"))
 
 test_that("Variable gets uploaded to the cluster.",{
   expect_identical(unique(unlist(eg$simulation$results)), "uploaded to cluster, executed on cluster")
@@ -319,7 +319,7 @@ test_that("No libraries loaded on the cluster.",{
   expect_true(is.null(unique(unlist(eg$simulation$results))))
 })
 
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), ncpus = 2, clusterLibraries = c("survival"))
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), ncpus = 2, cluster_libraries = c("survival"))
 test_that("No libraries loaded on the cluster.",{
   expect_equal(unique(unlist(eg$simulation$results)), "survival")
 })
