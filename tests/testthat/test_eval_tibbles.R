@@ -1,28 +1,96 @@
-# genData1 = function(df)
-# {
-#   df[[1]][,1]
-# }
-# 
-# genData2 = function(df)
-# {
-#   df[[1]][,2]
-# }
-# 
-# dg <- expand_tibble(
-#   fun = c("genData1", "genData2"),
-#   df = list(data.frame(1:3, 4:6),
-#              data.frame(1:4, 5:8)))
-# pg <- expandGrid(proc = "rng")
-# eg <- eval_tibbles(dg, pg, rep = 2, envir = environment())
-
-
-##################################################################
-
 rng = function(data, ...) {
   ret = range(data)
   names(ret) = c("min", "max")
   ret
 }
+
+genData1 = function(df)
+{
+  df[[1]][,1]
+}
+
+genData2 = function(df)
+{
+  df[[1]][,2]
+}
+
+dg <- expand_tibble(
+  fun = c("genData1", "genData2"),
+  df = list(matrix(1:6, 3,2),
+            matrix(1:8, 4,2)))
+pg <- expandGrid(proc = "rng")
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment())
+
+expected_df = structure(list(
+  fun = c("genData1", "genData1", "genData2", "genData2", "genData1", "genData1", "genData2", "genData2"), 
+  df = list(structure(1:6, .Dim = c(3L, 2L)), 
+            structure(1:6, .Dim = c(3L, 2L)), structure(1:6, .Dim = c(3L, 2L)), 
+            structure(1:6, .Dim = c(3L, 2L)), structure(1:8, .Dim = c(4L, 2L)),
+            structure(1:8, .Dim = c(4L, 2L)), structure(1:8, .Dim = c(4L, 2L)),
+            structure(1:8, .Dim = c(4L, 2L))),
+  replications = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L), proc = c("rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"), 
+  results = list(structure(c(1L, 3L), .Names = c("min", "max")), 
+                 structure(c(1L, 3L), .Names = c("min", "max")), 
+                 structure(c(4L, 6L), .Names = c("min", "max")), 
+                 structure(c(4L, 6L), .Names = c("min", "max")), 
+                 structure(c(1L, 4L), .Names = c("min", "max")),
+                 structure(c(1L, 4L), .Names = c("min", "max")), 
+                 structure(c(5L, 8L), .Names = c("min", "max")),
+                 structure(c(5L, 8L), .Names = c("min", "max")))), 
+  .Names = c("fun", "df", "replications", "proc", "results"), 
+  row.names = c(NA, -8L), 
+  class = c("tbl_df", "tbl", "data.frame"))
+
+
+test_that("Tibbles for data generating functions can be used.",{
+  expect_identical(eg$simulation, expected_df)
+})
+
+##################################################################
+
+
+
+genMat = function(df)
+{
+  df[[1]][,1]
+}
+
+mat_mult = function(A, B)
+{
+  A %*% B[[1]]
+}
+
+dg <- expand_tibble(
+  fun = c("genMat"),
+  df = list(matrix(1:4, 2,2),
+            matrix(5:8, 2,2)))
+
+pg <- expand_tibble(
+  proc = "mat_mult", 
+  B = list(matrix(1:4, 2,2), matrix(5:8, 2,2)))
+
+eg <- eval_tibbles(dg, pg, rep = 1, envir = environment())
+
+expected_df <- structure(
+  list(fun = c("genMat", "genMat", "genMat", "genMat"), 
+       df = list(structure(1:4, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)), 
+                 structure(5:8, .Dim = c(2L, 2L)), structure(5:8, .Dim = c(2L, 2L))), 
+       replications = c(1L, 1L, 1L, 1L), proc = c("mat_mult", "mat_mult", "mat_mult", "mat_mult"),
+       B = list(structure(1:4, .Dim = c(2L, 2L)), 
+                structure(5:8, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)), 
+                structure(5:8, .Dim = c(2L, 2L))), 
+       results = list(structure(c(5, 11), .Dim = 1:2), structure(c(17, 23), .Dim = 1:2),
+                      structure(c(17, 39), .Dim = 1:2), structure(c(61, 83), .Dim = 1:2))), 
+  .Names = c("fun", "df", "replications", "proc", "B", "results"), 
+  row.names = c(NA, -4L), 
+  class = c("tbl_df", "tbl", "data.frame"))
+
+
+test_that("Tibbles for data generating and data analyzing functions can be used.",{
+  expect_identical(eg$simulation, expected_df)
+})
+
+##################################################################
 
 dg <- expandGrid(fun = "seq_len", length.out = 1:3)
 pg <- expandGrid(proc = "rng")
