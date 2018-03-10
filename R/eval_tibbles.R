@@ -116,21 +116,25 @@
 #' tidyr::unnest(eg$simulation)
 #' @export
 eval_tibbles <-
-  function(data_grid, proc_grid = expand_tibble(proc = "length"), replications = 1,
-             discard_generated_data = FALSE, post_analyze = identity,
-             summary_fun = NULL, group_for_summary = NULL,
-             ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
-             cluster_libraries = NULL,
-             cluster_global_objects = NULL,
-             envir = globalenv(),
-             simplify = TRUE) {
+  function(data_grid, proc_grid = expand_tibble(proc = "length"),
+           replications = 1, discard_generated_data = FALSE,
+           post_analyze = identity,
+           summary_fun = NULL, group_for_summary = NULL,
+           ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
+           cluster_libraries = NULL,
+           cluster_global_objects = NULL,
+           envir = globalenv(),
+           simplify = TRUE) {
     mc <- match.call()
 
     summary_fun <- prepare_summary_fun(summary_fun)
     df <- data_grid_to_fun(data_grid, envir)
     pf <- proc_grid_to_fun(proc_grid, envir)
-    cluster <- prepare_cluster(cluster, ncpus, cluster_global_objects, cluster_libraries, cluster_seed, df, pf)
-    sim_fun <- define_simulation(pf, discard_generated_data, cluster, replications, summary_fun, group_for_summary, post_analyze)
+    cluster <- prepare_cluster(cluster, ncpus, cluster_global_objects,
+                               cluster_libraries, cluster_seed, df, pf)
+    sim_fun <- define_simulation(pf, discard_generated_data, cluster,
+                                 replications, summary_fun,
+                                 group_for_summary, post_analyze)
 
     pb <- progress_bar(df)
 
@@ -151,12 +155,13 @@ eval_tibbles <-
     }
     )
 
-
-    est_reps_per_hour <- as.integer(replications / as.numeric(difftime(t2, t1, units = "hour")))
+    est_reps_per_hour <-
+      as.integer(replications / as.numeric(difftime(t2, t1, units = "hour")))
 
     ret <- list(
       call = mc, data_grid = data_grid, proc_grid = proc_grid,
-      simulation = frame_simulation(data_grid, proc_grid, simulation_list, summary_fun),
+      simulation = frame_simulation(data_grid, proc_grid,
+                                    simulation_list, summary_fun),
       summary_fun = summary_fun,
       replications = replications,
       start_time = t1,
@@ -168,74 +173,9 @@ eval_tibbles <-
       ret <- unnest_simulation(ret)
     }
     if (!discard_generated_data) {
-      ret$generated_data <- purrr::map(purrr::flatten(simulation_list), ~ `[[`(., "data"))
+      ret$generated_data <- purrr::map(
+        purrr::flatten(simulation_list), ~ `[[`(., "data"))
     }
     class(ret) <- "eval_tibbles"
     ret
   }
-
-
-# regData = function(n, SD){
-#   data.frame(
-#   x=seq(0,1,length=n),
-#   y=rnorm(n, sd=SD))
-# }
-#
-# presever_rownames = function(mat)
-# {
-#       rn = rownames(mat)
-#       ret = as_tibble(mat)
-#       ret$term = rn
-#       ret
-# }
-#
-# eg <- eval_tibbles(
-#   expandGrid(fun="regData", n=20, SD=1:2),
-#   expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
-#   #post_analyze = broom::tidy,
-#   post_analyze = purrr::compose(presever_rownames, coef, summary),
-#   summary_fun = list(mean = mean, sd = sd),
-#   group_for_summary = "term",
-#   replications=2000
-# )
-# tidyr::unnest(eg$simulation)
-# set.seed(1)
-# eg <- eval_tibbles(
-#   expandGrid(fun="regData", n=20, SD=1:2),
-#   expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
-#   post_analyze = broom::tidy,
-#   #post_analyze = purrr::compose(presever_rownames, coef, summary),
-#   summary_fun = list(mean = mean, sd = sd),
-#   group_for_summary = "term",
-#   replications=2000
-# )
-# tidyr::unnest(eg$simulation)
-#
-
-# ###############################################
-# microbenchmark::microbenchmark(
-#   old = evalGrids(dg, pg,rep = 2000),
-#   new = eval_tibbles(dg, pg,rep = 2000),
-#   times = 10
-# )
-# #####################################################
-# regData = function(n, SD){
-#   data.frame(
-#     x=seq(0,1,length=n),
-#     y=rnorm(n, sd=SD))
-# }
-#
-# microbenchmark::microbenchmark(
-#   old = evalGrids(
-#     expandGrid(fun="regData", n=20, SD=1:2),
-#     expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
-#     replications=200
-#   ),
-#   new = eval_tibbles(
-#     expandGrid(fun="regData", n=20, SD=1:2),
-#     expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
-#     replications=200
-#   ),
-#   times = 10
-# )
-# #####################################################

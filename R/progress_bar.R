@@ -1,6 +1,8 @@
 progress_bar <- function(df) {
   if (!interactive()) {
-    return(function() {})
+    return(function() {
+
+    })
   }
   count <- 0
   pb <- utils::txtProgressBar(max = length(df), style = 3)
