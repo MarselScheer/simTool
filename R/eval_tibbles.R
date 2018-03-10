@@ -103,7 +103,7 @@
 #' }
 #' 
 #' eg <- eval_tibbles(
-#'   expandGrid(fun="regData", n=5, SD=1:2),
+#'   expandGrid(fun="regData", n=5L, SD=1:2),
 #'   expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
 #'   post_analyze = purrr::compose(presever_rownames, coef, summary),
 #'   #post_analyze = broom::tidy, # is a nice out of the box alternative
@@ -120,7 +120,8 @@ eval_tibbles <-
            ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
            cluster_libraries = NULL,
            cluster_global_objects = NULL,           
-           envir = globalenv()) {
+           envir = globalenv(),
+           simplify = TRUE) {
     
     mc = match.call()
 
@@ -162,6 +163,14 @@ eval_tibbles <-
                end_time = t2,
                est_reps_per_hour = est_reps_per_hour,
                session_info = sessionInfo())
+    if (simplify)
+    {
+      ret = unnest_simulation(ret)
+    }
+    if (!discard_generated_data)
+    {
+      ret$generated_data = purrr::map(purrr::flatten(simulation_list), ~`[[`(., "data"))
+    }
     class(ret) <- "eval_tibbles"
     ret
   }
