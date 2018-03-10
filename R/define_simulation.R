@@ -30,7 +30,8 @@ define_simulation <- function(pf, discardGeneratedData, cluster, replications, s
       res <- purrr::map(res, ~do.call("bind_or_combine", .))
       if (!is.null(summary.fun) && !is.null(group_for_summary))
       {
-        res <- lapply(summary.fun, function(f) purrr::map(res, ~dplyr::summarize_all(dplyr::group_by_(., group_for_summary), f)))  
+        class(group_for_summary) = "list"
+        res <- lapply(summary.fun, function(f) purrr::map(res, ~dplyr::summarize_all(dplyr::group_by_(., .dots = group_for_summary), f)))
       } else
       {
         res <- lapply(summary.fun, function(f) purrr::map(res, ~dplyr::summarize_all(., f)))  

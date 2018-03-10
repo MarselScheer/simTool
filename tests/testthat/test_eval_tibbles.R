@@ -313,9 +313,41 @@ expected_df <- structure(
   row.names = c(NA, -2L), 
   class = c("tbl_df", "tbl", "data.frame"))
 
-test_that("Grouping with one group for summary_fun. Results were created and stored in simulation",{
+test_that("One group for summary_fun. Results were created and stored in simulation",{
   expect_identical(eg$simulation, expected_df)
 })
+
+##################################################################
+
+shift = -1
+gen_data <- function()
+{
+  shift <<- shift + 1
+  tibble(group1 = letters[1:3], group2 = letters[4:6], b = 1:3 + shift)
+}
+
+dg <- expand_tibble(fun = c("gen_data"))
+pg <- expandGrid(proc = "identity")
+eg <- eval_tibbles(dg, pg, rep = 3, envir = environment(), summary_fun = list(mean = mean, sum = sum), 
+                   group_for_summary = c("group1", "group2"))
+
+expected_df <- structure(list(fun = c("gen_data", "gen_data"), replications = c(1L, 
+                                                                 1L), summary_fun = c("mean", "sum"), proc = c("identity", "identity"
+                                                                 ), results = structure(list(mean = structure(list(group1 = c("a", 
+                                                                                                                              "b", "c"), group2 = c("d", "e", "f"), b = c(2, 3, 4)), .Names = c("group1", 
+                                                                                                                                                                                                "group2", "b"), row.names = c(NA, -3L), class = c("grouped_df", 
+                                                                                                                                                                                                                                                  "tbl_df", "tbl", "data.frame"), vars = "group1", drop = TRUE), 
+                                                                                             sum = structure(list(group1 = c("a", "b", "c"), group2 = c("d", 
+                                                                                                                                                        "e", "f"), b = c(6, 9, 12)), .Names = c("group1", "group2", 
+                                                                                                                                                                                                "b"), row.names = c(NA, -3L), class = c("grouped_df", "tbl_df", 
+                                                                                                                                                                                                                                        "tbl", "data.frame"), vars = "group1", drop = TRUE)), .Names = c("mean", 
+                                                                                                                                                                                                                                                                                                         "sum"))), .Names = c("fun", "replications", "summary_fun", "proc", 
+                                                                                                                                                                                                                                                                                                                              "results"), row.names = c(NA, -2L), class = c("tbl_df", "tbl", 
+                                                                                                                                                                                                                                                                                                                                                                            "data.frame"))
+test_that("Two groups for summary_fun. Results were created and stored in simulation",{
+  expect_identical(eg$simulation, expected_df)
+})
+
 
 ##################################################################
 

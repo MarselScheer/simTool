@@ -27,8 +27,8 @@
 #'  the replications, e.g. list(mean = mean, sd = sd). 
 #'@param group_for_summary if the result returned by the data analyzing function or \code{post_analyze} 
 #'  is a \code{data.frame} with more than one row, one usually is interested
-#'  in summarizing the results with respect to a specific group variable. This group variable can be passed as
-#'  a character into \code{group_for_summary}
+#'  in summarizing the results while grouping for some variables. This group variables can be passed as
+#'  a character vector into \code{group_for_summary}
 #'@param ncpus  a cluster of \code{ncpus} workers (R-processes)
 #'  is created on the local machine to conduct the
 #'  simulation. If \code{ncpus}
