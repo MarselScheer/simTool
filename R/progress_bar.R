@@ -1,7 +1,5 @@
-progress_bar = function(df) 
-{
-  if(!interactive())
-  {
+progress_bar <- function(df) {
+  if (!interactive()) {
     return(function() {})
   }
   count <- 0
