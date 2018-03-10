@@ -4,10 +4,12 @@
 \alias{print.eval_tibbles}
 \title{Printing simulation results}
 \usage{
-\method{print}{eval_tibbles}(x)
+\method{print}{eval_tibbles}(x, ...)
 }
 \arguments{
 \item{x}{object of class \code{eval_tibbles}}
+
+\item{...}{not used. only necessary to define the function consistently with respect to \code{print(x, ...)}}
 }
 \description{
 Prints objects created by \code{eval_tibbles()}

@@ -351,7 +351,7 @@ evalGrids <-
     ret = list(call=mc, dataGrid=dataGrid, procGrid=procGrid, simulation=simulation, 
                summary.fun = summary.fun,
                est.reps.per.hour=est.reps.per.hour,
-               sessionInfo=sessionInfo())
+               sessionInfo=utils::sessionInfo())
     class(ret) = "evalGrid"
     ret
   }

@@ -4,9 +4,10 @@
 #'
 #'
 #'@param x  object of class \code{eval_tibbles}
+#'@param ... not used. only necessary to define the function consistently with respect to \code{print(x, ...)}
 #'@author  Marsel Scheer
 #'@export
-print.eval_tibbles = function(x){
+print.eval_tibbles = function(x, ...){
   print(x$simulation)
   cat(sprintf("Number of data generating functions: %i\n", nrow(x$data_grid)))
   cat(sprintf("Number of analyzing procedures: %i\n", nrow(x$proc_grid)))

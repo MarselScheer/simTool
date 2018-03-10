@@ -53,6 +53,8 @@
 #'@param envir  must be provided if the functions specified
 #'  in \code{data_grid} or \code{proc_grid} are not part
 #'  of the global environment.
+#'@param simplify usually the result column is nested, by default it is tried to
+#'  unnest the it.  
 #'@return  The returned object list of the class
 #'  \code{eval_tibbles}, where the element \code{simulations} contain
 #'  the results of the simulation.
@@ -97,7 +99,7 @@
 #' presever_rownames = function(mat)
 #' {
 #'   rn = rownames(mat)
-#'   ret = as_tibble(mat)
+#'   ret = tibble::as_tibble(mat)
 #'   ret$term = rn
 #'   ret
 #' }
@@ -162,7 +164,7 @@ eval_tibbles <-
                start_time = t1,
                end_time = t2,
                est_reps_per_hour = est_reps_per_hour,
-               session_info = sessionInfo())
+               session_info = utils::sessionInfo())
     if (simplify)
     {
       ret = unnest_simulation(ret)

@@ -1,8 +1,8 @@
 Package: simTool
 Type: Package
 Title: Conduct Simulation Studies with a Minimal Amount of Source Code
-Version: 1.0.3
-Date: 2014-09-07
+Version: 1.1.0
+Date: 2018-03-10
 Author: Marsel Scheer <scheer@freescience.de>
 Maintainer: Marsel Scheer <scheer@freescience.de>
 Description: The simTool package is designed for statistical simulations that
@@ -21,11 +21,13 @@ Imports:
     dplyr (>= 0.7.2),
     purrr (>= 0.2.3),
     tidyr (>= 0.6.2),
+    tibble (>= 1.4.2),
     parallel
 Suggests:
     ggplot2,
     knitr,
     boot,
+    broom,
     testthat
 License: GPL-3
 VignetteBuilder: knitr

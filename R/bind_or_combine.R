@@ -6,9 +6,7 @@ bind_or_combine <- function(...)
   .list = list(...)
   if (is.matrix(.list[[1]])) 
   {
-    .list <- 
-      .list %>% 
-      purrr::map(tibble::as_tibble)
+    .list <- purrr::map(.list, tibble::as_tibble)
   }
   if (is.null(names(.list[[1]])))
   {

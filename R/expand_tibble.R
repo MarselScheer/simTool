@@ -17,6 +17,5 @@
 #'@export
 expand_tibble <-
   function(...){
-    expand.grid(..., stringsAsFactors=FALSE) %>% 
-      tibble::as_tibble()
+    tibble::as_tibble(expand.grid(..., stringsAsFactors=FALSE))
   }

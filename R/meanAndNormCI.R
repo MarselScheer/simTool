@@ -13,6 +13,6 @@
 meanAndNormCI <-
 function(results){
     m = mean(results)
-    s = sd(results)/sqrt(length(results))
+    s = stats::sd(results)/sqrt(length(results))
     c(mean=m, lower=m-1.96*s, upper=m+1.96*s)
 }

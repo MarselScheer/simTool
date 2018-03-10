@@ -9,7 +9,7 @@ eval_tibbles(data_grid, proc_grid = expand_tibble(proc = "length"),
   post_analyze = identity, summary_fun = NULL, group_for_summary = NULL,
   ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
   cluster_libraries = NULL, cluster_global_objects = NULL,
-  envir = globalenv())
+  envir = globalenv(), simplify = TRUE)
 }
 \arguments{
 \item{data_grid}{a \code{data.frame} or \code{tibble} where the first column
@@ -39,8 +39,8 @@ the replications, e.g. list(mean = mean, sd = sd).}
 
 \item{group_for_summary}{if the result returned by the data analyzing function or \code{post_analyze} 
 is a \code{data.frame} with more than one row, one usually is interested
-in summarizing the results with respect to a specific group variable. This group variable can be passed as
-a character into \code{group_for_summary}}
+in summarizing the results while grouping for some variables. This group variables can be passed as
+a character vector into \code{group_for_summary}}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)
 is created on the local machine to conduct the
@@ -71,6 +71,9 @@ be exported to the global environment of every worker.}
 \item{envir}{must be provided if the functions specified
 in \code{data_grid} or \code{proc_grid} are not part
 of the global environment.}
+
+\item{simplify}{usually the result column is nested, by default it is tried to
+unnest the it.}
 }
 \value{
 The returned object list of the class
@@ -125,13 +128,13 @@ eg
 presever_rownames = function(mat)
 {
   rn = rownames(mat)
-  ret = as_tibble(mat)
+  ret = tibble::as_tibble(mat)
   ret$term = rn
   ret
 }
 
 eg <- eval_tibbles(
-  expandGrid(fun="regData", n=5, SD=1:2),
+  expandGrid(fun="regData", n=5L, SD=1:2),
   expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
   post_analyze = purrr::compose(presever_rownames, coef, summary),
   #post_analyze = broom::tidy, # is a nice out of the box alternative
