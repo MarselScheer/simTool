@@ -42,7 +42,7 @@ expected_df = structure(list(
   class = c("tbl_df", "tbl", "data.frame"))
 
 
-test_that("Tibbles for data generating functions can be used.",{
+test_that("Tibbles for data generating functions can be used. Results were created and stored in simulation",{
   expect_identical(eg$simulation, expected_df)
 })
 
@@ -86,7 +86,7 @@ expected_df <- structure(
   class = c("tbl_df", "tbl", "data.frame"))
 
 
-test_that("Tibbles for data generating and data analyzing functions can be used.",{
+test_that("Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation",{
   expect_identical(eg$simulation, expected_df)
 })
 
@@ -255,6 +255,7 @@ test_that("Three analyzing functions and three summary function. Results were cr
 })
 
 
+
 ##################################################################
 
 eg <- eval_tibbles(dg, pg,rep = 20, envir = environment(), summary_fun = list(mean = mean), ncpus = 2)
@@ -284,6 +285,37 @@ test_that("Three analyzing functions and one summary function over 2 cpus. Resul
   expect_identical(eg$simulation, expected_df)
 })
 
+##################################################################
+
+shift = -1
+gen_data <- function()
+{
+  shift <<- shift + 1
+  tibble(group = letters[1:3], b = 1:3 + shift)
+}
+
+dg <- expand_tibble(fun = c("gen_data"))
+pg <- expandGrid(proc = "identity")
+eg <- eval_tibbles(dg, pg, rep = 3, envir = environment(), summary_fun = list(mean = mean, sum = sum), 
+                   group_for_summary = "group")
+
+expected_df <- structure(
+  list(fun = c("gen_data", "gen_data"), replications = c(1L, 1L), summary_fun = c("mean", "sum"), 
+       proc = c("identity", "identity"), 
+       results = structure(
+         list(mean = structure(list(group = c("a", "b", "c"), b = c(2, 3, 4)), 
+                               class = c("tbl_df", "tbl", "data.frame"), 
+                               .Names = c("group", "b"), row.names = c(NA, -3L)), 
+              sum = structure(list(group = c("a", "b", "c"), b = c(6, 9, 12)), 
+                              class = c("tbl_df", "tbl", "data.frame"), .Names = c("group", "b"), 
+                              row.names = c(NA, -3L))), 
+         .Names = c("mean", "sum"))), .Names = c("fun", "replications", "summary_fun", "proc", "results"), 
+  row.names = c(NA, -2L), 
+  class = c("tbl_df", "tbl", "data.frame"))
+
+test_that("Grouping with one group for summary_fun. Results were created and stored in simulation",{
+  expect_identical(eg$simulation, expected_df)
+})
 
 ##################################################################
 

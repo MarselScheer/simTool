@@ -6,9 +6,10 @@
 \usage{
 eval_tibbles(data_grid, proc_grid = expand_tibble(proc = "length"),
   replications = 1, discard_generated_data = FALSE,
-  post_analyze = identity, summary_fun = NULL, ncpus = 1L,
-  cluster = NULL, cluster_seed = rep(12345, 6), cluster_libraries = NULL,
-  cluster_global_objects = NULL, envir = globalenv())
+  post_analyze = identity, summary_fun = NULL, group_for_summary = NULL,
+  ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
+  cluster_libraries = NULL, cluster_global_objects = NULL,
+  envir = globalenv())
 }
 \arguments{
 \item{data_grid}{a \code{data.frame} or \code{tibble} where the first column
@@ -35,6 +36,11 @@ generated data sets will be part of the returned object.}
 
 \item{summary_fun}{named list of univariate function to summarize the results (numeric or logical) over
 the replications, e.g. list(mean = mean, sd = sd).}
+
+\item{group_for_summary}{if the result returned by the data analyzing function or \code{post_analyze} 
+is a \code{data.frame} with more than one row, one usually is interested
+in summarizing the results with respect to a specific group variable. This group variable can be passed as
+a character into \code{group_for_summary}}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)
 is created on the local machine to conduct the
@@ -84,6 +90,56 @@ If \code{cluster} is provided by the user the
  simulations by specifing \code{ncpus} will interally
  create a cluster and stop it after the simulation
  is done.
+}
+\examples{
+
+rng = function(data, ...) {
+ret = range(data)
+names(ret) = c("min", "max")
+ret
+}
+
+dg <- expandGrid(fun = "rnorm", n = c(5, 10))
+pg <- expandGrid(proc = c("rng", "median", "length"))
+
+eg <- eval_tibbles(dg, pg,rep = 2)
+eg
+tidyr::unnest(eg$simulation)
+eg <- eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
+tidyr::unnest(eg$simulation)
+
+regData = function(n, SD){
+  data.frame(
+  x=seq(0,1,length=n),
+  y=rnorm(n, sd=SD))
+}
+
+eg <- eval_tibbles(
+  expandGrid(fun="regData", n=5, SD=1:2),
+  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  group_for_summary = "term",
+  replications=3
+)
+eg
+
+presever_rownames = function(mat)
+{
+  rn = rownames(mat)
+  ret = as_tibble(mat)
+  ret$term = rn
+  ret
+}
+
+eg <- eval_tibbles(
+  expandGrid(fun="regData", n=5, SD=1:2),
+  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
+  #post_analyze = broom::tidy, # is a nice out of the box alternative
+  summary_fun = list(mean = mean, sd = sd),
+  group_for_summary = "term",
+  replications=3
+)
+tidyr::unnest(eg$simulation)
 }
 \author{
 Marsel Scheer
