@@ -53,6 +53,17 @@ test_that("Tibbles for data generating functions can be used. Results were creat
   expect_identical(eg$simulation, expected_df)
 })
 
+test_that("Generated data is stored.", {
+  expect_identical(eg$generated_data, list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
+})
+
+eg <- eval_tibbles(dg, pg, discard_generated_data = TRUE, envir = environment())
+ 
+test_that("No entry for generated_data.", {
+  expect_false(all(grepl("generated_data", names(eg))))
+})
+
+
 ##################################################################
 
 
