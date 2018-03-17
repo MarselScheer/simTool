@@ -127,6 +127,7 @@ eval_tibbles <-
            simplify = TRUE) {
     mc <- match.call()
 
+    user_provided_cluster = !is.null(cluster)
     summary_fun <- prepare_summary_fun(summary_fun)
     df <- data_grid_to_fun(data_grid, envir)
     pf <- proc_grid_to_fun(proc_grid, envir)
@@ -149,7 +150,7 @@ eval_tibbles <-
       t2 <- Sys.time()
     },
     finally = {
-      if (ncpus > 1 && is.null(cluster)) {
+      if (ncpus > 1 && !user_provided_cluster) {
         #cluster created by the user wont be stopped
         parallel::stopCluster(cluster)
       }
