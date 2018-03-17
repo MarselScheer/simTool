@@ -149,7 +149,8 @@ eval_tibbles <-
       t2 <- Sys.time()
     },
     finally = {
-      if (ncpus > 1) {
+      if (ncpus > 1 && is.null(cluster)) {
+        #cluster created by the user wont be stopped
         parallel::stopCluster(cluster)
       }
     }
