@@ -102,14 +102,12 @@ names(ret) = c("min", "max")
 ret
 }
 
-dg <- expandGrid(fun = "rnorm", n = c(5, 10))
+dg <- expandGrid(fun = "rnorm", n = c(5L, 10L))
 pg <- expandGrid(proc = c("rng", "median", "length"))
 
-eg <- eval_tibbles(dg, pg,rep = 2)
-eg
-tidyr::unnest(eg$simulation)
-eg <- eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
-tidyr::unnest(eg$simulation)
+eval_tibbles(dg, pg,rep = 2)
+eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t))
+eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
 
 regData = function(n, SD){
   data.frame(
@@ -118,7 +116,7 @@ regData = function(n, SD){
 }
 
 eg <- eval_tibbles(
-  expandGrid(fun="regData", n=5, SD=1:2),
+  expandGrid(fun="regData", n=5L, SD=1:2),
   expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
   group_for_summary = "term",
   replications=3
