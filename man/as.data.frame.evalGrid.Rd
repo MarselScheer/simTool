@@ -8,7 +8,7 @@
   summary.fun = NULL, progress = FALSE)
 }
 \arguments{
-\item{x}{an object returned by 
+\item{x}{an object returned by
 \code{\link{evalGrids}}}
 
 \item{\dots}{only for S3 method consistency}
@@ -28,12 +28,12 @@ a \code{data.frame} with the parameter constellations
  (probably summarized).
 }
 \description{
-Converts the results contained in the 
- object returned by \code{\link{evalGrids}} 
+Converts the results contained in the
+ object returned by \code{\link{evalGrids}}
  into a \code{data.frame}. If the results can not
  be coerced automatically into a \code{data.frame}, the
  user can provide a function to pre-process the
- results (see \code{convert.result.fun}). Furthermore, 
+ results (see \code{convert.result.fun}). Furthermore,
  univariate functions to summarize the results over
  the replications can be specified via \code{summary.fun}.
 }

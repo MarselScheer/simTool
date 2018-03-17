@@ -18,17 +18,17 @@ columns contain parameters for the functions specified
 in the first column. Parameters with NA are ignored.}
 
 \item{proc_grid}{similar as \code{data_grid} the first
-column must contain function names. The other columns 
+column must contain function names. The other columns
 contain parameters for the functions specified in the
-first column. The data generated according to 
+first column. The data generated according to
 \code{data_grid} will always be passed to the first
-unspecified argument of the functions sepcified in the first 
+unspecified argument of the functions sepcified in the first
 column of \code{proc_grid}.}
 
 \item{replications}{number of replications for the simulation}
 
-\item{discard_generated_data}{if \code{TRUE} the generated 
-data is deleted after all function constellations in 
+\item{discard_generated_data}{if \code{TRUE} the generated
+data is deleted after all function constellations in
 \code{proc_grid} have been applied. Otherwise, ALL
 generated data sets will be part of the returned object.}
 
@@ -37,7 +37,7 @@ generated data sets will be part of the returned object.}
 \item{summary_fun}{named list of univariate function to summarize the results (numeric or logical) over
 the replications, e.g. list(mean = mean, sd = sd).}
 
-\item{group_for_summary}{if the result returned by the data analyzing function or \code{post_analyze} 
+\item{group_for_summary}{if the result returned by the data analyzing function or \code{post_analyze}
 is a \code{data.frame} with more than one row, one usually is interested
 in summarizing the results while grouping for some variables. This group variables can be passed as
 a character vector into \code{group_for_summary}}
@@ -54,11 +54,11 @@ If \code{cluster} is specified, then \code{ncpus} will
 be ignored.}
 
 \item{cluster_seed}{if the simulation is done in parallel
-manner, then the combined multiple-recursive generator from L'Ecuyer (1999) 
-is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer 
-vector of length 6. The 6 elements of the seed are internally regarded as 
-32-bit unsigned integers. Neither the first three nor the last three 
-should be all zero, and they are limited to less than 4294967087 and 
+manner, then the combined multiple-recursive generator from L'Ecuyer (1999)
+is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer
+vector of length 6. The 6 elements of the seed are internally regarded as
+32-bit unsigned integers. Neither the first three nor the last three
+should be all zero, and they are limited to less than 4294967087 and
 4294944443 respectively.}
 
 \item{cluster_libraries}{a character vector specifying
@@ -81,7 +81,7 @@ The returned object list of the class
  the results of the simulation.
 }
 \description{
-Generates data according to all provided 
+Generates data according to all provided
  constellations in \code{data_tibble} and applies
  all provided constellations in \code{proc_tibble}
  to them.
