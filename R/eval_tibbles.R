@@ -54,7 +54,7 @@
 #'  in \code{data_grid} or \code{proc_grid} are not part
 #'  of the global environment.
 #' @param simplify usually the result column is nested, by default it is tried to
-#'  unnest the it.
+#'  unnest it.
 #' @return  The returned object list of the class
 #'  \code{eval_tibbles}, where the element \code{simulations} contain
 #'  the results of the simulation.
