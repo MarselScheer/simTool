@@ -152,21 +152,16 @@ eg
 ## Parameter *discard_generated_data*
 
 *eval_tibbles* saves ALL generated data sets.
+```{r}
+eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1)
+eg$simulation
+eg$generated_data
+```
 In general, it is sometimes very handy to
 have the data sets in order to investigate unusual or unexpected results.
 But saving the generated data sets can be very memory consuming.
 Stop saving the generated data sets can be obtained by setting 
-*discardGeneratedData = TRUE*.
-See command line 11 in the pseudo code.
-```{r}
-eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1000)
-object.size(eg)
-eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1000,
-    discard_generated_data = TRUE)
-object.size(eg)
-```
-The object returned by *eval_tibbles* will be discussed at the
-end of this vignette.
+*discardGeneratedData = TRUE*. See command line 11 in the pseudo code.
 
 ## Parameter *summary_fun*
 
@@ -206,6 +201,42 @@ eval_tibbles(
  expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
  post_analyze = purrr::compose(function(mat) mat["(Intercept)", "Estimate"], coef, summary.lm),
  replications=2
+)
+```
+
+## Parameter *group_for_summary*
+
+When the result object is a *data.frame* itself, 
+for instance
+
+```{r}
+presever_rownames = function(mat)
+{
+  rn = rownames(mat)
+  ret = tibble::as_tibble(mat)
+  ret$term = rn
+  ret
+}
+
+eval_tibbles(
+  expandGrid(fun="regData", n=5L, SD=1:2),
+  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
+  replications=3
+)
+```
+In order to summarize the replications it is necessary to 
+additional group the calculations with respect to 
+another variable. This variable can be passed to
+*group_for_summary*
+```{r}
+eval_tibbles(
+  expandGrid(fun="regData", n=5L, SD=1:2),
+  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
+  summary_fun = list(mean = mean, sd = sd),
+  group_for_summary = "term",
+  replications=3
 )
 ```
 
