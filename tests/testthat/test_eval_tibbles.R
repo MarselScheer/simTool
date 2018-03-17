@@ -79,7 +79,7 @@ test_that("No entry for generated_data if a cluster is used.", {
 parallel::stopCluster(cl)
 
 
-##################################################################
+#################################################################
 
 
 
@@ -162,7 +162,6 @@ out.attrs = structure(list(
 class = c("tbl_df", "tbl", "data.frame")
 )
 
-
 test_that(
   "Data grid that was used is preserved in the object returned by evalGrids",
   expect_true(all(eg$data_grid == dg))
@@ -176,6 +175,55 @@ test_that(
 test_that("One analyzing function. Results were created and stored in simulation", {
   expect_identical(eg$simulation, expected_df)
 })
+##################################################################
+
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
+expected_df <- structure(list(fun = c(
+  "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len"
+), length.out = c(
+  1L, 1L, 1L, 1L, 2L, 2L,
+  2L, 2L, 3L, 3L, 3L, 3L
+), replications = c(
+  1L, 1L, 2L, 2L, 1L,
+  1L, 2L, 2L, 1L, 1L, 2L, 2L
+), proc = c(
+  "rng", "rng", "rng", "rng",
+  "rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"
+), results = c(
+  1L,
+  1L, 1L, 1L, 1L, 2L, 1L, 2L, 1L, 3L, 1L, 3L
+)), row.names = c(
+  NA,
+  -12L
+), class = c("tbl_df", "tbl", "data.frame"), .Names = c(
+  "fun",
+  "length.out", "replications", "proc", "results"
+))
+
+test_that("Simplify the simulation results",{
+  expect_identical(eg$simulation, expected_df)
+})
+
+
+##################################################################
+
+eg <- eval_tibbles(dg, pg, envir = environment(), simplify = TRUE,
+                   post_analyze = purrr::compose(tibble::as_tibble, t))
+
+expected_df <- structure(list(
+  fun = c("seq_len", "seq_len", "seq_len"), length.out = 1:3,
+  replications = c(1L, 1L, 1L), proc = c("rng", "rng", "rng"), min = c(1L, 1L, 1L), max = 1:3
+), row.names = c(NA, -3L), class = c("tbl_df", "tbl", "data.frame"), .Names = c(
+  "fun",
+  "length.out", "replications", "proc", "min", "max"
+))
+
+test_that("Post analyze function works",{
+  expect_identical(eg$simulation, expected_df)
+})
+
 ##################################################################
 
 dg <- expandGrid(fun = "seq_len", length.out = 1:3)
@@ -520,23 +568,23 @@ test_that("No libraries loaded on the cluster.", {
   expect_true(is.null(unique(unlist(eg$simulation$results))))
 })
 
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), 
-                   cluster = cl, 
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                   cluster = cl,
                    cluster_libraries = c("survival"), simplify = FALSE)
 test_that("No libraries loaded on the cluster.",{
   expect_equal(unique(unlist(eg$simulation$results)), "survival")
 })
 
 test_that("Warning if cluster and ncpus are specified and that the cluster cl is not stopped", {
-  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), 
+  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
                               ncpus = 2,
-                              cluster = cl, 
+                              cluster = cl,
                               cluster_libraries = c("survival"), simplify = FALSE),
                  "Ignore argument ncpus")
   # just repeat the call. If the cluster would have been stopped an error would occur
-  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), 
+  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
                               ncpus = 2,
-                              cluster = cl, 
+                              cluster = cl,
                               cluster_libraries = c("survival"), simplify = FALSE),
                  "Ignore argument ncpus")
 })
