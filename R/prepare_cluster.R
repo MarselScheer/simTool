@@ -21,7 +21,6 @@ prepare_cluster <- function(cluster, ncpus, cluster_global_objects,
 
 upload_objects_to_cluster <- function(cluster, cluster_global_objects) {
   if (!is.null(cluster_global_objects)) {
-    # cannot test is automatically because during automated test
     parallel::clusterExport(cl = cluster, varlist = cluster_global_objects)
   }
 }

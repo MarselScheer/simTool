@@ -63,6 +63,21 @@ test_that("No entry for generated_data.", {
   expect_false(all(grepl("generated_data", names(eg))))
 })
 
+cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE, cluster = cl)
+test_that("Generated data is stored if a cluster is used.", {
+  expect_identical(eg$generated_data, list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
+})
+
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE, cluster = cl,
+                   discard_generated_data = TRUE)
+
+test_that("No entry for generated_data if a cluster is used.", {
+  expect_false(all(grepl("generated_data", names(eg))))
+})
+
+parallel::stopCluster(cl)
+
 
 ##################################################################
 
@@ -378,7 +393,7 @@ test_that("Three analyzing functions and one summary function over 2 cpus. Resul
 shift <- -1
 gen_data <- function() {
   shift <<- shift + 1
-  tibble(group = letters[1:3], b = 1:3 + shift)
+  tibble::tibble(group = letters[1:3], b = 1:3 + shift)
 }
 
 dg <- expand_tibble(fun = c("gen_data"))
@@ -420,7 +435,7 @@ test_that("One group for summary_fun. Results were created and stored in simulat
 shift <- -1
 gen_data <- function() {
   shift <<- shift + 1
-  tibble(group1 = letters[1:3], group2 = letters[4:6], b = 1:3 + shift)
+  tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = 1:3 + shift)
 }
 
 dg <- expand_tibble(fun = c("gen_data"))
@@ -490,6 +505,8 @@ test_that("Error is variable is not uploaded to cluster", {
 })
 
 ##################################################################
+
+pg <- expandGrid(proc = c("mean"))
 fetch_other_pkgs <- function(dummy) {
   names(sessionInfo()$otherPkgs)
 }
@@ -503,8 +520,26 @@ test_that("No libraries loaded on the cluster.", {
   expect_true(is.null(unique(unlist(eg$simulation$results))))
 })
 
-# eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), ncpus = 2, cluster_libraries = c("survival"), simplify = FALSE)
-# test_that("No libraries loaded on the cluster.",{
-#  expect_equal(unique(unlist(eg$simulation$results)), "survival")
-# })
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), 
+                   cluster = cl, 
+                   cluster_libraries = c("survival"), simplify = FALSE)
+test_that("No libraries loaded on the cluster.",{
+  expect_equal(unique(unlist(eg$simulation$results)), "survival")
+})
+
+test_that("Warning if cluster and ncpus are specified and that the cluster cl is not stopped", {
+  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), 
+                              ncpus = 2,
+                              cluster = cl, 
+                              cluster_libraries = c("survival"), simplify = FALSE),
+                 "Ignore argument ncpus")
+  # just repeat the call. If the cluster would have been stopped an error would occur
+  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), 
+                              ncpus = 2,
+                              cluster = cl, 
+                              cluster_libraries = c("survival"), simplify = FALSE),
+                 "Ignore argument ncpus")
+})
+
+
 parallel::stopCluster(cl)
