@@ -570,22 +570,23 @@ test_that("No libraries loaded on the cluster.", {
 
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
                    cluster = cl,
-                   cluster_libraries = c("survival"), simplify = FALSE)
-test_that("No libraries loaded on the cluster.",{
-  expect_equal(unique(unlist(eg$simulation$results)), "survival")
+                   cluster_libraries = c("boot"), simplify = FALSE)
+
+test_that("Library survival loaded on the cluster.",{
+  expect_equal(unique(unlist(eg$simulation$results)), "boot")
 })
 
 test_that("Warning if cluster and ncpus are specified and that the cluster cl is not stopped", {
   expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
                               ncpus = 2,
                               cluster = cl,
-                              cluster_libraries = c("survival"), simplify = FALSE),
+                              cluster_libraries = c("boot"), simplify = FALSE),
                  "Ignore argument ncpus")
   # just repeat the call. If the cluster would have been stopped an error would occur
   expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
                               ncpus = 2,
                               cluster = cl,
-                              cluster_libraries = c("survival"), simplify = FALSE),
+                              cluster_libraries = c("boot"), simplify = FALSE),
                  "Ignore argument ncpus")
 })
 
