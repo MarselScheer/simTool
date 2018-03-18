@@ -26,7 +26,11 @@ knitr::opts_chunk$set(comment = "")
 options(width = 100, max.print = 100)
 library(simTool)
 library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
 library(broom)
+library(boot)
 ```
 
 # A first example
@@ -351,4 +355,99 @@ someFunc = function(){
   print(eval_tibbles(dg, pg, envir=environment()))
 }
 someFunc()
+```
+
+# Some Examples
+
+Note, the following code examples will use more computational 
+resources. In order to prevent that these are checked/executed
+on the CRAN check farm, they are only evaluated
+if the environment variable *NOT_CRAN* is set to "true"
+
+```{r}
+EVAL <- FALSE
+if (Sys.getenv("NOT_CRAN") == "true") {
+  EVAL <- TRUE
+}
+```
+
+## Sampling distribution of mean and median for normal and exponential distributed data
+
+```{r, eval = EVAL}
+set.seed(123456)
+dg <- dplyr::bind_rows(
+  expand_tibble(fun = c("rnorm"), mean = 1, n = c(10L, 100L)),
+  expand_tibble(fun = c("rexp"), rate = 1, n = c(10L, 100L))
+)
+pg <- expand_tibble(proc = c("mean", "median"))
+et <- eval_tibbles(dg, pg, replications = 10^5, ncpus = 4)
+et
+et$simulation %>%
+  ggplot(aes(x = results, color = interaction(fun, n), fill = interaction(fun, n))) +
+  geom_density(alpha = 0.3) +
+  facet_wrap(~ proc)  
+```
+
+## Comparing bootstrap confidence intervals with classical intervals
+
+### Define how confidence intervals are calculated
+```{r, eval = EVAL}
+bootstrap.ci <- function(x, conf.level, R = 999) {
+  b <- boot::boot(x, function(d, i) c(
+      mean = mean(d[i]),
+      variance = var(d[i])
+    ), R = R)
+  ret <- boot::boot.ci(b,
+    conf = conf.level, type = "stud",
+    var.t0 = var(x),
+    var.t = b$t[, 2]
+  )$student[4:5]
+  names(ret) <- c("lower", "upper")
+  ret
+}
+
+normal.ci <- function(x, conf.level) {
+  m <- mean(x)
+  s <- sd(x)
+  sqlen <- sqrt(length(x))
+  q_lev <- qnorm((1 - conf.level) / 2)
+  c(lower = m + q_lev * s / sqlen, upper = m - q_lev * s / sqlen)
+}
+```
+
+### Define and run the simulation
+
+```{r, eval = EVAL}
+dg <- dplyr::bind_rows(
+  simTool::expand_tibble(fun = "runif", n = 10, max = 6),
+  simTool::expand_tibble(fun = "rexp", n = 10, rate = 1/3)
+)
+
+pg <- simTool::expand_tibble(
+  proc = c("normal.ci", "bootstrap.ci"), 
+  conf.level = c(0.8, 0.9)
+)
+
+post_analyze <- function(v) {
+  tibble::tibble(
+    aspect = c("covered", "ci_length"),
+    value = c(v[1] <= 3L && 3L <= v[2], v[2] - v[1])
+  )
+}
+
+et <- eval_tibbles(dg, pg,
+  replications = 10^3, ncpus = 4,
+  cluster_global_objects = "post_analyze",
+  post_analyze = post_analyze,
+  summary_fun = list(mean = mean),
+  group_for_summary = "aspect"
+)
+et
+
+et$simulation %>% 
+  ggplot(aes(x = fun, y = value, group = proc, fill = proc, label = round(value, 2))) + 
+  geom_col(position = "dodge") + 
+  geom_text(position = position_dodge(0.9)) + 
+  geom_label(position = position_dodge(0.9)) + 
+  facet_grid(aspect ~ conf.level, scales = "free")
 ```
