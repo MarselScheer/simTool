@@ -40,19 +40,19 @@ library(boot)
 3. Repeat step 1 and 2 three times
 4. Summarize the results with respect to the different data generating functions and models by calculating mean and standard deviation for the corresponding model terms
 ```{r}
-regData = function(n, SD){
- x=seq(0,1,length=n)
- y=10 + 2 * x + rnorm(n, sd=SD)
- tibble(x=x, y=y)
+regData <- function(n, SD) {
+  x <- seq(0, 1, length = n)
+  y <- 10 + 2 * x + rnorm(n, sd = SD)
+  tibble(x = x, y = y)
 }
 
 eval_tibbles(
- expand_tibble(fun="regData", n=5L, SD=1:2),
- expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
- post_analyze = broom::tidy, 
- summary_fun = list(mean = mean, sd = sd),
- group_for_summary = "term",
- replications=3
+  expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+  expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
+  post_analyze = broom::tidy,
+  summary_fun = list(mean = mean, sd = sd),
+  group_for_summary = "term",
+  replications = 3
 )
 ```
 
@@ -89,8 +89,9 @@ The function *expand_tibble* is a convenient function for defining such *data.fr
 We now define the data generation functions for our first simulation.
 ```{r}
 print(dg <- dplyr::bind_rows(
-  expand_tibble(fun="rexp", n=c(10L, 20L), rate=1:2),
-  expand_tibble(fun="rnorm", n=c(10L, 20L), mean=1:2)))
+  expand_tibble(fun = "rexp", n = c(10L, 20L), rate = 1:2),
+  expand_tibble(fun = "rnorm", n = c(10L, 20L), mean = 1:2)
+))
 ```
 
 
@@ -102,9 +103,10 @@ not passed to *rexp*.
 Similar, we define the *data.frame* for data analyzing functions.
 
 ```{r}
-print(pg<-dplyr::bind_rows(
-  expand_tibble(proc="min"),
-  expand_tibble(proc="mean", trim=c(0.1, 0.2))))
+print(pg <- dplyr::bind_rows(
+  expand_tibble(proc = "min"),
+  expand_tibble(proc = "mean", trim = c(0.1, 0.2))
+))
 ```
 
 Hence, this *data.frame* represents 3 *R*-functions i.e. calculating the
@@ -136,9 +138,9 @@ The workhorse *eval_tibbles* has the following simplified pseudo code:
 The object returned by *eval_tibbles* is a *list* of class *eval_tibbles*.
 
 ```{r}
-dg = expand_tibble(fun="rnorm", n=10, mean=1:2)
-pg = expand_tibble(proc="min")
-eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 2)
+dg <- expand_tibble(fun = "rnorm", n = 10, mean = 1:2)
+pg <- expand_tibble(proc = "min")
+eg <- eval_tibbles(data_grid = dg, proc_grid = pg, replications = 2)
 eg
 ```
 
@@ -149,7 +151,7 @@ done in one hour.
 
 Of course, this parameter controls the number of replications conducted.
 ```{r}
-eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 3)
+eg <- eval_tibbles(data_grid = dg, proc_grid = pg, replications = 3)
 eg
 ```
 
@@ -157,7 +159,7 @@ eg
 
 *eval_tibbles* saves ALL generated data sets.
 ```{r}
-eg = eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1)
+eg <- eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1)
 eg$simulation
 eg$generated_data
 ```
@@ -172,12 +174,16 @@ Stop saving the generated data sets can be obtained by setting
 As stated in command line 12 we can summarize the result objects over 
 all replications but separately for all data analyzing functions.
 ```{r}
-dg = expand_tibble(fun="runif", n=c(10,20,30))
-pg = expand_tibble(proc=c("min", "max"))
-eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1000, 
-    summary_fun=list(mean = mean))
-eval_tibbles(data_grid = dg, proc_grid = pg, replications = 1000, 
-    summary_fun=list(mean = mean, sd = sd))
+dg <- expand_tibble(fun = "runif", n = c(10, 20, 30))
+pg <- expand_tibble(proc = c("min", "max"))
+eval_tibbles(
+  data_grid = dg, proc_grid = pg, replications = 1000,
+  summary_fun = list(mean = mean)
+)
+eval_tibbles(
+  data_grid = dg, proc_grid = pg, replications = 1000,
+  summary_fun = list(mean = mean, sd = sd)
+)
 ```
 Note, by specifying the parameter *summary_fun* the generated data sets
 and all individual result objects are discarded. In this example we discard
@@ -190,9 +196,9 @@ Sometimes the analyzing functions return quite complicated objects like in
 the Section *A first example*.
 ```{r}
 eval_tibbles(
- expand_tibble(fun="regData", n=5L, SD=1:2),
- expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
- replications=2
+  expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+  expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
+  replications = 2
 )
 ```
 The parameter *post_analyze* (if specified) is applied directly after the
@@ -201,10 +207,10 @@ very handy if your post-analyzing-function can be defined by a few single
 functions:
 ```{r}
 eval_tibbles(
- expand_tibble(fun="regData", n=5L, SD=1:2),
- expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
- post_analyze = purrr::compose(function(mat) mat["(Intercept)", "Estimate"], coef, summary.lm),
- replications=2
+  expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+  expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
+  post_analyze = purrr::compose(function(mat) mat["(Intercept)", "Estimate"], coef, summary.lm),
+  replications = 2
 )
 ```
 
@@ -214,19 +220,18 @@ When the result object is a *data.frame* itself,
 for instance
 
 ```{r}
-presever_rownames = function(mat)
-{
-  rn = rownames(mat)
-  ret = tibble::as_tibble(mat)
-  ret$term = rn
+presever_rownames <- function(mat) {
+  rn <- rownames(mat)
+  ret <- tibble::as_tibble(mat)
+  ret$term <- rn
   ret
 }
 
 eval_tibbles(
-  expandGrid(fun="regData", n=5L, SD=1:2),
-  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  expandGrid(fun = "regData", n = 5L, SD = 1:2),
+  expandGrid(proc = "lm", formula = c("y~x", "y~I(x^2)")),
   post_analyze = purrr::compose(presever_rownames, coef, summary),
-  replications=3
+  replications = 3
 )
 ```
 In order to summarize the replications it is necessary to 
@@ -235,12 +240,12 @@ another variable. This variable can be passed to
 *group_for_summary*
 ```{r}
 eval_tibbles(
-  expandGrid(fun="regData", n=5L, SD=1:2),
-  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  expandGrid(fun = "regData", n = 5L, SD = 1:2),
+  expandGrid(proc = "lm", formula = c("y~x", "y~I(x^2)")),
   post_analyze = purrr::compose(presever_rownames, coef, summary),
   summary_fun = list(mean = mean, sd = sd),
   group_for_summary = "term",
-  replications=3
+  replications = 3
 )
 ```
 
@@ -251,8 +256,10 @@ By specifying *ncpus* larger than 1 a cluster objected is created
 for the user and passed to the parameter *cluster* discussed in the
 next section.
 ```{r}
-eval_tibbles(data_grid = dg, proc_grid = pg, replications = 10, 
-    ncpus=2, summary_fun=list(mean = mean))
+eval_tibbles(
+  data_grid = dg, proc_grid = pg, replications = 10,
+  ncpus = 2, summary_fun = list(mean = mean)
+)
 ```
 As it is stated in command line 7, the replications are parallelized. In our case, this means
 that roughly every CPU conducts 5 replications.
@@ -267,10 +274,12 @@ does not change.
 The user can create a cluster on its own. This also enables the user
 to distribute the replications over different computers in a network.
 ```{r}
-require(parallel)
-cl = makeCluster(rep("localhost", 2), type="PSOCK") 
-eval_tibbles(data_grid = dg, proc_grid = pg, replications = 10, 
-    cluster=cl, summary_fun=list(mean = mean))
+library(parallel)
+cl <- makeCluster(rep("localhost", 2), type = "PSOCK")
+eval_tibbles(
+  data_grid = dg, proc_grid = pg, replications = 10,
+  cluster = cl, summary_fun = list(mean = mean)
+)
 stopCluster(cl)
 ```
 As you can see our cluster consists of 3 workers. Hence, this reproduces the
@@ -288,24 +297,32 @@ the cluster.
 Lets look at standard example from the *boot* package.
 ```{r}
 library(boot)
-ratio <- function(d, w) sum(d$x * w)/sum(d$u * w)
-city.boot <- boot(city, ratio, R = 999, stype = "w", 
-    sim = "ordinary")
-boot.ci(city.boot, conf = c(0.90, 0.95),
-    type = c("norm", "basic", "perc", "bca"))
+ratio <- function(d, w) sum(d$x * w) / sum(d$u * w)
+city.boot <- boot(city, ratio,
+  R = 999, stype = "w",
+  sim = "ordinary"
+)
+boot.ci(city.boot,
+  conf = c(0.90, 0.95),
+  type = c("norm", "basic", "perc", "bca")
+)
 ```
 
 The following data generating function is extremely boring because it always returns
 the data set *city* from the library *boot*.
 ```{r}
-returnCity = function(){
+returnCity <- function() {
   city
 }
-bootConfInt = function(data){
-city.boot <- boot(data, ratio, R = 999, stype = "w", 
-    sim = "ordinary")
-boot.ci(city.boot, conf = c(0.90, 0.95),
-    type = c("norm", "basic", "perc", "bca"))  
+bootConfInt <- function(data) {
+  city.boot <- boot(data, ratio,
+    R = 999, stype = "w",
+    sim = "ordinary"
+  )
+  boot.ci(city.boot,
+    conf = c(0.90, 0.95),
+    type = c("norm", "basic", "perc", "bca")
+  )
 }
 ```
 
@@ -315,11 +332,13 @@ package by setting *cluster_libraries = c("boot")* and transfer the function
 *ratio* by setting *cluster_global_objects = c("ratio")*.
 
 ```{r}
-dg = expand_tibble(fun="returnCity")
-pg = expand_tibble(proc="bootConfInt")
-eval_tibbles(dg, pg, replications=10, ncpus=2,
-    cluster_libraries=c("boot"), 
-    cluster_global_objects=c("ratio"))
+dg <- expand_tibble(fun = "returnCity")
+pg <- expand_tibble(proc = "bootConfInt")
+eval_tibbles(dg, pg,
+  replications = 10, ncpus = 2,
+  cluster_libraries = c("boot"),
+  cluster_global_objects = c("ratio")
+)
 ```
 
 Of course, it is possible to set *cluster_global_objects=ls()*, but then 
@@ -336,13 +355,13 @@ current R session. An example shows how to use
 the parameter *envir*.
 ```{r}
 # masking summary from the base package
-summary = function(x) tibble(sd = sd(x))
-g = function(x) tibble(q0.1 = quantile(x, 0.1))
-someFunc = function(){
-  summary = function(x) tibble(sd=sd(x), mean=mean(x))
-  
-  dg = expand_tibble(fun="runif", n=100)
-  pg = expand_tibble(proc=c("summary", "g"))
+summary <- function(x) tibble(sd = sd(x))
+g <- function(x) tibble(q0.1 = quantile(x, 0.1))
+someFunc <- function() {
+  summary <- function(x) tibble(sd = sd(x), mean = mean(x))
+
+  dg <- expand_tibble(fun = "runif", n = 100)
+  pg <- expand_tibble(proc = c("summary", "g"))
 
   # the standard is to use the global
   # environment, hence summary defined outside
@@ -352,7 +371,7 @@ someFunc = function(){
   # will use the local defined summary, but g
   # from the global environment, because
   # g is not locally defined.
-  print(eval_tibbles(dg, pg, envir=environment()))
+  print(eval_tibbles(dg, pg, envir = environment()))
 }
 someFunc()
 ```
@@ -385,7 +404,7 @@ et
 et$simulation %>%
   ggplot(aes(x = results, color = interaction(fun, n), fill = interaction(fun, n))) +
   geom_density(alpha = 0.3) +
-  facet_wrap(~ proc)  
+  facet_wrap(~ proc)
 ```
 
 ## Comparing bootstrap confidence intervals with classical intervals
@@ -420,11 +439,11 @@ normal.ci <- function(x, conf.level) {
 ```{r, eval = EVAL}
 dg <- dplyr::bind_rows(
   simTool::expand_tibble(fun = "runif", n = 10, max = 6),
-  simTool::expand_tibble(fun = "rexp", n = 10, rate = 1/3)
+  simTool::expand_tibble(fun = "rexp", n = 10, rate = 1 / 3)
 )
 
 pg <- simTool::expand_tibble(
-  proc = c("normal.ci", "bootstrap.ci"), 
+  proc = c("normal.ci", "bootstrap.ci"),
   conf.level = c(0.8, 0.9)
 )
 
@@ -444,10 +463,10 @@ et <- eval_tibbles(dg, pg,
 )
 et
 
-et$simulation %>% 
-  ggplot(aes(x = fun, y = value, group = proc, fill = proc, label = round(value, 2))) + 
-  geom_col(position = "dodge") + 
-  geom_text(position = position_dodge(0.9)) + 
-  geom_label(position = position_dodge(0.9)) + 
+et$simulation %>%
+  ggplot(aes(x = fun, y = value, group = proc, fill = proc, label = round(value, 2))) +
+  geom_col(position = "dodge") +
+  geom_text(position = position_dodge(0.9)) +
+  geom_label(position = position_dodge(0.9)) +
   facet_grid(aspect ~ conf.level, scales = "free")
 ```
