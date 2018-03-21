@@ -115,25 +115,29 @@
 #' @export
 eval_tibbles <-
   function(data_grid, proc_grid = expand_tibble(proc = "length"),
-           replications = 1, discard_generated_data = FALSE,
-           post_analyze = identity,
-           summary_fun = NULL, group_for_summary = NULL,
-           ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
-           cluster_libraries = NULL,
-           cluster_global_objects = NULL,
-           envir = globalenv(),
-           simplify = TRUE) {
+             replications = 1, discard_generated_data = FALSE,
+             post_analyze = identity,
+             summary_fun = NULL, group_for_summary = NULL,
+             ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
+             cluster_libraries = NULL,
+             cluster_global_objects = NULL,
+             envir = globalenv(),
+             simplify = TRUE) {
     mc <- match.call()
 
-    user_provided_cluster = !is.null(cluster)
+    user_provided_cluster <- !is.null(cluster)
     summary_fun <- prepare_summary_fun(summary_fun)
     df <- data_grid_to_fun(data_grid, envir)
     pf <- proc_grid_to_fun(proc_grid, envir)
-    cluster <- prepare_cluster(cluster, ncpus, cluster_global_objects,
-                               cluster_libraries, cluster_seed, df, pf)
-    sim_fun <- define_simulation(pf, discard_generated_data, cluster,
-                                 replications, summary_fun,
-                                 group_for_summary, post_analyze)
+    cluster <- prepare_cluster(
+      cluster, ncpus, cluster_global_objects,
+      cluster_libraries, cluster_seed, df, pf
+    )
+    sim_fun <- define_simulation(
+      pf, discard_generated_data, cluster,
+      replications, summary_fun,
+      group_for_summary, post_analyze
+    )
 
     pb <- progress_bar(df)
 
@@ -149,7 +153,7 @@ eval_tibbles <-
     },
     finally = {
       if (ncpus > 1 && !user_provided_cluster) {
-        #cluster created by the user wont be stopped
+        # cluster created by the user wont be stopped
         parallel::stopCluster(cluster)
       }
     }
@@ -160,8 +164,10 @@ eval_tibbles <-
 
     ret <- list(
       call = mc, data_grid = data_grid, proc_grid = proc_grid,
-      simulation = frame_simulation(data_grid, proc_grid,
-                                    simulation_list, summary_fun),
+      simulation = frame_simulation(
+        data_grid, proc_grid,
+        simulation_list, summary_fun
+      ),
       summary_fun = summary_fun,
       replications = replications,
       start_time = t1,
@@ -174,7 +180,8 @@ eval_tibbles <-
     }
     if (!discard_generated_data) {
       ret$generated_data <- purrr::map(
-        purrr::flatten(simulation_list), ~ `[[`(., "data"))
+        purrr::flatten(simulation_list), ~ `[[`(., "data")
+      )
     }
     class(ret) <- "eval_tibbles"
     ret

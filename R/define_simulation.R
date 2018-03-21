@@ -32,14 +32,17 @@ define_simulation <- function(pf, discard_generated_data, cluster,
     if (!is.null(summary_fun)) {
       res <- purrr::map(ret, ~ `[[`(., "results"))
       # combine all results for the i-th function in procGrid
-      res <- lapply(seq_along(res[[1]]),
-                    function(i) purrr::map(res, ~ `[[`(., i)))
+      res <- lapply(
+        seq_along(res[[1]]),
+        function(i) purrr::map(res, ~ `[[`(., i))
+      )
       res <- purrr::map(res, ~ do.call("bind_or_combine", .))
       if (!is.null(summary_fun) && !is.null(group_for_summary)) {
         class(group_for_summary) <- "list"
         res <- lapply(summary_fun, function(f) {
           purrr::map(res, ~ dplyr::summarize_all(
-            dplyr::group_by_(., .dots = group_for_summary), f))
+            dplyr::group_by_(., .dots = group_for_summary), f
+          ))
         })
       } else {
         res <- lapply(summary_fun, function(f) {

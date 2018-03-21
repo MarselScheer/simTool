@@ -58,7 +58,7 @@ test_that("Generated data is stored.", {
 })
 
 eg <- eval_tibbles(dg, pg, discard_generated_data = TRUE, envir = environment())
- 
+
 test_that("No entry for generated_data.", {
   expect_false(all(grepl("generated_data", names(eg))))
 })
@@ -69,8 +69,10 @@ test_that("Generated data is stored if a cluster is used.", {
   expect_identical(eg$generated_data, list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
 })
 
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE, cluster = cl,
-                   discard_generated_data = TRUE)
+eg <- eval_tibbles(dg, pg,
+  rep = 2, envir = environment(), simplify = FALSE, cluster = cl,
+  discard_generated_data = TRUE
+)
 
 test_that("No entry for generated_data if a cluster is used.", {
   expect_false(all(grepl("generated_data", names(eg))))
@@ -202,15 +204,17 @@ expected_df <- structure(list(fun = c(
   "length.out", "replications", "proc", "results"
 ))
 
-test_that("Simplify the simulation results",{
+test_that("Simplify the simulation results", {
   expect_identical(eg$simulation, expected_df)
 })
 
 
 ##################################################################
 
-eg <- eval_tibbles(dg, pg, envir = environment(), simplify = TRUE,
-                   post_analyze = purrr::compose(tibble::as_tibble, t))
+eg <- eval_tibbles(dg, pg,
+  envir = environment(), simplify = TRUE,
+  post_analyze = purrr::compose(tibble::as_tibble, t)
+)
 
 expected_df <- structure(list(
   fun = c("seq_len", "seq_len", "seq_len"), length.out = 1:3,
@@ -220,7 +224,7 @@ expected_df <- structure(list(
   "length.out", "replications", "proc", "min", "max"
 ))
 
-test_that("Post analyze function works",{
+test_that("Post analyze function works", {
   expect_identical(eg$simulation, expected_df)
 })
 
@@ -568,26 +572,36 @@ test_that("No libraries loaded on the cluster.", {
   expect_true(is.null(unique(unlist(eg$simulation$results))))
 })
 
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
-                   cluster = cl,
-                   cluster_libraries = c("boot"), simplify = FALSE)
+eg <- eval_tibbles(dg, pg,
+  rep = 2, envir = environment(),
+  cluster = cl,
+  cluster_libraries = c("boot"), simplify = FALSE
+)
 
-test_that("Library survival loaded on the cluster.",{
+test_that("Library survival loaded on the cluster.", {
   expect_equal(unique(unlist(eg$simulation$results)), "boot")
 })
 
 test_that("Warning if cluster and ncpus are specified and that the cluster cl is not stopped", {
-  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
-                              ncpus = 2,
-                              cluster = cl,
-                              cluster_libraries = c("boot"), simplify = FALSE),
-                 "Ignore argument ncpus")
+  expect_warning(
+    eval_tibbles(dg, pg,
+      rep = 2, envir = environment(),
+      ncpus = 2,
+      cluster = cl,
+      cluster_libraries = c("boot"), simplify = FALSE
+    ),
+    "Ignore argument ncpus"
+  )
   # just repeat the call. If the cluster would have been stopped an error would occur
-  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(),
-                              ncpus = 2,
-                              cluster = cl,
-                              cluster_libraries = c("boot"), simplify = FALSE),
-                 "Ignore argument ncpus")
+  expect_warning(
+    eval_tibbles(dg, pg,
+      rep = 2, envir = environment(),
+      ncpus = 2,
+      cluster = cl,
+      cluster_libraries = c("boot"), simplify = FALSE
+    ),
+    "Ignore argument ncpus"
+  )
 })
 
 
