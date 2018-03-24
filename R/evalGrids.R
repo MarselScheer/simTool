@@ -192,6 +192,8 @@ evalGrids <-
              clusterGlobalObjects=NULL,
              fallback=NULL,
              envir=globalenv(), ...) {
+    warning("The function evalGrids() is deprecated. Please use eval_tibbles() instead.")
+    
     ellipsis <- list(...)
     if (is.element("post.proc", names(ellipsis))) stop("post.proc is deprecated. Please use summary.fun")
 

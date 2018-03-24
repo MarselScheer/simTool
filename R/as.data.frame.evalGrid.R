@@ -47,8 +47,10 @@
 #' @export
 as.data.frame.evalGrid <-
   function(x, ..., convert.result.fun = identity, summary.fun=NULL, progress=FALSE) {
+    warning("The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.")
     postFun <- NULL
 
+    
     ellipsis <- list(...)
     if (is.element("post.proc", names(ellipsis))) stop("post.proc is deprecated. Please use summary.fun")
     if (is.element("value.fun", names(ellipsis))) stop("value.fun is deprecated. Please use convert.result.fun")

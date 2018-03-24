@@ -15,5 +15,6 @@
 #' @export
 expandGrid <-
   function(...) {
+    warning("The function expandGrid() is deprecated. Please use expand_tibble() instead.")
     expand.grid(..., stringsAsFactors = FALSE)
   }
