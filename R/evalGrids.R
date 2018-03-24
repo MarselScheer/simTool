@@ -15,7 +15,7 @@
 #'  contain parameters for the functions specified in the
 #'  first column. The data generated according to
 #'  \code{dataGrid} will always be passed to the first
-#'  unspecified argument of the functions sepcified in the first
+#'  unspecified argument of the functions specified in the first
 #'  column of \code{procGrid}.
 #' @param replications  number of replications for the simulation
 #' @param discardGeneratedData  if \code{TRUE} the generated
@@ -47,7 +47,7 @@
 #' @param clusterGlobalObjects  a character vector specifying
 #'  the names of R objects in the global environment that should
 #'  be exported to the global environment of every worker.
-#' @param fallback must be missing or a character specfying a file. Every time
+#' @param fallback must be missing or a character specifying a file. Every time
 #'  when the data generation function is changed, the results so far obtained
 #'  are saved in the file specified by \code{fallback}.
 #' @param envir  must be provided if the functions specified
@@ -68,7 +68,7 @@
 #' @note  If \code{cluster} is provided by the user the
 #'  function \code{evalGrids} will NOT stop the cluster.
 #'  This has to be done by the user. Conducting parallel
-#'  simulations by specifing \code{ncpus} will interally
+#'  simulations by specifying \code{ncpus} will internally
 #'  create a cluster and stop it after the simulation
 #'  is done.
 #' @author  Marsel Scheer

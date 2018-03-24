@@ -15,7 +15,7 @@
 #'  contain parameters for the functions specified in the
 #'  first column. The data generated according to
 #'  \code{data_grid} will always be passed to the first
-#'  unspecified argument of the functions sepcified in the first
+#'  unspecified argument of the functions specified in the first
 #'  column of \code{proc_grid}.
 #' @param replications  number of replications for the simulation
 #' @param discard_generated_data  if \code{TRUE} the generated
@@ -61,12 +61,11 @@
 #' @note  If \code{cluster} is provided by the user the
 #'  function \code{eval_tibbles} will NOT stop the cluster.
 #'  This has to be done by the user. Conducting parallel
-#'  simulations by specifing \code{ncpus} will interally
+#'  simulations by specifying \code{ncpus} will internally
 #'  create a cluster and stop it after the simulation
 #'  is done.
 #' @author  Marsel Scheer
 #' @examples
-#'
 #' rng = function(data, ...) {
 #' ret = range(data)
 #' names(ret) = c("min", "max")

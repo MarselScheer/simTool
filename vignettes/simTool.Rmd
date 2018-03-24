@@ -77,7 +77,7 @@ the functions that analyze the data. These two *data.frames* are passed to
 *eval_tibbles* which conducts the simulation. Afterwards, the results can nicely
 be displayed as a *data.frame*.
 
-# Defining the *data.frames* for data generation and analyzation
+# Defining the *data.frames* for data generation and analysis
 
 There are 3 rules:
 
@@ -525,7 +525,8 @@ et <- eval_tibbles(dg, pg,
 )
 et
 ```
-Finnaly, we can visualize the summarized results:
+
+Finally, we can visualize the summarized results:
 ```{r, eval = EVAL, fig.width=13}
 et$simulation %>%
   ggplot(aes(x = fun, y = value, group = type, fill = type, label = round(value, 2))) +
