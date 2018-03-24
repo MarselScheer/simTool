@@ -1,4 +1,4 @@
-library(tibble)
+testthat::context("test_flatten_results.R")
 
 data_and_results <-
   list(

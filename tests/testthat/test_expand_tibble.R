@@ -1,4 +1,5 @@
-library(testthat)
+testthat::context("test_expand_tibble.R")
+
 tmp <- expand_tibble(
   desc = letters[1:2],
   mod = list(

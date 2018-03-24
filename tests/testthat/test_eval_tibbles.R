@@ -1,3 +1,5 @@
+testthat::context("test_eval_tibbles.R")
+
 rng <- function(data, ...) {
   ret <- range(data)
   names(ret) <- c("min", "max")
@@ -19,7 +21,7 @@ dg <- expand_tibble(
     matrix(1:8, 4, 2)
   )
 )
-pg <- expandGrid(proc = "rng")
+pg <- expand_tibble(proc = "rng")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
 expected_df <- structure(list(
@@ -138,31 +140,40 @@ test_that("Tibbles for data generating and data analyzing functions can be used.
 
 ##################################################################
 
-dg <- expandGrid(fun = "seq_len", length.out = 1:3)
-pg <- expandGrid(proc = "rng")
+dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
+pg <- expand_tibble(proc = "rng")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
+
 expected_df <- structure(list(
-  fun = c("seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"),
-  length.out = c(1L, 1L, 2L, 2L, 3L, 3L),
-  replications = c(1L, 2L, 1L, 2L, 1L, 2L),
-  proc = c("rng", "rng", "rng", "rng", "rng", "rng"),
-  results = list(
-    structure(c(1L, 1L), .Names = c("min", "max")),
-    structure(c(1L, 1L), .Names = c("min", "max")), structure(1:2, .Names = c("min", "max")),
-    structure(1:2, .Names = c("min", "max")), structure(c(1L, 3L), .Names = c("min", "max")),
+  fun = c(
+    "seq_len", "seq_len", "seq_len", "seq_len",
+    "seq_len", "seq_len"
+  ), length.out = c(1L, 1L, 2L, 2L, 3L, 3L),
+  replications = c(1L, 2L, 1L, 2L, 1L, 2L), proc = c(
+    "rng",
+    "rng", "rng", "rng", "rng", "rng"
+  ), results = list(
+    structure(c(
+      1L,
+      1L
+    ), .Names = c("min", "max")), structure(c(1L, 1L), .Names = c(
+      "min",
+      "max"
+    )), structure(1:2, .Names = c("min", "max")), structure(1:2, .Names = c(
+      "min",
+      "max"
+    )), structure(c(1L, 3L), .Names = c("min", "max")),
     structure(c(1L, 3L), .Names = c("min", "max"))
   )
-),
-.Names = c("fun", "length.out", "replications", "proc", "results"),
-out.attrs = structure(list(
-  dim = structure(c(1L, 3L), .Names = c("fun", "length.out")),
-  dimnames = structure(list(fun = "fun=seq_len", length.out = c("length.out=1", "length.out=2", "length.out=3")), .Names = c("fun", "length.out"))
-),
-.Names = c("dim", "dimnames")
-), row.names = c(NA, -6L),
-class = c("tbl_df", "tbl", "data.frame")
-)
+), .Names = c(
+  "fun",
+  "length.out", "replications", "proc", "results"
+), row.names = c(
+  NA,
+  -6L
+), class = c("tbl_df", "tbl", "data.frame"))
+
 
 test_that(
   "Data grid that was used is preserved in the object returned by evalGrids",
@@ -230,58 +241,44 @@ test_that("Post analyze function works", {
 
 ##################################################################
 
-dg <- expandGrid(fun = "seq_len", length.out = 1:3)
-pg <- expandGrid(proc = c("rng", "median", "length"))
+dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
+pg <- expand_tibble(proc = c("rng", "median", "length"))
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
-expected_df <- structure(
-  list(
-    fun = c(
-      "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len"
-    ),
-    length.out = c(
-      1L, 1L, 1L, 1L, 1L, 1L,
-      2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L
-    ),
-    replications = c(
-      1L,
-      1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L,
-      2L
-    ),
-    proc = c(
-      "rng", "median", "length", "rng", "median", "length",
-
-      "rng", "median", "length", "rng", "median", "length", "rng",
-      "median", "length", "rng", "median", "length"
-    ),
-    results = list(
-      structure(c(1L, 1L), .Names = c("min", "max")), 1L, 1L,
-      structure(c(1L, 1L), .Names = c("min", "max")), 1L, 1L,
-      structure(1:2, .Names = c("min", "max")), 1.5, 2L,
-      structure(1:2, .Names = c("min", "max")), 1.5, 2L,
-      structure(c(1L, 3L), .Names = c("min", "max")), 2L, 3L,
-      structure(c(1L, 3L), .Names = c("min", "max")), 2L, 3L
-    )
-  ),
-  .Names = c("fun", "length.out", "replications", "proc", "results"),
-  out.attrs = structure(
-    list(
-      dim = structure(c(1L, 3L), .Names = c("fun", "length.out")),
-      dimnames = structure(list(
-        fun = "fun=seq_len",
-        length.out = c("length.out=1", "length.out=2", "length.out=3")
-      ),
-      .Names = c("fun", "length.out")
-      )
-    ),
-    .Names = c("dim", "dimnames")
-  ),
-  row.names = c(NA, -18L),
-  class = c("tbl_df", "tbl", "data.frame")
-)
+expected_df <- structure(list(fun = c(
+  "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len"
+), length.out = c(
+  1L, 1L, 1L, 1L, 1L, 1L,
+  2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L
+), replications = c(
+  1L,
+  1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L,
+  2L
+), proc = c(
+  "rng", "median", "length", "rng", "median", "length",
+  "rng", "median", "length", "rng", "median", "length", "rng",
+  "median", "length", "rng", "median", "length"
+), results = list(
+  structure(c(1L, 1L), .Names = c("min", "max")), 1L, 1L, structure(c(
+    1L,
+    1L
+  ), .Names = c("min", "max")), 1L, 1L, structure(1:2, .Names = c(
+    "min",
+    "max"
+  )), 1.5, 2L, structure(1:2, .Names = c("min", "max")),
+  1.5, 2L, structure(c(1L, 3L), .Names = c("min", "max")),
+  2L, 3L, structure(c(1L, 3L), .Names = c("min", "max")), 2L,
+  3L
+)), .Names = c(
+  "fun", "length.out", "replications", "proc",
+  "results"
+), row.names = c(NA, -18L), class = c(
+  "tbl_df", "tbl",
+  "data.frame"
+))
 
 test_that("Three analyzing functions. Results were created and stored in simulation", {
   expect_identical(eg$simulation, expected_df)
@@ -302,33 +299,62 @@ test_that("Error if summary function is not a named list", {
 
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), summary_fun = list(mean = mean), simplify = FALSE)
 
-expected_df <- structure(
-  list(
-    fun = c("seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"),
-    length.out = c(1L, 1L, 1L, 2L, 2L, 2L, 3L, 3L, 3L), replications = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L),
-    summary_fun = rep("mean", 9),
-    proc = c("rng", "median", "length", "rng", "median", "length", "rng", "median", "length"),
-    results = list(
-      structure(list(min = 1, max = 1), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 2), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1.5), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 3), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 3), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame"))
-    )
-  ),
-  .Names = c("fun", "length.out", "replications", "summary_fun", "proc", "results"),
-  out.attrs = structure(
-    list(
-      dim = structure(c(1L, 3L), .Names = c("fun", "length.out")),
-      dimnames = structure(list(fun = "fun=seq_len", length.out = c("length.out=1", "length.out=2", "length.out=3")), .Names = c("fun", "length.out"))
-    ),
-    .Names = c("dim", "dimnames")
-  ), row.names = c(NA, -9L), class = c("tbl_df", "tbl", "data.frame")
-)
+expected_df <- structure(list(fun = c(
+  "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"
+), length.out = c(
+  1L,
+  1L, 1L, 2L, 2L, 2L, 3L, 3L, 3L
+), replications = c(
+  1L, 1L, 1L,
+  1L, 1L, 1L, 1L, 1L, 1L
+), summary_fun = c(
+  "mean", "mean", "mean",
+  "mean", "mean", "mean", "mean", "mean", "mean"
+), proc = c(
+  "rng",
+  "median", "length", "rng", "median", "length", "rng", "median",
+  "length"
+), results = list(structure(list(min = 1, max = 1), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 1
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 2), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 2
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 3), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 3
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)))), .Names = c(
+  "fun", "length.out", "replications",
+  "summary_fun", "proc", "results"
+), row.names = c(NA, -9L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+))
 
 test_that("Three analyzing functions and one summary function. Results were created and stored in simulation", {
   expect_identical(eg$simulation, expected_df)
@@ -339,64 +365,140 @@ test_that("Three analyzing functions and one summary function. Results were crea
 
 eg <- eval_tibbles(dg, pg, rep = 4, envir = environment(), summary_fun = list(mean = mean, sum = sum, prod = prod), simplify = FALSE)
 
-expected_df <- structure(
-  list(
-    fun = c(
-      "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"
-    ),
-    length.out = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L),
-    replications = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L),
-    summary_fun = c(
-      "mean", "mean", "mean", "prod", "prod", "prod", "sum", "sum", "sum", "mean", "mean", "mean",
-      "prod", "prod", "prod", "sum", "sum", "sum", "mean", "mean", "mean", "prod", "prod", "prod",
-      "sum", "sum", "sum"
-    ),
-    proc = c(
-      "rng", "median", "length", "rng", "median", "length", "rng", "median", "length", "rng", "median", "length",
-      "rng", "median", "length", "rng", "median", "length", "rng", "median", "length", "rng", "median", "length",
-      "rng", "median", "length"
-    ),
-    results = list(
-      structure(list(min = 1, max = 1), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 1), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 4L, max = 4L), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 4L), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 4L), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 2), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1.5), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 16), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 5.0625), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 16), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 4L, max = 8L), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 6), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 8L), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 3), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 3), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 81), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 16), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 81), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 4L, max = 12L), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 8L), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 12L), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame"))
-    )
-  ),
-  .Names = c("fun", "length.out", "replications", "summary_fun", "proc", "results"),
-  out.attrs = structure(list(
-    dim = structure(c(1L, 3L), .Names = c("fun", "length.out")),
-    dimnames = structure(list(fun = "fun=seq_len", length.out = c("length.out=1", "length.out=2", "length.out=3")),
-      .Names = c("fun", "length.out")
-    )
-  ), .Names = c("dim", "dimnames")), row.names = c(NA, -27L),
-  class = c("tbl_df", "tbl", "data.frame")
-)
+expected_df <- structure(list(fun = c(
+  "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"
+), length.out = c(
+  1L,
+  1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L,
+  2L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L, 3L
+), replications = c(
+  1L,
+  1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
+  1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L
+), summary_fun = c(
+  "mean",
+  "mean", "mean", "prod", "prod", "prod", "sum", "sum", "sum",
+  "mean", "mean", "mean", "prod", "prod", "prod", "sum", "sum",
+  "sum", "mean", "mean", "mean", "prod", "prod", "prod", "sum",
+  "sum", "sum"
+), proc = c(
+  "rng", "median", "length", "rng", "median",
+  "length", "rng", "median", "length", "rng", "median", "length",
+  "rng", "median", "length", "rng", "median", "length", "rng",
+  "median", "length", "rng", "median", "length", "rng", "median",
+  "length"
+), results = list(structure(list(min = 1, max = 1), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 1
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 1), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 1
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 4L, max = 4L), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 4L), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 4L
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 2), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 2
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 16), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 5.0625), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 16
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 4L, max = 8L), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 6), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 8L
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 3), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 3
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 81), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 16), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 81
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 4L, max = 12L), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 8L), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 12L
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)))), .Names = c(
+  "fun", "length.out", "replications",
+  "summary_fun", "proc", "results"
+), row.names = c(NA, -27L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+))
+
+
 
 test_that("Three analyzing functions and three summary function. Results were created and stored in simulation", {
   expect_identical(eg$simulation, expected_df)
@@ -408,34 +510,62 @@ test_that("Three analyzing functions and three summary function. Results were cr
 
 eg <- eval_tibbles(dg, pg, rep = 20, envir = environment(), summary_fun = list(mean = mean), ncpus = 2, simplify = FALSE)
 
-expected_df <- structure(
-  list(
-    fun = c("seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"),
-    length.out = c(1L, 1L, 1L, 2L, 2L, 2L, 3L, 3L, 3L), replications = c(1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L),
-    summary_fun = rep("mean", 9),
-    proc = c("rng", "median", "length", "rng", "median", "length", "rng", "median", "length"),
-    results = list(
-      structure(list(min = 1, max = 1), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 2), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 1.5), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(min = 1, max = 3), .Names = c("min", "max"), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 2), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
-      structure(list(value = 3), .Names = "value", row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame"))
-    )
-  ),
-  .Names = c("fun", "length.out", "replications", "summary_fun", "proc", "results"),
-  out.attrs = structure(
-    list(
-      dim = structure(c(1L, 3L), .Names = c("fun", "length.out")),
-      dimnames = structure(list(fun = "fun=seq_len", length.out = c("length.out=1", "length.out=2", "length.out=3")), .Names = c("fun", "length.out"))
-    ),
-    .Names = c("dim", "dimnames")
-  ), row.names = c(NA, -9L), class = c("tbl_df", "tbl", "data.frame")
-)
-
+expected_df <- structure(list(fun = c(
+  "seq_len", "seq_len", "seq_len", "seq_len",
+  "seq_len", "seq_len", "seq_len", "seq_len", "seq_len"
+), length.out = c(
+  1L,
+  1L, 1L, 2L, 2L, 2L, 3L, 3L, 3L
+), replications = c(
+  1L, 1L, 1L,
+  1L, 1L, 1L, 1L, 1L, 1L
+), summary_fun = c(
+  "mean", "mean", "mean",
+  "mean", "mean", "mean", "mean", "mean", "mean"
+), proc = c(
+  "rng",
+  "median", "length", "rng", "median", "length", "rng", "median",
+  "length"
+), results = list(structure(list(min = 1, max = 1), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 1
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 2), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 2
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)), structure(list(min = 1, max = 3), .Names = c(
+  "min",
+  "max"
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+  NA,
+  -1L
+), class = c("tbl_df", "tbl", "data.frame")), structure(list(
+  value = 3
+), .Names = "value", row.names = c(NA, -1L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+)))), .Names = c(
+  "fun", "length.out", "replications",
+  "summary_fun", "proc", "results"
+), row.names = c(NA, -9L), class = c(
+  "tbl_df",
+  "tbl", "data.frame"
+))
 test_that("Three analyzing functions and one summary function over 2 cpus. Results were created and stored in simulation", {
   expect_identical(eg$simulation, expected_df)
 })
@@ -449,7 +579,7 @@ gen_data <- function() {
 }
 
 dg <- expand_tibble(fun = c("gen_data"))
-pg <- expandGrid(proc = "identity")
+pg <- expand_tibble(proc = "identity")
 eg <- eval_tibbles(dg, pg,
   rep = 3, envir = environment(), summary_fun = list(mean = mean, sum = sum),
   group_for_summary = "group", simplify = FALSE
@@ -491,7 +621,7 @@ gen_data <- function() {
 }
 
 dg <- expand_tibble(fun = c("gen_data"))
-pg <- expandGrid(proc = "identity")
+pg <- expand_tibble(proc = "identity")
 eg <- eval_tibbles(dg, pg,
   rep = 3, envir = environment(), summary_fun = list(mean = mean, sum = sum),
   group_for_summary = c("group1", "group2"), simplify = FALSE
@@ -541,8 +671,8 @@ test_that("Two groups for summary_fun. Results were created and stored in simula
 ret_global_var <- function(dummy) {
   paste(get("globalVar", envir = globalenv()), "executed on cluster", sep = ", ")
 }
-dg <- expandGrid(fun = "seq_len", length.out = 1:3)
-pg <- expandGrid(proc = "ret_global_var")
+dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
+pg <- expand_tibble(proc = "ret_global_var")
 assign("globalVar", "uploaded to cluster", envir = .GlobalEnv)
 eg <- eval_tibbles(dg, pg, rep = 10, envir = environment(), ncpus = 2, cluster_global_objects = c("globalVar"), simplify = FALSE)
 
@@ -558,14 +688,14 @@ test_that("Error is variable is not uploaded to cluster", {
 
 ##################################################################
 
-pg <- expandGrid(proc = c("mean"))
+pg <- expand_tibble(proc = c("mean"))
 fetch_other_pkgs <- function(dummy) {
   names(sessionInfo()$otherPkgs)
 }
 
 cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
-dg <- expandGrid(fun = "seq_len", length.out = 1:3)
-pg <- expandGrid(proc = "fetch_other_pkgs")
+dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
+pg <- expand_tibble(proc = "fetch_other_pkgs")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), cluster = cl, simplify = FALSE)
 
 test_that("No libraries loaded on the cluster.", {
@@ -578,7 +708,7 @@ eg <- eval_tibbles(dg, pg,
   cluster_libraries = c("boot"), simplify = FALSE
 )
 
-test_that("Library survival loaded on the cluster.", {
+test_that("Library boot loaded on the cluster.", {
   expect_equal(unique(unlist(eg$simulation$results)), "boot")
 })
 
@@ -606,3 +736,4 @@ test_that("Warning if cluster and ncpus are specified and that the cluster cl is
 
 
 parallel::stopCluster(cl)
+

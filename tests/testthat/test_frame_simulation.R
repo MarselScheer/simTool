@@ -1,6 +1,7 @@
-library(tidyr)
-dg <- expandGrid(fun = c("Gen A", "Gen B"), para = 1:2)
-pg <- expandGrid(proc = c("Ana A", "Ana B", "Ana C"))
+testthat::context("test_frame_simulation.R")
+
+dg <- expand_tibble(fun = c("Gen A", "Gen B"), para = 1:2)
+pg <- expand_tibble(proc = c("Ana A", "Ana B", "Ana C"))
 sim <-
   list(
     list(
@@ -25,7 +26,7 @@ sim <-
   )
 
 fs <- frame_simulation(dg, pg, sim, NULL) %>%
-  unnest() %>%
+  tidyr::unnest() %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results for every replication", {
@@ -65,7 +66,7 @@ sim <-
   )
 
 fs <- frame_simulation(dg, pg, sim, mean) %>%
-  unnest() %>%
+  tidyr::unnest() %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results sumamrized by one summary function", {
