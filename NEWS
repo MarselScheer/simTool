@@ -1,3 +1,13 @@
+Version 1.0.4
+=========================
+
+Misc: 
+
+* Refactoring in order to remove the dependency on reshape and plyr
+* The simulation itself is now a tibble instead of a list of lists
+
+
+
 Version 1.0.3
 =========================
 
