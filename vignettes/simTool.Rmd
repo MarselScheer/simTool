@@ -411,7 +411,7 @@ pg
 
 Finally, we conduct the simulation and visualize the results
 ```{r, eval = EVAL}
-et <- eval_tibbles(dg, pg, replications = 10^5, ncpus = 4)
+et <- eval_tibbles(dg, pg, replications = 10^5, ncpus = 2)
 et
 et$simulation %>%
   ggplot(aes(x = results, color = interaction(fun, n), fill = interaction(fun, n))) +
@@ -518,7 +518,7 @@ correctly we need to tell eval_tibbles that additional group variables
 are *type* and *aspect*:
 ```{r, eval = EVAL}
 et <- eval_tibbles(dg, pg,
-  replications = 10^3, ncpus = 4,
+  replications = 10^3, ncpus = 2,
   cluster_global_objects = "post_analyze",
   post_analyze = post_analyze,
   summary_fun = list(mean = mean),
