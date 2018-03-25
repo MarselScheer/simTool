@@ -255,436 +255,9 @@ of the global environment.</p></td>
  <span class='fu'><a href='expandGrid.html'>expandGrid</a></span>(<span class='kw'>fun</span><span class='kw'>=</span><span class='st'>"runif"</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>),
  <span class='fu'><a href='expandGrid.html'>expandGrid</a></span>(<span class='kw'>proc</span><span class='kw'>=</span><span class='st'>"rng"</span>),
  <span class='kw'>rep</span><span class='kw'>=</span><span class='fl'>10</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function evalGrids() is deprecated. Please use eval_tibbles() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; [1] "Estimated replications per hour:  61933939"</div><div class='input'><span class='no'>eg</span></div><div class='output co'>#&gt; $call
-#&gt; evalGrids(dataGrid = expandGrid(fun = "runif", n = 1:3), procGrid = expandGrid(proc = "rng"), 
-#&gt;     replications = 10)
-#&gt; 
-#&gt; $dataGrid
-#&gt;     fun n
-#&gt; 1 runif 1
-#&gt; 2 runif 2
-#&gt; 3 runif 3
-#&gt; 
-#&gt; $procGrid
-#&gt;   proc
-#&gt; 1  rng
-#&gt; 
-#&gt; $simulation
-#&gt; $simulation[[1]]
-#&gt; $simulation[[1]][[1]]
-#&gt; $simulation[[1]][[1]]$data
-#&gt; [1] 0.0888955
-#&gt; 
-#&gt; $simulation[[1]][[1]]$results
-#&gt; $simulation[[1]][[1]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.0888955 0.0888955 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[2]]
-#&gt; $simulation[[1]][[2]]$data
-#&gt; [1] 0.527871
-#&gt; 
-#&gt; $simulation[[1]][[2]]$results
-#&gt; $simulation[[1]][[2]]$results[[1]]
-#&gt;      min      max 
-#&gt; 0.527871 0.527871 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[3]]
-#&gt; $simulation[[1]][[3]]$data
-#&gt; [1] 0.2349702
-#&gt; 
-#&gt; $simulation[[1]][[3]]$results
-#&gt; $simulation[[1]][[3]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2349702 0.2349702 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[4]]
-#&gt; $simulation[[1]][[4]]$data
-#&gt; [1] 0.2585438
-#&gt; 
-#&gt; $simulation[[1]][[4]]$results
-#&gt; $simulation[[1]][[4]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2585438 0.2585438 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[5]]
-#&gt; $simulation[[1]][[5]]$data
-#&gt; [1] 0.3336488
-#&gt; 
-#&gt; $simulation[[1]][[5]]$results
-#&gt; $simulation[[1]][[5]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.3336488 0.3336488 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[6]]
-#&gt; $simulation[[1]][[6]]$data
-#&gt; [1] 0.1119666
-#&gt; 
-#&gt; $simulation[[1]][[6]]$results
-#&gt; $simulation[[1]][[6]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.1119666 0.1119666 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[7]]
-#&gt; $simulation[[1]][[7]]$data
-#&gt; [1] 0.03739304
-#&gt; 
-#&gt; $simulation[[1]][[7]]$results
-#&gt; $simulation[[1]][[7]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.03739304 0.03739304 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[8]]
-#&gt; $simulation[[1]][[8]]$data
-#&gt; [1] 0.05453934
-#&gt; 
-#&gt; $simulation[[1]][[8]]$results
-#&gt; $simulation[[1]][[8]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.05453934 0.05453934 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[9]]
-#&gt; $simulation[[1]][[9]]$data
-#&gt; [1] 0.2673686
-#&gt; 
-#&gt; $simulation[[1]][[9]]$results
-#&gt; $simulation[[1]][[9]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2673686 0.2673686 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[1]][[10]]
-#&gt; $simulation[[1]][[10]]$data
-#&gt; [1] 0.4276272
-#&gt; 
-#&gt; $simulation[[1]][[10]]$results
-#&gt; $simulation[[1]][[10]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.4276272 0.4276272 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]]
-#&gt; $simulation[[2]][[1]]
-#&gt; $simulation[[2]][[1]]$data
-#&gt; [1] 0.09517665 0.70176252
-#&gt; 
-#&gt; $simulation[[2]][[1]]$results
-#&gt; $simulation[[2]][[1]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.09517665 0.70176252 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[2]]
-#&gt; $simulation[[2]][[2]]$data
-#&gt; [1] 0.5477511 0.9548898
-#&gt; 
-#&gt; $simulation[[2]][[2]]$results
-#&gt; $simulation[[2]][[2]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.5477511 0.9548898 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[3]]
-#&gt; $simulation[[2]][[3]]$data
-#&gt; [1] 0.07946089 0.62555272
-#&gt; 
-#&gt; $simulation[[2]][[3]]$results
-#&gt; $simulation[[2]][[3]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.07946089 0.62555272 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[4]]
-#&gt; $simulation[[2]][[4]]$data
-#&gt; [1] 0.1484082 0.0372463
-#&gt; 
-#&gt; $simulation[[2]][[4]]$results
-#&gt; $simulation[[2]][[4]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.0372463 0.1484082 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[5]]
-#&gt; $simulation[[2]][[5]]$data
-#&gt; [1] 0.9696468 0.1724914
-#&gt; 
-#&gt; $simulation[[2]][[5]]$results
-#&gt; $simulation[[2]][[5]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.1724914 0.9696468 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[6]]
-#&gt; $simulation[[2]][[6]]$data
-#&gt; [1] 0.4399818 0.8340476
-#&gt; 
-#&gt; $simulation[[2]][[6]]$results
-#&gt; $simulation[[2]][[6]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.4399818 0.8340476 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[7]]
-#&gt; $simulation[[2]][[7]]$data
-#&gt; [1] 0.43535228 0.09026915
-#&gt; 
-#&gt; $simulation[[2]][[7]]$results
-#&gt; $simulation[[2]][[7]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.09026915 0.43535228 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[8]]
-#&gt; $simulation[[2]][[8]]$data
-#&gt; [1] 0.7563909 0.2780298
-#&gt; 
-#&gt; $simulation[[2]][[8]]$results
-#&gt; $simulation[[2]][[8]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2780298 0.7563909 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[9]]
-#&gt; $simulation[[2]][[9]]$data
-#&gt; [1] 0.7310415 0.7597456
-#&gt; 
-#&gt; $simulation[[2]][[9]]$results
-#&gt; $simulation[[2]][[9]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.7310415 0.7597456 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[2]][[10]]
-#&gt; $simulation[[2]][[10]]$data
-#&gt; [1] 0.2564088137 0.0003509724
-#&gt; 
-#&gt; $simulation[[2]][[10]]$results
-#&gt; $simulation[[2]][[10]]$results[[1]]
-#&gt;          min          max 
-#&gt; 0.0003509724 0.2564088137 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]]
-#&gt; $simulation[[3]][[1]]
-#&gt; $simulation[[3]][[1]]$data
-#&gt; [1] 0.4282120 0.1318027 0.9594336
-#&gt; 
-#&gt; $simulation[[3]][[1]]$results
-#&gt; $simulation[[3]][[1]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.1318027 0.9594336 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[2]]
-#&gt; $simulation[[3]][[2]]$data
-#&gt; [1] 0.40122899 0.61148999 0.04283093
-#&gt; 
-#&gt; $simulation[[3]][[2]]$results
-#&gt; $simulation[[3]][[2]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.04283093 0.61148999 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[3]]
-#&gt; $simulation[[3]][[3]]$data
-#&gt; [1] 0.80651670 0.06773117 0.93108990
-#&gt; 
-#&gt; $simulation[[3]][[3]]$results
-#&gt; $simulation[[3]][[3]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.06773117 0.93108990 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[4]]
-#&gt; $simulation[[3]][[4]]$data
-#&gt; [1] 0.4304459 0.2033120 0.8845817
-#&gt; 
-#&gt; $simulation[[3]][[4]]$results
-#&gt; $simulation[[3]][[4]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2033120 0.8845817 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[5]]
-#&gt; $simulation[[3]][[5]]$data
-#&gt; [1] 0.34129542 0.06753315 0.53957040
-#&gt; 
-#&gt; $simulation[[3]][[5]]$results
-#&gt; $simulation[[3]][[5]]$results[[1]]
-#&gt;        min        max 
-#&gt; 0.06753315 0.53957040 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[6]]
-#&gt; $simulation[[3]][[6]]$data
-#&gt; [1] 0.8030478 0.2773124 0.9348883
-#&gt; 
-#&gt; $simulation[[3]][[6]]$results
-#&gt; $simulation[[3]][[6]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2773124 0.9348883 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[7]]
-#&gt; $simulation[[3]][[7]]$data
-#&gt; [1] 0.6890035 0.5900332 0.2133564
-#&gt; 
-#&gt; $simulation[[3]][[7]]$results
-#&gt; $simulation[[3]][[7]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2133564 0.6890035 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[8]]
-#&gt; $simulation[[3]][[8]]$data
-#&gt; [1] 0.9091252 0.5738601 0.7215302
-#&gt; 
-#&gt; $simulation[[3]][[8]]$results
-#&gt; $simulation[[3]][[8]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.5738601 0.9091252 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[9]]
-#&gt; $simulation[[3]][[9]]$data
-#&gt; [1] 0.9472091 0.6944337 0.6712095
-#&gt; 
-#&gt; $simulation[[3]][[9]]$results
-#&gt; $simulation[[3]][[9]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.6712095 0.9472091 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $simulation[[3]][[10]]
-#&gt; $simulation[[3]][[10]]$data
-#&gt; [1] 0.2434018 0.3578725 0.7407287
-#&gt; 
-#&gt; $simulation[[3]][[10]]$results
-#&gt; $simulation[[3]][[10]]$results[[1]]
-#&gt;       min       max 
-#&gt; 0.2434018 0.7407287 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $summary.fun
-#&gt; NULL
-#&gt; 
-#&gt; $est.reps.per.hour
-#&gt; [1] 61933939
-#&gt; 
-#&gt; $sessionInfo
-#&gt; R version 3.4.4 (2018-03-15)
-#&gt; Platform: x86_64-pc-linux-gnu (64-bit)
-#&gt; Running under: Arch Linux
-#&gt; 
-#&gt; Matrix products: default
-#&gt; BLAS: /usr/lib/libblas.so.3.8.0
-#&gt; LAPACK: /usr/lib/liblapack.so.3.8.0
-#&gt; 
-#&gt; locale:
-#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
-#&gt; 
-#&gt; attached base packages:
-#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
-#&gt; 
-#&gt; other attached packages:
-#&gt; [1] simTool_1.1.0  testthat_2.0.0
-#&gt; 
-#&gt; loaded via a namespace (and not attached):
-#&gt;  [1] Rcpp_0.12.16       pillar_1.2.1       compiler_3.4.4     plyr_1.8.4        
-#&gt;  [5] bindr_0.1          tools_3.4.4        highlight_0.4.7.2  pkgbuild_1.0.0    
-#&gt;  [9] pkgload_1.0.0      digest_0.6.15      debugme_1.1.0      memoise_1.1.0     
-#&gt; [13] evaluate_0.10.1    tibble_1.4.2       pkgconfig_2.0.1    rlang_0.2.0       
-#&gt; [17] cli_1.0.0          rstudioapi_0.7     commonmark_1.4     parallel_3.4.4    
-#&gt; [21] curl_3.1           yaml_2.1.18        pkgdown_0.1.0.9000 bindrcpp_0.2      
-#&gt; [25] withr_2.1.2        dplyr_0.7.4        stringr_1.3.0      httr_1.3.1        
-#&gt; [29] roxygen2_6.0.1     xml2_1.2.0         knitr_1.20         desc_1.1.1        
-#&gt; [33] fs_1.2.2           rprojroot_1.3-2    reshape_0.8.7      glue_1.2.0        
-#&gt; [37] R6_2.2.2           rematch_1.0.1      rmarkdown_1.9      callr_2.0.2       
-#&gt; [41] whisker_0.3-2      tidyr_0.8.0        purrr_0.2.4        magrittr_1.5      
-#&gt; [45] backports_1.1.2    htmltools_0.3.6    MASS_7.3-49        assertthat_0.2.0  
-#&gt; [49] stringi_1.1.6      crayon_1.3.4      
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "evalGrid"</div><div class='input'>
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function evalGrids() is deprecated. Please use eval_tibbles() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in get(procGrid[j, 1], envir = envir): object 'rng' not found</span></div><div class='input'><span class='no'>eg</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'eg' not found</span></div><div class='input'>
 <span class='co'># summarizing the results in a data.frame</span>
-<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt;    i j   fun n proc replication          min        max
-#&gt; 1  1 1 runif 1  rng           1 0.0888955038 0.08889550
-#&gt; 2  1 1 runif 1  rng           2 0.5278710033 0.52787100
-#&gt; 3  1 1 runif 1  rng           3 0.2349702110 0.23497021
-#&gt; 4  1 1 runif 1  rng           4 0.2585437574 0.25854376
-#&gt; 5  1 1 runif 1  rng           5 0.3336487842 0.33364878
-#&gt; 6  1 1 runif 1  rng           6 0.1119666023 0.11196660
-#&gt; 7  1 1 runif 1  rng           7 0.0373930435 0.03739304
-#&gt; 8  1 1 runif 1  rng           8 0.0545393399 0.05453934
-#&gt; 9  1 1 runif 1  rng           9 0.2673685643 0.26736856
-#&gt; 10 1 1 runif 1  rng          10 0.4276272098 0.42762721
-#&gt; 11 2 1 runif 2  rng           1 0.0951766476 0.70176252
-#&gt; 12 2 1 runif 2  rng           2 0.5477511259 0.95488981
-#&gt; 13 2 1 runif 2  rng           3 0.0794608853 0.62555272
-#&gt; 14 2 1 runif 2  rng           4 0.0372463040 0.14840821
-#&gt; 15 2 1 runif 2  rng           5 0.1724914415 0.96964677
-#&gt; 16 2 1 runif 2  rng           6 0.4399818102 0.83404762
-#&gt; 17 2 1 runif 2  rng           7 0.0902691513 0.43535228
-#&gt; 18 2 1 runif 2  rng           8 0.2780297908 0.75639087
-#&gt; 19 2 1 runif 2  rng           9 0.7310414694 0.75974559
-#&gt; 20 2 1 runif 2  rng          10 0.0003509724 0.25640881
-#&gt; 21 3 1 runif 3  rng           1 0.1318026731 0.95943357
-#&gt; 22 3 1 runif 3  rng           2 0.0428309273 0.61148999
-#&gt; 23 3 1 runif 3  rng           3 0.0677311674 0.93108990
-#&gt; 24 3 1 runif 3  rng           4 0.2033120390 0.88458166
-#&gt; 25 3 1 runif 3  rng           5 0.0675331461 0.53957040
-#&gt; 26 3 1 runif 3  rng           6 0.2773123942 0.93488835
-#&gt; 27 3 1 runif 3  rng           7 0.2133564144 0.68900347
-#&gt; 28 3 1 runif 3  rng           8 0.5738601099 0.90912522
-#&gt; 29 3 1 runif 3  rng           9 0.6712094849 0.94720912
-#&gt; 30 3 1 runif 3  rng          10 0.2434017900 0.74072871</div><div class='input'>
+<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(eg): object 'eg' not found</span></div><div class='input'>
 <span class='co'># we now generate data for a regression</span>
 <span class='co'># and fit different regression models</span>
 
@@ -699,46 +272,29 @@ of the global environment.</p></td>
 <span class='no'>eg</span> <span class='kw'>=</span> <span class='fu'>evalGrids</span>(
  <span class='fu'><a href='expandGrid.html'>expandGrid</a></span>(<span class='kw'>fun</span><span class='kw'>=</span><span class='st'>"regData"</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>20</span>, <span class='kw'>SD</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>2</span>),
  <span class='fu'><a href='expandGrid.html'>expandGrid</a></span>(<span class='kw'>proc</span><span class='kw'>=</span><span class='st'>"lm"</span>, <span class='kw'>formula</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"y~x"</span>, <span class='st'>"y~I(x^2)"</span>)),
- <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function evalGrids() is deprecated. Please use eval_tibbles() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; [1] "Estimated replications per hour:  682555"</div><div class='input'>
+ <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function evalGrids() is deprecated. Please use eval_tibbles() instead.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in get(dataGrid[j, 1], envir = envir): object 'regData' not found</span></div><div class='input'>
 <span class='co'># can not be converted to data.frame, because</span>
 <span class='co'># an object of class "lm" can not converted to</span>
 <span class='co'># a data.frame</span>
-<span class='fu'>try</span>(<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='input'>
+<span class='fu'>try</span>(<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>))
+
 <span class='co'># for the data.frame we just extract the r.squared</span>
 <span class='co'># from the fitted model</span>
-<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>, <span class='kw'>convert.result.fun</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>fit</span>) <span class='fu'>c</span>(<span class='kw'>rsq</span><span class='kw'>=</span><span class='fu'>summary</span>(<span class='no'>fit</span>)$<span class='no'>r.squared</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt;   i j     fun  n SD proc  formula replication        rsq
-#&gt; 1 1 1 regData 20  1   lm      y~x           1 0.04033998
-#&gt; 2 1 1 regData 20  1   lm      y~x           2 0.08286291
-#&gt; 3 1 2 regData 20  1   lm y~I(x^2)           1 0.04082008
-#&gt; 4 1 2 regData 20  1   lm y~I(x^2)           2 0.07815913
-#&gt; 5 2 1 regData 20  2   lm      y~x           1 0.02829111
-#&gt; 6 2 1 regData 20  2   lm      y~x           2 0.09343087
-#&gt; 7 2 2 regData 20  2   lm y~I(x^2)           1 0.02687260
-#&gt; 8 2 2 regData 20  2   lm y~I(x^2)           2 0.03008225</div><div class='input'>
+<span class='fu'>as.data.frame</span>(<span class='no'>eg</span>, <span class='kw'>convert.result.fun</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>fit</span>) <span class='fu'>c</span>(<span class='kw'>rsq</span><span class='kw'>=</span><span class='fu'>summary</span>(<span class='no'>fit</span>)$<span class='no'>r.squared</span>))</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(eg, convert.result.fun = function(fit) c(rsq = summary(fit)$r.squared)): object 'eg' not found</span></div><div class='input'>
 <span class='co'># for the data.frame we just extract the coefficients</span>
 <span class='co'># from the fitted model</span>
-<span class='no'>df</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>eg</span>, <span class='kw'>convert.result.fun</span><span class='kw'>=</span><span class='no'>coef</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='input'>
+<span class='no'>df</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>eg</span>, <span class='kw'>convert.result.fun</span><span class='kw'>=</span><span class='no'>coef</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(eg, convert.result.fun = coef): object 'eg' not found</span></div><div class='input'>
 <span class='co'># since we have done 2 replication we can calculate</span>
 <span class='co'># sum summary statistics</span>
 <span class='fu'>library</span>(<span class='st'>"reshape"</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘reshape’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:simTool’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    rename, round_any</span></div><div class='input'><span class='no'>df</span>$<span class='no'>replication</span><span class='kw'>=</span><span class='kw'>NULL</span>
-<span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/cast-9g'>cast</a></span>(<span class='no'>mdf</span>, <span class='no'>...</span> ~ <span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>mean</span>, <span class='no'>length</span>, <span class='no'>sd</span>))</div><div class='output co'>#&gt;   i j     fun  n SD proc  formula    variable        mean length         sd
-#&gt; 1 1 1 regData 20  1   lm      y~x (Intercept) -0.04840345      2 0.05979441
-#&gt; 2 1 1 regData 20  1   lm      y~x           x  0.81537381      2 0.21827869
-#&gt; 3 1 2 regData 20  1   lm y~I(x^2) (Intercept)  0.09397553      2 0.01530314
-#&gt; 4 1 2 regData 20  1   lm y~I(x^2)      I(x^2)  0.77551549      2 0.18897131
-#&gt; 5 2 1 regData 20  2   lm      y~x (Intercept) -0.58444666      2 0.26059373
-#&gt; 6 2 1 regData 20  2   lm      y~x           x  1.50407915      2 0.54672630
-#&gt; 7 2 2 regData 20  2   lm y~I(x^2) (Intercept) -0.18938794      2 0.53776108
-#&gt; 8 2 2 regData 20  2   lm y~I(x^2)      I(x^2)  1.04348249      2 0.01111998</div><div class='input'>
+#&gt; <span class='message'>    rename, round_any</span></div><div class='input'><span class='no'>df</span>$<span class='no'>replication</span><span class='kw'>=</span><span class='kw'>NULL</span></div><div class='output co'>#&gt; <span class='error'>Error in df$replication = NULL: object of type 'closure' is not subsettable</span></div><div class='input'><span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/cast-9g'>cast</a></span>(<span class='no'>mdf</span>, <span class='no'>...</span> ~ <span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>mean</span>, <span class='no'>length</span>, <span class='no'>sd</span>))</div><div class='output co'>#&gt; <span class='error'>Error in xj[i]: object of type 'closure' is not subsettable</span></div><div class='input'>
 <span class='co'># note if the data.frame would contain the column</span>
 <span class='co'># named "sd" instead of "SD" the cast will generate</span>
 <span class='co'># an error</span>
-<span class='fu'>names</span>(<span class='no'>df</span>)[<span class='fl'>5</span>] <span class='kw'>=</span> <span class='st'>"sd"</span>
-<span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'>names</span>(<span class='no'>df</span>)[<span class='fl'>5</span>] <span class='kw'>=</span> <span class='st'>"sd"</span></div><div class='output co'>#&gt; <span class='error'>Error in names(df)[5] = "sd": names() applied to a non-vector</span></div><div class='input'><span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>7</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'>try</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/cast-9g'>cast</a></span>(<span class='no'>mdf</span>, <span class='no'>...</span> ~ <span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>mean</span>, <span class='no'>length</span>, <span class='no'>sd</span>)))
 
 
@@ -746,40 +302,7 @@ of the global environment.</p></td>
 <span class='fu'>as.data.frame</span>(<span class='no'>eg</span>, <span class='kw'>convert.result.fun</span><span class='kw'>=</span><span class='kw'>function</span>(<span class='no'>x</span>) {
  <span class='no'>ret</span> <span class='kw'>=</span> <span class='fu'>coef</span>(<span class='fu'>summary</span>(<span class='no'>x</span>))
  <span class='fu'>data.frame</span>(<span class='kw'>valueName</span> <span class='kw'>=</span> <span class='fu'>rownames</span>(<span class='no'>ret</span>), <span class='no'>ret</span>, <span class='kw'>check.names</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-})</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt;    i j     fun  n SD proc  formula replication   valueName     Estimate
-#&gt; 1  1 1 regData 20  1   lm      y~x           1 (Intercept) -0.006122416
-#&gt; 2  1 1 regData 20  1   lm      y~x           1           x  0.661027467
-#&gt; 3  1 1 regData 20  1   lm      y~x           2 (Intercept) -0.090684476
-#&gt; 4  1 1 regData 20  1   lm      y~x           2           x  0.969720150
-#&gt; 5  1 2 regData 20  1   lm y~I(x^2)           1 (Intercept)  0.104796482
-#&gt; 6  1 2 regData 20  1   lm y~I(x^2)           1      I(x^2)  0.641892597
-#&gt; 7  1 2 regData 20  1   lm y~I(x^2)           2 (Intercept)  0.083154573
-#&gt; 8  1 2 regData 20  1   lm y~I(x^2)           2      I(x^2)  0.909138384
-#&gt; 9  2 1 regData 20  2   lm      y~x           1 (Intercept) -0.768714257
-#&gt; 10 2 1 regData 20  2   lm      y~x           1           x  1.117485281
-#&gt; 11 2 1 regData 20  2   lm      y~x           2 (Intercept) -0.400179071
-#&gt; 12 2 1 regData 20  2   lm      y~x           2           x  1.890673026
-#&gt; 13 2 2 regData 20  2   lm y~I(x^2)           1 (Intercept) -0.569642445
-#&gt; 14 2 2 regData 20  2   lm y~I(x^2)           1      I(x^2)  1.051345499
-#&gt; 15 2 2 regData 20  2   lm y~I(x^2)           2 (Intercept)  0.190866568
-#&gt; 16 2 2 regData 20  2   lm y~I(x^2)           2      I(x^2)  1.035619479
-#&gt;    Std. Error     t value  Pr(&gt;|t|)
-#&gt; 1   0.4444818 -0.01377428 0.9891616
-#&gt; 2   0.7599309  0.86985206 0.3958332
-#&gt; 3   0.4447614 -0.20389466 0.8407233
-#&gt; 4   0.7604089  1.27526138 0.2184311
-#&gt; 5   0.3407551  0.30754192 0.7619609
-#&gt; 6   0.7333972  0.87523188 0.3929772
-#&gt; 7   0.3419283  0.24319304 0.8106057
-#&gt; 8   0.7359221  1.23537310 0.2325736
-#&gt; 9   0.9028769 -0.85140540 0.4057291
-#&gt; 10  1.5436494  0.72392429 0.4784161
-#&gt; 11  0.8119239 -0.49287755 0.6280578
-#&gt; 12  1.3881470  1.36201213 0.1899972
-#&gt; 13  0.6928550 -0.82216690 0.4217398
-#&gt; 14  1.4912114  0.70502780 0.4898163
-#&gt; 15  0.6439904  0.29638109 0.7703315
-#&gt; 16  1.3860415  0.74717783 0.4646055</div><div class='input'>
+})</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(eg, convert.result.fun = function(x) {    ret = coef(summary(x))    data.frame(valueName = rownames(ret), ret, check.names = FALSE)}): object 'eg' not found</span></div><div class='input'>
 
 
 <span class='co'># we now compare to methods for</span>
@@ -809,11 +332,10 @@ of the global environment.</p></td>
 <span class='fu'>set.seed</span>(<span class='fl'>1234</span>)
 <span class='no'>eg</span> <span class='kw'>=</span> <span class='fu'>evalGrids</span>(<span class='no'>dg</span>, <span class='no'>pg</span>, <span class='kw'>replication</span><span class='kw'>=</span><span class='fl'>50</span>, <span class='kw'>progress</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function evalGrids() is deprecated. Please use eval_tibbles() instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in get(procGrid[j, 1], envir = envir): object 'emp.q' not found</span></div><div class='input'>
 <span class='co'># convert the results to a data.frame</span>
-<span class='no'>df</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>eg</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The function as.data.frame.evalGrid() is deprecated. Please use eval_tibbles, since it always returns a tibble-object.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The function expandGrid() is deprecated. Please use expand_tibble() instead.</span></div><div class='output co'>#&gt; <span class='error'>Error in list_to_dataframe(res, attr(.data, "split_labels"), .id, id_as_factor): Results must be all atomic, or all data frames</span></div><div class='input'><span class='no'>df</span>$<span class='no'>replication</span><span class='kw'>=</span><span class='kw'>NULL</span>
-<span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='no'>df</span> <span class='kw'>=</span> <span class='fu'>as.data.frame</span>(<span class='no'>eg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(eg): object 'eg' not found</span></div><div class='input'><span class='no'>df</span>$<span class='no'>replication</span><span class='kw'>=</span><span class='kw'>NULL</span></div><div class='output co'>#&gt; <span class='error'>Error in df$replication = NULL: object of type 'closure' is not subsettable</span></div><div class='input'><span class='no'>mdf</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/melt-24'>melt</a></span>(<span class='no'>df</span>, <span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>8</span>, <span class='kw'>na.rm</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 
 <span class='co'># calculate, print and plot summary statistics</span>
-<span class='fu'>require</span>(<span class='st'>"ggplot2"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='input'><span class='fu'>print</span>(<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/plyr/topics/arrange'>arrange</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/cast-9g'>cast</a></span>(<span class='no'>mdf</span>, <span class='no'>...</span> ~ <span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>mean</span>, <span class='no'>sd</span>)), <span class='no'>n</span>))</div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(data, , vars, drop = FALSE): undefined columns selected</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>a</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>fun</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>mean</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>proc</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fu'>I</span>(<span class='fl'>3</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>facet_grid</a></span>(<span class='no'>probs</span> ~ <span class='no'>n</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(a, aes(x = fun, y = mean, color = proc)): object 'a' not found</span></div></pre>
+<span class='fu'>require</span>(<span class='st'>"ggplot2"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: ggplot2</span></div><div class='input'><span class='fu'>print</span>(<span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/plyr/topics/arrange'>arrange</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/reshape/topics/cast-9g'>cast</a></span>(<span class='no'>mdf</span>, <span class='no'>...</span> ~ <span class='no'>.</span>, <span class='fu'>c</span>(<span class='no'>mean</span>, <span class='no'>sd</span>)), <span class='no'>n</span>))</div><div class='output co'>#&gt; <span class='error'>Error in xj[i]: object of type 'closure' is not subsettable</span></div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>a</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>fun</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>mean</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>proc</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fu'>I</span>(<span class='fl'>3</span>)) + <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>facet_grid</a></span>(<span class='no'>probs</span> ~ <span class='no'>n</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ggplot(a, aes(x = fun, y = mean, color = proc)): object 'a' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

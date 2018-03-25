@@ -133,9 +133,9 @@ p {
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 64676
-Start of the simulation: 2018-03-25 20:30:05
-End of the simulation: 2018-03-25 20:30:05</code></pre>
+Estimated replications per hour: 61311
+Start of the simulation: 2018-03-25 23:13:42
+End of the simulation: 2018-03-25 23:13:42</code></pre>
 </div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -223,9 +223,9 @@ End of the simulation: 2018-03-25 20:30:05</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 2
-Estimated replications per hour: 48786734
-Start of the simulation: 2018-03-25 20:30:05
-End of the simulation: 2018-03-25 20:30:05</code></pre>
+Estimated replications per hour: 49024332
+Start of the simulation: 2018-03-25 23:13:43
+End of the simulation: 2018-03-25 23:13:43</code></pre>
 <p>As you can see, the function always estimates the number of replications that can be done in one hour.</p>
 <div id="parameter-replications" class="section level2">
 <h2 class="hasAnchor">
@@ -246,9 +246,9 @@ End of the simulation: 2018-03-25 20:30:05</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 3
-Estimated replications per hour: 59681796
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 60559469
+Start of the simulation: 2018-03-25 23:13:43
+End of the simulation: 2018-03-25 23:13:43</code></pre>
 </div>
 <div id="parameter-discard_generated_data" class="section level2">
 <h2 class="hasAnchor">
@@ -295,9 +295,9 @@ End of the simulation: 2018-03-25 20:30:06</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 33717248
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 33720712
+Start of the simulation: 2018-03-25 23:13:43
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="dt">data_grid =</span> dg, <span class="dt">proc_grid =</span> pg, <span class="dt">replications =</span> <span class="dv">1000</span>,</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">summary_fun =</span> <span class="kw">list</span>(<span class="dt">mean =</span> mean, <span class="dt">sd =</span> sd)</a>
@@ -320,9 +320,9 @@ End of the simulation: 2018-03-25 20:30:06</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 32313036
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 30905678
+Start of the simulation: 2018-03-25 23:13:44
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 <p>Note, by specifying the parameter <em>summary_fun</em> the generated data sets and all individual result objects are discarded. In this example we discard <span class="math inline">\(3 \times 1000\)</span> data sets and <span class="math inline">\(3 \times 1000 \times 2\)</span> individual result objects.</p>
 </div>
 <div id="parameter-post_analyze" class="section level2">
@@ -349,9 +349,9 @@ End of the simulation: 2018-03-25 20:30:06</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 799274
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 667086
+Start of the simulation: 2018-03-25 23:13:44
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 <p>The parameter <em>post_analyze</em> (if specified) is applied directly after the result was generated (see command line 10). Note, <em>purrr::compose</em> can be very handy if your post-analyzing-function can be defined by a few single functions:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="kw"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="st">"regData"</span>, <span class="dt">n =</span> 5L, <span class="dt">SD =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),</a>
@@ -373,9 +373,9 @@ End of the simulation: 2018-03-25 20:30:06</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 526380
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 512611
+Start of the simulation: 2018-03-25 23:13:44
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 </div>
 <div id="parameter-group_for_summary" class="section level2">
 <h2 class="hasAnchor">
@@ -416,9 +416,9 @@ deprecated. Please use expand_tibble() instead.</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 358942
-Start of the simulation: 2018-03-25 20:30:06
-End of the simulation: 2018-03-25 20:30:06</code></pre>
+Estimated replications per hour: 355109
+Start of the simulation: 2018-03-25 23:13:44
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 <p>In order to summarize the replications it is necessary to additional group the calculations with respect to another variable. This variable can be passed to <em>group_for_summary</em></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="kw"><a href="../reference/expandGrid.html">expandGrid</a></span>(<span class="dt">fun =</span> <span class="st">"regData"</span>, <span class="dt">n =</span> 5L, <span class="dt">SD =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),</a>
@@ -455,9 +455,9 @@ deprecated. Please use expand_tibble() instead.</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 236064
-Start of the simulation: 2018-03-25 20:30:07
-End of the simulation: 2018-03-25 20:30:07</code></pre>
+Estimated replications per hour: 212783
+Start of the simulation: 2018-03-25 23:13:44
+End of the simulation: 2018-03-25 23:13:44</code></pre>
 </div>
 <div id="parameter-ncpus-and-cluster_seed" class="section level2">
 <h2 class="hasAnchor">
@@ -480,9 +480,9 @@ End of the simulation: 2018-03-25 20:30:07</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 97141
-Start of the simulation: 2018-03-25 20:30:07
-End of the simulation: 2018-03-25 20:30:08</code></pre>
+Estimated replications per hour: 86130
+Start of the simulation: 2018-03-25 23:13:45
+End of the simulation: 2018-03-25 23:13:45</code></pre>
 <p>As it is stated in command line 7, the replications are parallelized. In our case, this means that roughly every CPU conducts 5 replications.</p>
 <p>The parameter <em>cluster_seed</em> must be an integer vector of length 6 and serves the same purpose as the function <em>set.seed</em>. By default, <em>cluster_seed</em> equals <em>rep(12345, 6)</em>. Note, in order to reproduce the simulation study it is also necessary that <em>ncpus</em> does not change.</p>
 </div>
@@ -509,9 +509,9 @@ End of the simulation: 2018-03-25 20:30:08</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 97842
-Start of the simulation: 2018-03-25 20:30:08
-End of the simulation: 2018-03-25 20:30:09</code></pre>
+Estimated replications per hour: 85801
+Start of the simulation: 2018-03-25 23:13:46
+End of the simulation: 2018-03-25 23:13:46</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw"><a href="http://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a></code></pre></div>
 <p>As you can see our cluster consists of 3 workers. Hence, this reproduces the results from the last code chunk above. Further note, if the user starts the cluster, the user also has to stop the cluster. A cluster that is created within <em>eval_tibbles</em> by specifying <em>ncpus</em> is also stop within <em>eval_tibbles</em>.</p>
 </div>
@@ -585,9 +585,9 @@ Calculations and Intervals on Original Scale</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 1
 Number of replications: 10
-Estimated replications per hour: 172011
-Start of the simulation: 2018-03-25 20:30:09
-End of the simulation: 2018-03-25 20:30:10</code></pre>
+Estimated replications per hour: 170564
+Start of the simulation: 2018-03-25 23:13:47
+End of the simulation: 2018-03-25 23:13:47</code></pre>
 <p>Of course, it is possible to set <em>cluster_global_objects=ls()</em>, but then all objects from the global environment are transferred to all workers.</p>
 </div>
 <div id="parameter-envir" class="section level2">
@@ -623,9 +623,9 @@ End of the simulation: 2018-03-25 20:30:10</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2513231
-Start of the simulation: 2018-03-25 20:30:10
-End of the simulation: 2018-03-25 20:30:10
+Estimated replications per hour: 2541146
+Start of the simulation: 2018-03-25 23:13:48
+End of the simulation: 2018-03-25 23:13:48
 --------------------------------------------------
 # A tibble: 2 x 7
   fun       n replications proc        sd   mean   q0.1
@@ -635,9 +635,9 @@ End of the simulation: 2018-03-25 20:30:10
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 1341342
-Start of the simulation: 2018-03-25 20:30:10
-End of the simulation: 2018-03-25 20:30:10</code></pre>
+Estimated replications per hour: 1357257
+Start of the simulation: 2018-03-25 23:13:48
+End of the simulation: 2018-03-25 23:13:48</code></pre>
 </div>
 </div>
 <div id="some-examples" class="section level1">
@@ -673,7 +673,7 @@ End of the simulation: 2018-03-25 20:30:10</code></pre>
 1 mean  
 2 median</code></pre>
 <p>Finally, we conduct the simulation and visualize the results</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">et &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(dg, pg, <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">5</span>, <span class="dt">ncpus =</span> <span class="dv">4</span>)</a>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">et &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(dg, pg, <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">5</span>, <span class="dt">ncpus =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb49-2" data-line-number="2">et</a></code></pre></div>
 <pre><code># A tibble: 800,000 x 7
    fun    mean     n  rate replications proc   results
@@ -692,9 +692,9 @@ End of the simulation: 2018-03-25 20:30:10</code></pre>
 Number of data generating functions: 4
 Number of analyzing procedures: 2
 Number of replications: 100000
-Estimated replications per hour: 29770667
-Start of the simulation: 2018-03-25 20:30:11
-End of the simulation: 2018-03-25 20:30:23</code></pre>
+Estimated replications per hour: 17678130
+Start of the simulation: 2018-03-25 23:13:48
+End of the simulation: 2018-03-25 23:14:09</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">et<span class="op">$</span>simulation <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb51-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> results, <span class="dt">color =</span> <span class="kw">interaction</span>(fun, n), <span class="dt">fill =</span> <span class="kw">interaction</span>(fun, n))) <span class="op">+</span></a>
 <a class="sourceLine" id="cb51-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
@@ -778,7 +778,7 @@ End of the simulation: 2018-03-25 20:30:23</code></pre>
 4 bootstrap_ci      0.950</code></pre>
 <p>Note, that the structure of the objects returned are quite different which addressed by our function <em>post_analyze</em>. The variables <em>type</em> and <em>aspect</em> that are created by <em>post_analyze</em> are to distinguish the different confidence intervals. Since these variables are part of the result objects <em>eval_tibbles</em> assumes that these variables are results. In order to summarize the results (calculating the mean) over all replications correctly we need to tell eval_tibbles that additional group variables are <em>type</em> and <em>aspect</em>:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">et &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(dg, pg,</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">  <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">3</span>, <span class="dt">ncpus =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2">  <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">3</span>, <span class="dt">ncpus =</span> <span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb58-3" data-line-number="3">  <span class="dt">cluster_global_objects =</span> <span class="st">"post_analyze"</span>,</a>
 <a class="sourceLine" id="cb58-4" data-line-number="4">  <span class="dt">post_analyze =</span> post_analyze,</a>
 <a class="sourceLine" id="cb58-5" data-line-number="5">  <span class="dt">summary_fun =</span> <span class="kw">list</span>(<span class="dt">mean =</span> mean),</a>
@@ -789,22 +789,22 @@ End of the simulation: 2018-03-25 20:30:23</code></pre>
    fun       n  mean    sd   max  rate replications summary_fun proc  conf.level aspect type  value
    &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
  1 rnorm    10    3.  1.73    NA    NA            1 mean        t.te…      0.900 ci_le… t.te… 1.94 
- 2 rnorm    10    3.  1.73    NA    NA            1 mean        t.te…      0.900 cover… t.te… 0.887
+ 2 rnorm    10    3.  1.73    NA    NA            1 mean        t.te…      0.900 cover… t.te… 0.886
  3 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 ci_le… boot… 1.66 
  4 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 ci_le… boot… 1.68 
  5 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 ci_le… boot… 1.65 
  6 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 ci_le… boot… 1.66 
  7 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 ci_le… boot… 2.05 
- 8 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.838
- 9 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.833
-10 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.834
+ 8 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.837
+ 9 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.836
+10 rnorm    10    3.  1.73    NA    NA            1 mean        boot…      0.900 cover… boot… 0.831
 # ... with 62 more rows
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 1000
-Estimated replications per hour: 49492
-Start of the simulation: 2018-03-25 20:30:32
-End of the simulation: 2018-03-25 20:31:45</code></pre>
+Estimated replications per hour: 25680
+Start of the simulation: 2018-03-25 23:14:18
+End of the simulation: 2018-03-25 23:16:38</code></pre>
 <p>Finally, we can visualize the summarized results:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">et<span class="op">$</span>simulation <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb60-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fun, <span class="dt">y =</span> value, <span class="dt">group =</span> type, <span class="dt">fill =</span> type, <span class="dt">label =</span> <span class="kw">round</span>(value, <span class="dv">2</span>))) <span class="op">+</span></a>
