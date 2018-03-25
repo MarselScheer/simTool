@@ -101,8 +101,8 @@ names(ret) = c("min", "max")
 ret
 }
 
-dg <- expandGrid(fun = "rnorm", n = c(5L, 10L))
-pg <- expandGrid(proc = c("rng", "median", "length"))
+dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
+pg <- expand_tibble(proc = c("rng", "median", "length"))
 
 eval_tibbles(dg, pg,rep = 2)
 eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t))
@@ -115,8 +115,8 @@ regData = function(n, SD){
 }
 
 eg <- eval_tibbles(
-  expandGrid(fun="regData", n=5L, SD=1:2),
-  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  expand_tibble(fun="regData", n=5L, SD=1:2),
+  expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
   group_for_summary = "term",
   replications=3
 )
@@ -131,8 +131,8 @@ presever_rownames = function(mat)
 }
 
 eg <- eval_tibbles(
-  expandGrid(fun="regData", n=5L, SD=1:2),
-  expandGrid(proc="lm", formula=c("y~x", "y~I(x^2)")),
+  expand_tibble(fun="regData", n=5L, SD=1:2),
+  expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
   post_analyze = purrr::compose(presever_rownames, coef, summary),
   #post_analyze = broom::tidy, # is a nice out of the box alternative
   summary_fun = list(mean = mean, sd = sd),
