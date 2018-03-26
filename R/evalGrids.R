@@ -183,6 +183,7 @@
 #' print(a <- arrange(cast(mdf, ... ~ ., c(mean, sd)), n))
 #' ggplot(a, aes(x=fun, y=mean, color=proc)) + geom_point(size=I(3)) + facet_grid(probs ~ n)
 #' @importFrom reshape funstofun melt melt.data.frame cast
+#' @importFrom utils sessionInfo
 #' @export
 evalGrids <-
   function(dataGrid, procGrid=expandGrid(proc = "length"), replications = 1,

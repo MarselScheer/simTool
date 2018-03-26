@@ -8,7 +8,7 @@
 #' @examples
 #'
 #' meanAndNormCI(rexp(10^4, rate=2))
-#'
+#' @importFrom stats sd
 #' @export
 meanAndNormCI <-
   function(results) {
