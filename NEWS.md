@@ -1,3 +1,12 @@
+Version 1.1.1
+=========================
+
+Misc: 
+
+* Unnesting of the simulation results improved
+
+
+
 Version 1.1.0
 =========================
 
