@@ -2,16 +2,17 @@ define_simulation <- function(pf, discard_generated_data, cluster,
                               replications, summary_fun, group_for_summary,
                               post_analyze) {
   function(fc) {
+    truth = attr(fc, ".truth")
     with_out_data <- function(dummy) {
       list(data = NULL, results = lapply(pf, function(f) {
-        post_analyze(f(fc()))
+        post_analyze(f(fc(), truth), truth)
       }))
     }
 
     with_data <- function(dummy) {
       data <- fc()
       list(data = data, results = lapply(pf, function(f) {
-        post_analyze(f(data))
+        post_analyze(f(data, truth), truth)
       }))
     }
 

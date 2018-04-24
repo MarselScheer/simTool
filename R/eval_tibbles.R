@@ -132,6 +132,7 @@ eval_tibbles <-
       cluster, ncpus, cluster_global_objects,
       cluster_libraries, cluster_seed, df, pf
     )
+    post_analyze <- extend_with_truth_parameter(post_analyze)
     sim_fun <- define_simulation(
       pf, discard_generated_data, cluster,
       replications, summary_fun,
