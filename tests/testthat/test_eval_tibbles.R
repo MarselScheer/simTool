@@ -107,6 +107,22 @@ test_that("Mixture of data analyzing function with and without .truth parameter 
   expect_identical(eg$simulation$results, c(0, 1, 0, 1, 0, 4, 0, 4, 0, 1, 0, 1, 0, 5, 0, 5))
 })
 
+
+##############################################################
+
+f <- function(data, .truth) {
+  0
+}
+
+dg$a <- 4:7
+names(dg)[4] <- ".truth"
+
+pg <- expand_tibble(proc = c("f"))
+
+test_that("Error if data grid has two columns .truth", {
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "only one column with name '.truth' allowed")
+})
+
 #############################################################
 
 
@@ -115,6 +131,14 @@ rng <- function(data, ...) {
   names(ret) <- c("min", "max")
   ret
 }
+
+dg <- expand_tibble(
+  fun = c("genData1", "genData2"),
+  df = list(
+    matrix(1:6, 3, 2),
+    matrix(1:8, 4, 2)
+  )
+)
 
 
 
