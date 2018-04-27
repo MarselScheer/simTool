@@ -9,20 +9,30 @@
 #' @param data_grid  a \code{data.frame} or \code{tibble} where the first column
 #'  is a character vector with function names. The other
 #'  columns contain parameters for the functions specified
-#'  in the first column. Parameters with NA are ignored.
+#'  in the first column. Parameters with NA are ignored. If a column with name
+#'  \code{.truth} exist, then the corresponding entry is passed to functions generated from
+#'  \code{proc_grid} and the function specified in \code{post_analyze}.
 #' @param proc_grid  similar as \code{data_grid} the first
 #'  column must contain function names. The other columns
 #'  contain parameters for the functions specified in the
 #'  first column. The data generated according to
 #'  \code{data_grid} will always be passed to the first
 #'  unspecified argument of the functions specified in the first
-#'  column of \code{proc_grid}.
+#'  column of \code{proc_grid}. If a function specified in
+#'  \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the 
+#'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
+#'  or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+#'  for the data generation are passed to the \code{.truth} parameter.
 #' @param replications  number of replications for the simulation
 #' @param discard_generated_data  if \code{TRUE} the generated
 #'  data is deleted after all function constellations in
 #'  \code{proc_grid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
 #' @param post_analyze this is a convenience function, that is applied directly after the data analyzing function.
+#'  If this function has an argument \code{.truth}, then the corresponding entry in the 
+#'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
+#'  or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+#'  for the data generation are passed to the \code{.truth} parameter.
 #' @param summary_fun  named list of univariate function to summarize the results (numeric or logical) over
 #'  the replications, e.g. list(mean = mean, sd = sd).
 #' @param group_for_summary if the result returned by the data analyzing function or \code{post_analyze}
@@ -75,6 +85,7 @@
 #' dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
 #' pg <- expand_tibble(proc = c("rng", "median", "length"))
 #'
+#' eval_tibbles(dg, pg,rep = 2, simplify=FALSE)
 #' eval_tibbles(dg, pg,rep = 2)
 #' eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t))
 #' eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
@@ -111,6 +122,33 @@
 #'   replications=3
 #' )
 #' tidyr::unnest(eg$simulation)
+#' 
+#' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L)) 
+#' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
+#' et <- eval_tibbles(dg, pg,
+#'   ncpus = 2,
+#'   replications = 10^2,
+#'   post_analyze = function(ttest, .truth) {
+#'     mu = 1 / .truth$rate
+#'     ttest$conf.int[1] <= mu && mu <= ttest$conf.int[2]
+#'   },
+#'  summary_fun = list(mean = mean, sd = sd)
+#' )
+#' et
+#' 
+#' dg <- dplyr::bind_rows(
+#'  expand_tibble(fun = "rexp", rate = 10, .truth = 1/10, n = c(50L, 100L)),
+#'  expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L)))
+#' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
+#' et <- eval_tibbles(dg, pg,
+#'   ncpus = 2,
+#'   replications = 10^2,
+#'   post_analyze = function(ttest, .truth) {
+#'     ttest$conf.int[1] <= .truth && .truth <= ttest$conf.int[2]
+#'   },
+#'   summary_fun = list(mean = mean, sd = sd)
+#' )
+#' et
 #' @export
 eval_tibbles <-
   function(data_grid, proc_grid = expand_tibble(proc = "length"),
