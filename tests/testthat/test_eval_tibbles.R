@@ -108,6 +108,17 @@ test_that("Mixture of data analyzing function with and without .truth parameter 
 })
 
 
+###########################################################
+
+pg <- expand_tibble(proc = c("f"), .truth = 1)
+
+test_that("Warning if proc_grid has a .truth-column", {
+  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "\\.truth.*ignored")
+})
+
+
+
+
 ##############################################################
 
 f <- function(data, .truth) {

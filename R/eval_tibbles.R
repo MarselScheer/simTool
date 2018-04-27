@@ -160,6 +160,11 @@ eval_tibbles <-
              cluster_global_objects = NULL,
              envir = globalenv(),
              simplify = TRUE) {
+
+    if (is.element(".truth", names(proc_grid))) {
+      warning(".truth column in proc_grid will be ignored!")
+    }
+    
     mc <- match.call()
 
     user_provided_cluster <- !is.null(cluster)
