@@ -28,6 +28,30 @@ test_that("Explicit defined .truth parameter of the data analyzing function can 
   expect_true(all(sapply(1:8, function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]]))))
 })
 
+###############################################################
+
+dg <- expand_tibble(
+  fun = c("genData1", "genData2"),
+  df = list(
+    matrix(1:6, 3, 2),
+    matrix(1:8, 4, 2)
+  ),
+  xyz = NA
+)
+
+
+f <- function(data, .truth) {
+  .truth$df[[1]]
+}
+
+pg <- expand_tibble(proc = "f")
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
+
+test_that("Explicit defined .truth parameter of the data analyzing function can access the matrix for the data generating function", {
+  expect_true(all(sapply(1:8, function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]]))))
+})
+
+
 ################################################################
 
 f <- function(data, .truth) {

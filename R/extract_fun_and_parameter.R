@@ -7,8 +7,10 @@ extract_fun_and_parameter <- function(row, envir) {
     para = as.list(row[1, -c(1, idx_na, idx_gt), drop = FALSE])
   )
 
-  if (length(idx_gt) == 0) {
-    gt <- ret$para
+  if (length(idx_gt) == 0 && length(idx_na) == 0) {
+    gt <- as.list(row[1, , drop = FALSE])
+  } else if (length(idx_gt) == 0) {
+    gt <- as.list(row[1, -idx_na, drop = FALSE])
   } else if (length(idx_gt) == 1) {
     gt <- row[1, idx_gt, drop = TRUE]
   } else {
