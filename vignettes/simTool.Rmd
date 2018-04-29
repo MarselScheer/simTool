@@ -381,9 +381,13 @@ someFunc()
 ## .truth-functionality
 
 Somtimes it is handy to access the parameter constellation that was used
-during the data generation in the (post) data analyzing phase. If the
+during the data generation in the (post) data analyzing phase. Of course,
+one could write wrapper functions for every data generating function and
+append the parameter constellation from the data generation as attributes
+to the data set, but the purpose of this package is to reduce such
+administrative source code. Hence if the
 (post) data anaylzing function has an argument *.truth*, then 
-*eval_tibbles* will manage that the hand-over. A brief example should
+*eval_tibbles* will manage that hand-over. A brief example should
 explain this. Suppose we want to estimate the bias of the empirical
 quantile estimator if the data is normal distributed.
 
@@ -413,7 +417,9 @@ dg <- dplyr::bind_rows(
 )
 pg <- expand_tibble(proc = "quantile", probs = 0.975)
 post_ana <- function(q_est, .truth){
-  tibble::tibble(bias = q_est - .truth)
+  ret <- q_est - .truth
+  names(ret) <- "bias"
+  ret
 }
 eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
                    ncpus = 2,
@@ -421,8 +427,50 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
                    summary_fun = list(mean = mean))
 ```
 
-In the same fashtion one could write a data analyzing function with a 
-parameter *.truth*.
+In the same fashtion one could write a data analyzing function with a parameter *.truth*.
+To go even a step further, we store the analytic quantile function in the
+*.truth* column:
+
+```{r}
+dg <- dplyr::bind_rows(
+  expand_tibble(fun = c("rnorm"), mean = 0, n = c(10L, 1000L), 
+                .truth = list(function(prob) qnorm(prob, mean = 0))),
+  expand_tibble(fun = c("rexp"), rate = 1, n = c(10L, 1000L),
+                .truth = list(function(prob) qexp(prob, rate = 1))),
+  expand_tibble(fun = c("runif"), max = 2, n = c(10L, 1000L),
+                .truth = list(function(prob) qunif(prob, max = 2)))
+)
+bias_quantile <- function(x, prob, .truth) {
+  est <- quantile(x, probs = prob)
+  ret <- est - .truth[[1]](prob)
+  names(ret) <- "bias"
+  ret
+}
+pg <- expand_tibble(proc = "bias_quantile", prob = c(0.9, 0.975))
+eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
+                   ncpus = 1,
+                   summary_fun = list(mean = mean))
+```
+
+But one should keep in mind that if one calculates the quantile during the
+(post) analyzing phase that this is happens on replication level. To be
+more precise lets look at an excerpt of the psudeo code from the beginning 
+of the vignette:
+
+```{r, eval = FALSE}
+6.  for g in  {g_1, ..., g_k} 
+7.      for r in 1:replications (optionally in a parallel manner) 
+8.          data = g() 
+9.          for f in  {f_1, \ldots, f_L} 
+10.             append f(data) to the result object (optionally apply a post-analyze-function)
+```
+
+No matter if one extend the data analyzing function *f_1, ... f_L* or
+the post-analyze-function with an argument *.truth* the calculation
+are made for every single replication during step 10. Hence, the operations
+are not vectorized! 
+
+
 
 # Some Examples
 
@@ -557,7 +605,7 @@ pg
 Note, that the structure of the objects returned are quite different which
 addressed by our function *post_analyze*. The variables *type* and *aspect*
 that are created by *post_analyze* are to distinguish the different
-confidence intervals. Since these variables are part of the result objects
+confidence intervals. Since these variables are part of the result objects,
 *eval_tibbles* assumes that these variables are results.
 In order to summarize the results (calculating the mean) over all replications
 correctly we need to tell eval_tibbles that additional group variables
