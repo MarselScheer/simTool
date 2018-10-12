@@ -630,3 +630,69 @@ et$simulation %>%
   theme(legend.position = "bottom") + 
   facet_grid(aspect ~ conf.level, scales = "free")
 ```
+
+### A different implementation
+
+Here we briefly realize the simulation differently by leveraging
+data analyzing functions with unified return-objects:
+
+
+```{r, eval = EVAL}
+t_test = function(x, conf.level){
+  tt <- t.test(x, conf.level = conf.level)
+  
+  # unify return
+  tibble::tibble(type = "t.test", lower = tt$conf.int[1], upper = tt$conf.int[2])
+}
+
+bootstrap_ci <- function(x, conf.level, R = 999) {
+  b <- boot::boot(x, function(d, i) {
+    n <- length(i)
+    c(
+      mean = mean(d[i]),
+      variance = (n - 1) * var(d[i]) / n^2
+    )
+  }, R = R)
+  ci <- boot::boot.ci(b, conf = conf.level, type = "all")
+  method = c("normal", "basic", "student", "percent", "bca")
+  ret = ci[method]
+  lower = unlist(purrr::map(ret, ~dplyr::nth(.x, -2)))
+  upper = sapply(ret, dplyr::last)
+  type = paste("boot", method, sep = "_")
+  
+  # unify return
+  tibble::tibble(type = type, lower = lower, upper = upper)
+}
+
+dg <- dplyr::bind_rows(
+  simTool::expand_tibble(fun = "rnorm", n = 10L, mean = 0, sd = sqrt(3), .truth = 0),
+  simTool::expand_tibble(fun = "runif", n = 10L, max = 6, .truth = 3),
+  simTool::expand_tibble(fun = "rexp", n = 10L, rate = 1 / sqrt(3), .truth = sqrt(3))
+)
+
+pg <- simTool::expand_tibble(
+  proc = c("t_test","bootstrap_ci"),
+  conf.level = c(0.9, 0.95)
+) %>% 
+  mutate(R = ifelse(proc == "bootstrap_ci", 100, NA))
+
+et <- eval_tibbles(dg, pg,
+  replications = 10^2, ncpus = 2
+)
+et
+```
+
+```{r, eval = EVAL}
+grps <- et$simulation %>% 
+  select(-replications) %>% 
+  select(fun:type) %>% 
+  names
+
+et$simulation %>% 
+  mutate(covered = lower <= .truth & .truth <= upper,
+         ci_length = upper - lower) %>% 
+  group_by_(.dots = grps) %>% 
+  summarise(coverage = mean(covered),
+            ci_length = mean(ci_length))
+```
+
