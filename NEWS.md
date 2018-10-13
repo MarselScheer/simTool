@@ -3,8 +3,8 @@ Version 1.1.1
 
 Misc: 
 
-* Unnesting of the simulation results improved
 * .truth-functionality added, i.e. the parameters of the data generation (or alternatively a column of the data generating matrix with the name .truth) is passed to the the data analyzing functions, see the vignette for details
+* Unnesting of the simulation results improved
 
 
 

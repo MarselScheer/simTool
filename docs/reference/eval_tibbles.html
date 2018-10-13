@@ -21,10 +21,15 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Workhorse for simulation studies — eval_tibbles" />
 
 <meta property="og:description" content="Generates data according to all provided
@@ -32,6 +37,7 @@
  all provided constellations in proc_tibble
  to them." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -58,7 +64,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.1</span>
       </span>
     </div>
 
@@ -89,6 +95,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -96,19 +103,22 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Workhorse for simulation studies</h1>
-    <small>Source: <a href='https://github.com/MarselScheer/simTool/blob/master/R/eval_tibbles.R'><code>R/eval_tibbles.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/MarselScheer/simTool/blob/master/R/eval_tibbles.R'><code>R/eval_tibbles.R</code></a></small>
+    <div class="hidden name"><code>eval_tibbles.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Generates data according to all provided
  constellations in <code>data_tibble</code> and applies
  all provided constellations in <code>proc_tibble</code>
  to them.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>eval_tibbles</span>(<span class='no'>data_grid</span>, <span class='kw'>proc_grid</span> <span class='kw'>=</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='st'>"length"</span>),
   <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>discard_generated_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -125,7 +135,9 @@
       <td><p>a <code>data.frame</code> or <code>tibble</code> where the first column
 is a character vector with function names. The other
 columns contain parameters for the functions specified
-in the first column. Parameters with NA are ignored.</p></td>
+in the first column. Parameters with NA are ignored. If a column with name
+<code>.truth</code> exist, then the corresponding entry is passed to functions generated from
+<code>proc_grid</code> and the function specified in <code>post_analyze</code>.</p></td>
     </tr>
     <tr>
       <th>proc_grid</th>
@@ -135,7 +147,11 @@ contain parameters for the functions specified in the
 first column. The data generated according to
 <code>data_grid</code> will always be passed to the first
 unspecified argument of the functions specified in the first
-column of <code>proc_grid</code>.</p></td>
+column of <code>proc_grid</code>. If a function specified in
+<code>proc_grid</code> has an argument <code>.truth</code>, then the corresponding entry in the 
+<code>.truth</code> column from <code>data_grid</code> is passed to the <code>.truth</code> parameter
+or if no column <code>.truth</code> exist in <code>data_grid</code>, then all paramters used
+for the data generation are passed to the <code>.truth</code> parameter.</p></td>
     </tr>
     <tr>
       <th>replications</th>
@@ -150,7 +166,11 @@ generated data sets will be part of the returned object.</p></td>
     </tr>
     <tr>
       <th>post_analyze</th>
-      <td><p>this is a convenience function, that is applied directly after the data analyzing function.</p></td>
+      <td><p>this is a convenience function, that is applied directly after the data analyzing function.
+If this function has an argument <code>.truth</code>, then the corresponding entry in the 
+<code>.truth</code> column from <code>data_grid</code> is passed to the <code>.truth</code> parameter
+or if no column <code>.truth</code> exist in <code>data_grid</code>, then all paramters used
+for the data generation are passed to the <code>.truth</code> parameter.</p></td>
     </tr>
     <tr>
       <th>summary_fun</th>
@@ -239,7 +259,7 @@ unnest it.</p></td>
 <span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>5L</span>, <span class='fl'>10L</span>))
 <span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"rng"</span>, <span class='st'>"median"</span>, <span class='st'>"length"</span>))
 
-<span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/compose'>compose</a></span>(<span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>as_tibble</a></span>, <span class='no'>t</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'>
+<span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>simplify</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/compose'>compose</a></span>(<span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>as_tibble</a></span>, <span class='no'>t</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'>
 <span class='no'>regData</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>n</span>, <span class='no'>SD</span>){
   <span class='fu'>data.frame</span>(
   <span class='kw'>x</span><span class='kw'>=</span><span class='fu'>seq</span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='kw'>length</span><span class='kw'>=</span><span class='no'>n</span>),
@@ -268,7 +288,70 @@ unnest it.</p></td>
   <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>),
   <span class='kw'>group_for_summary</span> <span class='kw'>=</span> <span class='st'>"term"</span>,
   <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>3</span>
-)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'regData' not found</span></div><div class='input'><span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyr/topics/unnest'>unnest</a></span>(<span class='no'>eg</span>$<span class='no'>simulation</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidyr::unnest(eg$simulation): object 'eg' not found</span></div></pre>
+)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'regData' not found</span></div><div class='input'><span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidyr/topics/unnest'>unnest</a></span>(<span class='no'>eg</span>$<span class='no'>simulation</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidyr::unnest(eg$simulation): object 'eg' not found</span></div><div class='input'>
+<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>10</span>, <span class='fl'>100</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>))
+<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
+<span class='no'>et</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>2</span>,
+  <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>ttest</span>, <span class='no'>.truth</span>) {
+    <span class='no'>mu</span> <span class='kw'>=</span> <span class='fl'>1</span> / <span class='no'>.truth</span>$<span class='no'>rate</span>
+    <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>1</span>] <span class='kw'>&lt;=</span> <span class='no'>mu</span> <span class='kw'>&amp;&amp;</span> <span class='no'>mu</span> <span class='kw'>&lt;=</span> <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>2</span>]
+  },
+ <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>)
+)
+<span class='no'>et</span></div><div class='output co'>#&gt; # A tibble: 24 x 8
+#&gt;    fun    rate     n replications summary_fun proc   conf.level value
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 rexp     10    50            1 mean        t.test       0.8  0.76 
+#&gt;  2 rexp     10    50            1 mean        t.test       0.9  0.87 
+#&gt;  3 rexp     10    50            1 mean        t.test       0.95 0.92 
+#&gt;  4 rexp     10    50            1 sd          t.test       0.8  0.429
+#&gt;  5 rexp     10    50            1 sd          t.test       0.9  0.338
+#&gt;  6 rexp     10    50            1 sd          t.test       0.95 0.273
+#&gt;  7 rexp    100    50            1 mean        t.test       0.8  0.79 
+#&gt;  8 rexp    100    50            1 mean        t.test       0.9  0.91 
+#&gt;  9 rexp    100    50            1 mean        t.test       0.95 0.93 
+#&gt; 10 rexp    100    50            1 sd          t.test       0.8  0.409
+#&gt; # ... with 14 more rows
+#&gt; Number of data generating functions: 4
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 100
+#&gt; Estimated replications per hour: 506767
+#&gt; Start of the simulation: 2018-10-13 17:33:48
+#&gt; End of the simulation: 2018-10-13 17:33:49</div><div class='input'>
+<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span>(
+ <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>10</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>)),
+ <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>)))
+<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
+<span class='no'>et</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,
+  <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>2</span>,
+  <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>ttest</span>, <span class='no'>.truth</span>) {
+    <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>1</span>] <span class='kw'>&lt;=</span> <span class='no'>.truth</span> <span class='kw'>&amp;&amp;</span> <span class='no'>.truth</span> <span class='kw'>&lt;=</span> <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>2</span>]
+  },
+  <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>)
+)
+<span class='no'>et</span></div><div class='output co'>#&gt; # A tibble: 24 x 9
+#&gt;    fun    rate .truth     n replications summary_fun proc   conf.level value
+#&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 rexp     10    0.1    50            1 mean        t.test       0.8  0.76 
+#&gt;  2 rexp     10    0.1    50            1 mean        t.test       0.9  0.87 
+#&gt;  3 rexp     10    0.1    50            1 mean        t.test       0.95 0.92 
+#&gt;  4 rexp     10    0.1    50            1 sd          t.test       0.8  0.429
+#&gt;  5 rexp     10    0.1    50            1 sd          t.test       0.9  0.338
+#&gt;  6 rexp     10    0.1    50            1 sd          t.test       0.95 0.273
+#&gt;  7 rexp     10    0.1   100            1 mean        t.test       0.8  0.82 
+#&gt;  8 rexp     10    0.1   100            1 mean        t.test       0.9  0.93 
+#&gt;  9 rexp     10    0.1   100            1 mean        t.test       0.95 0.97 
+#&gt; 10 rexp     10    0.1   100            1 sd          t.test       0.8  0.386
+#&gt; # ... with 14 more rows
+#&gt; Number of data generating functions: 4
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 100
+#&gt; Estimated replications per hour: 492791
+#&gt; Start of the simulation: 2018-10-13 17:33:49
+#&gt; End of the simulation: 2018-10-13 17:33:50</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -300,6 +383,8 @@ Marsel Scheer
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

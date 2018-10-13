@@ -12,7 +12,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/simTool)](https://cran.r-project.org/package=simTool)
+```{r badges, results='asis', echo=FALSE}
+suppressPackageStartupMessages(library(badgecreatr))
+acc <- "MarselScheer"
+repo <- "simTool"
+branch <- "master"
+status <- "active"
+lifecycle <- "Stable"
+badges <- list(
+  badge_travis(ghaccount = acc, ghrepo = repo, branch = branch),
+  badge_lifecycle(lifecycle = lifecycle),
+  badge_projectstatus(status = status),
+  badge_cran_version_ago(packagename = repo),
+  badge_cran_downloads(packagename = repo),
+  badge_license()
+  )
+cat(paste(badges, collapse = " "))
+```
 
 # simTool
 

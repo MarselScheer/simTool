@@ -21,14 +21,20 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="A convenient function to calculate the mean and a 95% confidence interval — meanAndNormCI" />
 
 <meta property="og:description" content="The 95% confidence interval is based on a normal approximation." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -55,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.1.1</span>
       </span>
     </div>
 
@@ -86,6 +92,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -93,16 +100,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>A convenient function to calculate the mean and a 95% confidence interval</h1>
-    <small>Source: <a href='https://github.com/MarselScheer/simTool/blob/master/R/meanAndNormCI.R'><code>R/meanAndNormCI.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/MarselScheer/simTool/blob/master/R/meanAndNormCI.R'><code>R/meanAndNormCI.R</code></a></small>
+    <div class="hidden name"><code>meanAndNormCI.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The 95% confidence interval is based on a normal approximation.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>meanAndNormCI</span>(<span class='no'>results</span>)</pre>
     
@@ -119,8 +129,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>meanAndNormCI</span>(<span class='fu'>rexp</span>(<span class='fl'>10</span>^<span class='fl'>4</span>, <span class='kw'>rate</span><span class='kw'>=</span><span class='fl'>2</span>))</div><div class='output co'>#&gt;      mean     lower     upper 
-#&gt; 0.4942467 0.4847280 0.5037654 </div><div class='input'>
-</div></pre>
+#&gt; 0.4989355 0.4891409 0.5087302 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -148,6 +157,8 @@ Marsel Scheer
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
