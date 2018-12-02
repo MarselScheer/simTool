@@ -3,11 +3,17 @@
 #' @importFrom purrr map
 bind_or_combine <- function(...) {
   .list <- list(...)
+  
   if (is.matrix(.list[[1]])) {
-    .list <- purrr::map(.list, tibble::as_tibble)
+    .list <- purrr::map(.list, purrr::partial(tibble::as_tibble, .name_repair = repair_col_names))
   }
   if (is.null(names(.list[[1]]))) {
     return(tibble::as_tibble(dplyr::combine(.list)))
   }
   do.call("bind_rows", .list)
+}
+
+repair_col_names <- function(x) {
+  names(x) <- x
+  names(tibble::repair_names(x))
 }

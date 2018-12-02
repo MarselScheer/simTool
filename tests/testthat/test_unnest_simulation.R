@@ -2,21 +2,22 @@ testthat::context("test_unnest_simulation.R")
 
 s <- simTool::expand_tibble(a = 1:2, b = 3, results = list(r1 = 1L, r2 = 2L))
 e <- list(simulation = s)
-expected_df <- structure(list(simulation = structure(list(a = c(
-  1L, 2L, 1L,
-  2L
-), b = c(3, 3, 3, 3), results = c(1L, 1L, 2L, 2L)), row.names = c(
+expected_df <- list(simulation = structure(list(a = c(1L, 2L, 1L, 2L), b = c(
+  3,
+  3, 3, 3
+), results = c(1L, 1L, 2L, 2L)), out.attrs = list(dim = c(
+  a = 2L,
+  b = 1L, results = 2L
+), dimnames = list(
+  a = c("a=1", "a=2"), b = "b=3",
+  results = c("results=1", "results=2")
+)), row.names = c(
   NA,
   -4L
-), class = c("tbl_df", "tbl", "data.frame"), .Names = c(
-  "a",
-
-  "b", "results"
-))), .Names = "simulation")
-
+), class = c("tbl_df", "tbl", "data.frame")))
 
 test_that("Simple unnesting", {
-  expect_identical(simTool:::unnest_simulation(e), expected_df)
+    expect_identical(simTool:::unnest_simulation(e), expected_df)  
 })
 
 

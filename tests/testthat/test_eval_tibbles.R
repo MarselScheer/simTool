@@ -208,7 +208,9 @@ class = c("tbl_df", "tbl", "data.frame")
 
 
 test_that("Tibbles for data generating functions can be used. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 test_that("Generated data is stored.", {
@@ -291,7 +293,9 @@ expected_df <- structure(
 
 
 test_that("Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 ##################################################################
@@ -342,7 +346,9 @@ test_that(
 )
 
 test_that("One analyzing function. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 ##################################################################
 
@@ -372,7 +378,9 @@ expected_df <- structure(list(fun = c(
 ))
 
 test_that("Simplify the simulation results", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 
@@ -392,7 +400,9 @@ expected_df <- structure(list(
 ))
 
 test_that("Post analyze function works", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 ##################################################################
@@ -437,7 +447,9 @@ expected_df <- structure(list(fun = c(
 ))
 
 test_that("Three analyzing functions. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 ##################################################################
@@ -513,7 +525,9 @@ expected_df <- structure(list(fun = c(
 ))
 
 test_that("Three analyzing functions and one summary function. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 
@@ -657,7 +671,9 @@ expected_df <- structure(list(fun = c(
 
 
 test_that("Three analyzing functions and three summary function. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 
@@ -723,7 +739,9 @@ expected_df <- structure(list(fun = c(
   "tbl", "data.frame"
 ))
 test_that("Three analyzing functions and one summary function over 2 cpus. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 ##################################################################
@@ -765,7 +783,9 @@ expected_df <- structure(
 )
 
 test_that("One group for summary_fun. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 ##################################################################
@@ -818,7 +838,9 @@ expected_df <- structure(list(fun = c("gen_data", "gen_data"), replications = c(
   "data.frame"
 ))
 test_that("Two groups for summary_fun. Results were created and stored in simulation", {
-  expect_identical(eg$simulation, expected_df)
+  for (col in colnames(eg$simulation)) {
+    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+  }
 })
 
 

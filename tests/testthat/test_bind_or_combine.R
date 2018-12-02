@@ -11,6 +11,17 @@ test_that("Named vectors combined to multiple columns", {
   )
 })
 
+test_that("Repair colnames", {
+  expect_identical(
+    repair_col_names(c("", "", "")),
+    paste0("V", 1:3)
+  )
+  expect_identical(
+    repair_col_names(c("V1", "d", "")),
+    c("V1", "d", "V2")
+  )
+})
+
 test_that("Matrix is converted to tibble", {
   expect_identical(
     bind_or_combine(matrix(1:6, 2, 3)),
