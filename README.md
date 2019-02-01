@@ -33,7 +33,7 @@ interval based on the t-distribution performs on exponential distributed
 random variables. The following lines generate exponential distributed
 random variables of size 10, 50, 100, and 1000. Afterwards the *t.test*
 using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
-1000 times to estimate the covarage:
+1000 times to estimate the coverage:
 
 ``` r
 library(simTool)
@@ -65,9 +65,9 @@ et
 #> Number of data generating functions: 4
 #> Number of analyzing procedures: 3
 #> Number of replications: 1000
-#> Estimated replications per hour: 773308
-#> Start of the simulation: 2018-10-13 18:35:11
-#> End of the simulation: 2018-10-13 18:35:16
+#> Estimated replications per hour: 754228
+#> Start of the simulation: 2019-02-01 23:25:01
+#> End of the simulation: 2019-02-01 23:25:05
 ```
 
 ## Installation

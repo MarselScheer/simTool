@@ -21,7 +21,7 @@
 #'  column of \code{proc_grid}. If a function specified in
 #'  \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the 
 #'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-#'  or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+#'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 #'  for the data generation are passed to the \code{.truth} parameter.
 #' @param replications  number of replications for the simulation
 #' @param discard_generated_data  if \code{TRUE} the generated
@@ -31,7 +31,7 @@
 #' @param post_analyze this is a convenience function, that is applied directly after the data analyzing function.
 #'  If this function has an argument \code{.truth}, then the corresponding entry in the 
 #'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-#'  or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+#'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 #'  for the data generation are passed to the \code{.truth} parameter.
 #' @param summary_fun  named list of univariate function to summarize the results (numeric or logical) over
 #'  the replications, e.g. list(mean = mean, sd = sd).

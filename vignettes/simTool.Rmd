@@ -380,13 +380,13 @@ someFunc()
 
 ## .truth-functionality
 
-Somtimes it is handy to access the parameter constellation that was used
+Sometimes it is handy to access the parameter constellation that was used
 during the data generation in the (post) data analyzing phase. Of course,
 one could write wrapper functions for every data generating function and
 append the parameter constellation from the data generation as attributes
 to the data set, but the purpose of this package is to reduce such
 administrative source code. Hence if the
-(post) data anaylzing function has an argument *.truth*, then 
+(post) data analyzing function has an argument *.truth*, then 
 *eval_tibbles* will manage that hand-over. A brief example should
 explain this. Suppose we want to estimate the bias of the empirical
 quantile estimator if the data is normal distributed.
@@ -427,7 +427,7 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
                    summary_fun = list(mean = mean))
 ```
 
-In the same fashtion one could write a data analyzing function with a parameter *.truth*.
+In the same fashion one could write a data analyzing function with a parameter *.truth*.
 To go even a step further, we store the analytic quantile function in the
 *.truth* column:
 
@@ -454,7 +454,7 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
 
 But one should keep in mind that if one calculates the quantile during the
 (post) analyzing phase that this is happens on replication level. To be
-more precise lets look at an excerpt of the psudeo code from the beginning 
+more precise lets look at an excerpt of the pseudo code from the beginning 
 of the vignette:
 
 ```{r, eval = FALSE}

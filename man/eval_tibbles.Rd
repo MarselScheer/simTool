@@ -28,7 +28,7 @@ unspecified argument of the functions specified in the first
 column of \code{proc_grid}. If a function specified in
 \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the 
 \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 for the data generation are passed to the \code{.truth} parameter.}
 
 \item{replications}{number of replications for the simulation}
@@ -41,7 +41,7 @@ generated data sets will be part of the returned object.}
 \item{post_analyze}{this is a convenience function, that is applied directly after the data analyzing function.
 If this function has an argument \code{.truth}, then the corresponding entry in the 
 \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-or if no column \code{.truth} exist in \code{data_grid}, then all paramters used
+or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 for the data generation are passed to the \code{.truth} parameter.}
 
 \item{summary_fun}{named list of univariate function to summarize the results (numeric or logical) over
