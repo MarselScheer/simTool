@@ -215,6 +215,10 @@ eval_tibbles(
   replications = 2
 )
 ```
+Note, the function *identity* used in *compose* and passed to the parameter *post_analyze*
+is only necessary because a bug was introduced in purrr 0.3.0, see [https://github.com/tidyverse/purrr/issues/629](https://github.com/tidyverse/purrr/issues/629).
+However, one can assume that this will be solved in a future version of purrr.
+
 
 ## Parameter *group_for_summary*
 
