@@ -1,3 +1,11 @@
+Version 1.1.2
+=========================
+
+Misc: 
+
+* using a workaround in examples and vignette to circumvent a bug introduced in purrr 0.3.0 (https://github.com/tidyverse/purrr/issues/629)
+
+
 Version 1.1.1
 =========================
 
