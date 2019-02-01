@@ -388,8 +388,13 @@ test_that("Simplify the simulation results", {
 
 eg <- eval_tibbles(dg, pg,
   envir = environment(), simplify = TRUE,
-  post_analyze = purrr::compose(tibble::as_tibble, t)
+  post_analyze = purrr::compose(tibble::as_tibble, t, identity)
 )
+# due to a bug introduced with purrr 0.3.0 (https://github.com/tidyverse/purrr/issues/629)
+# identity in purrr::compose is a necessary workaround
+
+
+
 
 expected_df <- structure(list(
   fun = c("seq_len", "seq_len", "seq_len"), length.out = 1:3,
