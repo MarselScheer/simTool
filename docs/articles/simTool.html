@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9000</span>
       </span>
     </div>
 
@@ -74,7 +74,7 @@
       <h1>The simTool package: Facilitate simulations</h1>
                         <h4 class="author">Marsel Scheer</h4>
             
-            <h4 class="date">2019-02-02</h4>
+            <h4 class="date">2019-02-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/master/vignettes/simTool.Rmd"><code>vignettes/simTool.Rmd</code></a></small>
       <div class="hidden name"><code>simTool.Rmd</code></div>
@@ -134,9 +134,9 @@ p {
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 113037
-Start of the simulation: 2019-02-02 00:50:09
-End of the simulation: 2019-02-02 00:50:09</code></pre>
+Estimated replications per hour: 75976
+Start of the simulation: 2019-02-03 19:10:07
+End of the simulation: 2019-02-03 19:10:07</code></pre>
 </div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -224,9 +224,9 @@ End of the simulation: 2019-02-02 00:50:09</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 2
-Estimated replications per hour: 59681796
-Start of the simulation: 2019-02-02 00:50:09
-End of the simulation: 2019-02-02 00:50:09</code></pre>
+Estimated replications per hour: 52795434
+Start of the simulation: 2019-02-03 19:10:07
+End of the simulation: 2019-02-03 19:10:07</code></pre>
 <p>As you can see, the function always estimates the number of replications that can be done in one hour.</p>
 <div id="parameter-replications" class="section level2">
 <h2 class="hasAnchor">
@@ -248,8 +248,8 @@ Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 3
 Estimated replications per hour: 70778880
-Start of the simulation: 2019-02-02 00:50:09
-End of the simulation: 2019-02-02 00:50:09</code></pre>
+Start of the simulation: 2019-02-03 19:10:07
+End of the simulation: 2019-02-03 19:10:07</code></pre>
 </div>
 <div id="parameter-discard_generated_data" class="section level2">
 <h2 class="hasAnchor">
@@ -296,9 +296,9 @@ End of the simulation: 2019-02-02 00:50:09</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 35296923
-Start of the simulation: 2019-02-02 00:50:10
-End of the simulation: 2019-02-02 00:50:10</code></pre>
+Estimated replications per hour: 35988022
+Start of the simulation: 2019-02-03 19:10:08
+End of the simulation: 2019-02-03 19:10:08</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb18-2" title="2">  <span class="dt">data_grid =</span> dg, <span class="dt">proc_grid =</span> pg, <span class="dt">replications =</span> <span class="dv">1000</span>,</a>
 <a class="sourceLine" id="cb18-3" title="3">  <span class="dt">summary_fun =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">mean =</span> mean, <span class="dt">sd =</span> sd)</a>
@@ -321,9 +321,9 @@ End of the simulation: 2019-02-02 00:50:10</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 32334141
-Start of the simulation: 2019-02-02 00:50:10
-End of the simulation: 2019-02-02 00:50:10</code></pre>
+Estimated replications per hour: 32761956
+Start of the simulation: 2019-02-03 19:10:08
+End of the simulation: 2019-02-03 19:10:08</code></pre>
 <p>Note, by specifying the parameter <em>summary_fun</em> the generated data sets and all individual result objects are discarded. In this example we discard <span class="math inline">\(3 \times 1000\)</span> data sets and <span class="math inline">\(3 \times 1000 \times 2\)</span> individual result objects.</p>
 </div>
 <div id="parameter-post_analyze" class="section level2">
@@ -350,9 +350,9 @@ End of the simulation: 2019-02-02 00:50:10</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 815505
-Start of the simulation: 2019-02-02 00:50:10
-End of the simulation: 2019-02-02 00:50:10</code></pre>
+Estimated replications per hour: 815659
+Start of the simulation: 2019-02-03 19:10:08
+End of the simulation: 2019-02-03 19:10:08</code></pre>
 <p>The parameter <em>post_analyze</em> (if specified) is applied directly after the result was generated (see command line 10). Note, <em>purrr::compose</em> can be very handy if your post-analyzing-function can be defined by a few single functions:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb22-2" title="2">  <span class="kw"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="st">"regData"</span>, <span class="dt">n =</span> 5L, <span class="dt">SD =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),</a>
@@ -374,9 +374,9 @@ End of the simulation: 2019-02-02 00:50:10</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 472627
-Start of the simulation: 2019-02-02 00:50:10
-End of the simulation: 2019-02-02 00:50:10</code></pre>
+Estimated replications per hour: 489076
+Start of the simulation: 2019-02-03 19:10:08
+End of the simulation: 2019-02-03 19:10:08</code></pre>
 <p>Note, the function <em>identity</em> used in <em>compose</em> and passed to the parameter <em>post_analyze</em> is only necessary because a bug was introduced in purrr 0.3.0, see <a href="https://github.com/tidyverse/purrr/issues/629">https://github.com/tidyverse/purrr/issues/629</a>. However, one can assume that this will be solved in a future version of purrr.</p>
 </div>
 <div id="parameter-group_for_summary" class="section level2">
@@ -418,9 +418,9 @@ Please use expand_tibble() instead.</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 393120
-Start of the simulation: 2019-02-02 00:50:10
-End of the simulation: 2019-02-02 00:50:10</code></pre>
+Estimated replications per hour: 399732
+Start of the simulation: 2019-02-03 19:10:08
+End of the simulation: 2019-02-03 19:10:08</code></pre>
 <p>In order to summarize the replications it is necessary to additional group the calculations with respect to another variable. This variable can be passed to <em>group_for_summary</em></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(</a>
 <a class="sourceLine" id="cb28-2" title="2">  <span class="kw"><a href="../reference/expandGrid.html">expandGrid</a></span>(<span class="dt">fun =</span> <span class="st">"regData"</span>, <span class="dt">n =</span> 5L, <span class="dt">SD =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>),</a>
@@ -457,9 +457,9 @@ Please use expand_tibble() instead.</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 202851
-Start of the simulation: 2019-02-02 00:50:11
-End of the simulation: 2019-02-02 00:50:11</code></pre>
+Estimated replications per hour: 195837
+Start of the simulation: 2019-02-03 19:10:09
+End of the simulation: 2019-02-03 19:10:09</code></pre>
 </div>
 <div id="parameter-ncpus-and-cluster_seed" class="section level2">
 <h2 class="hasAnchor">
@@ -482,9 +482,9 @@ End of the simulation: 2019-02-02 00:50:11</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 84330
-Start of the simulation: 2019-02-02 00:50:11
-End of the simulation: 2019-02-02 00:50:12</code></pre>
+Estimated replications per hour: 85701
+Start of the simulation: 2019-02-03 19:10:09
+End of the simulation: 2019-02-03 19:10:10</code></pre>
 <p>As it is stated in command line 7, the replications are parallelized. In our case, this means that roughly every CPU conducts 5 replications.</p>
 <p>The parameter <em>cluster_seed</em> must be an integer vector of length 6 and serves the same purpose as the function <em>set.seed</em>. By default, <em>cluster_seed</em> equals <em>rep(12345, 6)</em>. Note, in order to reproduce the simulation study it is also necessary that <em>ncpus</em> does not change.</p>
 </div>
@@ -511,9 +511,9 @@ End of the simulation: 2019-02-02 00:50:12</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 84275
-Start of the simulation: 2019-02-02 00:50:12
-End of the simulation: 2019-02-02 00:50:13</code></pre>
+Estimated replications per hour: 85302
+Start of the simulation: 2019-02-03 19:10:10
+End of the simulation: 2019-02-03 19:10:11</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/parallel/topics/makeCluster">stopCluster</a></span>(cl)</a></code></pre></div>
 <p>As you can see our cluster consists of 3 workers. Hence, this reproduces the results from the last code chunk above. Further note, if the user starts the cluster, the user also has to stop the cluster. A cluster that is created within <em>eval_tibbles</em> by specifying <em>ncpus</em> is also stop within <em>eval_tibbles</em>.</p>
 </div>
@@ -587,9 +587,9 @@ Calculations and Intervals on Original Scale</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 1
 Number of replications: 10
-Estimated replications per hour: 119766
-Start of the simulation: 2019-02-02 00:50:13
-End of the simulation: 2019-02-02 00:50:14</code></pre>
+Estimated replications per hour: 120718
+Start of the simulation: 2019-02-03 19:10:11
+End of the simulation: 2019-02-03 19:10:12</code></pre>
 <p>Of course, it is possible to set <em>cluster_global_objects=ls()</em>, but then all objects from the global environment are transferred to all workers.</p>
 </div>
 <div id="parameter-envir" class="section level2">
@@ -625,9 +625,9 @@ End of the simulation: 2019-02-02 00:50:14</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2337383
-Start of the simulation: 2019-02-02 00:50:14
-End of the simulation: 2019-02-02 00:50:14
+Estimated replications per hour: 2313035
+Start of the simulation: 2019-02-03 19:10:12
+End of the simulation: 2019-02-03 19:10:12
 --------------------------------------------------
 # A tibble: 2 x 7
   fun       n replications proc        sd   mean   q0.1
@@ -637,9 +637,9 @@ End of the simulation: 2019-02-02 00:50:14
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2561841
-Start of the simulation: 2019-02-02 00:50:14
-End of the simulation: 2019-02-02 00:50:14</code></pre>
+Estimated replications per hour: 2825504
+Start of the simulation: 2019-02-03 19:10:12
+End of the simulation: 2019-02-03 19:10:12</code></pre>
 </div>
 <div id="truth-functionality" class="section level2">
 <h2 class="hasAnchor">
@@ -668,9 +668,9 @@ End of the simulation: 2019-02-02 00:50:14</code></pre>
 Number of data generating functions: 8
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 1084848
-Start of the simulation: 2019-02-02 00:50:15
-End of the simulation: 2019-02-02 00:50:18</code></pre>
+Estimated replications per hour: 1106417
+Start of the simulation: 2019-02-03 19:10:12
+End of the simulation: 2019-02-03 19:10:16</code></pre>
 <p>If we want to do the analysis for different distrubtions we could modify our post data analyzing function, but we can also simply add a <em>.truth</em>-column to the data generating grid. In this case, the information from the <em>.truth</em>-column is directly passed to the <em>.truth</em>-parameter:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">dg &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(</a>
 <a class="sourceLine" id="cb46-2" title="2">  <span class="kw"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"rnorm"</span>), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">n =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(10L, 100L), <span class="dt">.truth =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">qnorm</a></span>(<span class="fl">0.975</span>)),</a>
@@ -699,9 +699,9 @@ End of the simulation: 2019-02-02 00:50:18</code></pre>
 Number of data generating functions: 6
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 2908030
-Start of the simulation: 2019-02-02 00:50:18
-End of the simulation: 2019-02-02 00:50:20</code></pre>
+Estimated replications per hour: 2837883
+Start of the simulation: 2019-02-03 19:10:16
+End of the simulation: 2019-02-03 19:10:18</code></pre>
 <p>In the same fashion one could write a data analyzing function with a parameter <em>.truth</em>. To go even a step further, we store the analytic quantile function in the <em>.truth</em> column:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">dg &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(</a>
 <a class="sourceLine" id="cb48-2" title="2">  <span class="kw"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"rnorm"</span>), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">n =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(10L, 1000L), </a>
@@ -739,9 +739,9 @@ End of the simulation: 2019-02-02 00:50:20</code></pre>
 Number of data generating functions: 6
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 1652212
-Start of the simulation: 2019-02-02 00:50:20
-End of the simulation: 2019-02-02 00:50:22</code></pre>
+Estimated replications per hour: 1645166
+Start of the simulation: 2019-02-03 19:10:18
+End of the simulation: 2019-02-03 19:10:20</code></pre>
 <p>But one should keep in mind that if one calculates the quantile during the (post) analyzing phase that this is happens on replication level. To be more precise lets look at an excerpt of the pseudo code from the beginning of the vignette:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="fl">6.</span>  <span class="cf">for</span> g <span class="cf">in</span>  {g_<span class="dv">1</span>, ..., g_k} </a>
 <a class="sourceLine" id="cb50-2" title="2"><span class="fl">7.</span>      <span class="cf">for</span> r <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/replications">replications</a></span> (optionally <span class="cf">in</span> a parallel manner) </a>
@@ -803,9 +803,9 @@ End of the simulation: 2019-02-02 00:50:22</code></pre>
 Number of data generating functions: 4
 Number of analyzing procedures: 2
 Number of replications: 100000
-Estimated replications per hour: 18869556
-Start of the simulation: 2019-02-02 00:50:23
-End of the simulation: 2019-02-02 00:50:42</code></pre>
+Estimated replications per hour: 18824311
+Start of the simulation: 2019-02-03 19:10:21
+End of the simulation: 2019-02-03 19:10:40</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">et<span class="op">$</span>simulation <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> results, <span class="dt">color =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/interaction">interaction</a></span>(fun, n), <span class="dt">fill =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/interaction">interaction</a></span>(fun, n))) <span class="op">+</span></a>
 <a class="sourceLine" id="cb58-3" title="3"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
@@ -913,9 +913,9 @@ End of the simulation: 2019-02-02 00:50:42</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 1000
-Estimated replications per hour: 15642
-Start of the simulation: 2019-02-02 00:50:48
-End of the simulation: 2019-02-02 00:54:38</code></pre>
+Estimated replications per hour: 15347
+Start of the simulation: 2019-02-03 19:10:46
+End of the simulation: 2019-02-03 19:14:41</code></pre>
 <p>Finally, we can visualize the summarized results:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">et<span class="op">$</span>simulation <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb67-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fun, <span class="dt">y =</span> value, <span class="dt">group =</span> type, <span class="dt">fill =</span> type, <span class="dt">label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(value, <span class="dv">2</span>))) <span class="op">+</span></a>
@@ -988,9 +988,9 @@ End of the simulation: 2019-02-02 00:54:38</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 100
-Estimated replications per hour: 80735
-Start of the simulation: 2019-02-02 00:54:40
-End of the simulation: 2019-02-02 00:54:44</code></pre>
+Estimated replications per hour: 78556
+Start of the simulation: 2019-02-03 19:14:43
+End of the simulation: 2019-02-03 19:14:47</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1">grps &lt;-<span class="st"> </span>et<span class="op">$</span>simulation <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>replications) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb70-3" title="3"><span class="st">  </span><span class="kw">select</span>(fun<span class="op">:</span>type) <span class="op">%&gt;%</span><span class="st"> </span></a>
