@@ -808,43 +808,21 @@ eg <- eval_tibbles(dg, pg,
   group_for_summary = c("group1", "group2"), simplify = FALSE
 )
 
-expected_df <- structure(list(fun = c("gen_data", "gen_data"), replications = c(
-  1L,
-  1L
-), summary_fun = c("mean", "sum"), proc = c("identity", "identity"), results = structure(list(
-  mean = structure(list(group1 = c(
-    "a",
-    "b", "c"
-  ), group2 = c("d", "e", "f"), b = c(2, 3, 4)), .Names = c(
-    "group1",
-    "group2", "b"
-  ), row.names = c(NA, -3L), class = c(
-    "grouped_df",
-    "tbl_df", "tbl", "data.frame"
-  ), vars = "group1", drop = TRUE),
-  sum = structure(list(group1 = c("a", "b", "c"), group2 = c(
-    "d",
-    "e", "f"
-  ), b = c(6, 9, 12)), .Names = c(
-    "group1", "group2",
-    "b"
-  ), row.names = c(NA, -3L), class = c(
-    "grouped_df", "tbl_df",
-    "tbl", "data.frame"
-  ), vars = "group1", drop = TRUE)
-), .Names = c(
-  "mean",
-  "sum"
-))), .Names = c(
-  "fun", "replications", "summary_fun", "proc",
-  "results"
-), row.names = c(NA, -2L), class = c(
-  "tbl_df", "tbl",
-  "data.frame"
-))
+expected_df <-
+  tibble::tibble(
+    fun = "gen_data",
+    replications = 1L,
+    summary_fun = c("mean", "sum"),
+    proc = "identity",
+    results = list(
+      mean = dplyr::group_by(tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = c(2.0, 3.0, 4.0)), group1, group2),
+      sum = dplyr::group_by(tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = c(6.0, 9.0, 12.0)), group1, group2)
+    )
+  )
+
 test_that("Two groups for summary_fun. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_equal(eg$simulation[[col]], expected_df[[col]])  
   }
 })
 
