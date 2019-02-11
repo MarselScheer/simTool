@@ -821,7 +821,16 @@ expected_df <- structure(list(fun = c("gen_data", "gen_data"), replications = c(
   ), row.names = c(NA, -3L), class = c(
     "grouped_df",
     "tbl_df", "tbl", "data.frame"
-  ), vars = "group1", drop = TRUE),
+  ), 
+    groups = structure(list(
+        group1 = c("a", "b", "c"), 
+        .rows = list(1L, 2L, 3L)
+      ), 
+      row.names = c(NA, -3L), 
+      class = c("tbl_df", "tbl", "data.frame"), 
+      .drop = TRUE
+    )
+  ),
   sum = structure(list(group1 = c("a", "b", "c"), group2 = c(
     "d",
     "e", "f"
@@ -831,7 +840,16 @@ expected_df <- structure(list(fun = c("gen_data", "gen_data"), replications = c(
   ), row.names = c(NA, -3L), class = c(
     "grouped_df", "tbl_df",
     "tbl", "data.frame"
-  ), vars = "group1", drop = TRUE)
+  ), 
+    groups = structure(list(
+        group1 = c("a", "b", "c"), 
+        .rows = list(1L, 2L, 3L)
+      ), 
+      row.names = c(NA, -3L), 
+      class = c("tbl_df", "tbl", "data.frame"), 
+      .drop = TRUE
+    )
+  )
 ), .Names = c(
   "mean",
   "sum"
