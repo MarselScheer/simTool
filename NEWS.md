@@ -1,3 +1,10 @@
+Version 1.1.3
+=========================
+
+Misc: 
+
+* test cases update to address the new release of dplyr 0.8.0 
+
 Version 1.1.2
 =========================
 
