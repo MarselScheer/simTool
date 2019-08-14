@@ -5,12 +5,12 @@ Version: 1.1.3
 Date: 2019-03-01
 Authors@R: person("Marsel", "Scheer", role = c("aut", "cre"), email = "scheer@freescience.de") 
 Maintainer: Marsel Scheer <scheer@freescience.de>
-Description: The simTool package is designed for statistical simulations that
-    have two components. One component generates the data and the other one
-    analyzes the data. The main aims of the simTool package are the reduction
+Description: Tool for statistical simulations that have two components. 
+    One component generates the data and the other one
+    analyzes the data. The main aims of the package are the reduction
     of the administrative source code (mainly loops and management code for the
     results) and a simple applicability of the package that allows the user to
-    quickly learn how to work with the simTool package. Parallel computing is
+    quickly learn how to work with it. Parallel computing is
     also supported. Finally, convenient functions are provided to summarize the
     simulation results.
 Depends:

@@ -159,8 +159,8 @@ tidyr::unnest(eg$simulation)
 dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L)) 
 pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 et <- eval_tibbles(dg, pg,
-  ncpus = 2,
-  replications = 10^2,
+  ncpus = 1,
+  replications = 10^1,
   post_analyze = function(ttest, .truth) {
     mu = 1 / .truth$rate
     ttest$conf.int[1] <= mu && mu <= ttest$conf.int[2]
@@ -174,8 +174,8 @@ dg <- dplyr::bind_rows(
  expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L)))
 pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 et <- eval_tibbles(dg, pg,
-  ncpus = 2,
-  replications = 10^2,
+  ncpus = 1,
+  replications = 10^1,
   post_analyze = function(ttest, .truth) {
     ttest$conf.int[1] <= .truth && .truth <= ttest$conf.int[2]
   },
