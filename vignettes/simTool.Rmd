@@ -695,7 +695,7 @@ grps <- et$simulation %>%
 et$simulation %>% 
   mutate(covered = lower <= .truth & .truth <= upper,
          ci_length = upper - lower) %>% 
-  group_by_(.dots = grps) %>% 
+  group_by(.dots = grps) %>% 
   summarise(coverage = mean(covered),
             ci_length = mean(ci_length))
 ```
