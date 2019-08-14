@@ -8,7 +8,7 @@ bind_or_combine <- function(...) {
     .list <- purrr::map(.list, purrr::partial(tibble::as_tibble, .name_repair = repair_col_names))
   }
   if (is.null(names(.list[[1]]))) {
-    return(tibble::as_tibble(dplyr::combine(.list)))
+    return(tibble::enframe(dplyr::combine(.list), name = NULL))
   }
   do.call("bind_rows", .list)
 }
