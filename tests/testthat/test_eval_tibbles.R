@@ -135,9 +135,8 @@ test_that("Mixture of data analyzing function with and without .truth parameter 
 ###########################################################
 
 pg <- expand_tibble(proc = c("f"), .truth = 1)
-
-test_that("Warning if proc_grid has a .truth-column", {
-  expect_warning(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "\\.truth.*ignored")
+test_that("Error if proc_grid has a .truth-column", {
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "\\.truth.*not allowed")
 })
 
 
@@ -897,3 +896,59 @@ test_that("Warning if cluster and ncpus are specified and that the cluster cl is
 
 
 parallel::stopCluster(cl)
+
+
+##################################################################
+
+genData1 <- function(p) {
+  2 * p
+}
+
+genData2 <- function(p) {
+  3 * p
+}
+
+genData3 <- function(p) {
+  5 * p
+}
+
+dg <- expand_tibble(
+  fun = c("genData1", "genData2", "genData3"),
+  p = c(7,11,13)
+)
+
+ana1 <- function(data, m) {
+  data * m * 29
+}
+
+ana2 <- function(data, m) {
+  data * m * 31
+}
+
+ana3 <- function(data, m) {
+  data * m * 37
+}
+
+
+pg <- expand_tibble(proc = c("ana1", "ana2", "ana3"), 
+                    m = c(17,19,23))
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
+
+result <- 1:162
+cnt <- 0
+for (p in c(7,11,13)) {
+  for (g in c(2,3,5)) {  
+    for (rep in 1:2) {
+      for (m in c(17,19,23)) {
+        for (a in c(29,31,37)) {
+          cnt <- cnt + 1
+          result[cnt] <- g * p * m * a
+        }
+      }
+    }
+  }
+}
+test_that("Results are mapped correctly to data-generating/analyzing constellations", {
+  expect_equal(eg$simulation$results, result)
+})
+

@@ -2,7 +2,7 @@
 #' @importFrom purrr flatten
 frame_simulation <- function(dg, pg, sim, summary_fun) {
   # if summary_fun is NULL, names(summary_fun) is NULL and crossing ignores it.
-  ret <- tidyr::crossing(dg,
+  ret <- tidyr::expand_grid(dg,
     replications = seq_along(sim[[1]]),
     summary_fun = names(summary_fun), pg
   )
