@@ -1,5 +1,5 @@
 unnest_simulation <- function(e) {
-  s <- try(tidyr::unnest(e$simulation), silent = TRUE)
+  s <- try(tidyr::unnest(e$simulation, cols = c(results)), silent = TRUE)
   if (class(s)[[1]] != "try-error") {
     e$simulation <- s
     return(e)
@@ -8,7 +8,7 @@ unnest_simulation <- function(e) {
   s$.row_nmb <- base::seq_len(nrow(s))
 
   r <- with(NULL, dplyr::select(s, results, .row_nmb))
-  r <- try(tidyr::unnest(r), silent = TRUE)
+  r <- try(tidyr::unnest(r, cols = c(results)), silent = TRUE)
 
   if (class(r)[[1]] == "try-error") {
     return(e)
