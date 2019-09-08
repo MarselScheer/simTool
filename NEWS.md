@@ -1,3 +1,15 @@
+Version 1.1.4
+=========================
+
+Misc: 
+
+* adaptions to address the new release of tidyr 1.0.0 
+
+Note: 
+
+* due to https://github.com/r-lib/vctrs/issues/530 reshaping the simulation results can be extremely slow. That costly reshaping will not happen if the parameter *simplify* is set to *FALSE* in *simTool::eval_tibbles*. 
+
+
 Version 1.1.3
 =========================
 
