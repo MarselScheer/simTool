@@ -20,7 +20,7 @@ Imports:
     reshape (>= 0.8.5),
     dplyr (>= 0.7.2),
     purrr (>= 0.2.3),
-    tidyr (>= 0.6.2),
+    tidyr (>= 0.8.99.9000),
     tibble (>= 2.0.0),
     parallel,
     methods
