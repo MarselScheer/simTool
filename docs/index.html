@@ -7,15 +7,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Conduct Simulation Studies with a Minimal Amount of Source Code • simTool</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Conduct Simulation Studies with a Minimal Amount of Source Code">
-<meta property="og:description" content="The simTool package is designed for statistical simulations that
-    have two components. One component generates the data and the other one
-    analyzes the data. The main aims of the simTool package are the reduction
+<meta property="og:description" content="Tool for statistical simulations that have two components. 
+    One component generates the data and the other one
+    analyzes the data. The main aims of the package are the reduction
     of the administrative source code (mainly loops and management code for the
     results) and a simple applicability of the package that allows the user to
-    quickly learn how to work with the simTool package. Parallel computing is
+    quickly learn how to work with it. Parallel computing is
     also supported. Finally, convenient functions are provided to summarize the
     simulation results.">
 <meta name="twitter:card" content="summary">
@@ -25,7 +26,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -37,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">simTool</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
       </span>
     </div>
 
@@ -45,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +63,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/MarselScheer/simTool">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -75,13 +76,10 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
+
 
 <div id="simtool" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -92,50 +90,51 @@
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This small simulation (using 4 cores) illustrates how the confidence interval based on the t-distribution performs on exponential distributed random variables. The following lines generate exponential distributed random variables of size 10, 50, 100, and 1000. Afterwards the <em>t.test</em> using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated 1000 times to estimate the coverage:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(simTool)</a>
-<a class="sourceLine" id="cb1-2" title="2">dg &lt;-<span class="st"> </span><span class="kw"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="st">"rexp"</span>, <span class="dt">rate =</span> <span class="dv">10</span>, <span class="dt">n =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(10L, 50L, 100L, 1000L))</a>
-<a class="sourceLine" id="cb1-3" title="3">pg &lt;-<span class="st"> </span><span class="kw"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">proc =</span> <span class="st">"t.test"</span>, <span class="dt">conf.level =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))</a>
-<a class="sourceLine" id="cb1-4" title="4">et &lt;-<span class="st"> </span><span class="kw"><a href="reference/eval_tibbles.html">eval_tibbles</a></span>(dg, pg, </a>
-<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">ncpus =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb1-7" title="7">  <span class="dt">post_analyze =</span> <span class="cf">function</span>(ttest) tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(</a>
-<a class="sourceLine" id="cb1-8" title="8">    <span class="dt">coverage =</span> ttest<span class="op">$</span>conf.int[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;&amp;</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span> <span class="op">&lt;=</span><span class="st"> </span>ttest<span class="op">$</span>conf.int[<span class="dv">2</span>]),</a>
-<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">summary_fun =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">mean =</span> mean)</a>
-<a class="sourceLine" id="cb1-10" title="10">)</a>
-<a class="sourceLine" id="cb1-11" title="11">et</a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; # A tibble: 12 x 8</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt;    fun    rate     n replications summary_fun proc   conf.level coverage</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt;  1 rexp     10    10            1 mean        t.test       0.8     0.754</span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt;  2 rexp     10    10            1 mean        t.test       0.9     0.855</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;  3 rexp     10    10            1 mean        t.test       0.95    0.905</span></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="co">#&gt;  4 rexp     10    50            1 mean        t.test       0.8     0.808</span></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="co">#&gt;  5 rexp     10    50            1 mean        t.test       0.9     0.905</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="co">#&gt;  6 rexp     10    50            1 mean        t.test       0.95    0.945</span></a>
-<a class="sourceLine" id="cb1-21" title="21"><span class="co">#&gt;  7 rexp     10   100            1 mean        t.test       0.8     0.792</span></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="co">#&gt;  8 rexp     10   100            1 mean        t.test       0.9     0.895</span></a>
-<a class="sourceLine" id="cb1-23" title="23"><span class="co">#&gt;  9 rexp     10   100            1 mean        t.test       0.95    0.936</span></a>
-<a class="sourceLine" id="cb1-24" title="24"><span class="co">#&gt; 10 rexp     10  1000            1 mean        t.test       0.8     0.796</span></a>
-<a class="sourceLine" id="cb1-25" title="25"><span class="co">#&gt; 11 rexp     10  1000            1 mean        t.test       0.9     0.897</span></a>
-<a class="sourceLine" id="cb1-26" title="26"><span class="co">#&gt; 12 rexp     10  1000            1 mean        t.test       0.95    0.953</span></a>
-<a class="sourceLine" id="cb1-27" title="27"><span class="co">#&gt; Number of data generating functions: 4</span></a>
-<a class="sourceLine" id="cb1-28" title="28"><span class="co">#&gt; Number of analyzing procedures: 3</span></a>
-<a class="sourceLine" id="cb1-29" title="29"><span class="co">#&gt; Number of replications: 1000</span></a>
-<a class="sourceLine" id="cb1-30" title="30"><span class="co">#&gt; Estimated replications per hour: 731854</span></a>
-<a class="sourceLine" id="cb1-31" title="31"><span class="co">#&gt; Start of the simulation: 2019-02-03 19:09:47</span></a>
-<a class="sourceLine" id="cb1-32" title="32"><span class="co">#&gt; End of the simulation: 2019-02-03 19:09:52</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(simTool)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>dg &lt;-<span class="st"> </span><span class="kw"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">fun =</span> <span class="st">"rexp"</span>, <span class="dt">rate =</span> <span class="dv">10</span>, <span class="dt">n =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(10L, 50L, 100L, 1000L))</span>
+<span id="cb1-3"><a href="#cb1-3"></a>pg &lt;-<span class="st"> </span><span class="kw"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="dt">proc =</span> <span class="st">"t.test"</span>, <span class="dt">conf.level =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))</span>
+<span id="cb1-4"><a href="#cb1-4"></a>et &lt;-<span class="st"> </span><span class="kw"><a href="reference/eval_tibbles.html">eval_tibbles</a></span>(dg, pg, </span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="dt">ncpus =</span> <span class="dv">4</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="dt">replications =</span> <span class="dv">10</span><span class="op">^</span><span class="dv">3</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="dt">post_analyze =</span> <span class="cf">function</span>(ttest) tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="dt">coverage =</span> ttest<span class="op">$</span>conf.int[<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span> <span class="op">&amp;&amp;</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">10</span> <span class="op">&lt;=</span><span class="st"> </span>ttest<span class="op">$</span>conf.int[<span class="dv">2</span>]),</span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="dt">summary_fun =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">mean =</span> mean)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>et</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; # A tibble: 12 x 8</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt;    fun    rate     n replications summary_fun proc   conf.level coverage</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt;  1 rexp     10    10            1 mean        t.test       0.8     0.754</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt;  2 rexp     10    10            1 mean        t.test       0.9     0.855</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt;  3 rexp     10    10            1 mean        t.test       0.95    0.905</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt;  4 rexp     10    50            1 mean        t.test       0.8     0.808</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">#&gt;  5 rexp     10    50            1 mean        t.test       0.9     0.905</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt;  6 rexp     10    50            1 mean        t.test       0.95    0.945</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#&gt;  7 rexp     10   100            1 mean        t.test       0.8     0.792</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co">#&gt;  8 rexp     10   100            1 mean        t.test       0.9     0.895</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt;  9 rexp     10   100            1 mean        t.test       0.95    0.936</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; 10 rexp     10  1000            1 mean        t.test       0.8     0.796</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt; 11 rexp     10  1000            1 mean        t.test       0.9     0.897</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="co">#&gt; 12 rexp     10  1000            1 mean        t.test       0.95    0.953</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#&gt; Number of data generating functions: 4</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="co">#&gt; Number of analyzing procedures: 3</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#&gt; Number of replications: 1000</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">#&gt; Estimated replications per hour: 754228</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co">#&gt; Start of the simulation: 2019-02-01 23:25:01</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="co">#&gt; End of the simulation: 2019-02-01 23:25:05</span></span></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install simTool from github with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"simTool"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"MarselScheer/simTool"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"simTool"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"MarselScheer/simTool"</span>)</span></code></pre></div>
 <p>Or from CRAN with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"simTool"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"simTool"</span>)</span></code></pre></div>
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -163,7 +162,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/MarselScheer/simTool"><img src="https://travis-ci.org/MarselScheer/simTool.svg?branch=master" alt="Build Status"></a></li>
@@ -175,7 +174,6 @@
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -184,12 +182,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
