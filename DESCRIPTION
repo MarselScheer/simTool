@@ -2,7 +2,7 @@ Package: simTool
 Type: Package
 Title: Conduct Simulation Studies with a Minimal Amount of Source Code
 Version: 1.1.4
-Date: 2019-09-09
+Date: 2019-09-12
 Authors@R: person("Marsel", "Scheer", role = c("aut", "cre"), email = "scheer@freescience.de") 
 Maintainer: Marsel Scheer <scheer@freescience.de>
 Description: Tool for statistical simulations that have two components. 
@@ -20,7 +20,7 @@ Imports:
     reshape (>= 0.8.5),
     dplyr (>= 0.7.2),
     purrr (>= 0.2.3),
-    tidyr (>= 0.8.99.9000),
+    tidyr (>= 1.0.0),
     tibble (>= 2.0.0),
     parallel,
     methods
