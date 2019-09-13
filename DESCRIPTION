@@ -2,7 +2,7 @@ Package: simTool
 Type: Package
 Title: Conduct Simulation Studies with a Minimal Amount of Source Code
 Version: 1.1.4
-Date: 2019-09-12
+Date: 2019-09-13
 Authors@R: person("Marsel", "Scheer", role = c("aut", "cre"), email = "scheer@freescience.de") 
 Maintainer: Marsel Scheer <scheer@freescience.de>
 Description: Tool for statistical simulations that have two components. 
