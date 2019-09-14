@@ -35,6 +35,7 @@ Marsel Scheer
 
 Maintainer: scheer@freescience.de
 }
-\keyword{computing}
-\keyword{parallel}
-\keyword{simulations,}
+\concept{computing}
+\concept{parallel}
+\concept{simulations}
+\keyword{utilities}
