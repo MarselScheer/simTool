@@ -26,7 +26,7 @@ sim <-
   )
 
 fs <- frame_simulation(dg, pg, sim, NULL) %>%
-  tidyr::unnest() %>%
+  tidyr::unnest(cols = c(results)) %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results for every replication", {
@@ -66,7 +66,7 @@ sim <-
   )
 
 fs <- frame_simulation(dg, pg, sim, mean) %>%
-  tidyr::unnest() %>%
+  tidyr::unnest(cols = c(results)) %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results sumamrized by one summary function", {

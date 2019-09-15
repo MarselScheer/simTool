@@ -166,7 +166,7 @@ eval_tibbles <-
              simplify = TRUE) {
 
     if (is.element(".truth", names(proc_grid))) {
-      warning(".truth column in proc_grid will be ignored!")
+      stop(".truth column in proc_grid not allowed!")
     }
     
     mc <- match.call()

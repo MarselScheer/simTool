@@ -20,7 +20,10 @@
 #' @author Marsel Scheer
 #'
 #' Maintainer: scheer@@freescience.de
-#' @keywords simulations, parallel computing
+#' @keywords utilities
+#' @concept simulations 
+#' @concept parallel 
+#' @concept computing
 #' @examples
 #'
 #' dg = expand_tibble(fun="rexp", n=c(10, 20), rate=1:2)

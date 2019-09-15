@@ -1,5 +1,8 @@
 unnest_simulation <- function(e) {
-  s <- try(tidyr::unnest(e$simulation), silent = TRUE)
+  
+  # tidyr::unnest can be extremely slow, which seems to be related to 
+  # https://github.com/r-lib/vctrs/issues/530
+  s <- try(with(NULL, tidyr::unnest(e$simulation, cols = c(results))), silent = TRUE)
   if (class(s)[[1]] != "try-error") {
     e$simulation <- s
     return(e)
@@ -7,16 +10,16 @@ unnest_simulation <- function(e) {
   s <- e$simulation
   s$.row_nmb <- base::seq_len(nrow(s))
 
-  r <- dplyr::select_(s, "c(results, .row_nmb)")
-  r <- try(tidyr::unnest(r), silent = TRUE)
+  r <- with(NULL, dplyr::select(s, results, .row_nmb))
+  r <- try(with(NULL, tidyr::unnest(r, cols = c(results))), silent = TRUE)
 
   if (class(r)[[1]] == "try-error") {
     return(e)
   }
 
-  s <- dplyr::select_(s, "-results")
+  s <- with(NULL, dplyr::select(s, -results))
   s <- dplyr::inner_join(s, r, by = ".row_nmb")
-  s <- dplyr::select_(s, "-.row_nmb")
+  s <- with(NULL, dplyr::select(s, -.row_nmb))
   e$simulation <- s
   e
 }

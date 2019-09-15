@@ -1,7 +1,7 @@
 testthat::context("test_bind_or_combine.R")
 
 test_that("Unnamed vector combined to one column", {
-  expect_identical(bind_or_combine(1:2, 3:5), tibble::tibble(value = 1:5))
+  expect_identical(bind_or_combine(1:2, 3:5), tibble::enframe(x = 1:5, name = NULL))
 })
 
 test_that("Named vectors combined to multiple columns", {

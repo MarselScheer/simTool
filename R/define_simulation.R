@@ -42,7 +42,7 @@ define_simulation <- function(pf, discard_generated_data, cluster,
         class(group_for_summary) <- "list"
         res <- lapply(summary_fun, function(f) {
           purrr::map(res, ~ dplyr::summarize_all(
-            dplyr::group_by_(., .dots = group_for_summary), f
+            dplyr::group_by(., .dots = group_for_summary), f
           ))
         })
       } else {
