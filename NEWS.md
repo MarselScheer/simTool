@@ -1,3 +1,11 @@
+Version 1.1.5
+=========================
+
+Misc: 
+
+* removing functions expandGrid() and evalGrid() (which were marked as deprecated in version 1.1.0) and the corresponding dependencies with reshape and plyr
+
+
 Version 1.1.4
 =========================
 

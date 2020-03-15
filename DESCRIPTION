@@ -16,8 +16,6 @@ Description: Tool for statistical simulations that have two components.
 Depends:
     R (>= 2.14.0)
 Imports:
-    plyr (>= 1.8.1),
-    reshape (>= 0.8.5),
     dplyr (>= 0.7.2),
     purrr (>= 0.2.3),
     tidyr (>= 1.0.0),
