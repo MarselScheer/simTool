@@ -6,7 +6,7 @@ prepare_cluster <- function(cluster, ncpus, cluster_global_objects,
   }
 
   if (is.null(cluster) && ncpus > 1) {
-    RNGkind("L'Ecuyer-CMRG")
+    RNGkind(kind = "L'Ecuyer-CMRG")
     cluster <- parallel::makeCluster(rep("localhost", ncpus), type = "PSOCK")
   }
 

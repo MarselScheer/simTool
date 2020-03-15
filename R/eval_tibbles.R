@@ -175,6 +175,7 @@ eval_tibbles <-
     summary_fun <- prepare_summary_fun(summary_fun)
     df <- data_grid_to_fun(data_grid, envir)
     pf <- proc_grid_to_fun(proc_grid, envir)
+    generator_info <- RNGkind()
     cluster <- prepare_cluster(
       cluster, ncpus, cluster_global_objects,
       cluster_libraries, cluster_seed, df, pf
@@ -202,6 +203,7 @@ eval_tibbles <-
       if (ncpus > 1 && !user_provided_cluster) {
         # cluster created by the user wont be stopped
         parallel::stopCluster(cluster)
+        RNGkind(kind = generator_info[1])
       }
     }
     )
