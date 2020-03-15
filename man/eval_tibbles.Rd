@@ -4,13 +4,22 @@
 \alias{eval_tibbles}
 \title{Workhorse for simulation studies}
 \usage{
-eval_tibbles(data_grid, proc_grid = expand_tibble(proc = "length"),
-  replications = 1, discard_generated_data = FALSE,
-  post_analyze = identity, summary_fun = NULL,
-  group_for_summary = NULL, ncpus = 1L, cluster = NULL,
-  cluster_seed = rep(12345, 6), cluster_libraries = NULL,
-  cluster_global_objects = NULL, envir = globalenv(),
-  simplify = TRUE)
+eval_tibbles(
+  data_grid,
+  proc_grid = expand_tibble(proc = "length"),
+  replications = 1,
+  discard_generated_data = FALSE,
+  post_analyze = identity,
+  summary_fun = NULL,
+  group_for_summary = NULL,
+  ncpus = 1L,
+  cluster = NULL,
+  cluster_seed = rep(12345, 6),
+  cluster_libraries = NULL,
+  cluster_global_objects = NULL,
+  envir = globalenv(),
+  simplify = TRUE
+)
 }
 \arguments{
 \item{data_grid}{a \code{data.frame} or \code{tibble} where the first column
