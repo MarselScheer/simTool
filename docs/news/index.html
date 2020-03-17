@@ -8,10 +8,12 @@
 
 <title>Changelog • simTool</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -32,7 +34,9 @@
 
 
 
+
 <meta property="og:title" content="Changelog" />
+
 
 
 
@@ -63,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
       </span>
     </div>
 
@@ -85,7 +89,6 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/MarselScheer/simTool">
@@ -110,9 +113,19 @@
       <small>Source: <a href='https://github.com/MarselScheer/simTool/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-114" class="section level1">
+    <div id="version-1-1-5" class="section level1">
 <h1 class="page-header">
-<a href="#version-114" class="anchor"></a>Version 1.1.4<small> 2019-09-14 </small>
+<a href="#version-1-1-5" class="anchor"></a>Version 1.1.5<small> 2020-03-15 </small>
+</h1>
+<p>Misc:</p>
+<ul>
+<li>removing functions expandGrid() and evalGrid() (which were marked as deprecated in version 1.1.0) and the corresponding dependencies with reshape and plyr</li>
+<li>retrieve the RNG kind after parallel computation</li>
+</ul>
+</div>
+    <div id="version-1-1-4" class="section level1">
+<h1 class="page-header">
+<a href="#version-1-1-4" class="anchor"></a>Version 1.1.4<small> 2019-09-14 </small>
 </h1>
 <p>Misc:</p>
 <ul>
@@ -123,27 +136,27 @@
 <li>due to <a href="https://github.com/r-lib/vctrs/issues/530" class="uri">https://github.com/r-lib/vctrs/issues/530</a> reshaping the simulation results can be extremely slow. That costly reshaping will not happen if the parameter <em>simplify</em> is set to <em>FALSE</em> in <em>simTool::eval_tibbles</em>.</li>
 </ul>
 </div>
-    <div id="version-113" class="section level1">
+    <div id="version-1-1-3" class="section level1">
 <h1 class="page-header">
-<a href="#version-113" class="anchor"></a>Version 1.1.3<small> 2019-03-22 </small>
+<a href="#version-1-1-3" class="anchor"></a>Version 1.1.3<small> 2019-03-22 </small>
 </h1>
 <p>Misc:</p>
 <ul>
 <li>test cases update to address the new release of dplyr 0.8.0</li>
 </ul>
 </div>
-    <div id="version-112" class="section level1">
+    <div id="version-1-1-2" class="section level1">
 <h1 class="page-header">
-<a href="#version-112" class="anchor"></a>Version 1.1.2<small> 2019-02-02 </small>
+<a href="#version-1-1-2" class="anchor"></a>Version 1.1.2<small> 2019-02-02 </small>
 </h1>
 <p>Misc:</p>
 <ul>
 <li>using a workaround in examples and vignette to circumvent a bug introduced in purrr 0.3.0 (<a href="https://github.com/tidyverse/purrr/issues/629" class="uri">https://github.com/tidyverse/purrr/issues/629</a>)</li>
 </ul>
 </div>
-    <div id="version-111" class="section level1">
+    <div id="version-1-1-1" class="section level1">
 <h1 class="page-header">
-<a href="#version-111" class="anchor"></a>Version 1.1.1<small> 2019-01-13 </small>
+<a href="#version-1-1-1" class="anchor"></a>Version 1.1.1<small> 2019-01-13 </small>
 </h1>
 <p>Misc:</p>
 <ul>
@@ -151,9 +164,9 @@
 <li>Unnesting of the simulation results improved</li>
 </ul>
 </div>
-    <div id="version-110" class="section level1">
+    <div id="version-1-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#version-110" class="anchor"></a>Version 1.1.0<small> 2018-03-26 </small>
+<a href="#version-1-1-0" class="anchor"></a>Version 1.1.0<small> 2018-03-26 </small>
 </h1>
 <p>Misc:</p>
 <ul>
@@ -161,18 +174,18 @@
 <li>The simulation itself is now a tibble instead of a list of lists</li>
 </ul>
 </div>
-    <div id="version-103" class="section level1">
+    <div id="version-1-0-3" class="section level1">
 <h1 class="page-header">
-<a href="#version-103" class="anchor"></a>Version 1.0.3<small> 2014-10-25 </small>
+<a href="#version-1-0-3" class="anchor"></a>Version 1.0.3<small> 2014-10-25 </small>
 </h1>
 <p>Misc:</p>
 <ul>
 <li>Adapted how libraries are loaded onto the cluster</li>
 </ul>
 </div>
-    <div id="version-102" class="section level1">
+    <div id="version-1-0-2" class="section level1">
 <h1 class="page-header">
-<a href="#version-102" class="anchor"></a>Version 1.0.2<small> 2014-10-15 </small>
+<a href="#version-1-0-2" class="anchor"></a>Version 1.0.2<small> 2014-10-15 </small>
 </h1>
 <p>New Features:</p>
 <ul>
@@ -183,9 +196,9 @@
 <li>Two parameter renamed (post.proc to summary.fun and value.fun to convert.result.fun). Of course, renaming parameters is one of the worst things one can do. On the other hand, only very few users will be affected by these changes.</li>
 </ul>
 </div>
-    <div id="version-101" class="section level1">
+    <div id="version-1-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#version-101" class="anchor"></a>Version 1.0.1<small> Unreleased </small>
+<a href="#version-1-0-1" class="anchor"></a>Version 1.0.1<small> Unreleased </small>
 </h1>
 <p>New Features:</p>
 <ul>
@@ -197,9 +210,9 @@
 <li>additional documentation (static pdf in JSS style)</li>
 </ul>
 </div>
-    <div id="version-10" class="section level1">
+    <div id="version-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#version-10" class="anchor"></a>Version 1.0<small> 2014-07-08 </small>
+<a href="#version-1-0" class="anchor"></a>Version 1.0<small> 2014-07-08 </small>
 </h1>
 <p>Initial release</p>
 <ul>
@@ -215,15 +228,16 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#version-114">1.1.4</a></li>
-        <li><a href="#version-113">1.1.3</a></li>
-        <li><a href="#version-112">1.1.2</a></li>
-        <li><a href="#version-111">1.1.1</a></li>
-        <li><a href="#version-110">1.1.0</a></li>
-        <li><a href="#version-103">1.0.3</a></li>
-        <li><a href="#version-102">1.0.2</a></li>
-        <li><a href="#version-101">1.0.1</a></li>
-        <li><a href="#version-10">1.0</a></li>
+        <li><a href="#version-1-1-5">1.1.5</a></li>
+        <li><a href="#version-1-1-4">1.1.4</a></li>
+        <li><a href="#version-1-1-3">1.1.3</a></li>
+        <li><a href="#version-1-1-2">1.1.2</a></li>
+        <li><a href="#version-1-1-1">1.1.1</a></li>
+        <li><a href="#version-1-1-0">1.1.0</a></li>
+        <li><a href="#version-1-0-3">1.0.3</a></li>
+        <li><a href="#version-1-0-2">1.0.2</a></li>
+        <li><a href="#version-1-0-1">1.0.1</a></li>
+        <li><a href="#version-1-0">1.0</a></li>
       </ul>
     </div>
   </div>
@@ -237,7 +251,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>
