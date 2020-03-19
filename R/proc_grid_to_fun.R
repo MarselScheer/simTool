@@ -1,6 +1,6 @@
 #' @importFrom methods formalArgs
 proc_grid_to_fun <- function(proc_grid, envir) {
-  lapply(1:nrow(proc_grid), function(i) {
+  lapply(seq_len(nrow(proc_grid)), function(i) {
     fp <- extract_fun_and_parameter(proc_grid[i, , drop = FALSE], envir)
     # extending the parameter list should be outside, otherwise
     # the parameter list will be extended every time the data analyzing

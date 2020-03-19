@@ -1,15 +1,15 @@
 testthat::context("test_eval_tibbles.R")
 
-genData1 <- function(df) {
+gen_data1 <- function(df) {
   df[[1]][, 1]
 }
 
-genData2 <- function(df) {
+gen_data2 <- function(df) {
   df[[1]][, 2]
 }
 
 dg <- expand_tibble(
-  fun = c("genData1", "genData2"),
+  fun = c("gen_data1", "gen_data2"),
   df = list(
     matrix(1:6, 3, 2),
     matrix(1:8, 4, 2)
@@ -31,7 +31,7 @@ test_that("Explicit defined .truth parameter of the data analyzing function can 
 ###############################################################
 
 dg <- expand_tibble(
-  fun = c("genData1", "genData2"),
+  fun = c("gen_data1", "gen_data2"),
   df = list(
     matrix(1:6, 3, 2),
     matrix(1:8, 4, 2)
@@ -78,7 +78,7 @@ test_that("Explicit defined .truth parameter of the post analyzing function can 
 ##############################################################
 
 dg <- expand_tibble(
-  fun = c("genData1", "genData2"),
+  fun = c("gen_data1", "gen_data2"),
   df = list(
     matrix(1:6, 3, 2),
     matrix(1:8, 4, 2)
@@ -167,7 +167,7 @@ rng <- function(data, ...) {
 }
 
 dg <- expand_tibble(
-  fun = c("genData1", "genData2"),
+  fun = c("gen_data1", "gen_data2"),
   df = list(
     matrix(1:6, 3, 2),
     matrix(1:8, 4, 2)
@@ -180,7 +180,7 @@ pg <- expand_tibble(proc = "rng")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
 expected_df <- structure(list(
-  fun = c("genData1", "genData1", "genData2", "genData2", "genData1", "genData1", "genData2", "genData2"),
+  fun = c("gen_data1", "gen_data1", "gen_data2", "gen_data2", "gen_data1", "gen_data1", "gen_data2", "gen_data2"),
   df = list(
     structure(1:6, .Dim = c(3L, 2L)),
     structure(1:6, .Dim = c(3L, 2L)), structure(1:6, .Dim = c(3L, 2L)),
@@ -244,16 +244,16 @@ parallel::stopCluster(cl)
 
 
 
-genMat <- function(df) {
+gen_mat <- function(df) {
   df[[1]][, 1]
 }
 
-mat_mult <- function(A, B) {
-  A %*% B[[1]]
+mat_mult <- function(mat_a, mat_b) {
+  mat_a %*% mat_b[[1]]
 }
 
 dg <- expand_tibble(
-  fun = c("genMat"),
+  fun = c("gen_mat"),
   df = list(
     matrix(1:4, 2, 2),
     matrix(5:8, 2, 2)
@@ -262,20 +262,20 @@ dg <- expand_tibble(
 
 pg <- expand_tibble(
   proc = "mat_mult",
-  B = list(matrix(1:4, 2, 2), matrix(5:8, 2, 2))
+  mat_b = list(matrix(1:4, 2, 2), matrix(5:8, 2, 2))
 )
 
 eg <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE)
 
 expected_df <- structure(
   list(
-    fun = c("genMat", "genMat", "genMat", "genMat"),
+    fun = c("gen_mat", "gen_mat", "gen_mat", "gen_mat"),
     df = list(
       structure(1:4, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
       structure(5:8, .Dim = c(2L, 2L)), structure(5:8, .Dim = c(2L, 2L))
     ),
     replications = c(1L, 1L, 1L, 1L), proc = c("mat_mult", "mat_mult", "mat_mult", "mat_mult"),
-    B = list(
+    mat_b = list(
       structure(1:4, .Dim = c(2L, 2L)),
       structure(5:8, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
       structure(5:8, .Dim = c(2L, 2L))
@@ -285,7 +285,7 @@ expected_df <- structure(
       structure(c(17, 39), .Dim = 1:2), structure(c(61, 83), .Dim = 1:2)
     )
   ),
-  .Names = c("fun", "df", "replications", "proc", "B", "results"),
+  .Names = c("fun", "df", "replications", "proc", "mat_b", "results"),
   row.names = c(NA, -4L),
   class = c("tbl_df", "tbl", "data.frame")
 )
@@ -900,20 +900,20 @@ parallel::stopCluster(cl)
 
 ##################################################################
 
-genData1 <- function(p) {
+gen_data1 <- function(p) {
   2 * p
 }
 
-genData2 <- function(p) {
+gen_data2 <- function(p) {
   3 * p
 }
 
-genData3 <- function(p) {
+gen_data3 <- function(p) {
   5 * p
 }
 
 dg <- expand_tibble(
-  fun = c("genData1", "genData2", "genData3"),
+  fun = c("gen_data1", "gen_data2", "gen_data3"),
   p = c(7, 11, 13)
 )
 
