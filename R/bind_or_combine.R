@@ -3,7 +3,7 @@
 #' @importFrom purrr map
 bind_or_combine <- function(...) {
   .list <- list(...)
-  
+
   if (is.matrix(.list[[1]])) {
     .list <- purrr::map(.list, purrr::partial(tibble::as_tibble, .name_repair = repair_col_names))
   }

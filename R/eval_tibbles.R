@@ -19,7 +19,7 @@
 #'  \code{data_grid} will always be passed to the first
 #'  unspecified argument of the functions specified in the first
 #'  column of \code{proc_grid}. If a function specified in
-#'  \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the 
+#'  \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the
 #'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
 #'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 #'  for the data generation are passed to the \code{.truth} parameter.
@@ -29,7 +29,7 @@
 #'  \code{proc_grid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
 #' @param post_analyze this is a convenience function, that is applied directly after the data analyzing function.
-#'  If this function has an argument \code{.truth}, then the corresponding entry in the 
+#'  If this function has an argument \code{.truth}, then the corresponding entry in the
 #'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
 #'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
 #'  for the data generation are passed to the \code{.truth} parameter.
@@ -76,73 +76,74 @@
 #'  is done.
 #' @author  Marsel Scheer
 #' @examples
-#' rng = function(data, ...) {
-#' ret = range(data)
-#' names(ret) = c("min", "max")
-#' ret
+#' rng <- function(data, ...) {
+#'   ret <- range(data)
+#'   names(ret) <- c("min", "max")
+#'   ret
 #' }
 #'
 #' dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
 #' pg <- expand_tibble(proc = c("rng", "median", "length"))
 #'
-#' eval_tibbles(dg, pg,rep = 2, simplify=FALSE)
-#' eval_tibbles(dg, pg,rep = 2)
-#' eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t, identity))
-#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was 
+#' eval_tibbles(dg, pg, rep = 2, simplify = FALSE)
+#' eval_tibbles(dg, pg, rep = 2)
+#' eval_tibbles(dg, pg, rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t, identity))
+#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was
 #' # introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
-#' eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
+#' eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 #'
-#' regData = function(n, SD){
+#' regData <- function(n, SD) {
 #'   data.frame(
-#'   x=seq(0,1,length=n),
-#'   y=rnorm(n, sd=SD))
+#'     x = seq(0, 1, length = n),
+#'     y = rnorm(n, sd = SD)
+#'   )
 #' }
 #'
 #' eg <- eval_tibbles(
-#'   expand_tibble(fun="regData", n=5L, SD=1:2),
-#'   expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
+#'   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+#'   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
 #'   group_for_summary = "term",
-#'   replications=3
+#'   replications = 3
 #' )
 #' eg
 #'
-#' presever_rownames = function(mat)
-#' {
-#'   rn = rownames(mat)
-#'   ret = tibble::as_tibble(mat)
-#'   ret$term = rn
+#' presever_rownames <- function(mat) {
+#'   rn <- rownames(mat)
+#'   ret <- tibble::as_tibble(mat)
+#'   ret$term <- rn
 #'   ret
 #' }
 #'
 #' eg <- eval_tibbles(
-#'   expand_tibble(fun="regData", n=5L, SD=1:2),
-#'   expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
+#'   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+#'   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
 #'   post_analyze = purrr::compose(presever_rownames, coef, summary, identity),
-#'   #post_analyze = broom::tidy, # is a nice out of the box alternative
+#'   # post_analyze = broom::tidy, # is a nice out of the box alternative
 #'   summary_fun = list(mean = mean, sd = sd),
 #'   group_for_summary = "term",
-#'   replications=3
+#'   replications = 3
 #' )
-#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was 
+#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was
 #' # introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
 #' tidyr::unnest(eg$simulation)
-#' 
-#' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L)) 
+#'
+#' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L))
 #' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 #' et <- eval_tibbles(dg, pg,
 #'   ncpus = 1,
 #'   replications = 10^1,
 #'   post_analyze = function(ttest, .truth) {
-#'     mu = 1 / .truth$rate
+#'     mu <- 1 / .truth$rate
 #'     ttest$conf.int[1] <= mu && mu <= ttest$conf.int[2]
 #'   },
-#'  summary_fun = list(mean = mean, sd = sd)
+#'   summary_fun = list(mean = mean, sd = sd)
 #' )
 #' et
-#' 
+#'
 #' dg <- dplyr::bind_rows(
-#'  expand_tibble(fun = "rexp", rate = 10, .truth = 1/10, n = c(50L, 100L)),
-#'  expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L)))
+#'   expand_tibble(fun = "rexp", rate = 10, .truth = 1 / 10, n = c(50L, 100L)),
+#'   expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L))
+#' )
 #' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 #' et <- eval_tibbles(dg, pg,
 #'   ncpus = 1,
@@ -156,19 +157,18 @@
 #' @export
 eval_tibbles <-
   function(data_grid, proc_grid = expand_tibble(proc = "length"),
-             replications = 1, discard_generated_data = FALSE,
-             post_analyze = identity,
-             summary_fun = NULL, group_for_summary = NULL,
-             ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
-             cluster_libraries = NULL,
-             cluster_global_objects = NULL,
-             envir = globalenv(),
-             simplify = TRUE) {
-
+           replications = 1, discard_generated_data = FALSE,
+           post_analyze = identity,
+           summary_fun = NULL, group_for_summary = NULL,
+           ncpus = 1L, cluster = NULL, cluster_seed = rep(12345, 6),
+           cluster_libraries = NULL,
+           cluster_global_objects = NULL,
+           envir = globalenv(),
+           simplify = TRUE) {
     if (is.element(".truth", names(proc_grid))) {
       stop(".truth column in proc_grid not allowed!")
     }
-    
+
     mc <- match.call()
 
     user_provided_cluster <- !is.null(cluster)
@@ -191,21 +191,22 @@ eval_tibbles <-
 
     t1 <- Sys.time()
 
-    tryCatch({
-      simulation_list <- lapply(df, function(fc) {
-        ret <- sim_fun(fc)
-        pb()
-        ret
-      })
-      t2 <- Sys.time()
-    },
-    finally = {
-      if (ncpus > 1 && !user_provided_cluster) {
-        # cluster created by the user wont be stopped
-        parallel::stopCluster(cluster)
-        RNGkind(kind = generator_info[1])
+    tryCatch(
+      {
+        simulation_list <- lapply(df, function(fc) {
+          ret <- sim_fun(fc)
+          pb()
+          ret
+        })
+        t2 <- Sys.time()
+      },
+      finally = {
+        if (ncpus > 1 && !user_provided_cluster) {
+          # cluster created by the user wont be stopped
+          parallel::stopCluster(cluster)
+          RNGkind(kind = generator_info[1])
+        }
       }
-    }
     )
 
     est_reps_per_hour <-

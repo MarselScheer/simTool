@@ -11,8 +11,7 @@
 #' @seealso  \code{\link{expand.grid}}
 #' @examples
 #'
-#' expand_tibble(fun="rnorm", mean=1:4, sd=2:5)
-#'
+#' expand_tibble(fun = "rnorm", mean = 1:4, sd = 2:5)
 #' @importFrom tibble as_tibble
 #' @export
 expand_tibble <-

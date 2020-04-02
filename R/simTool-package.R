@@ -21,15 +21,14 @@
 #'
 #' Maintainer: scheer@@freescience.de
 #' @keywords utilities
-#' @concept simulations 
-#' @concept parallel 
+#' @concept simulations
+#' @concept parallel
 #' @concept computing
 #' @examples
 #'
-#' dg = expand_tibble(fun="rexp", n=c(10, 20), rate=1:2)
-#' pg = expand_tibble(proc="summary")
-#' eval_tibbles(dg, pg, replications=3)
-#' eval_tibbles(dg, pg, replications=3, summary_fun = list(mean = mean))
-#' eval_tibbles(dg, pg, replications=3, summary_fun = list(mean = mean, sd = sd))
-#'
+#' dg <- expand_tibble(fun = "rexp", n = c(10, 20), rate = 1:2)
+#' pg <- expand_tibble(proc = "summary")
+#' eval_tibbles(dg, pg, replications = 3)
+#' eval_tibbles(dg, pg, replications = 3, summary_fun = list(mean = mean))
+#' eval_tibbles(dg, pg, replications = 3, summary_fun = list(mean = mean, sd = sd))
 NULL

@@ -208,7 +208,7 @@ class = c("tbl_df", "tbl", "data.frame")
 
 test_that("Tibbles for data generating functions can be used. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -293,7 +293,7 @@ expected_df <- structure(
 
 test_that("Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -346,7 +346,7 @@ test_that(
 
 test_that("One analyzing function. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 ##################################################################
@@ -405,7 +405,7 @@ expected_df <- structure(list(
 
 test_that("Post analyze function works", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -452,7 +452,7 @@ expected_df <- structure(list(fun = c(
 
 test_that("Three analyzing functions. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -530,7 +530,7 @@ expected_df <- structure(list(fun = c(
 
 test_that("Three analyzing functions and one summary function. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -676,7 +676,7 @@ expected_df <- structure(list(fun = c(
 
 test_that("Three analyzing functions and three summary function. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -744,7 +744,7 @@ expected_df <- structure(list(fun = c(
 ))
 test_that("Three analyzing functions and one summary function over 2 cpus. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -788,7 +788,7 @@ expected_df <- structure(
 
 test_that("One group for summary_fun. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -914,7 +914,7 @@ genData3 <- function(p) {
 
 dg <- expand_tibble(
   fun = c("genData1", "genData2", "genData3"),
-  p = c(7,11,13)
+  p = c(7, 11, 13)
 )
 
 ana1 <- function(data, m) {
@@ -930,17 +930,19 @@ ana3 <- function(data, m) {
 }
 
 
-pg <- expand_tibble(proc = c("ana1", "ana2", "ana3"), 
-                    m = c(17,19,23))
+pg <- expand_tibble(
+  proc = c("ana1", "ana2", "ana3"),
+  m = c(17, 19, 23)
+)
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
 
 result <- 1:162
 cnt <- 0
-for (p in c(7,11,13)) {
-  for (g in c(2,3,5)) {  
+for (p in c(7, 11, 13)) {
+  for (g in c(2, 3, 5)) {
     for (rep in 1:2) {
-      for (m in c(17,19,23)) {
-        for (a in c(29,31,37)) {
+      for (m in c(17, 19, 23)) {
+        for (a in c(29, 31, 37)) {
           cnt <- cnt + 1
           result[cnt] <- g * p * m * a
         }
@@ -951,4 +953,3 @@ for (p in c(7,11,13)) {
 test_that("Results are mapped correctly to data-generating/analyzing constellations", {
   expect_equal(eg$simulation$results, result)
 })
-

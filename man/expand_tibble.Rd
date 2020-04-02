@@ -19,8 +19,7 @@ Actually a wrapper for \code{\link{expand.grid}}, but
 }
 \examples{
 
-expand_tibble(fun="rnorm", mean=1:4, sd=2:5)
-
+expand_tibble(fun = "rnorm", mean = 1:4, sd = 2:5)
 }
 \seealso{
 \code{\link{expand.grid}}
