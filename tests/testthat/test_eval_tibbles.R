@@ -419,7 +419,7 @@ expected_df <- structure(list(fun = c(
 
 test_that("Simplify the simulation results", {
   for (col in colnames(eg$simulation)) {
-    expect_equivalent(eg$simulation[[col]], expected_df[[col]])  
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -906,7 +906,7 @@ expected_df <-
 test_that("Two groups for summary_fun. Results were created and
           stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_equivalent(eg$simulation[[col]], expected_df[[col]])  
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -941,7 +941,7 @@ test_that("Error is variable is not uploaded to cluster", {
 
 pg <- expand_tibble(proc = c("mean"))
 fetch_other_pkgs <- function(dummy) {
-  names(sessionInfo()$otherPkgs)
+  names(sessionInfo()[["otherPkgs"]])
 }
 
 cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
