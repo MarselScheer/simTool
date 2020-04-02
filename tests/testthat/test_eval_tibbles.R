@@ -24,8 +24,16 @@ f <- function(data, .truth) {
 pg <- expand_tibble(proc = "f")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
-test_that("Explicit defined .truth parameter of the data analyzing function can access the matrix for the data generating function", {
-  expect_true(all(sapply(1:8, function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]]))))
+test_that("Explicit defined .truth parameter of the data analyzing function
+          can access the matrix for the data generating function", {
+  expect_true(
+    all(
+      sapply(
+        1:8,
+        function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]])
+      )
+    )
+  )
 })
 
 ###############################################################
@@ -47,8 +55,16 @@ f <- function(data, .truth) {
 pg <- expand_tibble(proc = "f")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
-test_that("Explicit defined .truth parameter of the data analyzing function can access the matrix for the data generating function", {
-  expect_true(all(sapply(1:8, function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]]))))
+test_that("Explicit defined .truth parameter of the data analyzing
+          function can access the matrix for the data generating function", {
+  expect_true(
+    all(
+      sapply(
+        1:8,
+        function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]])
+      )
+    )
+  )
 })
 
 
@@ -70,8 +86,16 @@ eg <- eval_tibbles(dg, pg,
 )
 
 
-test_that("Explicit defined .truth parameter of the post analyzing function can access the matrix for the data generating function", {
-  expect_true(all(sapply(1:8, function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]]))))
+test_that("Explicit defined .truth parameter of the post analyzing
+          function can access the matrix for the data generating function", {
+  expect_true(
+    all(
+      sapply(
+        1:8,
+        function(i) all(eg$simulation$df[[i]] == eg$simulation$results[[i]])
+      )
+    )
+  )
 })
 
 
@@ -94,7 +118,8 @@ f <- function(data, .truth) {
 pg <- expand_tibble(proc = "f")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
 
-test_that("Explicit defined .truth column is passed to the data analyzing function", {
+test_that("Explicit defined .truth column is passed to the data
+          analyzing function", {
   expect_identical(eg$simulation$results, c(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L))
 })
 
@@ -114,7 +139,8 @@ eg <- eval_tibbles(dg, pg,
   post_analyze = post_ana
 )
 
-test_that("Explicit defined .truth column is passed to the post analyzing function", {
+test_that("Explicit defined .truth column is passed to the post
+          analyzing function", {
   expect_identical(eg$simulation$results, c(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L))
 })
 
@@ -127,8 +153,10 @@ f <- function(data, .truth) {
 pg <- expand_tibble(proc = c("f", "min"))
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
 
-test_that("Mixture of data analyzing function with and without .truth parameter work", {
-  expect_identical(eg$simulation$results, c(0, 1, 0, 1, 0, 4, 0, 4, 0, 1, 0, 1, 0, 5, 0, 5))
+test_that("Mixture of data analyzing function with and without
+          .truth parameter work", {
+  expect_identical(eg$simulation$results,
+                   c(0, 1, 0, 1, 0, 4, 0, 4, 0, 1, 0, 1, 0, 5, 0, 5))
 })
 
 
@@ -136,7 +164,9 @@ test_that("Mixture of data analyzing function with and without .truth parameter 
 
 pg <- expand_tibble(proc = c("f"), .truth = 1)
 test_that("Error if proc_grid has a .truth-column", {
-  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "\\.truth.*not allowed")
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                            simplify = TRUE),
+               "\\.truth.*not allowed")
 })
 
 
@@ -154,7 +184,9 @@ names(dg)[4] <- ".truth"
 pg <- expand_tibble(proc = c("f"))
 
 test_that("Error if data grid has two columns .truth", {
-  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE), "only one column with name '.truth' allowed")
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                            simplify = TRUE),
+               "only one column with name '.truth' allowed")
 })
 
 #############################################################
@@ -180,7 +212,8 @@ pg <- expand_tibble(proc = "rng")
 eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
 
 expected_df <- structure(list(
-  fun = c("gen_data1", "gen_data1", "gen_data2", "gen_data2", "gen_data1", "gen_data1", "gen_data2", "gen_data2"),
+  fun = c("gen_data1", "gen_data1", "gen_data2", "gen_data2",
+          "gen_data1", "gen_data1", "gen_data2", "gen_data2"),
   df = list(
     structure(1:6, .Dim = c(3L, 2L)),
     structure(1:6, .Dim = c(3L, 2L)), structure(1:6, .Dim = c(3L, 2L)),
@@ -188,7 +221,8 @@ expected_df <- structure(list(
     structure(1:8, .Dim = c(4L, 2L)), structure(1:8, .Dim = c(4L, 2L)),
     structure(1:8, .Dim = c(4L, 2L))
   ),
-  replications = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L), proc = c("rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"),
+  replications = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L),
+  proc = c("rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"),
   results = list(
     structure(c(1L, 3L), .Names = c("min", "max")),
     structure(c(1L, 3L), .Names = c("min", "max")),
@@ -206,14 +240,16 @@ class = c("tbl_df", "tbl", "data.frame")
 )
 
 
-test_that("Tibbles for data generating functions can be used. Results were created and stored in simulation", {
+test_that("Tibbles for data generating functions can be used.
+          Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
 test_that("Generated data is stored.", {
-  expect_identical(eg$generated_data, list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
+  expect_identical(eg$generated_data,
+                   list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
 })
 
 eg <- eval_tibbles(dg, pg, discard_generated_data = TRUE, envir = environment())
@@ -223,9 +259,11 @@ test_that("No entry for generated_data.", {
 })
 
 cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE, cluster = cl)
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                   simplify = FALSE, cluster = cl)
 test_that("Generated data is stored if a cluster is used.", {
-  expect_identical(eg$generated_data, list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
+  expect_identical(eg$generated_data,
+                   list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8))
 })
 
 eg <- eval_tibbles(dg, pg,
@@ -274,7 +312,8 @@ expected_df <- structure(
       structure(1:4, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
       structure(5:8, .Dim = c(2L, 2L)), structure(5:8, .Dim = c(2L, 2L))
     ),
-    replications = c(1L, 1L, 1L, 1L), proc = c("mat_mult", "mat_mult", "mat_mult", "mat_mult"),
+    replications = c(1L, 1L, 1L, 1L),
+    proc = c("mat_mult", "mat_mult", "mat_mult", "mat_mult"),
     mat_b = list(
       structure(1:4, .Dim = c(2L, 2L)),
       structure(5:8, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
@@ -291,7 +330,8 @@ expected_df <- structure(
 )
 
 
-test_that("Tibbles for data generating and data analyzing functions can be used. Results were created and stored in simulation", {
+test_that("Tibbles for data generating and data analyzing functions can be used.
+          Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -344,7 +384,8 @@ test_that(
   expect_true(all(eg$proc_grid == pg))
 )
 
-test_that("One analyzing function. Results were created and stored in simulation", {
+test_that("One analyzing function. Results were created and
+          stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -389,7 +430,8 @@ eg <- eval_tibbles(dg, pg,
   envir = environment(), simplify = TRUE,
   post_analyze = purrr::compose(tibble::as_tibble, t, identity)
 )
-# due to a bug introduced with purrr 0.3.0 (https://github.com/tidyverse/purrr/issues/629)
+# due to a bug introduced with purrr 0.3.0
+# (https://github.com/tidyverse/purrr/issues/629)
 # identity in purrr::compose is a necessary workaround
 
 
@@ -397,8 +439,10 @@ eg <- eval_tibbles(dg, pg,
 
 expected_df <- structure(list(
   fun = c("seq_len", "seq_len", "seq_len"), length.out = 1:3,
-  replications = c(1L, 1L, 1L), proc = c("rng", "rng", "rng"), min = c(1L, 1L, 1L), max = 1:3
-), row.names = c(NA, -3L), class = c("tbl_df", "tbl", "data.frame"), .Names = c(
+  replications = c(1L, 1L, 1L), proc = c("rng", "rng", "rng"),
+  min = c(1L, 1L, 1L), max = 1:3
+), row.names = c(NA, -3L), class = c("tbl_df", "tbl", "data.frame"),
+.Names = c(
   "fun",
   "length.out", "replications", "proc", "min", "max"
 ))
@@ -450,7 +494,8 @@ expected_df <- structure(list(fun = c(
   "data.frame"
 ))
 
-test_that("Three analyzing functions. Results were created and stored in simulation", {
+test_that("Three analyzing functions. Results were created and
+          stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -459,17 +504,23 @@ test_that("Three analyzing functions. Results were created and stored in simulat
 ##################################################################
 
 test_that("Error if summary function is not a list", {
-  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), summary_fun = c(mean), simplify = FALSE), "must be NULL or a named list")
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                            summary_fun = c(mean), simplify = FALSE),
+               "must be NULL or a named list")
 })
 
 test_that("Error if summary function is not a named list", {
-  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(), summary_fun = list(mean), simplify = FALSE), "must be NULL or a named list")
+  expect_error(eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                            summary_fun = list(mean), simplify = FALSE),
+               "must be NULL or a named list")
 })
 
 
 ##################################################################
 
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), summary_fun = list(mean = mean), simplify = FALSE)
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                   summary_fun = list(mean = mean),
+                   simplify = FALSE)
 
 expected_df <- structure(list(fun = c(
   "seq_len", "seq_len", "seq_len", "seq_len",
@@ -490,7 +541,8 @@ expected_df <- structure(list(fun = c(
 ), results = list(structure(list(min = 1, max = 1), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -501,7 +553,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 2), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1.5), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -512,7 +565,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 3), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 2), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -528,7 +582,8 @@ expected_df <- structure(list(fun = c(
   "tbl", "data.frame"
 ))
 
-test_that("Three analyzing functions and one summary function. Results were created and stored in simulation", {
+test_that("Three analyzing functions and one summary function.
+          Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -537,7 +592,9 @@ test_that("Three analyzing functions and one summary function. Results were crea
 
 ##################################################################
 
-eg <- eval_tibbles(dg, pg, rep = 4, envir = environment(), summary_fun = list(mean = mean, sum = sum, prod = prod), simplify = FALSE)
+eg <- eval_tibbles(dg, pg, rep = 4, envir = environment(),
+                   summary_fun = list(mean = mean, sum = sum, prod = prod),
+                   simplify = FALSE)
 
 expected_df <- structure(list(fun = c(
   "seq_len", "seq_len", "seq_len", "seq_len",
@@ -568,7 +625,8 @@ expected_df <- structure(list(fun = c(
 ), results = list(structure(list(min = 1, max = 1), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -579,7 +637,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 1), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -590,7 +649,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 4L, max = 4L), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 4L), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 4L), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -601,7 +661,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 2), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1.5), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -612,7 +673,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 16), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 5.0625), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 5.0625), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -623,7 +685,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 4L, max = 8L), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 6), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 6), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -634,7 +697,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 3), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 2), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -645,7 +709,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 81), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 16), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 16), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -656,7 +721,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 4L, max = 12L), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 8L), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 8L), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -674,7 +740,8 @@ expected_df <- structure(list(fun = c(
 
 
 
-test_that("Three analyzing functions and three summary function. Results were created and stored in simulation", {
+test_that("Three analyzing functions and three summary function.
+          Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -684,7 +751,9 @@ test_that("Three analyzing functions and three summary function. Results were cr
 
 ##################################################################
 
-eg <- eval_tibbles(dg, pg, rep = 20, envir = environment(), summary_fun = list(mean = mean), ncpus = 2, simplify = FALSE)
+eg <- eval_tibbles(dg, pg, rep = 20, envir = environment(),
+                   summary_fun = list(mean = mean), ncpus = 2,
+                   simplify = FALSE)
 
 expected_df <- structure(list(fun = c(
   "seq_len", "seq_len", "seq_len", "seq_len",
@@ -705,7 +774,8 @@ expected_df <- structure(list(fun = c(
 ), results = list(structure(list(min = 1, max = 1), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -716,7 +786,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 2), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 1.5), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 1.5), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -727,7 +798,8 @@ expected_df <- structure(list(fun = c(
 )), structure(list(min = 1, max = 3), .Names = c(
   "min",
   "max"
-), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")), structure(list(value = 2), .Names = "value", row.names = c(
+), row.names = c(NA, -1L), class = c("tbl_df", "tbl", "data.frame")),
+structure(list(value = 2), .Names = "value", row.names = c(
   NA,
   -1L
 ), class = c("tbl_df", "tbl", "data.frame")), structure(list(
@@ -742,7 +814,8 @@ expected_df <- structure(list(fun = c(
   "tbl_df",
   "tbl", "data.frame"
 ))
-test_that("Three analyzing functions and one summary function over 2 cpus. Results were created and stored in simulation", {
+test_that("Three analyzing functions and one summary function over 2 cpus.
+          Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -765,7 +838,9 @@ eg <- eval_tibbles(dg, pg,
 
 expected_df <- structure(
   list(
-    fun = c("gen_data", "gen_data"), replications = c(1L, 1L), summary_fun = c("mean", "sum"),
+    fun = c("gen_data", "gen_data"),
+    replications = c(1L, 1L),
+    summary_fun = c("mean", "sum"),
     proc = c("identity", "identity"),
     results = structure(
       list(
@@ -786,7 +861,8 @@ expected_df <- structure(
   class = c("tbl_df", "tbl", "data.frame")
 )
 
-test_that("One group for summary_fun. Results were created and stored in simulation", {
+test_that("One group for summary_fun. Results were created and
+          stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_identical(eg$simulation[[col]], expected_df[[col]])
   }
@@ -814,12 +890,21 @@ expected_df <-
     summary_fun = c("mean", "sum"),
     proc = "identity",
     results = list(
-      mean = dplyr::group_by(tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = c(2.0, 3.0, 4.0)), group1, group2),
-      sum = dplyr::group_by(tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = c(6.0, 9.0, 12.0)), group1, group2)
+      mean = dplyr::group_by(
+        tibble::tibble(group1 = letters[1:3],
+                       group2 = letters[4:6],
+                       b = c(2.0, 3.0, 4.0)),
+        group1, group2),
+      sum = dplyr::group_by(
+        tibble::tibble(group1 = letters[1:3],
+                       group2 = letters[4:6],
+                       b = c(6.0, 9.0, 12.0)),
+        group1, group2)
     )
   )
 
-test_that("Two groups for summary_fun. Results were created and stored in simulation", {
+test_that("Two groups for summary_fun. Results were created and
+          stored in simulation", {
   for (col in colnames(eg$simulation)) {
     expect_equivalent(eg$simulation[[col]], expected_df[[col]])  
   }
@@ -829,19 +914,25 @@ test_that("Two groups for summary_fun. Results were created and stored in simula
 ##################################################################
 
 ret_global_var <- function(dummy) {
-  paste(get("globalVar", envir = globalenv()), "executed on cluster", sep = ", ")
+  paste(get("globalVar", envir = globalenv()),
+        "executed on cluster",
+        sep = ", ")
 }
 dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
 pg <- expand_tibble(proc = "ret_global_var")
 assign("globalVar", "uploaded to cluster", envir = .GlobalEnv)
-eg <- eval_tibbles(dg, pg, rep = 10, envir = environment(), ncpus = 2, cluster_global_objects = c("globalVar"), simplify = FALSE)
+eg <- eval_tibbles(dg, pg, rep = 10, envir = environment(),
+                   ncpus = 2, cluster_global_objects = c("globalVar"),
+                   simplify = FALSE)
 
 test_that("Variable gets uploaded to the cluster.", {
-  expect_identical(unique(unlist(eg$simulation$results)), "uploaded to cluster, executed on cluster")
+  expect_identical(unique(unlist(eg$simulation$results)),
+                   "uploaded to cluster, executed on cluster")
 })
 
 test_that("Error is variable is not uploaded to cluster", {
-  err <- try(eval_tibbles(dg, pg, rep = 10, envir = environment(), ncpus = 2, simplify = FALSE), silent = TRUE)
+  err <- try(eval_tibbles(dg, pg, rep = 10, envir = environment(),
+                          ncpus = 2, simplify = FALSE), silent = TRUE)
   expect_equal(class(err), "try-error")
   expect_true(grepl("'globalVar' not found", err))
 })
@@ -856,7 +947,8 @@ fetch_other_pkgs <- function(dummy) {
 cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
 dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
 pg <- expand_tibble(proc = "fetch_other_pkgs")
-eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), cluster = cl, simplify = FALSE)
+eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
+                   cluster = cl, simplify = FALSE)
 
 test_that("No libraries loaded on the cluster.", {
   expect_true(is.null(unique(unlist(eg$simulation$results))))
@@ -872,7 +964,8 @@ test_that("Library boot loaded on the cluster.", {
   expect_equal(unique(unlist(eg$simulation$results)), "boot")
 })
 
-test_that("Warning if cluster and ncpus are specified and that the cluster cl is not stopped", {
+test_that("Warning if cluster and ncpus are specified and that the cluster
+          cl is not stopped", {
   expect_warning(
     eval_tibbles(dg, pg,
       rep = 2, envir = environment(),
@@ -882,7 +975,8 @@ test_that("Warning if cluster and ncpus are specified and that the cluster cl is
     ),
     "Ignore argument ncpus"
   )
-  # just repeat the call. If the cluster would have been stopped an error would occur
+  # just repeat the call. If the cluster would have been stopped
+  # an error would occur
   expect_warning(
     eval_tibbles(dg, pg,
       rep = 2, envir = environment(),
@@ -950,6 +1044,7 @@ for (p in c(7, 11, 13)) {
     }
   }
 }
-test_that("Results are mapped correctly to data-generating/analyzing constellations", {
+test_that("Results are mapped correctly to data-generating/analyzing
+          constellations", {
   expect_equal(eg$simulation$results, result)
 })

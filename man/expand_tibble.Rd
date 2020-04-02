@@ -10,7 +10,8 @@ expand_tibble(...)
 \item{\dots}{vectors, factors or a list containing these.}
 }
 \value{
-See \code{\link{expand.grid}} but instead of a \code{\link{data.frame}}
+See \code{\link{expand.grid}} but instead of a
+ \code{\link{data.frame}}
  a \code{\link{tibble}} is returned.
 }
 \description{

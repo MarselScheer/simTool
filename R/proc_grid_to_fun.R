@@ -17,7 +17,8 @@ proc_grid_to_fun <- function(proc_grid, envir) {
       })
     }
     return(function(x, .truth) {
-      # fp$fun has no argument for .groundTruth, but function signature must be the same
+      # fp$fun has no argument for .groundTruth, but function signature must
+      # be the same
       fp$para[[length(fp$para)]] <- x
       do.call(fp$fun, fp$para)
     })

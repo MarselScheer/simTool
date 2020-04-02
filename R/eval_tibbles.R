@@ -10,7 +10,8 @@
 #'  is a character vector with function names. The other
 #'  columns contain parameters for the functions specified
 #'  in the first column. Parameters with NA are ignored. If a column with name
-#'  \code{.truth} exist, then the corresponding entry is passed to functions generated from
+#'  \code{.truth} exist, then the corresponding entry is passed to functions
+#'    generated from
 #'  \code{proc_grid} and the function specified in \code{post_analyze}.
 #' @param proc_grid  similar as \code{data_grid} the first
 #'  column must contain function names. The other columns
@@ -19,26 +20,32 @@
 #'  \code{data_grid} will always be passed to the first
 #'  unspecified argument of the functions specified in the first
 #'  column of \code{proc_grid}. If a function specified in
-#'  \code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the
-#'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-#'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
+#'  \code{proc_grid} has an argument \code{.truth}, then the corresponding
+#'  entry in the
+#'  \code{.truth} column from \code{data_grid} is passed to the
+#'  \code{.truth} parameter or if no column \code{.truth} exist in
+#'  \code{data_grid}, then all parameters used
 #'  for the data generation are passed to the \code{.truth} parameter.
 #' @param replications  number of replications for the simulation
 #' @param discard_generated_data  if \code{TRUE} the generated
 #'  data is deleted after all function constellations in
 #'  \code{proc_grid} have been applied. Otherwise, ALL
 #'  generated data sets will be part of the returned object.
-#' @param post_analyze this is a convenience function, that is applied directly after the data analyzing function.
-#'  If this function has an argument \code{.truth}, then the corresponding entry in the
-#'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-#'  or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
-#'  for the data generation are passed to the \code{.truth} parameter.
-#' @param summary_fun  named list of univariate function to summarize the results (numeric or logical) over
-#'  the replications, e.g. list(mean = mean, sd = sd).
-#' @param group_for_summary if the result returned by the data analyzing function or \code{post_analyze}
+#' @param post_analyze this is a convenience function, that is applied
+#'  directly after the data analyzing function. If this function has an
+#'  argument \code{.truth}, then the corresponding entry in the
+#'  \code{.truth} column from \code{data_grid} is passed to the \code{.truth}
+#'  parameter or if no column \code{.truth} exist in \code{data_grid},
+#'  then all parameters used for the data generation are passed to the
+#'  \code{.truth} parameter.
+#' @param summary_fun  named list of univariate function to summarize the
+#'  results (numeric or logical) over the replications, e.g.
+#'  list(mean = mean, sd = sd).
+#' @param group_for_summary if the result returned by the data analyzing
+#'  function  or \code{post_analyze}
 #'  is a \code{data.frame} with more than one row, one usually is interested
-#'  in summarizing the results while grouping for some variables. This group variables can be passed as
-#'  a character vector into \code{group_for_summary}
+#'  in summarizing the results while grouping for some variables. This group
+#'  variables can be passed as a character vector into \code{group_for_summary}
 #' @param ncpus  a cluster of \code{ncpus} workers (R-processes)
 #'  is created on the local machine to conduct the
 #'  simulation. If \code{ncpus}
@@ -50,8 +57,9 @@
 #'  be ignored.
 #' @param cluster_seed if the simulation is done in parallel
 #'  manner, then the combined multiple-recursive generator from L'Ecuyer (1999)
-#'  is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer
-#'  vector of length 6. The 6 elements of the seed are internally regarded as
+#'  is used to generate random numbers. Thus \code{cluster_seed} must be a
+#'  (signed) integer vector of length 6.
+#'  The 6 elements of the seed are internally regarded as
 #'  32-bit unsigned integers. Neither the first three nor the last three
 #'  should be all zero, and they are limited to less than 4294967087 and
 #'  4294944443 respectively.
@@ -63,8 +71,8 @@
 #' @param envir  must be provided if the functions specified
 #'  in \code{data_grid} or \code{proc_grid} are not part
 #'  of the global environment.
-#' @param simplify usually the result column is nested, by default it is tried to
-#'  unnest it.
+#' @param simplify usually the result column is nested, by default it is
+#'  tried to unnest it.
 #' @return  The returned object list of the class
 #'  \code{eval_tibbles}, where the element \code{simulations} contain
 #'  the results of the simulation.
@@ -87,9 +95,13 @@
 #'
 #' eval_tibbles(dg, pg, rep = 2, simplify = FALSE)
 #' eval_tibbles(dg, pg, rep = 2)
-#' eval_tibbles(dg, pg, rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t, identity))
-#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was
-#' # introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
+#' eval_tibbles(dg, pg,
+#'   rep = 2,
+#'   post_analyze = purrr::compose(tibble::as_tibble, t, identity)
+#' )
+#' # Note, identity in the post_analyze-parameter is a workaround for a
+#' # bug that was introduced in purrr 0.3.0, see
+#' # https://github.com/tidyverse/purrr/issues/629
 #' eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 #'
 #' regData <- function(n, SD) {
@@ -123,8 +135,9 @@
 #'   group_for_summary = "term",
 #'   replications = 3
 #' )
-#' # Note, identity in the post_analyze-parameter is a workaround for a bug that was
-#' # introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
+#' # Note, identity in the post_analyze-parameter is a workaround for a
+#' # bug that was introduced in purrr 0.3.0, see
+#' # https://github.com/tidyverse/purrr/issues/629
 #' tidyr::unnest(eg$simulation)
 #'
 #' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L))
@@ -192,21 +205,20 @@ eval_tibbles <-
     t1 <- Sys.time()
 
     tryCatch({
-        simulation_list <- lapply(df, function(fc) {
-          ret <- sim_fun(fc)
-          pb()
-          ret
-        })
-        t2 <- Sys.time()
-      },
-      finally = {
-        if (ncpus > 1 && !user_provided_cluster) {
-          # cluster created by the user wont be stopped
-          parallel::stopCluster(cluster)
-          RNGkind(kind = generator_info[1])
-        }
+      simulation_list <- lapply(df, function(fc) {
+        ret <- sim_fun(fc)
+        pb()
+        ret
+      })
+      t2 <- Sys.time()
+    },
+    finally = {
+      if (ncpus > 1 && !user_provided_cluster) {
+        # cluster created by the user wont be stopped
+        parallel::stopCluster(cluster)
+        RNGkind(kind = generator_info[1])
       }
-    )
+    })
 
     est_reps_per_hour <-
       as.integer(replications / as.numeric(difftime(t2, t1, units = "hour")))

@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{object of class \code{eval_tibbles}}
 
-\item{...}{not used. only necessary to define the function consistently with respect to \code{print(x, ...)}}
+\item{...}{not used. only necessary to define the function consistently
+with respect to \code{print(x, ...)}}
 }
 \description{
 Prints objects created by \code{eval_tibbles()}
