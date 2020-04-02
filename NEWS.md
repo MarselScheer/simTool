@@ -3,7 +3,7 @@ Version 1.1.5.9000
 
 Misc:
 
-* placeholder for upcoming entries
+* internal updated for dplyr 1.0.0
 
 
 

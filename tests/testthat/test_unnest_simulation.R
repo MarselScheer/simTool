@@ -17,7 +17,7 @@ expected_df <- list(simulation = structure(list(a = c(1L, 2L, 1L, 2L), b = c(
 ), class = c("tbl_df", "tbl", "data.frame")))
 
 test_that("Simple unnesting", {
-    expect_equal(simTool:::unnest_simulation(e), expected_df)  
+    expect_equivalent(simTool:::unnest_simulation(e), expected_df)  
 })
 
 

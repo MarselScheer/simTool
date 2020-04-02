@@ -378,7 +378,7 @@ expected_df <- structure(list(fun = c(
 
 test_that("Simplify the simulation results", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])  
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])  
   }
 })
 
@@ -821,7 +821,7 @@ expected_df <-
 
 test_that("Two groups for summary_fun. Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_equal(eg$simulation[[col]], expected_df[[col]])  
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])  
   }
 })
 
