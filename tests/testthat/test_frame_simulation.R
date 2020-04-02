@@ -30,7 +30,7 @@ fs <- frame_simulation(dg, pg, sim, NULL) %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results for every replication", {
-  expect_identical(fs$results, fs$expected)
+  expect_equivalent(fs$results, fs$expected)
 })
 
 
@@ -70,5 +70,5 @@ fs <- frame_simulation(dg, pg, sim, mean) %>%
   tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
 
 test_that("Create a tibble containing the results sumamrized by one summary function", {
-  expect_identical(fs$results, fs$expected)
+  expect_equivalent(fs$results, fs$expected)
 })
