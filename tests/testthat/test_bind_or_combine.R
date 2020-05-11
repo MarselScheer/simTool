@@ -1,7 +1,8 @@
 testthat::context("test_bind_or_combine.R")
 
 test_that("Unnamed vector combined to one column", {
-  expect_identical(bind_or_combine(1:2, 3:5), tibble::enframe(x = 1:5, name = NULL))
+  expect_identical(bind_or_combine(1:2, 3:5),
+                   tibble::enframe(x = 1:5, name = NULL))
 })
 
 test_that("Named vectors combined to multiple columns", {
@@ -31,7 +32,8 @@ test_that("Matrix is converted to tibble", {
 
 test_that("Matrix is converted to tibble. Colnames preserved", {
   expect_identical(
-    bind_or_combine(structure(1:6, .Dim = 3:2, .Dimnames = list(NULL, letters[1:2]))),
+    bind_or_combine(structure(1:6, .Dim = 3:2,
+                              .Dimnames = list(NULL, letters[1:2]))),
     tibble::tibble(a = 1:3, b = 4:6)
   )
 })

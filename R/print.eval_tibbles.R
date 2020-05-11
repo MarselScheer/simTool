@@ -4,7 +4,8 @@
 #'
 #'
 #' @param x  object of class \code{eval_tibbles}
-#' @param ... not used. only necessary to define the function consistently with respect to \code{print(x, ...)}
+#' @param ... not used. only necessary to define the function consistently
+#'  with respect to \code{print(x, ...)}
 #' @author  Marsel Scheer
 #' @export
 print.eval_tibbles <- function(x, ...) {

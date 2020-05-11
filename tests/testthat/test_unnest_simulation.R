@@ -17,17 +17,22 @@ expected_df <- list(simulation = structure(list(a = c(1L, 2L, 1L, 2L), b = c(
 ), class = c("tbl_df", "tbl", "data.frame")))
 
 test_that("Simple unnesting", {
-    expect_equivalent(simTool:::unnest_simulation(e), expected_df)  
+    expect_equivalent(simTool:::unnest_simulation(e), expected_df)
 })
 
 
-s <- simTool::expand_tibble(a = 1:2, df = list(matrix(1:6, 3, 2), matrix(1:8, 4, 2)), results = list(r1 = 1L, r2 = 2L))
+s <- simTool::expand_tibble(
+  a = 1:2,
+  df = list(matrix(1:6, 3, 2), matrix(1:8, 4, 2)),
+  results = list(r1 = 1L, r2 = 2L))
 e <- list(simulation = s)
 
 expected_df <- structure(list(simulation = structure(list(a = c(
   1L, 2L, 1L,
   2L, 1L, 2L, 1L, 2L
-), df = list(structure(1:6, .Dim = c(3L, 2L)), structure(1:6, .Dim = c(3L, 2L)), structure(1:8, .Dim = c(
+), df = list(structure(1:6, .Dim = c(3L, 2L)),
+             structure(1:6, .Dim = c(3L, 2L)),
+             structure(1:8, .Dim = c(
   4L,
   2L
 )), structure(1:8, .Dim = c(4L, 2L)), structure(1:6, .Dim = c(
@@ -39,14 +44,20 @@ expected_df <- structure(list(simulation = structure(list(a = c(
 )), structure(1:8, .Dim = c(4L, 2L))), results = c(
   1L, 1L,
   1L, 1L, 2L, 2L, 2L, 2L
-)), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA, -8L), .Names = c("a", "df", "results"))), .Names = "simulation")
+)), class = c("tbl_df", "tbl", "data.frame"),
+row.names = c(NA, -8L), .Names = c("a", "df", "results"))),
+.Names = "simulation")
 
 
 test_that("Unnesting with further matrices in the row", {
   expect_identical(simTool:::unnest_simulation(e), expected_df)
 })
 
-s <- simTool::expand_tibble(a = 1:2, df = list(matrix(1:6, 3, 2), matrix(1:8, 4, 2)), results = list(r1 = as.data.frame(matrix(1:4, 2, 2)), r2 = as.data.frame(matrix(1:9, 3, 3))))
+s <- simTool::expand_tibble(
+  a = 1:2,
+  df = list(matrix(1:6, 3, 2), matrix(1:8, 4, 2)),
+  results = list(r1 = as.data.frame(matrix(1:4, 2, 2)),
+                 r2 = as.data.frame(matrix(1:9, 3, 3))))
 e <- list(simulation = s)
 expected_df <- structure(list(simulation = structure(list(a = c(
   1L, 1L, 2L,
@@ -99,7 +110,8 @@ expected_df <- structure(list(simulation = structure(list(a = c(
 
 
 
-test_that("Unnesting with further matrices in the row and result itself contains data.frames", {
+test_that("Unnesting with further matrices in the row and result
+          itself contains data.frames", {
   expect_identical(simTool:::unnest_simulation(e), expected_df)
 })
 

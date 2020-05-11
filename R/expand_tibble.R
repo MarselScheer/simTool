@@ -5,14 +5,14 @@
 #'
 #'
 #' @param \dots  vectors, factors or a list containing these.
-#' @return See \code{\link{expand.grid}} but instead of a \code{\link{data.frame}}
+#' @return See \code{\link{expand.grid}} but instead of a
+#'  \code{\link{data.frame}}
 #'  a \code{\link{tibble}} is returned.
 #' @author  Marsel Scheer
 #' @seealso  \code{\link{expand.grid}}
 #' @examples
 #'
-#' expand_tibble(fun="rnorm", mean=1:4, sd=2:5)
-#'
+#' expand_tibble(fun = "rnorm", mean = 1:4, sd = 2:5)
 #' @importFrom tibble as_tibble
 #' @export
 expand_tibble <-
