@@ -1,4 +1,4 @@
-FROM rocker/verse:latest
+FROM rocker/verse:4.0.0
 
 RUN apt-get update && apt-get install -y \
     ranger \
