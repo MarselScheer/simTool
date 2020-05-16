@@ -121,7 +121,6 @@
 #' eg <- eval_tibbles(
 #'   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
 #'   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-#'   group_for_summary = "term",
 #'   replications = 3
 #' )
 #' eg
