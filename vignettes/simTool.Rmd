@@ -211,13 +211,10 @@ functions:
 eval_tibbles(
   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-  post_analyze = purrr::compose(function(mat) mat["(Intercept)", "Estimate"], coef, summary.lm, identity),
+  post_analyze = purrr::compose(function(mat) mat["(Intercept)", "Estimate"], coef, summary.lm),
   replications = 2
 )
 ```
-Note, the function *identity* used in *compose* and passed to the parameter *post_analyze*
-is only necessary because a bug was introduced in purrr 0.3.0, see [https://github.com/tidyverse/purrr/issues/629](https://github.com/tidyverse/purrr/issues/629).
-However, one can assume that this will be solved in a future version of purrr.
 
 
 ## Parameter *group_for_summary*
@@ -236,7 +233,7 @@ presever_rownames <- function(mat) {
 eval_tibbles(
   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-  post_analyze = purrr::compose(presever_rownames, coef, summary, identity),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
   replications = 3
 )
 ```
@@ -248,7 +245,7 @@ another variable. This variable can be passed to
 eval_tibbles(
   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-  post_analyze = purrr::compose(presever_rownames, coef, summary, identity),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
   summary_fun = list(mean = mean, sd = sd),
   group_for_summary = "term",
   replications = 3
