@@ -141,7 +141,7 @@
 #'   group_for_summary = "term",
 #'   replications = 3
 #' )
-#' tidyr::unnest(eg$simulation)
+#' eg$simulation
 #'
 #' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L))
 #' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
