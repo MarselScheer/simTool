@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     && install2.r --error \
        --deps TRUE \
        styler \
+       badgecreatr \
     && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
     && git config --global user.email "scheer@freescience.de" \
     && git config --global user.name "Marsel Scheer" \
