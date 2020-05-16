@@ -90,6 +90,16 @@
 #'   ret
 #' }
 #'
+#' ### The following line is only necessary 
+#' ### if the examples are not executed in the global 
+#' ### environment, which for instance is the case when
+#' ### the oneline-documentation 
+#' ### http://marselscheer.github.io/simTool/reference/eval_tibbles.html
+#' ### is build. In such case eval_tibble() would search the
+#' ### above defined function rng() in the global environment where
+#' ### it does not exist!
+#' eval_tibbles <- purrr::partial(eval_tibbles, envir = environment())
+#' 
 #' dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
 #' pg <- expand_tibble(proc = c("rng", "median", "length"))
 #'
@@ -161,6 +171,10 @@
 #'   summary_fun = list(mean = mean, sd = sd)
 #' )
 #' et
+#' ### need to remove the locally adapted eval_tibbles()
+#' ### otherwise executing the examples would mask 
+#' ### eval_tibbles from simTool-namespace.
+#' rm(eval_tibbles)
 #' @export
 eval_tibbles <-
   function(data_grid, proc_grid = expand_tibble(proc = "length"),
