@@ -91,9 +91,9 @@
 <a href="#example" class="anchor"></a>Example</h2>
 <p>This small simulation (using 4 cores) illustrates how the confidence interval based on the t-distribution performs on exponential distributed random variables. The following lines generate exponential distributed random variables of size 10, 50, 100, and 1000. Afterwards the <em>t.test</em> using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated 1000 times to estimate the coverage:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">simTool</span>)
-<span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">50L</span>, <span class="fl">100L</span>, <span class="fl">1000L</span>))
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"t.test"</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))
-<span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>,
+<span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/simTool/man/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">50L</span>, <span class="fl">100L</span>, <span class="fl">1000L</span>))
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/simTool/man/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"t.test"</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">0.95</span>))
+<span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/simTool/man/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>,
   <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">4</span>,
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>,
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">ttest</span>) <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
@@ -141,6 +141,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=simTool">https://​cloud.r-project.org/​package=simTool</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/MarselScheer/simTool/">https://​github.com/​MarselScheer/​simTool/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/MarselScheer/simTool/issues">https://​github.com/​MarselScheer/​simTool/​issues</a>
