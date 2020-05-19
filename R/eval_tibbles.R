@@ -90,6 +90,16 @@
 #'   ret
 #' }
 #'
+#' ### The following line is only necessary
+#' ### if the examples are not executed in the global
+#' ### environment, which for instance is the case when
+#' ### the oneline-documentation
+#' ### http://marselscheer.github.io/simTool/reference/eval_tibbles.html
+#' ### is build. In such case eval_tibble() would search the
+#' ### above defined function rng() in the global environment where
+#' ### it does not exist!
+#' eval_tibbles <- purrr::partial(eval_tibbles, envir = environment())
+#'
 #' dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
 #' pg <- expand_tibble(proc = c("rng", "median", "length"))
 #'
@@ -97,11 +107,8 @@
 #' eval_tibbles(dg, pg, rep = 2)
 #' eval_tibbles(dg, pg,
 #'   rep = 2,
-#'   post_analyze = purrr::compose(tibble::as_tibble, t, identity)
+#'   post_analyze = purrr::compose(as.data.frame, t)
 #' )
-#' # Note, identity in the post_analyze-parameter is a workaround for a
-#' # bug that was introduced in purrr 0.3.0, see
-#' # https://github.com/tidyverse/purrr/issues/629
 #' eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 #'
 #' regData <- function(n, SD) {
@@ -114,7 +121,6 @@
 #' eg <- eval_tibbles(
 #'   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
 #'   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-#'   group_for_summary = "term",
 #'   replications = 3
 #' )
 #' eg
@@ -129,16 +135,13 @@
 #' eg <- eval_tibbles(
 #'   expand_tibble(fun = "regData", n = 5L, SD = 1:2),
 #'   expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
-#'   post_analyze = purrr::compose(presever_rownames, coef, summary, identity),
+#'   post_analyze = purrr::compose(presever_rownames, coef, summary),
 #'   # post_analyze = broom::tidy, # is a nice out of the box alternative
 #'   summary_fun = list(mean = mean, sd = sd),
 #'   group_for_summary = "term",
 #'   replications = 3
 #' )
-#' # Note, identity in the post_analyze-parameter is a workaround for a
-#' # bug that was introduced in purrr 0.3.0, see
-#' # https://github.com/tidyverse/purrr/issues/629
-#' tidyr::unnest(eg$simulation)
+#' eg$simulation
 #'
 #' dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L))
 #' pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
@@ -167,6 +170,10 @@
 #'   summary_fun = list(mean = mean, sd = sd)
 #' )
 #' et
+#' ### need to remove the locally adapted eval_tibbles()
+#' ### otherwise executing the examples would mask
+#' ### eval_tibbles from simTool-namespace.
+#' rm(eval_tibbles)
 #' @export
 eval_tibbles <-
   function(data_grid, proc_grid = expand_tibble(proc = "length"),

@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -40,7 +44,6 @@
  constellations in data_tibble and applies
  all provided constellations in proc_tibble
  to them." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -58,7 +61,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -96,7 +99,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/MarselScheer/simTool">
+  <a href="https://github.com/MarselScheer/simTool/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -128,7 +131,7 @@
 
     <pre class="usage"><span class='fu'>eval_tibbles</span>(
   <span class='no'>data_grid</span>,
-  <span class='kw'>proc_grid</span> <span class='kw'>=</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='st'>"length"</span>),
+  <span class='kw'>proc_grid</span> <span class='kw'>=</span> <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='st'>"length"</span>),
   <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>discard_generated_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='no'>identity</span>,
@@ -152,7 +155,8 @@
 is a character vector with function names. The other
 columns contain parameters for the functions specified
 in the first column. Parameters with NA are ignored. If a column with name
-<code>.truth</code> exist, then the corresponding entry is passed to functions generated from
+<code>.truth</code> exist, then the corresponding entry is passed to functions
+  generated from
 <code>proc_grid</code> and the function specified in <code>post_analyze</code>.</p></td>
     </tr>
     <tr>
@@ -164,9 +168,11 @@ first column. The data generated according to
 <code>data_grid</code> will always be passed to the first
 unspecified argument of the functions specified in the first
 column of <code>proc_grid</code>. If a function specified in
-<code>proc_grid</code> has an argument <code>.truth</code>, then the corresponding entry in the 
-<code>.truth</code> column from <code>data_grid</code> is passed to the <code>.truth</code> parameter
-or if no column <code>.truth</code> exist in <code>data_grid</code>, then all parameters used
+<code>proc_grid</code> has an argument <code>.truth</code>, then the corresponding
+entry in the
+<code>.truth</code> column from <code>data_grid</code> is passed to the
+<code>.truth</code> parameter or if no column <code>.truth</code> exist in
+<code>data_grid</code>, then all parameters used
 for the data generation are passed to the <code>.truth</code> parameter.</p></td>
     </tr>
     <tr>
@@ -182,23 +188,27 @@ generated data sets will be part of the returned object.</p></td>
     </tr>
     <tr>
       <th>post_analyze</th>
-      <td><p>this is a convenience function, that is applied directly after the data analyzing function.
-If this function has an argument <code>.truth</code>, then the corresponding entry in the 
-<code>.truth</code> column from <code>data_grid</code> is passed to the <code>.truth</code> parameter
-or if no column <code>.truth</code> exist in <code>data_grid</code>, then all parameters used
-for the data generation are passed to the <code>.truth</code> parameter.</p></td>
+      <td><p>this is a convenience function, that is applied
+directly after the data analyzing function. If this function has an
+argument <code>.truth</code>, then the corresponding entry in the
+<code>.truth</code> column from <code>data_grid</code> is passed to the <code>.truth</code>
+parameter or if no column <code>.truth</code> exist in <code>data_grid</code>,
+then all parameters used for the data generation are passed to the
+<code>.truth</code> parameter.</p></td>
     </tr>
     <tr>
       <th>summary_fun</th>
-      <td><p>named list of univariate function to summarize the results (numeric or logical) over
-the replications, e.g. list(mean = mean, sd = sd).</p></td>
+      <td><p>named list of univariate function to summarize the
+results (numeric or logical) over the replications, e.g.
+list(mean = mean, sd = sd).</p></td>
     </tr>
     <tr>
       <th>group_for_summary</th>
-      <td><p>if the result returned by the data analyzing function or <code>post_analyze</code>
+      <td><p>if the result returned by the data analyzing
+function  or <code>post_analyze</code>
 is a <code>data.frame</code> with more than one row, one usually is interested
-in summarizing the results while grouping for some variables. This group variables can be passed as
-a character vector into <code>group_for_summary</code></p></td>
+in summarizing the results while grouping for some variables. This group
+variables can be passed as a character vector into <code>group_for_summary</code></p></td>
     </tr>
     <tr>
       <th>ncpus</th>
@@ -219,8 +229,9 @@ be ignored.</p></td>
       <th>cluster_seed</th>
       <td><p>if the simulation is done in parallel
 manner, then the combined multiple-recursive generator from L'Ecuyer (1999)
-is used to generate random numbers. Thus <code>cluster_seed</code> must be a (signed) integer
-vector of length 6. The 6 elements of the seed are internally regarded as
+is used to generate random numbers. Thus <code>cluster_seed</code> must be a
+(signed) integer vector of length 6.
+The 6 elements of the seed are internally regarded as
 32-bit unsigned integers. Neither the first three nor the last three
 should be all zero, and they are limited to less than 4294967087 and
 4294944443 respectively.</p></td>
@@ -244,8 +255,8 @@ of the global environment.</p></td>
     </tr>
     <tr>
       <th>simplify</th>
-      <td><p>usually the result column is nested, by default it is tried to
-unnest it.</p></td>
+      <td><p>usually the result column is nested, by default it is
+tried to unnest it.</p></td>
     </tr>
     </table>
 
@@ -264,69 +275,203 @@ unnest it.</p></td>
  is done.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rng</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>data</span>, <span class='no'>...</span>) {
-<span class='no'>ret</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>data</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>ret</span>) <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"min"</span>, <span class='st'>"max"</span>)
-<span class='no'>ret</span>
+    <pre class="examples"><div class='input'><span class='no'>rng</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>data</span>, <span class='no'>...</span>) {
+  <span class='no'>ret</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/range.html'>range</a></span>(<span class='no'>data</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>ret</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"min"</span>, <span class='st'>"max"</span>)
+  <span class='no'>ret</span>
 }
 
-<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5L</span>, <span class='fl'>10L</span>))
-<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"rng"</span>, <span class='st'>"median"</span>, <span class='st'>"length"</span>))
+<span class='co'>### The following line is only necessary</span>
+<span class='co'>### if the examples are not executed in the global</span>
+<span class='co'>### environment, which for instance is the case when</span>
+<span class='co'>### the oneline-documentation</span>
+<span class='co'>### http://marselscheer.github.io/simTool/reference/eval_tibbles.html</span>
+<span class='co'>### is build. In such case eval_tibble() would search the</span>
+<span class='co'>### above defined function rng() in the global environment where</span>
+<span class='co'>### it does not exist!</span>
+<span class='no'>eval_tibbles</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='no'>eval_tibbles</span>, <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/environment.html'>environment</a></span>())
 
-<span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>simplify</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/compose.html'>compose</a></span>(<span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='no'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>, <span class='no'>t</span>, <span class='no'>identity</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'><span class='co'># Note, identity in the post_analyze-parameter is a workaround for a bug that was </span>
-<span class='co'># introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629</span>
-<span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,<span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'rng' not found</span></div><div class='input'>
-<span class='no'>regData</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>n</span>, <span class='no'>SD</span>){
+<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5L</span>, <span class='fl'>10L</span>))
+<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"rng"</span>, <span class='st'>"median"</span>, <span class='st'>"length"</span>))
+
+<span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>, <span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 5</span><span>
+#&gt;    fun       n replications proc   results  
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 1</span><span> rnorm     5            1 rng    </span><span style='color: #555555;'>&lt;dbl [2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> rnorm     5            1 median </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> rnorm     5            1 length </span><span style='color: #555555;'>&lt;int [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> rnorm     5            2 rng    </span><span style='color: #555555;'>&lt;dbl [2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> rnorm     5            2 median </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> rnorm     5            2 length </span><span style='color: #555555;'>&lt;int [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> rnorm    10            1 rng    </span><span style='color: #555555;'>&lt;dbl [2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> rnorm    10            1 median </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> rnorm    10            1 length </span><span style='color: #555555;'>&lt;int [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> rnorm    10            2 rng    </span><span style='color: #555555;'>&lt;dbl [2]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>11</span><span> rnorm    10            2 median </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> rnorm    10            2 length </span><span style='color: #555555;'>&lt;int [1]&gt;</span><span>
+#&gt; Number of data generating functions: 2
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 2
+#&gt; Estimated replications per hour: 156448
+#&gt; Start of the simulation: 2020-05-19 22:18:57
+#&gt; End of the simulation: 2020-05-19 22:18:57</div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>, <span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 5</span><span>
+#&gt;    fun       n replications proc   results
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> rnorm     5            1 rng     0.112 
+#&gt; </span><span style='color: #555555;'> 2</span><span> rnorm     5            1 rng     1.62  
+#&gt; </span><span style='color: #555555;'> 3</span><span> rnorm     5            1 median  0.244 
+#&gt; </span><span style='color: #555555;'> 4</span><span> rnorm     5            1 length  5     
+#&gt; </span><span style='color: #555555;'> 5</span><span> rnorm     5            2 rng    -</span><span style='color: #BB0000;'>1.91</span><span>  
+#&gt; </span><span style='color: #555555;'> 6</span><span> rnorm     5            2 rng     1.07  
+#&gt; </span><span style='color: #555555;'> 7</span><span> rnorm     5            2 median -</span><span style='color: #BB0000;'>0.279</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span> rnorm     5            2 length  5     
+#&gt; </span><span style='color: #555555;'> 9</span><span> rnorm    10            1 rng    -</span><span style='color: #BB0000;'>1.91</span><span>  
+#&gt; </span><span style='color: #555555;'>10</span><span> rnorm    10            1 rng     2.76  
+#&gt; </span><span style='color: #555555;'>11</span><span> rnorm    10            1 median  0.058</span><span style='text-decoration: underline;'>3</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> rnorm    10            1 length 10     
+#&gt; </span><span style='color: #555555;'>13</span><span> rnorm    10            2 rng    -</span><span style='color: #BB0000;'>2.27</span><span>  
+#&gt; </span><span style='color: #555555;'>14</span><span> rnorm    10            2 rng     2.68  
+#&gt; </span><span style='color: #555555;'>15</span><span> rnorm    10            2 median  0.024</span><span style='text-decoration: underline;'>4</span><span>
+#&gt; </span><span style='color: #555555;'>16</span><span> rnorm    10            2 length 10     
+#&gt; Number of data generating functions: 2
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 2
+#&gt; Estimated replications per hour: 3555750
+#&gt; Start of the simulation: 2020-05-19 22:18:58
+#&gt; End of the simulation: 2020-05-19 22:18:58</div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,
+  <span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/compose.html'>compose</a></span>(<span class='no'>as.data.frame</span>, <span class='no'>t</span>)
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 7</span><span>
+#&gt;    fun       n replications proc     min   max     V1
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> rnorm     5            1 rng    -</span><span style='color: #BB0000;'>1.18</span><span>  1.11 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 2</span><span> rnorm     5            1 median </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    -</span><span style='color: #BB0000;'>0.246</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> rnorm     5            1 length </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     5    
+#&gt; </span><span style='color: #555555;'> 4</span><span> rnorm     5            2 rng    -</span><span style='color: #BB0000;'>1.70</span><span>  1.07 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> rnorm     5            2 median </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     0.132
+#&gt; </span><span style='color: #555555;'> 6</span><span> rnorm     5            2 length </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     5    
+#&gt; </span><span style='color: #555555;'> 7</span><span> rnorm    10            1 rng    -</span><span style='color: #BB0000;'>1.47</span><span>  1.34 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 8</span><span> rnorm    10            1 median </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     0.260
+#&gt; </span><span style='color: #555555;'> 9</span><span> rnorm    10            1 length </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    10    
+#&gt; </span><span style='color: #555555;'>10</span><span> rnorm    10            2 rng    -</span><span style='color: #BB0000;'>2.61</span><span>  1.92 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>11</span><span> rnorm    10            2 median </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     0.495
+#&gt; </span><span style='color: #555555;'>12</span><span> rnorm    10            2 length </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    10    
+#&gt; Number of data generating functions: 2
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 2
+#&gt; Estimated replications per hour: 312011
+#&gt; Start of the simulation: 2020-05-19 22:18:58
+#&gt; End of the simulation: 2020-05-19 22:18:58</div><div class='input'><span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>, <span class='kw'>rep</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 8</span><span>
+#&gt;    fun       n replications summary_fun proc       min    max  value
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> rnorm     5            1 mean        rng    -</span><span style='color: #BB0000;'>0.196</span><span>   1.37  </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 2</span><span> rnorm     5            1 mean        median </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      0.716
+#&gt; </span><span style='color: #555555;'> 3</span><span> rnorm     5            1 mean        length </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      5    
+#&gt; </span><span style='color: #555555;'> 4</span><span> rnorm     5            1 sd          rng     0.224   0.431 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> rnorm     5            1 sd          median </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      0.325
+#&gt; </span><span style='color: #555555;'> 6</span><span> rnorm     5            1 sd          length </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      0    
+#&gt; </span><span style='color: #555555;'> 7</span><span> rnorm    10            1 mean        rng    -</span><span style='color: #BB0000;'>1.72</span><span>    1.55  </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 8</span><span> rnorm    10            1 mean        median </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     -</span><span style='color: #BB0000;'>0.185</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> rnorm    10            1 mean        length </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>     10    
+#&gt; </span><span style='color: #555555;'>10</span><span> rnorm    10            1 sd          rng     0.050</span><span style='text-decoration: underline;'>9</span><span>  0.812 </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>11</span><span> rnorm    10            1 sd          median </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      0.621
+#&gt; </span><span style='color: #555555;'>12</span><span> rnorm    10            1 sd          length </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>      0    
+#&gt; Number of data generating functions: 2
+#&gt; Number of analyzing procedures: 3
+#&gt; Number of replications: 2
+#&gt; Estimated replications per hour: 56141
+#&gt; Start of the simulation: 2020-05-19 22:18:58
+#&gt; End of the simulation: 2020-05-19 22:18:58</div><div class='input'>
+<span class='no'>regData</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>n</span>, <span class='no'>SD</span>) {
   <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>x</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='kw'>length</span><span class='kw'>=</span><span class='no'>n</span>),
-  <span class='kw'>y</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='kw'>sd</span><span class='kw'>=</span><span class='no'>SD</span>))
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='no'>n</span>),
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>SD</span>)
+  )
 }
 
 <span class='no'>eg</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(
-  <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span><span class='kw'>=</span><span class='st'>"regData"</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>5L</span>, <span class='kw'>SD</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>2</span>),
-  <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span><span class='kw'>=</span><span class='st'>"lm"</span>, <span class='kw'>formula</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"y~x"</span>, <span class='st'>"y~I(x^2)"</span>)),
-  <span class='kw'>group_for_summary</span> <span class='kw'>=</span> <span class='st'>"term"</span>,
-  <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>3</span>
-)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'regData' not found</span></div><div class='input'><span class='no'>eg</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'eg' not found</span></div><div class='input'>
-<span class='no'>presever_rownames</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>mat</span>)
-{
-  <span class='no'>rn</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>mat</span>)
-  <span class='no'>ret</span> <span class='kw'>=</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='no'>mat</span>)
-  <span class='no'>ret</span>$<span class='no'>term</span> <span class='kw'>=</span> <span class='no'>rn</span>
+  <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"regData"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>SD</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>),
+  <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='st'>"lm"</span>, <span class='kw'>formula</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"y~x"</span>, <span class='st'>"y~I(x^2)"</span>)),
+  <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>3</span>
+)
+<span class='no'>eg</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 7</span><span>
+#&gt;    fun         n    SD replications proc  formula  results
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'> 1</span><span> regData     5     1            1 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 2</span><span> regData     5     1            1 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 3</span><span> regData     5     1            2 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 4</span><span> regData     5     1            2 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 5</span><span> regData     5     1            3 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 6</span><span> regData     5     1            3 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 7</span><span> regData     5     2            1 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 8</span><span> regData     5     2            1 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 9</span><span> regData     5     2            2 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span> regData     5     2            2 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'>11</span><span> regData     5     2            3 lm    y~x      </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'>12</span><span> regData     5     2            3 lm    y~I(x^2) </span><span style='color: #555555;'>&lt;lm&gt;</span><span>   
+#&gt; Number of data generating functions: 2
+#&gt; Number of analyzing procedures: 2
+#&gt; Number of replications: 3
+#&gt; Estimated replications per hour: 223497
+#&gt; Start of the simulation: 2020-05-19 22:18:59
+#&gt; End of the simulation: 2020-05-19 22:18:59</div><div class='input'>
+<span class='no'>presever_rownames</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>mat</span>) {
+  <span class='no'>rn</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>mat</span>)
+  <span class='no'>ret</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/as_tibble.html'>as_tibble</a></span>(<span class='no'>mat</span>)
+  <span class='no'>ret</span>$<span class='no'>term</span> <span class='kw'>&lt;-</span> <span class='no'>rn</span>
   <span class='no'>ret</span>
 }
 
 <span class='no'>eg</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(
-  <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span><span class='kw'>=</span><span class='st'>"regData"</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>5L</span>, <span class='kw'>SD</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>2</span>),
-  <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span><span class='kw'>=</span><span class='st'>"lm"</span>, <span class='kw'>formula</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"y~x"</span>, <span class='st'>"y~I(x^2)"</span>)),
-  <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/compose.html'>compose</a></span>(<span class='no'>presever_rownames</span>, <span class='no'>coef</span>, <span class='no'>summary</span>, <span class='no'>identity</span>),
-  <span class='co'>#post_analyze = broom::tidy, # is a nice out of the box alternative</span>
+  <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"regData"</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5L</span>, <span class='kw'>SD</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>),
+  <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='st'>"lm"</span>, <span class='kw'>formula</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"y~x"</span>, <span class='st'>"y~I(x^2)"</span>)),
+  <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/compose.html'>compose</a></span>(<span class='no'>presever_rownames</span>, <span class='no'>coef</span>, <span class='no'>summary</span>),
+  <span class='co'># post_analyze = broom::tidy, # is a nice out of the box alternative</span>
   <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>),
   <span class='kw'>group_for_summary</span> <span class='kw'>=</span> <span class='st'>"term"</span>,
-  <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>3</span>
-)</div><div class='output co'>#&gt; <span class='error'>Error in get(unlist(row[1, 1]), envir = envir): object 'regData' not found</span></div><div class='input'><span class='co'># Note, identity in the post_analyze-parameter is a workaround for a bug that was </span>
-<span class='co'># introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629</span>
-<span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='no'>eg</span>$<span class='no'>simulation</span>)</div><div class='output co'>#&gt; <span class='error'>Error in tidyr::unnest(eg$simulation): object 'eg' not found</span></div><div class='input'>
-<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>100</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>))
-<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
+  <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>3</span>
+)
+<span class='no'>eg</span>$<span class='no'>simulation</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 16 x 12</span><span>
+#&gt;    fun       n    SD replications summary_fun proc  formula term  Estimate
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> regD…     5     1            1 mean        lm    y~x     (Int…   -</span><span style='color: #BB0000;'>0.137</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> regD…     5     1            1 mean        lm    y~x     x        0.148
+#&gt; </span><span style='color: #555555;'> 3</span><span> regD…     5     1            1 mean        lm    y~I(x^… (Int…   -</span><span style='color: #BB0000;'>0.121</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> regD…     5     1            1 mean        lm    y~I(x^… I(x^…    0.154
+#&gt; </span><span style='color: #555555;'> 5</span><span> regD…     5     1            1 sd          lm    y~x     (Int…    0.330
+#&gt; </span><span style='color: #555555;'> 6</span><span> regD…     5     1            1 sd          lm    y~x     x        0.298
+#&gt; </span><span style='color: #555555;'> 7</span><span> regD…     5     1            1 sd          lm    y~I(x^… (Int…    0.240
+#&gt; </span><span style='color: #555555;'> 8</span><span> regD…     5     1            1 sd          lm    y~I(x^… I(x^…    0.913
+#&gt; </span><span style='color: #555555;'> 9</span><span> regD…     5     2            1 mean        lm    y~x     (Int…   -</span><span style='color: #BB0000;'>1.05</span><span> 
+#&gt; </span><span style='color: #555555;'>10</span><span> regD…     5     2            1 mean        lm    y~x     x        2.58 
+#&gt; </span><span style='color: #555555;'>11</span><span> regD…     5     2            1 mean        lm    y~I(x^… (Int…   -</span><span style='color: #BB0000;'>0.851</span><span>
+#&gt; </span><span style='color: #555555;'>12</span><span> regD…     5     2            1 mean        lm    y~I(x^… I(x^…    2.91 
+#&gt; </span><span style='color: #555555;'>13</span><span> regD…     5     2            1 sd          lm    y~x     (Int…    0.754
+#&gt; </span><span style='color: #555555;'>14</span><span> regD…     5     2            1 sd          lm    y~x     x        0.492
+#&gt; </span><span style='color: #555555;'>15</span><span> regD…     5     2            1 sd          lm    y~I(x^… (Int…    0.667
+#&gt; </span><span style='color: #555555;'>16</span><span> regD…     5     2            1 sd          lm    y~I(x^… I(x^…    0.655
+#&gt; </span><span style='color: #555555;'># … with 3 more variables: `Std. Error` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, `t value` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   `Pr(&gt;|t|)` </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+<span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>10</span>, <span class='fl'>100</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>))
+<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
 <span class='no'>et</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,
   <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>1</span>,
   <span class='kw'>post_analyze</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>ttest</span>, <span class='no'>.truth</span>) {
-    <span class='no'>mu</span> <span class='kw'>=</span> <span class='fl'>1</span> / <span class='no'>.truth</span>$<span class='no'>rate</span>
+    <span class='no'>mu</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span> / <span class='no'>.truth</span>$<span class='no'>rate</span>
     <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>1</span>] <span class='kw'>&lt;=</span> <span class='no'>mu</span> <span class='kw'>&amp;&amp;</span> <span class='no'>mu</span> <span class='kw'>&lt;=</span> <span class='no'>ttest</span>$<span class='no'>conf.int</span>[<span class='fl'>2</span>]
   },
- <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>)
+  <span class='kw'>summary_fun</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='no'>mean</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='no'>sd</span>)
 )
-<span class='no'>et</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 24 x 8</span><span>
+<span class='no'>et</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 8</span><span>
 #&gt;    fun    rate     n replications summary_fun proc   conf.level value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> rexp     10    50            1 mean        t.test       0.8  0.9  
 #&gt; </span><span style='color: #555555;'> 2</span><span> rexp     10    50            1 mean        t.test       0.9  0.9  
-#&gt; </span><span style='color: #555555;'> 3</span><span> rexp     10    50            1 mean        t.test       0.95 1    
+#&gt; </span><span style='color: #555555;'> 3</span><span> rexp     10    50            1 mean        t.test       0.95 0.9  
 #&gt; </span><span style='color: #555555;'> 4</span><span> rexp     10    50            1 sd          t.test       0.8  0.316
 #&gt; </span><span style='color: #555555;'> 5</span><span> rexp     10    50            1 sd          t.test       0.9  0.316
-#&gt; </span><span style='color: #555555;'> 6</span><span> rexp     10    50            1 sd          t.test       0.95 0    
+#&gt; </span><span style='color: #555555;'> 6</span><span> rexp     10    50            1 sd          t.test       0.95 0.316
 #&gt; </span><span style='color: #555555;'> 7</span><span> rexp    100    50            1 mean        t.test       0.8  0.6  
 #&gt; </span><span style='color: #555555;'> 8</span><span> rexp    100    50            1 mean        t.test       0.9  0.7  
 #&gt; </span><span style='color: #555555;'> 9</span><span> rexp    100    50            1 mean        t.test       0.95 0.7  
@@ -335,13 +480,14 @@ unnest it.</p></td>
 #&gt; Number of data generating functions: 4
 #&gt; Number of analyzing procedures: 3
 #&gt; Number of replications: 10
-#&gt; Estimated replications per hour: 216973
-#&gt; Start of the simulation: 2020-03-15 12:04:06
-#&gt; End of the simulation: 2020-03-15 12:04:07</div><div class='input'>
+#&gt; Estimated replications per hour: 207517
+#&gt; Start of the simulation: 2020-05-19 22:18:59
+#&gt; End of the simulation: 2020-05-19 22:18:59</div><div class='input'>
 <span class='no'>dg</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span>(
- <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>10</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>)),
- <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>)))
-<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expand_tibble.html'>expand_tibble</a></span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
+  <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rexp"</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>1</span> / <span class='fl'>10</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>)),
+  <span class='fu'>expand_tibble</span>(<span class='kw'>fun</span> <span class='kw'>=</span> <span class='st'>"rnorm"</span>, <span class='kw'>.truth</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50L</span>, <span class='fl'>100L</span>))
+)
+<span class='no'>pg</span> <span class='kw'>&lt;-</span> <span class='fu'>expand_tibble</span>(<span class='kw'>proc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"t.test"</span>), <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.8</span>, <span class='fl'>0.9</span>, <span class='fl'>0.95</span>))
 <span class='no'>et</span> <span class='kw'>&lt;-</span> <span class='fu'>eval_tibbles</span>(<span class='no'>dg</span>, <span class='no'>pg</span>,
   <span class='kw'>ncpus</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>1</span>,
@@ -353,35 +499,31 @@ unnest it.</p></td>
 <span class='no'>et</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 9</span><span>
 #&gt;    fun    rate .truth     n replications summary_fun proc   conf.level value
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> rexp     10    0.1    50            1 mean        t.test       0.8  1    
-#&gt; </span><span style='color: #555555;'> 2</span><span> rexp     10    0.1    50            1 mean        t.test       0.9  1    
+#&gt; </span><span style='color: #555555;'> 1</span><span> rexp     10    0.1    50            1 mean        t.test       0.8  0.9  
+#&gt; </span><span style='color: #555555;'> 2</span><span> rexp     10    0.1    50            1 mean        t.test       0.9  0.9  
 #&gt; </span><span style='color: #555555;'> 3</span><span> rexp     10    0.1    50            1 mean        t.test       0.95 1    
-#&gt; </span><span style='color: #555555;'> 4</span><span> rexp     10    0.1    50            1 sd          t.test       0.8  0    
-#&gt; </span><span style='color: #555555;'> 5</span><span> rexp     10    0.1    50            1 sd          t.test       0.9  0    
+#&gt; </span><span style='color: #555555;'> 4</span><span> rexp     10    0.1    50            1 sd          t.test       0.8  0.316
+#&gt; </span><span style='color: #555555;'> 5</span><span> rexp     10    0.1    50            1 sd          t.test       0.9  0.316
 #&gt; </span><span style='color: #555555;'> 6</span><span> rexp     10    0.1    50            1 sd          t.test       0.95 0    
-#&gt; </span><span style='color: #555555;'> 7</span><span> rexp     10    0.1   100            1 mean        t.test       0.8  0.7  
+#&gt; </span><span style='color: #555555;'> 7</span><span> rexp     10    0.1   100            1 mean        t.test       0.8  0.6  
 #&gt; </span><span style='color: #555555;'> 8</span><span> rexp     10    0.1   100            1 mean        t.test       0.9  0.7  
 #&gt; </span><span style='color: #555555;'> 9</span><span> rexp     10    0.1   100            1 mean        t.test       0.95 0.8  
-#&gt; </span><span style='color: #555555;'>10</span><span> rexp     10    0.1   100            1 sd          t.test       0.8  0.483
+#&gt; </span><span style='color: #555555;'>10</span><span> rexp     10    0.1   100            1 sd          t.test       0.8  0.516
 #&gt; </span><span style='color: #555555;'># … with 14 more rows</span><span>
 #&gt; Number of data generating functions: 4
 #&gt; Number of analyzing procedures: 3
 #&gt; Number of replications: 10
-#&gt; Estimated replications per hour: 216539
-#&gt; Start of the simulation: 2020-03-15 12:04:07
-#&gt; End of the simulation: 2020-03-15 12:04:07</div></span></pre>
+#&gt; Estimated replications per hour: 219555
+#&gt; Start of the simulation: 2020-05-19 22:19:00
+#&gt; End of the simulation: 2020-05-19 22:19:00</div><div class='input'><span class='co'>### need to remove the locally adapted eval_tibbles()</span>
+<span class='co'>### otherwise executing the examples would mask</span>
+<span class='co'>### eval_tibbles from simTool-namespace.</span>
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span>(<span class='no'>eval_tibbles</span>)</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Marsel Scheer</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -392,7 +534,7 @@ unnest it.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
