@@ -26,7 +26,8 @@ eval_tibbles(
 is a character vector with function names. The other
 columns contain parameters for the functions specified
 in the first column. Parameters with NA are ignored. If a column with name
-\code{.truth} exist, then the corresponding entry is passed to functions generated from
+\code{.truth} exist, then the corresponding entry is passed to functions
+  generated from
 \code{proc_grid} and the function specified in \code{post_analyze}.}
 
 \item{proc_grid}{similar as \code{data_grid} the first
@@ -36,9 +37,11 @@ first column. The data generated according to
 \code{data_grid} will always be passed to the first
 unspecified argument of the functions specified in the first
 column of \code{proc_grid}. If a function specified in
-\code{proc_grid} has an argument \code{.truth}, then the corresponding entry in the 
-\code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
+\code{proc_grid} has an argument \code{.truth}, then the corresponding
+entry in the
+\code{.truth} column from \code{data_grid} is passed to the
+\code{.truth} parameter or if no column \code{.truth} exist in
+\code{data_grid}, then all parameters used
 for the data generation are passed to the \code{.truth} parameter.}
 
 \item{replications}{number of replications for the simulation}
@@ -48,19 +51,23 @@ data is deleted after all function constellations in
 \code{proc_grid} have been applied. Otherwise, ALL
 generated data sets will be part of the returned object.}
 
-\item{post_analyze}{this is a convenience function, that is applied directly after the data analyzing function.
-If this function has an argument \code{.truth}, then the corresponding entry in the 
-\code{.truth} column from \code{data_grid} is passed to the \code{.truth} parameter
-or if no column \code{.truth} exist in \code{data_grid}, then all parameters used
-for the data generation are passed to the \code{.truth} parameter.}
+\item{post_analyze}{this is a convenience function, that is applied
+directly after the data analyzing function. If this function has an
+argument \code{.truth}, then the corresponding entry in the
+\code{.truth} column from \code{data_grid} is passed to the \code{.truth}
+parameter or if no column \code{.truth} exist in \code{data_grid},
+then all parameters used for the data generation are passed to the
+\code{.truth} parameter.}
 
-\item{summary_fun}{named list of univariate function to summarize the results (numeric or logical) over
-the replications, e.g. list(mean = mean, sd = sd).}
+\item{summary_fun}{named list of univariate function to summarize the
+results (numeric or logical) over the replications, e.g.
+list(mean = mean, sd = sd).}
 
-\item{group_for_summary}{if the result returned by the data analyzing function or \code{post_analyze}
+\item{group_for_summary}{if the result returned by the data analyzing
+function  or \code{post_analyze}
 is a \code{data.frame} with more than one row, one usually is interested
-in summarizing the results while grouping for some variables. This group variables can be passed as
-a character vector into \code{group_for_summary}}
+in summarizing the results while grouping for some variables. This group
+variables can be passed as a character vector into \code{group_for_summary}}
 
 \item{ncpus}{a cluster of \code{ncpus} workers (R-processes)
 is created on the local machine to conduct the
@@ -75,8 +82,9 @@ be ignored.}
 
 \item{cluster_seed}{if the simulation is done in parallel
 manner, then the combined multiple-recursive generator from L'Ecuyer (1999)
-is used to generate random numbers. Thus \code{cluster_seed} must be a (signed) integer
-vector of length 6. The 6 elements of the seed are internally regarded as
+is used to generate random numbers. Thus \code{cluster_seed} must be a
+(signed) integer vector of length 6.
+The 6 elements of the seed are internally regarded as
 32-bit unsigned integers. Neither the first three nor the last three
 should be all zero, and they are limited to less than 4294967087 and
 4294944443 respectively.}
@@ -92,8 +100,8 @@ be exported to the global environment of every worker.}
 in \code{data_grid} or \code{proc_grid} are not part
 of the global environment.}
 
-\item{simplify}{usually the result column is nested, by default it is tried to
-unnest it.}
+\item{simplify}{usually the result column is nested, by default it is
+tried to unnest it.}
 }
 \value{
 The returned object list of the class
@@ -115,73 +123,82 @@ If \code{cluster} is provided by the user the
  is done.
 }
 \examples{
-rng = function(data, ...) {
-ret = range(data)
-names(ret) = c("min", "max")
-ret
+rng <- function(data, ...) {
+  ret <- range(data)
+  names(ret) <- c("min", "max")
+  ret
 }
+
+### The following line is only necessary
+### if the examples are not executed in the global
+### environment, which for instance is the case when
+### the oneline-documentation
+### http://marselscheer.github.io/simTool/reference/eval_tibbles.html
+### is build. In such case eval_tibble() would search the
+### above defined function rng() in the global environment where
+### it does not exist!
+eval_tibbles <- purrr::partial(eval_tibbles, envir = environment())
 
 dg <- expand_tibble(fun = "rnorm", n = c(5L, 10L))
 pg <- expand_tibble(proc = c("rng", "median", "length"))
 
-eval_tibbles(dg, pg,rep = 2, simplify=FALSE)
-eval_tibbles(dg, pg,rep = 2)
-eval_tibbles(dg, pg,rep = 2, post_analyze = purrr::compose(tibble::as_tibble, t, identity))
-# Note, identity in the post_analyze-parameter is a workaround for a bug that was 
-# introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
-eval_tibbles(dg, pg,rep = 2, summary_fun = list(mean = mean, sd = sd))
+eval_tibbles(dg, pg, rep = 2, simplify = FALSE)
+eval_tibbles(dg, pg, rep = 2)
+eval_tibbles(dg, pg,
+  rep = 2,
+  post_analyze = purrr::compose(as.data.frame, t)
+)
+eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 
-regData = function(n, SD){
+regData <- function(n, SD) {
   data.frame(
-  x=seq(0,1,length=n),
-  y=rnorm(n, sd=SD))
+    x = seq(0, 1, length = n),
+    y = rnorm(n, sd = SD)
+  )
 }
 
 eg <- eval_tibbles(
-  expand_tibble(fun="regData", n=5L, SD=1:2),
-  expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
-  group_for_summary = "term",
-  replications=3
+  expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+  expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
+  replications = 3
 )
 eg
 
-presever_rownames = function(mat)
-{
-  rn = rownames(mat)
-  ret = tibble::as_tibble(mat)
-  ret$term = rn
+presever_rownames <- function(mat) {
+  rn <- rownames(mat)
+  ret <- tibble::as_tibble(mat)
+  ret$term <- rn
   ret
 }
 
 eg <- eval_tibbles(
-  expand_tibble(fun="regData", n=5L, SD=1:2),
-  expand_tibble(proc="lm", formula=c("y~x", "y~I(x^2)")),
-  post_analyze = purrr::compose(presever_rownames, coef, summary, identity),
-  #post_analyze = broom::tidy, # is a nice out of the box alternative
+  expand_tibble(fun = "regData", n = 5L, SD = 1:2),
+  expand_tibble(proc = "lm", formula = c("y~x", "y~I(x^2)")),
+  post_analyze = purrr::compose(presever_rownames, coef, summary),
+  # post_analyze = broom::tidy, # is a nice out of the box alternative
   summary_fun = list(mean = mean, sd = sd),
   group_for_summary = "term",
-  replications=3
+  replications = 3
 )
-# Note, identity in the post_analyze-parameter is a workaround for a bug that was 
-# introduced in purrr 0.3.0, see https://github.com/tidyverse/purrr/issues/629
-tidyr::unnest(eg$simulation)
+eg$simulation
 
-dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L)) 
+dg <- expand_tibble(fun = "rexp", rate = c(10, 100), n = c(50L, 100L))
 pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 et <- eval_tibbles(dg, pg,
   ncpus = 1,
   replications = 10^1,
   post_analyze = function(ttest, .truth) {
-    mu = 1 / .truth$rate
+    mu <- 1 / .truth$rate
     ttest$conf.int[1] <= mu && mu <= ttest$conf.int[2]
   },
- summary_fun = list(mean = mean, sd = sd)
+  summary_fun = list(mean = mean, sd = sd)
 )
 et
 
 dg <- dplyr::bind_rows(
- expand_tibble(fun = "rexp", rate = 10, .truth = 1/10, n = c(50L, 100L)),
- expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L)))
+  expand_tibble(fun = "rexp", rate = 10, .truth = 1 / 10, n = c(50L, 100L)),
+  expand_tibble(fun = "rnorm", .truth = 0, n = c(50L, 100L))
+)
 pg <- expand_tibble(proc = c("t.test"), conf.level = c(0.8, 0.9, 0.95))
 et <- eval_tibbles(dg, pg,
   ncpus = 1,
@@ -192,6 +209,10 @@ et <- eval_tibbles(dg, pg,
   summary_fun = list(mean = mean, sd = sd)
 )
 et
+### need to remove the locally adapted eval_tibbles()
+### otherwise executing the examples would mask
+### eval_tibbles from simTool-namespace.
+rm(eval_tibbles)
 }
 \author{
 Marsel Scheer

@@ -10,7 +10,8 @@ expand_tibble(...)
 \item{\dots}{vectors, factors or a list containing these.}
 }
 \value{
-See \code{\link{expand.grid}} but instead of a \code{\link{data.frame}}
+See \code{\link{expand.grid}} but instead of a
+ \code{\link{data.frame}}
  a \code{\link{tibble}} is returned.
 }
 \description{
@@ -19,8 +20,7 @@ Actually a wrapper for \code{\link{expand.grid}}, but
 }
 \examples{
 
-expand_tibble(fun="rnorm", mean=1:4, sd=2:5)
-
+expand_tibble(fun = "rnorm", mean = 1:4, sd = 2:5)
 }
 \seealso{
 \code{\link{expand.grid}}

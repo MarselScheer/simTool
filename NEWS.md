@@ -1,3 +1,13 @@
+Version 1.1.6
+=========================
+
+Misc:
+
+* internal updated for dplyr 1.0.0 and vctrs 0.3.0
+* internal correction based on lintr-findings
+
+
+
 Version 1.1.5
 =========================
 
