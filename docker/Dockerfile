@@ -23,9 +23,8 @@ RUN git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d \
     && sed -i 's/;;ess/ess/g' ~/.doom.d/init.el \
     && ~/.emacs.d/bin/doom refresh \
     && sed -i "s/display-line-numbers-type t/display-line-numbers-type 'relative/g" ~/.doom.d/config.el \
+    && sed -i "s/'doom-one/'doom-monokai-classic/g" ~/.doom.d/config.el \
     && mkdir -p /tmp/hostfs \
     && ln -s /tmp/hostfs ~/hostfs
-
-
 
 USER root
