@@ -582,7 +582,7 @@ structure(list(value = 2), .Names = "value", row.names = c(
 test_that("Three analyzing functions and one summary function.
           Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -740,7 +740,7 @@ structure(list(value = 8L), .Names = "value", row.names = c(
 test_that("Three analyzing functions and three summary function.
           Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
   }
 })
 
@@ -814,7 +814,7 @@ structure(list(value = 2), .Names = "value", row.names = c(
 test_that("Three analyzing functions and one summary function over 2 cpus.
           Results were created and stored in simulation", {
   for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
+    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
   }
 })
 

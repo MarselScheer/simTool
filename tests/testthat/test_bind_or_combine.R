@@ -6,7 +6,7 @@ test_that("Unnamed vector combined to one column", {
 })
 
 test_that("Named vectors combined to multiple columns", {
-  expect_identical(
+  expect_equivalent(
     bind_or_combine(c(min = 1, max = 1), c(min = 2, max = 3), c(a = 1)),
     tibble::tibble(min = c(1, 2, NA), max = c(1, 3, NA), a = c(NA, NA, 1))
   )
