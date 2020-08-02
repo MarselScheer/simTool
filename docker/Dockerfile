@@ -5,26 +5,17 @@ RUN apt-get update && apt-get install -y \
     git \
     tig \
     emacs \
-    && install2.r --error \
-       --deps TRUE \
-       styler \
-       badgecreatr \
+# xdg-utils and ff necessary to display 
+# drake-network-graphs from doom-emacs
+    xdg-utils \
+    firefox \
     && ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
     && git config --global user.email "scheer@freescience.de" \
     && git config --global user.name "Marsel Scheer" \
     && mv /root/.gitconfig /home/rstudio \
     && chown rstudio:rstudio /home/rstudio/.gitconfig \
-    && usermod --shell /bin/bash rstudio
-
-USER rstudio
-
-RUN git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d \
-    && ~/.emacs.d/bin/doom --yes install \
-    && sed -i 's/;;ess/ess/g' ~/.doom.d/init.el \
-    && ~/.emacs.d/bin/doom refresh \
-    && sed -i "s/display-line-numbers-type t/display-line-numbers-type 'relative/g" ~/.doom.d/config.el \
-    && sed -i "s/'doom-one/'doom-monokai-classic/g" ~/.doom.d/config.el \
-    && mkdir -p /tmp/hostfs \
-    && ln -s /tmp/hostfs ~/hostfs
-
-USER root
+    && usermod --shell /bin/bash rstudio \
+# create directory for mounting the host file system
+    && su -l rstudio -c "mkdir -p /tmp/hostfs" \
+    && su -l rstudio -c "ln -s /tmp/hostfs /home/rstudio/hostfs" \
+    && su -l rstudio -c "echo RENV_PATHS_ROOT=~/hostfs/renv/ > /home/rstudio/.Renviron"
