@@ -1,10 +1,10 @@
-FROM rstudio:4.0.0
+FROM rstudio:4.0.2
 
 USER rstudio
 
 # install and configure doom-emacs
 RUN git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d \
-    && ~/.emacs.d/bin/doom --yes install \
+    && yes | ~/.emacs.d/bin/doom install \
     && sed -i 's/;;ess/ess/g' ~/.doom.d/init.el \
     && ~/.emacs.d/bin/doom sync
 
