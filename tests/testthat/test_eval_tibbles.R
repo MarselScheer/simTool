@@ -1045,3 +1045,37 @@ test_that("Results are mapped correctly to data-generating/analyzing
           constellations", {
   expect_equal(eg$simulation$results, result)
 })
+
+
+##################################################
+
+dg <- expand_tibble(
+  fun = c("runif"),
+  n = 10
+)
+
+
+f1 <- function(data) {
+  data
+}
+f2 <- function(data) {
+  data
+}
+
+pg <- expand_tibble(proc = c("f1", "f2"))
+eg1 <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE)
+eg2 <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE,
+  discard_generated_data = TRUE)
+
+test_that("Data is generated once and used for all analyzing functions", {
+  expect_true(
+    all(
+      eg1$simulation$results[[1]] == eg1$simulation$results[[2]]
+      )
+  )
+  expect_true(
+    all(
+      eg2$simulation$results[[1]] == eg2$simulation$results[[2]]
+      )
+  )
+})

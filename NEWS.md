@@ -1,7 +1,12 @@
 Version 1.1.6.9000
 =========================
 
-* placeholder for the next development-cycle
+* During a replication data is generated once and then
+  used by all data analyzing functions. This was already
+  the case under the default setting where the generated
+  data sets are stored by eval_tibbles() and is now also
+  the case were the generated data is discarded by the
+  eval_tibbles() function.
 
 Version 1.1.6
 =========================
