@@ -48,9 +48,9 @@ create_a_tibble_containing_the_results_for_every_replication <- function() {
       )
     )
 
-  fs <- simTool:::frame_simulation(dg, pg, sim, NULL) %>%
-    tidyr::unnest(cols = c(results)) %>%
-    tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
+  fs <- simTool:::frame_simulation(dg, pg, sim, NULL)
+  fs <- tidyr::unnest(fs, cols = c(results))
+  fs <- tidyr::unite(fs, "expected", c("fun", "para", "proc"), sep = " ")
 
   expect_equivalent(fs$results, fs$expected)
 }
@@ -98,9 +98,9 @@ tibble_with_results_summarized_by_one_summary_function <- function() {
       )
     )
 
-  fs <- simTool:::frame_simulation(dg, pg, sim, mean) %>%
-    tidyr::unnest(cols = c(results)) %>%
-    tidyr::unite("expected", c("fun", "para", "proc"), sep = " ")
+  fs <- simTool:::frame_simulation(dg, pg, sim, mean)
+  fs <- tidyr::unnest(fs, cols = c(results))
+  fs <- tidyr::unite(fs, "expected", c("fun", "para", "proc"), sep = " ")
 
   expect_equivalent(fs$results, fs$expected)
 }
