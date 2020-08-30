@@ -9,13 +9,13 @@ su1 <- Simulation_unit$new(
   analysers = list(da1 = da1, da2 = da2),
   replications = 2
 )
-expect_equal(
+expect_equivalent(
   current = su1$run_evaluation(),
   target = data.table::data.table(
     generator = "dg1",
-    analyser = c("da1", "da1", "da2", "da2"),
-    replication = c(1, 2, 1, 2),
-    result = list(1, 1, 3, 3)
+    analyser = c("da1", "da2", "da1", "da2"),
+    replication = c(1, 1, 2, 2),
+    result = list(1, 3, 1, 3)
   )
 )
 
@@ -29,7 +29,7 @@ su1 <- Simulation_unit$new(
   analysers = list(da1 = da1, da2 = da2),
   replications = 1
 )
-expect_equal(
+expect_equivalent(
   current = su1$run_evaluation(),
   target = data.table::data.table(
     generator = "dg1",
@@ -50,7 +50,7 @@ su1 <- Simulation_unit$new(
   replications = 2,
   aggregate_funs = list(mean = mean, sd = sd)
 )
-expect_equal(
+expect_equivalent(
   current = su1$run_evaluation(),
   target = data.table::data.table(
     generator = "dg1",
@@ -73,7 +73,7 @@ su1 <- Simulation_unit$new(
   replications = 2,
   aggregate_funs = list(mean = mean, sd = sd)
 )
-expect_equal(
+expect_equivalent(
   current = su1$run_evaluation(),
   target = data.table::data.table(
     generator = "dg1",

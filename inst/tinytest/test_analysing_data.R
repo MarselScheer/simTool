@@ -14,5 +14,5 @@ da <- Data_analyser$new(
   post_fun = function(x) data.frame(t(x)))
 
 #-# can call analyser function with argument(s)
-expect_equal(da$post_fun(da$analyser(1)), data.frame(t.x. = 1))
-expect_equal(da$post_fun(da$analyser(1:2)), data.frame(X1 = 1, X2 = 4))
+expect_equal(da$analyser(1), data.frame(t.x. = 1))
+expect_equal(da$analyser(1:2), data.frame(X1 = 1, X2 = 4))

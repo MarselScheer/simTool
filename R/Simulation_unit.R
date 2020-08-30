@@ -30,8 +30,8 @@ Simulation_unit <- R6::R6Class("Eval_suite",
         })
       })
       ret[["result"]] <- purrr::flatten(.x = results)
+      names(ret[["results"]]) <- NULL
       ret <- ret[, c("generator", "analyser", "replication", "result")]
-      ret <- private$post_processing(raw_results = ret)
       ret <- private$aggregate(result_frame = ret)
       return(ret)
     }
@@ -50,8 +50,12 @@ Simulation_unit <- R6::R6Class("Eval_suite",
         result_frame[, result := unlist(result)]
       } else {
         result_frame[, id := .I]
+        # remove names otherwise rbindlist
+        # would use the names for the id
+        results <- result_frame$result
+        names(results) <- NULL
         results <- data.table::rbindlist(
-          l = result_frame$result,
+          l = results,
           idcol = "id",
           fill = TRUE)
         result_frame[, result := NULL]
@@ -65,21 +69,6 @@ Simulation_unit <- R6::R6Class("Eval_suite",
         fun.aggregate = private$aggregate_funs,
         value.var = cols)
       ret
-    },
-    post_processing = function(raw_results) {
-      ret <- lapply(
-        X = names(private$analysers),
-        FUN = function(analyser_name) {
-          analyser_instance <- private$analysers[[analyser_name]]
-          post_fun <- analyser_instance$post_fun
-          sub <- raw_results[analyser == analyser_name]
-          if (is.null(post_fun)) {
-            return(sub)
-          }
-          sub[["result"]] <- lapply(sub[["result"]], post_fun)
-          return(sub)
-        })
-      ret <- data.table::rbindlist(l = ret)
     }
   )
 )
