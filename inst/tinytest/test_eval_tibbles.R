@@ -497,33 +497,12 @@ one_group_for_summary_fun <- function() {
     rep = 3, envir = environment(), summary_fun = list(mean = mean, sum = sum),
     group_for_summary = "group", simplify = FALSE
   )
-  expected_df <- structure(
+  expect_equal(
     list(
-      fun = c("gen_data", "gen_data"),
-      replications = c(1L, 1L),
-      summary_fun = c("mean", "sum"),
-      proc = c("identity", "identity"),
-      results = structure(
-        list(
-          mean = structure(list(group = c("a", "b", "c"), b = c(2, 3, 4)),
-            class = c("tbl_df", "tbl", "data.frame"),
-            .Names = c("group", "b"), row.names = c(NA, -3L)
-          ),
-          sum = structure(list(group = c("a", "b", "c"), b = c(6, 9, 12)),
-            class = c("tbl_df", "tbl", "data.frame"), .Names = c("group", "b"),
-            row.names = c(NA, -3L)
-          )
-        ),
-        .Names = c("mean", "sum")
-      )
-    ),
-    .Names = c("fun", "replications", "summary_fun", "proc", "results"),
-    row.names = c(NA, -2L),
-    class = c("tbl_df", "tbl", "data.frame")
-  )
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
-  }
+      mean = tibble::tibble(group = letters[1:3], b = c(mean(1:3), mean(2:4), mean(3:5))),
+      sum = tibble::tibble(group = letters[1:3], b = c(sum(1:3), sum(2:4), sum(3:5)))
+      ),
+    eg$simulation$results)
 
 }
 one_group_for_summary_fun()
@@ -553,12 +532,12 @@ two_groups_for_summary_fun <- function() {
         mean = dplyr::group_by(
           tibble::tibble(group1 = letters[1:3],
             group2 = letters[4:6],
-            b = c(2.0, 3.0, 4.0)),
+            b = c(mean(1:3), mean(2:4), mean(3:5))),
           group1, group2),
         sum = dplyr::group_by(
           tibble::tibble(group1 = letters[1:3],
             group2 = letters[4:6],
-            b = c(6.0, 9.0, 12.0)),
+            b = c(sum(1:3), sum(2:4), sum(3:5))),
           group1, group2)
       )
     )
@@ -598,7 +577,7 @@ variables_uploaded_to_cluster()
 
 ##################################################################
 
-library_boot_loaded_on_the_cluster. <- function() {
+library_boot_loaded_on_the_cluster <- function() {
 
   pg <- expand_tibble(proc = c("mean"))
   fetch_other_pkgs <- function(dummy) {
@@ -621,11 +600,11 @@ library_boot_loaded_on_the_cluster. <- function() {
   expect_equal(unique(unlist(eg$simulation$results)), "boot")
 
 }
-library_boot_loaded_on_the_cluster.()
+library_boot_loaded_on_the_cluster()
 
 ##################################################################
 
-warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_cl_is_not_stopped <- function() {
+warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_is_not_stopped <- function() {
 
   fetch_other_pkgs <- function(dummy) {
     names(sessionInfo()[["otherPkgs"]])
@@ -657,7 +636,7 @@ warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_cl_is_not_stoppe
   parallel::stopCluster(cl)
 
 }
-warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_cl_is_not_stopped()
+warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_is_not_stopped()
 
 
 
@@ -716,24 +695,21 @@ results_are_mapped_correctly_to_data_generator_analyzer_constellations()
 ##################################################
 
 data_is_generated_once_and_used_for_all_analyzing_functions <- function() {
+
   dg <- expand_tibble(
     fun = c("runif"),
     n = 10
   )
-
-
   f1 <- function(data) {
     data
   }
   f2 <- function(data) {
     data
   }
-
   pg <- expand_tibble(proc = c("f1", "f2"))
   eg1 <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE)
   eg2 <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE,
     discard_generated_data = TRUE)
-
   expect_true(
     all(
       eg1$simulation$results[[1]] == eg1$simulation$results[[2]]
@@ -744,5 +720,6 @@ data_is_generated_once_and_used_for_all_analyzing_functions <- function() {
       eg2$simulation$results[[1]] == eg2$simulation$results[[2]]
     )
   )
+
 }
 data_is_generated_once_and_used_for_all_analyzing_functions()
