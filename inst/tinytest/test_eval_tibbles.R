@@ -59,7 +59,6 @@ truth_parameter_of_data_analyzer_can_access_matrix_of_data_generator <- function
   post_ana <- function(result, .truth) {
     .truth$df[[1]]
   }
-
   pg <- expand_tibble(proc = "f")
   eg <- eval_tibbles(dg, pg,
     rep = 2, envir = environment(), simplify = FALSE,
@@ -194,60 +193,34 @@ error_with_respect_to_truth_column()
 
 results_and_data_is_stored <- function() {
 
-  rng <- function(data, ...) {
-    ret <- range(data)
-    names(ret) <- c("min", "max")
-    ret
-  }
-  gen_data1 <- function(df) {
-    df[[1]][, 1]
-  }
-  gen_data2 <- function(df) {
-    df[[1]][, 2]
-  }
   dg <- expand_tibble(
-    fun = c("gen_data1", "gen_data2"),
-    df = list(
-      matrix(1:6, 3, 2),
-      matrix(1:8, 4, 2)
-    )
+    fun = c("runif", "rexp"),
+    n = 2
   )
-  pg <- expand_tibble(proc = "rng")
+  pg <- expand_tibble(proc = "mean")
+  set.seed(1)
   eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
-  expected_df <- structure(list(
-    fun = c("gen_data1", "gen_data1", "gen_data2", "gen_data2",
-      "gen_data1", "gen_data1", "gen_data2", "gen_data2"),
-    df = list(
-      structure(1:6, .Dim = c(3L, 2L)),
-      structure(1:6, .Dim = c(3L, 2L)), structure(1:6, .Dim = c(3L, 2L)),
-      structure(1:6, .Dim = c(3L, 2L)), structure(1:8, .Dim = c(4L, 2L)),
-      structure(1:8, .Dim = c(4L, 2L)), structure(1:8, .Dim = c(4L, 2L)),
-      structure(1:8, .Dim = c(4L, 2L))
-    ),
-    replications = c(1L, 2L, 1L, 2L, 1L, 2L, 1L, 2L),
-    proc = c("rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"),
+  set.seed(1)
+  expected_data <- list(runif(2), runif(2), rexp(2), rexp(2))
+  expected_df <- tibble::tibble(
+    fun = c("runif", "runif", "rexp", "rexp"),
+    n = 2,
+    replications = c(1:2, 1:2),
+    proc = "mean",
     results = list(
-      structure(c(1L, 3L), .Names = c("min", "max")),
-      structure(c(1L, 3L), .Names = c("min", "max")),
-      structure(c(4L, 6L), .Names = c("min", "max")),
-      structure(c(4L, 6L), .Names = c("min", "max")),
-      structure(c(1L, 4L), .Names = c("min", "max")),
-      structure(c(1L, 4L), .Names = c("min", "max")),
-      structure(c(5L, 8L), .Names = c("min", "max")),
-      structure(c(5L, 8L), .Names = c("min", "max"))
-    )
-  ),
-  .Names = c("fun", "df", "replications", "proc", "results"),
-  row.names = c(NA, -8L),
-  class = c("tbl_df", "tbl", "data.frame")
-  )
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]],
-      info = "results are stored in element simulation")
-  }
+      mean(expected_data[[1]]),
+      mean(expected_data[[2]]),
+      mean(expected_data[[3]]),
+      mean(expected_data[[4]])
+    ))
+  expect_equal(
+    expected_df,
+    eg$simulation,
+    info = "results are stored in element simulation")
 
-  expect_identical(eg$generated_data,
-    list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8),
+  expect_identical(
+    expected_data,
+    eg$generated_data,
     info = "generated data is stored")
 
   eg <- eval_tibbles(dg, pg, discard_generated_data = TRUE, envir = environment())
@@ -255,12 +228,20 @@ results_and_data_is_stored <- function() {
     info = "data is discarded")
 
 
-  cl <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
+  cluster <- parallel::makeCluster(rep("localhost", 2), type = "PSOCK")
   eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(),
-    simplify = FALSE, cluster = cl)
-  expect_identical(eg$generated_data,
-    list(1:3, 1:3, 4:6, 4:6, 1:4, 1:4, 5:8, 5:8),
+    simplify = FALSE, cluster = cluster, cluster_seed = rep(1, 6))
+  RNGkind(kind = "L'Ecuyer-CMRG")
+  parallel::clusterSetRNGStream(cluster, iseed = rep(1, 6))
+  expected_data <- c(
+    parallel::parLapply(cluster, c(2, 2), runif),
+    parallel::parLapply(cluster, c(2, 2), rexp)
+  )
+  expect_identical(
+    expected_data,
+    eg$generated_data,
     info = "generated data stored if cluster is used")
+
   eg <- eval_tibbles(dg, pg,
     rep = 2, envir = environment(), simplify = FALSE, cluster = cl,
     discard_generated_data = TRUE
@@ -268,111 +249,24 @@ results_and_data_is_stored <- function() {
   expect_false(all(grepl("generated_data", names(eg))),
     info = "generated data is discarded if cluster is used")
 
-  parallel::stopCluster(cl)
+  parallel::stopCluster(cluster)
 }
 results_and_data_is_stored()
 
-
-#################################################################
-results_stored_in_simulation <- function() {
-
-  gen_mat <- function(df) {
-    df[[1]][, 1]
-  }
-  mat_mult <- function(mat_a, mat_b) {
-    mat_a %*% mat_b[[1]]
-  }
-  dg <- expand_tibble(
-    fun = c("gen_mat"),
-    df = list(
-      matrix(1:4, 2, 2),
-      matrix(5:8, 2, 2)
-    )
-  )
-  pg <- expand_tibble(
-    proc = "mat_mult",
-    mat_b = list(matrix(1:4, 2, 2), matrix(5:8, 2, 2))
-  )
-  eg <- eval_tibbles(dg, pg, rep = 1, envir = environment(), simplify = FALSE)
-  expected_df <- structure(
-    list(
-      fun = c("gen_mat", "gen_mat", "gen_mat", "gen_mat"),
-      df = list(
-        structure(1:4, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
-        structure(5:8, .Dim = c(2L, 2L)), structure(5:8, .Dim = c(2L, 2L))
-      ),
-      replications = c(1L, 1L, 1L, 1L),
-      proc = c("mat_mult", "mat_mult", "mat_mult", "mat_mult"),
-      mat_b = list(
-        structure(1:4, .Dim = c(2L, 2L)),
-        structure(5:8, .Dim = c(2L, 2L)), structure(1:4, .Dim = c(2L, 2L)),
-        structure(5:8, .Dim = c(2L, 2L))
-      ),
-      results = list(
-        structure(c(5, 11), .Dim = 1:2), structure(c(17, 23), .Dim = 1:2),
-        structure(c(17, 39), .Dim = 1:2), structure(c(61, 83), .Dim = 1:2)
-      )
-    ),
-    .Names = c("fun", "df", "replications", "proc", "mat_b", "results"),
-    row.names = c(NA, -4L),
-    class = c("tbl_df", "tbl", "data.frame")
-  )
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
-  }
-
-}
-results_stored_in_simulation()
 
 ##################################################################
 
 grids_preserved <- function() {
 
-  rng <- function(data, ...) {
-    ret <- range(data)
-    names(ret) <- c("min", "max")
-    ret
-  }
-  dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
-  pg <- expand_tibble(proc = "rng")
+  dg <- tibble::tibble(
+    fun = c("seq_len", "seq.int"),
+    length.out = 3,
+    from = c(NA, 0),
+    to = c(NA, 1))
+  pg <- expand_tibble(proc = c("max", "min"))
   eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
-  expected_df <- structure(list(
-    fun = c(
-      "seq_len", "seq_len", "seq_len", "seq_len",
-      "seq_len", "seq_len"
-    ), length.out = c(1L, 1L, 2L, 2L, 3L, 3L),
-    replications = c(1L, 2L, 1L, 2L, 1L, 2L), proc = c(
-      "rng",
-      "rng", "rng", "rng", "rng", "rng"
-    ), results = list(
-      structure(c(
-        1L,
-        1L
-      ), .Names = c("min", "max")), structure(c(1L, 1L), .Names = c(
-        "min",
-        "max"
-      )), structure(1:2, .Names = c("min", "max")), structure(1:2, .Names = c(
-        "min",
-        "max"
-      )), structure(c(1L, 3L), .Names = c("min", "max")),
-      structure(c(1L, 3L), .Names = c("min", "max"))
-    )
-  ), .Names = c(
-    "fun",
-    "length.out", "replications", "proc", "results"
-  ), row.names = c(
-    NA,
-    -6L
-  ), class = c("tbl_df", "tbl", "data.frame"))
-  expect_true(all(eg$data_grid == dg),
-    info = "data grid preserved")
-  expect_true(all(eg$proc_grid == pg),
-    info = "proc grid preserved")
-
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]],
-      info = "one analyzing function. Results stored in simulation")
-  }
+  expect_identical(dg, eg$data_grid)
+  expect_identical(pg, eg$proc_grid)
 
 }
 grids_preserved()
@@ -388,32 +282,12 @@ simplify_the_simulation_results <- function() {
   dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
   pg <- expand_tibble(proc = "rng")
   eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = TRUE)
-  expected_df <- structure(list(fun = c(
-    "seq_len", "seq_len", "seq_len", "seq_len",
-    "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-    "seq_len", "seq_len"
-  ), length.out = c(
-    1L, 1L, 1L, 1L, 2L, 2L,
-    2L, 2L, 3L, 3L, 3L, 3L
-  ), replications = c(
-    1L, 1L, 2L, 2L, 1L,
-    1L, 2L, 2L, 1L, 1L, 2L, 2L
-  ), proc = c(
-    "rng", "rng", "rng", "rng",
-    "rng", "rng", "rng", "rng", "rng", "rng", "rng", "rng"
-  ), results = c(
-    1L,
-    1L, 1L, 1L, 1L, 2L, 1L, 2L, 1L, 3L, 1L, 3L
-  )), row.names = c(
-    NA,
-    -12L
-  ), class = c("tbl_df", "tbl", "data.frame"), .Names = c(
-    "fun",
-    "length.out", "replications", "proc", "results"
-  ))
-  for (col in colnames(eg$simulation)) {
-    expect_equivalent(eg$simulation[[col]], expected_df[[col]])
-  }
+  expected_result <- c(1L, 1L, 1L, 1L, 1L, 2L, 1L, 2L, 1L, 3L, 1L, 3L)
+  names(expected_result) <- rep(c("min", "max"), 6)
+  expect_identical(
+    expected_result,
+    eg$simulation$results
+  )
 
 }
 simplify_the_simulation_results()
@@ -434,18 +308,8 @@ post_analyze_function_works <- function() {
     envir = environment(), simplify = TRUE,
     post_analyze = purrr::compose(tibble::as_tibble, t)
   )
-  expected_df <- structure(list(
-    fun = c("seq_len", "seq_len", "seq_len"), length.out = 1:3,
-    replications = c(1L, 1L, 1L), proc = c("rng", "rng", "rng"),
-    min = c(1L, 1L, 1L), max = 1:3
-  ), row.names = c(NA, -3L), class = c("tbl_df", "tbl", "data.frame"),
-  .Names = c(
-    "fun",
-    "length.out", "replications", "proc", "min", "max"
-  ))
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
-  }
+  expect_identical(c(1L,1L,1L), eg$simulation$min)
+  expect_identical(1:3, eg$simulation$max)
 
 }
 post_analyze_function_works()
@@ -462,43 +326,18 @@ three_analyzing_functions <- function() {
   dg <- expand_tibble(fun = "seq_len", length.out = 1:3)
   pg <- expand_tibble(proc = c("rng", "median", "length"))
   eg <- eval_tibbles(dg, pg, rep = 2, envir = environment(), simplify = FALSE)
-  expected_df <- structure(list(fun = c(
-    "seq_len", "seq_len", "seq_len", "seq_len",
-    "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-    "seq_len", "seq_len", "seq_len", "seq_len", "seq_len", "seq_len",
-    "seq_len", "seq_len"
-  ), length.out = c(
-    1L, 1L, 1L, 1L, 1L, 1L,
-    2L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L, 3L
-  ), replications = c(
-    1L,
-    1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 2L,
-    2L
-  ), proc = c(
-    "rng", "median", "length", "rng", "median", "length",
-    "rng", "median", "length", "rng", "median", "length", "rng",
-    "median", "length", "rng", "median", "length"
-  ), results = list(
-    structure(c(1L, 1L), .Names = c("min", "max")), 1L, 1L, structure(c(
-      1L,
-      1L
-    ), .Names = c("min", "max")), 1L, 1L, structure(1:2, .Names = c(
-      "min",
-      "max"
-    )), 1.5, 2L, structure(1:2, .Names = c("min", "max")),
-    1.5, 2L, structure(c(1L, 3L), .Names = c("min", "max")),
-    2L, 3L, structure(c(1L, 3L), .Names = c("min", "max")), 2L,
-    3L
-  )), .Names = c(
-    "fun", "length.out", "replications", "proc",
-    "results"
-  ), row.names = c(NA, -18L), class = c(
-    "tbl_df", "tbl",
-    "data.frame"
-  ))
-  for (col in colnames(eg$simulation)) {
-    expect_identical(eg$simulation[[col]], expected_df[[col]])
-  }
+  expect_equal(
+    list(
+      c(min = 1, max = 1), 1, 1,
+      c(min = 1, max = 1), 1, 1,
+      #
+      c(min = 1, max = 2), 1.5, 2,
+      c(min = 1, max = 2), 1.5, 2,
+      #
+      c(min = 1, max = 3), 2, 3,
+      c(min = 1, max = 3), 2, 3
+      ),
+    eg$simulation$results)
 
 }
 three_analyzing_functions()
