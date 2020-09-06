@@ -82,3 +82,11 @@ Or from CRAN with:
 install.packages("simTool")
 ```
 
+## Test suite
+
+With tinytest you can rerun the test for simTool by calling
+
+```{r tinytest, eval = FALSE}
+# install.packages("tinytest")
+tinytest::test_package("simTool")
+```
