@@ -3,7 +3,7 @@
 #'
 #' @import data.table
 #' @export
-Simulation_unit <- R6::R6Class("Simulation_unit",
+Simulation_unit <- R6::R6Class("Simulation_unit", # nolint
   public = list(
     ##' @description
     ##' Creates a new Simulation_unit object.
@@ -70,7 +70,15 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
       names(ret[["results"]]) <- NULL
       ret <- ret[, c("generator", "analyser", "replication", "result")]
       ret <- private$aggregate(result_frame = ret)
-      return(ret)
+      private$results <- ret
+      invisible(ret)
+    },
+    ##' @description
+    ##' getter for the simulation results
+    ##' @return the results of the simulation or NULL if no simulation
+    ##' was performed
+    get_results = function() {
+      return(private$results)
     }
   ),
   private = list(
@@ -78,6 +86,7 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
     analysers = NULL,
     replications = NULL,
     aggregate_funs = NULL,
+    results = NULL,
     ## @description
     ## aggregates the raw replication according to the user
     ## defined aggregation function
@@ -89,7 +98,7 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
       if (is.null(private$aggregate_funs)) {
         return(result_frame)
       }
-      sub <- result_frame[replication == 1,]
+      sub <- result_frame[replication == 1, ]
       if (all(sapply(sub$result, function(x) is.vector(x) && length(x) == 1))) {
         result_frame[, result := unlist(result)]
       } else {
@@ -106,7 +115,9 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
         result_frame <- merge(x = result_frame, y = results, by = "id")
         result_frame[, id := NULL]
       }
-      cols <- setdiff(names(result_frame), c("generator", "analyser", "replication"))
+      cols <- setdiff(
+        x = names(result_frame),
+        y = c("generator", "analyser", "replication"))
       ret <- data.table::dcast(
         data = result_frame,
         formula =  generator + analyser ~ .,

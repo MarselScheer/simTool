@@ -18,6 +18,10 @@ expect_equivalent(
     result = list(1, 3, 1, 3)
   )
 )
+expect_equivalent(
+  current = su1$run_evaluation(),
+  target = su1$get_results())
+
 
 dg1 <- Data_generator$new(generator_fun = function() return(1:3))
 da1 <- Data_analyser$new(analyser_fun = function(data) min(data),
