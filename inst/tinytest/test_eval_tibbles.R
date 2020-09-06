@@ -1,4 +1,4 @@
-truth_parameter_of_data_analyzer_can_access_matrix_of_data_generator <- function() {
+truth_parameter_of_data_analyzer_can_access_matrix_of_data_generator <- function() { # nolint
 
   gen_data1 <- function(df) {
     df[[1]][, 1]
@@ -79,7 +79,7 @@ truth_parameter_of_data_analyzer_can_access_matrix_of_data_generator()
 
 ################################################################
 
-truth_column_passed_to_analyzers <- function() {
+truth_column_passed_to_analyzers <- function() { # nolint
 
   gen_data1 <- function(df) {
     df[[1]][, 1]
@@ -123,7 +123,7 @@ truth_column_passed_to_analyzers()
 
 ##############################################################
 
-mixture_of_data_analyzer_with_and_without_truth_parameter <- function() {
+mixture_of_data_analyzer_with_and_without_truth_parameter <- function() { # nolint
 
   gen_data1 <- function(df) {
     df[[1]][, 1]
@@ -153,7 +153,7 @@ mixture_of_data_analyzer_with_and_without_truth_parameter()
 
 ###########################################################
 
-error_with_respect_to_truth_column <- function() {
+error_with_respect_to_truth_column <- function() { # nolint
 
   gen_data1 <- function(df) {
     df[[1]][, 1]
@@ -223,7 +223,11 @@ results_and_data_is_stored <- function() {
     eg$generated_data,
     info = "generated data is stored")
 
-  eg <- eval_tibbles(dg, pg, discard_generated_data = TRUE, envir = environment())
+  eg <- eval_tibbles(
+    dg,
+    pg,
+    discard_generated_data = TRUE,
+    envir = environment())
   expect_false(all(grepl("generated_data", names(eg))),
     info = "data is discarded")
 
@@ -272,7 +276,7 @@ grids_preserved <- function() {
 grids_preserved()
 ##################################################################
 
-simplify_the_simulation_results <- function() {
+simplify_the_simulation_results <- function() { # nolint
 
   rng <- function(data, ...) {
     ret <- range(data)
@@ -308,7 +312,7 @@ post_analyze_function_works <- function() {
     envir = environment(), simplify = TRUE,
     post_analyze = purrr::compose(tibble::as_tibble, t)
   )
-  expect_identical(c(1L,1L,1L), eg$simulation$min)
+  expect_identical(c(1L, 1L, 1L), eg$simulation$min)
   expect_identical(1:3, eg$simulation$max)
 
 }
@@ -344,7 +348,7 @@ three_analyzing_functions()
 
 ##################################################################
 
-error_if_summary_function_is_not_a_list <- function() {
+error_if_summary_function_is_not_a_list <- function() { # nolint
 
   dg <- expand_tibble(fun = "runif", n = 10)
   pg <- expand_tibble(proc = "length")
@@ -355,7 +359,7 @@ error_if_summary_function_is_not_a_list <- function() {
 }
 error_if_summary_function_is_not_a_list()
 
-error_if_summary_function_is_not_a_named_list <- function() {
+error_if_summary_function_is_not_a_named_list <- function() { # nolint
 
   dg <- expand_tibble(fun = "runif", n = 10)
   pg <- expand_tibble(proc = "length")
@@ -370,7 +374,7 @@ error_if_summary_function_is_not_a_named_list()
 
 ##################################################################
 
-three_analyzing_functions_and_one_summary_function <- function() {
+three_analyzing_functions_and_one_summary_function <- function() { # nolint
 
   rng <- function(data, ...) {
     ret <- range(data)
@@ -402,7 +406,7 @@ three_analyzing_functions_and_one_summary_function()
 
 ##################################################################
 
-three_analyzing_functions_and_three_summary_function <- function() {
+three_analyzing_functions_and_three_summary_function <- function() { # nolint
 
   rng <- function(data, ...) {
     ret <- range(data)
@@ -453,7 +457,7 @@ three_analyzing_functions_and_three_summary_function()
 
 ##################################################################
 
-three_analyzing_functions_and_one_summary_function_over_2_cpus <- function() {
+three_analyzing_functions_and_one_summary_function_over_2_cpus <- function() { # nolint
 
   rng <- function(data, ...) {
     ret <- range(data)
@@ -499,8 +503,12 @@ one_group_for_summary_fun <- function() {
   )
   expect_equal(
     list(
-      mean = tibble::tibble(group = letters[1:3], b = c(mean(1:3), mean(2:4), mean(3:5))),
-      sum = tibble::tibble(group = letters[1:3], b = c(sum(1:3), sum(2:4), sum(3:5)))
+      mean = tibble::tibble(
+        group = letters[1:3],
+        b = c(mean(1:3), mean(2:4), mean(3:5))),
+      sum = tibble::tibble(
+        group = letters[1:3],
+        b = c(sum(1:3), sum(2:4), sum(3:5)))
       ),
     eg$simulation$results)
 
@@ -514,7 +522,10 @@ two_groups_for_summary_fun <- function() {
   shift <- -1
   gen_data <- function() {
     shift <<- shift + 1
-    tibble::tibble(group1 = letters[1:3], group2 = letters[4:6], b = 1:3 + shift)
+    tibble::tibble(
+      group1 = letters[1:3],
+      group2 = letters[4:6],
+      b = 1:3 + shift)
   }
   dg <- expand_tibble(fun = c("gen_data"))
   pg <- expand_tibble(proc = "identity")
@@ -577,7 +588,7 @@ variables_uploaded_to_cluster()
 
 ##################################################################
 
-library_boot_loaded_on_the_cluster <- function() {
+library_boot_loaded_on_the_cluster <- function() { # nolint
 
   pg <- expand_tibble(proc = c("mean"))
   fetch_other_pkgs <- function(dummy) {
@@ -604,7 +615,7 @@ library_boot_loaded_on_the_cluster()
 
 ##################################################################
 
-warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_is_not_stopped <- function() {
+warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_is_not_stopped <- function() { # nolint
 
   fetch_other_pkgs <- function(dummy) {
     names(sessionInfo()[["otherPkgs"]])
@@ -643,7 +654,7 @@ warning_if_cluster_and_ncpus_are_specified_and_that_the_cluster_is_not_stopped()
 
 ##################################################################
 
-results_are_mapped_correctly_to_data_generator_analyzer_constellations <- function() {
+results_are_mapped_correctly_to_data_generator_analyzer_constellations <- function() { # nolint
 
   gen_data1 <- function(p) {
     2 * p
@@ -694,7 +705,7 @@ results_are_mapped_correctly_to_data_generator_analyzer_constellations()
 
 ##################################################
 
-data_is_generated_once_and_used_for_all_analyzing_functions <- function() {
+data_is_generated_once_and_used_for_all_analyzing_functions <- function() { # nolint
 
   dg <- expand_tibble(
     fun = c("runif"),

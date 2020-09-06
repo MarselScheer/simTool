@@ -1,13 +1,16 @@
-unnamed_vector_combined_to_one_column <- function() {
+unnamed_vector_combined_to_one_column <- function() { # nolint
   expect_identical(
     simTool:::bind_or_combine(1:2, 3:5),
     tibble::enframe(x = 1:5, name = NULL))
 }
 unnamed_vector_combined_to_one_column()
 
-named_vectors_combined_to_multiple_columns <- function() {
+named_vectors_combined_to_multiple_columns <- function() { # nolint
   expect_identical(
-    simTool:::bind_or_combine(c(min = 1, max = 1), c(min = 2, max = 3), c(a = 1)),
+    simTool:::bind_or_combine(
+      c(min = 1, max = 1),
+      c(min = 2, max = 3),
+      c(a = 1)),
     tibble::tibble(min = c(1, 2, NA), max = c(1, 3, NA), a = c(NA, NA, 1))
   )
 }
@@ -33,7 +36,7 @@ matrix_is_converted_to_tibble <- function() {
 }
 matrix_is_converted_to_tibble()
 
-matrix_is_converted_to_tibble_Colnames_preserved <- function() {
+matrix_is_converted_to_tibble_Colnames_preserved <- function() { # nolint
   expect_identical(
     simTool:::bind_or_combine(structure(1:6, .Dim = 3:2,
       .Dimnames = list(NULL, letters[1:2]))),

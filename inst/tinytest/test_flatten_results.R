@@ -1,4 +1,4 @@
-extract_if_only_one_result_is_available <- function() {
+extract_if_only_one_result_is_available <- function() { # nolint
   data_and_results <-
     list(
       list(list(data = "1. set", results = list(c(a = 1, b = 2)))),
@@ -11,7 +11,7 @@ extract_if_only_one_result_is_available <- function() {
 }
 extract_if_only_one_result_is_available()
 
-extract_if_more_than_one_result_is_available <- function() {
+extract_if_more_than_one_result_is_available <- function() { # nolint
   data_and_results <-
     list(
       list(list(data = "1. set",

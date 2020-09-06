@@ -1,5 +1,4 @@
-#-# crossproduct of complicated objects
-cross_product_of_complicated_objects <- function() {
+cross_product_of_complicated_objects <- function() { # nolint
   tmp <- expand_tibble(
     desc = letters[1:2],
     mod = list(
@@ -18,6 +17,9 @@ cross_product_of_complicated_objects <- function() {
     )
   )
   expect_equal(tmp$desc, er$desc)
-  expect_equal(tmp$mod, er$mod, info = "expand_tibble also works with model fits")
+  expect_equal(
+    tmp$mod,
+    er$mod,
+    info = "expand_tibble also works with model fits")
 }
 cross_product_of_complicated_objects()

@@ -11,7 +11,7 @@ simple_unnesting <- function() {
 }
 simple_unnesting()
 
-unnesting_with_further_matrices_in_the_row <- function() {
+unnesting_with_further_matrices_in_the_row <- function() { # nolint
 
   s <- simTool::expand_tibble(
     a = 1:2,
@@ -28,7 +28,7 @@ unnesting_with_further_matrices_in_the_row <- function() {
 }
 unnesting_with_further_matrices_in_the_row()
 
-unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data.frames <- function() {
+unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data_frames <- function() { # nolint
 
   s <- simTool::expand_tibble(
     a = 1:2,
@@ -38,7 +38,7 @@ unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data.frame
   e <- list(simulation = s)
 
   expected_df <- s
-  expected_df$id <- 1:nrow(expected_df)
+  expected_df$id <- seq_len(nrow(expected_df))
   results <- purrr::map_dfr(split(expected_df, expected_df$id), function(sub) {
     ret <- sub$results[[1]]
     ret$id <- sub$id
@@ -54,12 +54,12 @@ unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data.frame
 
 }
 
-unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data.frames()
+unnesting_with_further_matrices_in_the_row_and_result_itself_contains_data_frames() # nolint
 
 
-if_unnesting_is_not_possible_then_nothing_is_changed <- function() {
-  x <- 1:2
-  y <- 2:3
+if_unnesting_is_not_possible_then_nothing_is_changed <- function() { # nolint
+  x <- 1:2 # nolint
+  y <- 2:3 # nolint
   s <- simTool::expand_tibble(a = 1:2, b = 2:3, results = list(lm(y ~ x)))
   e <- list(simulation = s)
   expect_identical(simTool:::unnest_simulation(e), e)

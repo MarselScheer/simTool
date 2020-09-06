@@ -211,8 +211,7 @@ eval_tibbles <-
 
     t1 <- Sys.time()
 
-    tryCatch(
-      {
+    tryCatch({
         simulation_list <- lapply(df, function(fc) {
           ret <- sim_fun(fc)
           pb()

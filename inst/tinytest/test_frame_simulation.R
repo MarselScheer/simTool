@@ -1,4 +1,4 @@
-create_a_tibble_containing_the_results_for_every_replication <- function() {
+create_a_tibble_containing_the_results_for_every_replication <- function() { # nolint
   dg <- expand_tibble(fun = c("Gen A", "Gen B"), para = 1:2)
   pg <- expand_tibble(proc = c("Ana A", "Ana B", "Ana C"))
   sim <-
@@ -49,14 +49,14 @@ create_a_tibble_containing_the_results_for_every_replication <- function() {
     )
 
   fs <- simTool:::frame_simulation(dg, pg, sim, NULL)
-  fs <- tidyr::unnest(fs, cols = c(results))
+  fs <- tidyr::unnest(fs, cols = c("results"))
   fs <- tidyr::unite(fs, "expected", c("fun", "para", "proc"), sep = " ")
 
   expect_equivalent(fs$results, fs$expected)
 }
 create_a_tibble_containing_the_results_for_every_replication()
 
-tibble_with_results_summarized_by_one_summary_function <- function() {
+tibble_with_results_summarized_by_one_summary_function <- function() { # nolint
   dg <- expand_tibble(fun = c("Gen A", "Gen B"), para = 1:2)
   pg <- expand_tibble(proc = c("Ana A", "Ana B", "Ana C"))
   sim <-
@@ -99,7 +99,7 @@ tibble_with_results_summarized_by_one_summary_function <- function() {
     )
 
   fs <- simTool:::frame_simulation(dg, pg, sim, mean)
-  fs <- tidyr::unnest(fs, cols = c(results))
+  fs <- tidyr::unnest(fs, cols = c("results"))
   fs <- tidyr::unite(fs, "expected", c("fun", "para", "proc"), sep = " ")
 
   expect_equivalent(fs$results, fs$expected)
