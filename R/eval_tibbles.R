@@ -211,21 +211,23 @@ eval_tibbles <-
 
     t1 <- Sys.time()
 
-    tryCatch({
-      simulation_list <- lapply(df, function(fc) {
-        ret <- sim_fun(fc)
-        pb()
-        ret
-      })
-      t2 <- Sys.time()
-    },
-    finally = {
-      if (ncpus > 1 && !user_provided_cluster) {
-        # cluster created by the user wont be stopped
-        parallel::stopCluster(cluster)
-        RNGkind(kind = generator_info[1])
+    tryCatch(
+      {
+        simulation_list <- lapply(df, function(fc) {
+          ret <- sim_fun(fc)
+          pb()
+          ret
+        })
+        t2 <- Sys.time()
+      },
+      finally = {
+        if (ncpus > 1 && !user_provided_cluster) {
+          # cluster created by the user wont be stopped
+          parallel::stopCluster(cluster)
+          RNGkind(kind = generator_info[1])
+        }
       }
-    })
+    )
 
     est_reps_per_hour <-
       as.integer(replications / as.numeric(difftime(t2, t1, units = "hour")))
