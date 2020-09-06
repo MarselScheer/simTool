@@ -7,7 +7,6 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
   public = list(
     ##' @description
     ##' Creates a new Simulation_unit object.
-    ##' @param generator
     ##' @param generator a named list with one element containing
     ##' a \link{Data_generator}
     ##' @param analysers a named list where every element must be
@@ -34,17 +33,19 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
     ##' according to the definition during construction of the
     ##' object
     ##' @return a data.table with column
-    ##' \item{generator}{name for the generator
-    ##  defined during construction of the object}
-    ##' \item{analyser}{name for the analyser
-    ##  defined during construction of the object}
-    ##' \item{replication}{number of the replication. Note this
-    ##' column is missing if aggregation was defined}
-    ##' \item{result}{output of the corresponding analyser or
-    ##  the aggregated output over all replications if
-    ##' aggregation was defined. In the case of aggregation
-    ##' it is possible that also the column name result was
-    ##' substitute by the corresponding output of the analyser}
+    ##' \describe{
+    ##'   \item{generator}{name for the generator
+    ##'    defined during construction of the object}
+    ##'   \item{analyser}{name for the analyser
+    ##'    defined during construction of the object}
+    ##'   \item{replication}{number of the replication. Note this
+    ##'   column is missing if aggregation was defined}
+    ##'   \item{result}{output of the corresponding analyser or
+    ##'    the aggregated output over all replications if
+    ##'   aggregation was defined. In the case of aggregation
+    ##'   it is possible that also the column name result was
+    ##'   substitute by the corresponding output of the analyser}
+    ##' }
     run_evaluation = function() {
       reps <- seq_len(length.out = private$replications)
       ret <- data.table::data.table(
@@ -77,13 +78,13 @@ Simulation_unit <- R6::R6Class("Simulation_unit",
     analysers = NULL,
     replications = NULL,
     aggregate_funs = NULL,
-    ##' @description
-    ##' aggregates the raw replication according to the user
-    ##' defined aggregation function
-    ##' @param result_frame
-    ##' @return if no aggregation is defined \code{result_frame} is returned
-    ##' Otherwise see \link{run_evaluation}, where column replication was
-    ##' dropped.
+    ## @description
+    ## aggregates the raw replication according to the user
+    ## defined aggregation function
+    ## @param result_frame results to be aggregated
+    ## @return if no aggregation is defined \code{result_frame} is returned
+    ## Otherwise see \link{run_evaluation}, where column replication was
+    ## dropped.
     aggregate = function(result_frame) {
       if (is.null(private$aggregate_funs)) {
         return(result_frame)
