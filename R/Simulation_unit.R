@@ -3,7 +3,7 @@
 #'
 #' @import data.table
 #' @export
-Simulation_unit <- R6::R6Class("Eval_suite",
+Simulation_unit <- R6::R6Class("Simulation_unit",
   public = list(
     ##' @description
     ##' Creates a new Simulation_unit object.
