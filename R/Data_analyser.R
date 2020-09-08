@@ -7,13 +7,26 @@ Data_analyser <- R6::R6Class("Data_analyser",
     ##' @param analyser_fun function that analyse a data set
     ##' @param post_fun function post-processes the output of
     ##' \code{analyser_fun}
+    ##' @param short_name string naming the data analyser. If
+    ##' not provided a name is generated that consists of the
+    ##' argument passed to \code{analyser_fun} and an integer
+    ##' which are the seconds passed since 1970.
     ##' @return no explicit return object
-    initialize = function(analyser_fun, post_fun = NULL) {
+    initialize = function(analyser_fun, post_fun = NULL, short_name = NULL) {
       if (is.null(post_fun)) {
         private$analyser_fun = analyser_fun
       } else {
         private$analyser_fun = function(x) post_fun(analyser_fun(x))
       }
+
+      if (is.null(short_name)) {
+        short_name <- paste0(
+          deparse(substitute(analyser_fun)),
+          "_",
+          format(x = Sys.time(), format = "%s")
+          )
+      }
+      private$short_name <- short_name
     },
     ##' @description
     ##' getter for the analysing and post-processing function
@@ -29,9 +42,16 @@ Data_analyser <- R6::R6Class("Data_analyser",
     analyser = function(analyser_input) {
       f <- self$get_analyser()
       return(f(analyser_input))
+    },
+    ##' @description
+    ##' getter for the short_name
+    ##' @return short_name for the data analyser
+    get_short_name = function() {
+      return(private$short_name)
     }
   ),
   private = list(
-    analyser_fun = NULL
+    analyser_fun = NULL,
+    short_name = NULL
   )
 )
