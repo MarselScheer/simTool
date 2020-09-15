@@ -7,9 +7,9 @@ Simulation_unit <- R6::R6Class("Simulation_unit", # nolint
   public = list(
     ##' @description
     ##' Creates a new Simulation_unit object.
-    ##' @param generator a named list with one element containing
+    ##' @param generator list with one element containing
     ##' a \link{Data_generator}
-    ##' @param analysers a named list where every element must be
+    ##' @param analysers list where every element must be
     ##' a \link{Data_analyser} that is able to process the output
     ##' Data_generator passed to \code{generator}
     ##' @param replications number of replications to be performed
@@ -34,10 +34,10 @@ Simulation_unit <- R6::R6Class("Simulation_unit", # nolint
     ##' object
     ##' @return a data.table with column
     ##' \describe{
-    ##'   \item{generator}{name for the generator
-    ##'    defined during construction of the object}
-    ##'   \item{analyser}{name for the analyser
-    ##'    defined during construction of the object}
+    ##'   \item{generator}{short-name for the generator
+    ##'    defined during construction of the generator}
+    ##'   \item{analyser}{short-name for the analyser
+    ##'    defined during construction of the analyser}
     ##'   \item{replication}{number of the replication. Note this
     ##'   column is missing if aggregation was defined}
     ##'   \item{result}{output of the corresponding analyser or
@@ -49,8 +49,8 @@ Simulation_unit <- R6::R6Class("Simulation_unit", # nolint
     run_evaluation = function() {
       reps <- seq_len(length.out = private$replications)
       ret <- data.table::data.table(
-        generator = names(private$generator),
-        analyser = names(private$analysers),
+        generator = private$generator[[1]]$get_short_name(),
+        analyser = sapply(private$analysers, function(a) a$get_short_name()),
         replication = as.numeric(gl(
           n = private$replications,
           k = length(private$analysers))))

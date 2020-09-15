@@ -3,15 +3,19 @@ call_generator_and_analyser <- function() {
   da1 <- Data_analyser$new(analyser_fun = function(data) min(data))
   da2 <- Data_analyser$new(analyser_fun = function(data) max(data))
   su1 <- Simulation_unit$new(
-    generator = list(dg1 = dg1),
-    analysers = list(da1 = da1, da2 = da2),
+    generator = list(dg1),
+    analysers = list(da1, da2),
     replications = 2
   )
   expect_equivalent(
     current = su1$run_evaluation(),
     target = data.table::data.table(
-      generator = "dg1",
-      analyser = c("da1", "da2", "da1", "da2"),
+      generator = dg1$get_short_name(),
+      analyser = c(
+        da1$get_short_name(),
+        da2$get_short_name(),
+        da1$get_short_name(),
+        da2$get_short_name()),
       replication = c(1, 1, 2, 2),
       result = list(1, 3, 1, 3)
     )
@@ -29,15 +33,17 @@ post_process_after_analysing <- function() {
   da2 <- Data_analyser$new(analyser_fun = function(data) max(data),
     post_fun = function(x) data.frame(out = x))
   su1 <- Simulation_unit$new(
-    generator = list(dg1 = dg1),
-    analysers = list(da1 = da1, da2 = da2),
+    generator = list(dg1),
+    analysers = list(da1, da2),
     replications = 1
   )
   expect_equivalent(
     current = su1$run_evaluation(),
     target = data.table::data.table(
-      generator = "dg1",
-      analyser = c("da1", "da2"),
+      generator = dg1$get_short_name(),
+      analyser = c(
+        da1$get_short_name(),
+        da2$get_short_name()),
       replication = c(1, 1),
       result = list(
         data.frame(out = 1),
@@ -52,16 +58,18 @@ aggregate_results_wo_post_process <- function() {
   da1 <- Data_analyser$new(analyser_fun = function(data) min(data))
   da2 <- Data_analyser$new(analyser_fun = function(data) max(data))
   su1 <- Simulation_unit$new(
-    generator = list(dg1 = dg1),
-    analysers = list(da1 = da1, da2 = da2),
+    generator = list(dg1),
+    analysers = list(da1, da2),
     replications = 2,
     aggregate_funs = list(mean = mean, sd = sd)
   )
   expect_equivalent(
     current = su1$run_evaluation(),
     target = data.table::data.table(
-      generator = "dg1",
-      analyser = c("da1", "da2"),
+      generator = dg1$get_short_name(),
+      analyser = c(
+        da1$get_short_name(),
+        da2$get_short_name()),
       result_mean = c(1, 3),
       result_sd = c(0, 0),
       key = c("generator", "analyser")
@@ -87,8 +95,10 @@ aggregate_results_w_post_process <- function() { # nolint
   expect_equivalent(
     current = su1$run_evaluation(),
     target = data.table::data.table(
-      generator = "dg1",
-      analyser = c("da1", "da2"),
+      generator = dg1$get_short_name(),
+      analyser = c(
+        da1$get_short_name(),
+        da2$get_short_name()),
       min_mean = c(1, NA),
       max_mean = c(4, NA),
       sum_mean = c(NA, 10),
