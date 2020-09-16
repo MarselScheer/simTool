@@ -1,4 +1,4 @@
-Version 1.1.6.9000
+Version 1.1.7
 =========================
 
 * During a replication data is generated once and then
