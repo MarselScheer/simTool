@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.0",
+    "Version": "4.0.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -433,7 +433,7 @@
       "Package": "renv",
       "Version": "0.11.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "1c3ef87cbb81c23ac96797781ec7aecc"
     },
     "reshape2": {
@@ -526,6 +526,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6ea435c354e8448819627cf686f66e0a"
+    },
+    "tinytest": {
+      "Package": "tinytest",
+      "Version": "1.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fb91119d9a21bf9897241fe74dad1a6b"
     },
     "tinytex": {
       "Package": "tinytex",

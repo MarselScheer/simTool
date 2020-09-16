@@ -46,6 +46,7 @@ et <- eval_tibbles(dg, pg,
     coverage = ttest$conf.int[1] <= 1 / 10 && 1 / 10 <= ttest$conf.int[2]),
   summary_fun = list(mean = mean)
 )
+#>   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 et
 #> # A tibble: 12 x 8
 #>    fun    rate     n replications summary_fun proc   conf.level coverage
@@ -65,9 +66,9 @@ et
 #> Number of data generating functions: 4
 #> Number of analyzing procedures: 3
 #> Number of replications: 1000
-#> Estimated replications per hour: 583320
-#> Start of the simulation: 2020-05-16 10:44:17
-#> End of the simulation: 2020-05-16 10:44:23
+#> Estimated replications per hour: 613106
+#> Start of the simulation: 2020-09-06 10:03:05
+#> End of the simulation: 2020-09-06 10:03:11
 ```
 
 ## Installation
@@ -84,4 +85,13 @@ Or from CRAN with:
 
 ``` r
 install.packages("simTool")
+```
+
+## Test suite
+
+With tinytest you can rerun the test for simTool by calling
+
+``` r
+# install.packages("tinytest")
+tinytest::test_package("simTool")
 ```

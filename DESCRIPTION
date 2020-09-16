@@ -13,9 +13,9 @@ Description: Tool for statistical simulations that have two components.
     quickly learn how to work with it. Parallel computing is
     also supported. Finally, convenient functions are provided to summarize the
     simulation results.
-Depends:
+Depends: 
     R (>= 2.14.0)
-Imports:
+Imports: 
     dplyr (>= 0.7.2),
     purrr (>= 0.2.3),
     tidyr (>= 1.0.0),
@@ -23,13 +23,13 @@ Imports:
     vctrs (>= 0.3.0),
     parallel,
     methods
-Suggests:
+Suggests: 
     ggplot2,
     knitr,
     boot,
     broom,
-    testthat,
-    rmarkdown
+    rmarkdown,
+    tinytest
 License: GPL-3
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
