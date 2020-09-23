@@ -1,4 +1,4 @@
-#' @importFrom dplyr bind_rows combine
+#' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map
 bind_or_combine <- function(...) {

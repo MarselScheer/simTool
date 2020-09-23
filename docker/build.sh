@@ -1,1 +1,3 @@
-sudo docker build -t simtool_ide:4.0.0 .
+#!/bin/bash
+
+sudo docker build -t rstudio:4.0.2 .

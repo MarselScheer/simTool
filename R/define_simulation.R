@@ -4,8 +4,9 @@ define_simulation <- function(pf, discard_generated_data, cluster,
   function(fc) {
     truth <- attr(fc, ".truth")
     with_out_data <- function(dummy) {
+      data <- fc()
       list(data = NULL, results = lapply(pf, function(f) {
-        post_analyze(f(fc(), truth), truth)
+        post_analyze(f(data, truth), truth)
       }))
     }
 

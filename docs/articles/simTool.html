@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">simTool</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.7</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       <h1 data-toc-skip>The simTool package: Facilitate simulations</h1>
                         <h4 class="author">Marsel Scheer</h4>
             
-            <h4 class="date">2020-05-19</h4>
+            <h4 class="date">2020-09-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/master/vignettes/simTool.Rmd"><code>vignettes/simTool.Rmd</code></a></small>
       <div class="hidden name"><code>simTool.Rmd</code></div>
@@ -105,9 +105,9 @@ p {
   <span class="fu">tibble</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)
 }
 
-<span class="fu">eval_tibbles</span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="kw pkg">broom</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>,
   <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="no">sd</span>),
   <span class="kw">group_for_summary</span> <span class="kw">=</span> <span class="st">"term"</span>,
@@ -136,9 +136,9 @@ p {
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 51201
-Start of the simulation: 2020-05-19 22:19:09
-End of the simulation: 2020-05-19 22:19:09</code></pre>
+Estimated replications per hour: 66584
+Start of the simulation: 2020-09-23 18:15:30
+End of the simulation: 2020-09-23 18:15:30</code></pre>
 </div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
@@ -163,8 +163,8 @@ End of the simulation: 2020-05-19 22:19:09</code></pre>
 <p>The function <em>expand_tibble</em> is a convenient function for defining such <em>data.frames</em>.</p>
 <p>We now define the data generation functions for our first simulation.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">20L</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">20L</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>)
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">20L</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">20L</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>)
 ))</pre></body></html></div>
 <pre><code># A tibble: 8 x 4
   fun       n  rate  mean
@@ -180,8 +180,8 @@ End of the simulation: 2020-05-19 22:19:09</code></pre>
 <p>This <em>data.frame</em> represents 8 <em>R</em>-functions. For instance, the second row represents a function that generates 20 exponential distributed random variables with <em>rate</em> 1. Since <em>mean=NA</em> in the second row, this parameter is not passed to <em>rexp</em>.</p>
 <p>Similar, we define the <em>data.frame</em> for data analyzing functions.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"min"</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"mean"</span>, <span class="kw">trim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>))
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"min"</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"mean"</span>, <span class="kw">trim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>))
 ))</pre></body></html></div>
 <pre><code># A tibble: 3 x 2
   proc   trim
@@ -212,9 +212,9 @@ End of the simulation: 2020-05-19 22:19:09</code></pre>
 13. t2 = current.time() 
 14. Estimate the number of replications per hour from t1 and t2 </pre></body></html></div>
 <p>The object returned by <em>eval_tibbles</em> is a <em>list</em> of class <em>eval_tibbles</em>.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>)
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"min"</span>)
-<span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">2</span>)
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>)
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"min"</span>)
+<span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">2</span>)
 <span class="no">eg</span></pre></body></html></div>
 <pre><code># A tibble: 4 x 6
   fun       n  mean replications proc  results
@@ -226,16 +226,16 @@ End of the simulation: 2020-05-19 22:19:09</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 2
-Estimated replications per hour: 28570471
-Start of the simulation: 2020-05-19 22:19:10
-End of the simulation: 2020-05-19 22:19:10</code></pre>
+Estimated replications per hour: 51446318
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
 <p>As you can see, the function always estimates the number of replications that can be done in one hour.</p>
 <div id="parameter-replications" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parameter-replications" class="anchor"></a>Parameter <em>replications</em>
 </h2>
 <p>Of course, this parameter controls the number of replications conducted.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">3</span>)
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">3</span>)
 <span class="no">eg</span></pre></body></html></div>
 <pre><code># A tibble: 6 x 6
   fun       n  mean replications proc  results
@@ -249,16 +249,16 @@ End of the simulation: 2020-05-19 22:19:10</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 3
-Estimated replications per hour: 28742692
-Start of the simulation: 2020-05-19 22:19:10
-End of the simulation: 2020-05-19 22:19:10</code></pre>
+Estimated replications per hour: 56693971
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
 </div>
 <div id="parameter-discard_generated_data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parameter-discard_generated_data" class="anchor"></a>Parameter <em>discard_generated_data</em>
 </h2>
 <p><em>eval_tibbles</em> saves ALL generated data sets.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">1</span>)
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">eg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">1</span>)
 <span class="no">eg</span>$<span class="no">simulation</span></pre></body></html></div>
 <pre><code># A tibble: 2 x 6
   fun       n  mean replications proc   results
@@ -280,9 +280,9 @@ End of the simulation: 2020-05-19 22:19:10</code></pre>
 <a href="#parameter-summary_fun" class="anchor"></a>Parameter <em>summary_fun</em>
 </h2>
 <p>As stated in command line 12 we can summarize the result objects over all replications but separately for all data analyzing functions.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>))
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"min"</span>, <span class="st">"max"</span>))
-<span class="fu">eval_tibbles</span>(
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>))
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"min"</span>, <span class="st">"max"</span>))
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
   <span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">1000</span>,
   <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>)
 )</pre></body></html></div>
@@ -298,10 +298,10 @@ End of the simulation: 2020-05-19 22:19:10</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 13146685
-Start of the simulation: 2020-05-19 22:19:10
-End of the simulation: 2020-05-19 22:19:10</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu">eval_tibbles</span>(
+Estimated replications per hour: 22712598
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
   <span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">1000</span>,
   <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="no">sd</span>)
 )</pre></body></html></div>
@@ -323,9 +323,9 @@ End of the simulation: 2020-05-19 22:19:10</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 7657126
-Start of the simulation: 2020-05-19 22:19:11
-End of the simulation: 2020-05-19 22:19:11</code></pre>
+Estimated replications per hour: 22522507
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
 <p>Note, by specifying the parameter <em>summary_fun</em> the generated data sets and all individual result objects are discarded. In this example we discard <span class="math inline">\(3 \times 1000\)</span> data sets and <span class="math inline">\(3 \times 1000 \times 2\)</span> individual result objects.</p>
 </div>
 <div id="parameter-post_analyze" class="section level2">
@@ -333,9 +333,9 @@ End of the simulation: 2020-05-19 22:19:11</code></pre>
 <a href="#parameter-post_analyze" class="anchor"></a>Parameter <em>post_analyze</em>
 </h2>
 <p>Sometimes the analyzing functions return quite complicated objects like in the Section <em>A first example</em>.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu">eval_tibbles</span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">2</span>
 )</pre></body></html></div>
 <pre><code># A tibble: 8 x 7
@@ -352,13 +352,13 @@ End of the simulation: 2020-05-19 22:19:11</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 188929
-Start of the simulation: 2020-05-19 22:19:11
-End of the simulation: 2020-05-19 22:19:11</code></pre>
+Estimated replications per hour: 481596
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
 <p>The parameter <em>post_analyze</em> (if specified) is applied directly after the result was generated (see command line 10). Note, <em>purrr::compose</em> can be very handy if your post-analyzing-function can be defined by a few single functions:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu">eval_tibbles</span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html">compose</a></span>(<span class="kw">function</span>(<span class="no">mat</span>) <span class="no">mat</span>[<span class="st">"(Intercept)"</span>, <span class="st">"Estimate"</span>], <span class="no">coef</span>, <span class="no">summary.lm</span>),
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">2</span>
 )</pre></body></html></div>
@@ -376,9 +376,9 @@ End of the simulation: 2020-05-19 22:19:11</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 95112
-Start of the simulation: 2020-05-19 22:19:12
-End of the simulation: 2020-05-19 22:19:12</code></pre>
+Estimated replications per hour: 332602
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:31</code></pre>
 </div>
 <div id="parameter-group_for_summary" class="section level2">
 <h2 class="hasAnchor">
@@ -392,9 +392,9 @@ End of the simulation: 2020-05-19 22:19:12</code></pre>
   <span class="no">ret</span>
 }
 
-<span class="fu">eval_tibbles</span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html">compose</a></span>(<span class="no">presever_rownames</span>, <span class="no">coef</span>, <span class="no">summary</span>),
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">3</span>
 )</pre></body></html></div>
@@ -415,13 +415,13 @@ End of the simulation: 2020-05-19 22:19:12</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 131214
-Start of the simulation: 2020-05-19 22:19:12
-End of the simulation: 2020-05-19 22:19:12</code></pre>
+Estimated replications per hour: 338682
+Start of the simulation: 2020-09-23 18:15:31
+End of the simulation: 2020-09-23 18:15:32</code></pre>
 <p>In order to summarize the replications it is necessary to additional group the calculations with respect to another variable. This variable can be passed to <em>group_for_summary</em></p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu">eval_tibbles</span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
-  <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"regData"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">5L</span>, <span class="kw">SD</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">2</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"lm"</span>, <span class="kw">formula</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span>)),
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html">compose</a></span>(<span class="no">presever_rownames</span>, <span class="no">coef</span>, <span class="no">summary</span>),
   <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="no">sd</span>),
   <span class="kw">group_for_summary</span> <span class="kw">=</span> <span class="st">"term"</span>,
@@ -450,16 +450,16 @@ End of the simulation: 2020-05-19 22:19:12</code></pre>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 83635
-Start of the simulation: 2020-05-19 22:19:12
-End of the simulation: 2020-05-19 22:19:12</code></pre>
+Estimated replications per hour: 118069
+Start of the simulation: 2020-09-23 18:15:32
+End of the simulation: 2020-09-23 18:15:32</code></pre>
 </div>
 <div id="parameter-ncpus-and-cluster_seed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parameter-ncpus-and-cluster_seed" class="anchor"></a>Parameter <em>ncpus</em> and <em>cluster_seed</em>
 </h2>
 <p>By specifying <em>ncpus</em> larger than 1 a cluster objected is created for the user and passed to the parameter <em>cluster</em> discussed in the next section.</p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu">eval_tibbles</span>(
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
   <span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>,
   <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>)
 )</pre></body></html></div>
@@ -475,9 +475,9 @@ End of the simulation: 2020-05-19 22:19:12</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 263970
-Start of the simulation: 2020-05-19 22:19:14
-End of the simulation: 2020-05-19 22:19:14</code></pre>
+Estimated replications per hour: 16571
+Start of the simulation: 2020-09-23 18:15:32
+End of the simulation: 2020-09-23 18:15:34</code></pre>
 <p>As it is stated in command line 7, the replications are parallelized. In our case, this means that roughly every CPU conducts 5 replications.</p>
 <p>The parameter <em>cluster_seed</em> must be an integer vector of length 6 and serves the same purpose as the function <em>set.seed</em>. By default, <em>cluster_seed</em> equals <em>rep(12345, 6)</em>. Note, in order to reproduce the simulation study it is also necessary that <em>ncpus</em> does not change.</p>
 </div>
@@ -488,7 +488,7 @@ End of the simulation: 2020-05-19 22:19:14</code></pre>
 <p>The user can create a cluster on its own. This also enables the user to distribute the replications over different computers in a network.</p>
 <div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">parallel</span>)
 <span class="no">cl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">makeCluster</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"localhost"</span>, <span class="fl">2</span>), <span class="kw">type</span> <span class="kw">=</span> <span class="st">"PSOCK"</span>)
-<span class="fu">eval_tibbles</span>(
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(
   <span class="kw">data_grid</span> <span class="kw">=</span> <span class="no">dg</span>, <span class="kw">proc_grid</span> <span class="kw">=</span> <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>,
   <span class="kw">cluster</span> <span class="kw">=</span> <span class="no">cl</span>, <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>)
 )</pre></body></html></div>
@@ -504,9 +504,9 @@ End of the simulation: 2020-05-19 22:19:14</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 291016
-Start of the simulation: 2020-05-19 22:19:16
-End of the simulation: 2020-05-19 22:19:16</code></pre>
+Estimated replications per hour: 74036
+Start of the simulation: 2020-09-23 18:15:34
+End of the simulation: 2020-09-23 18:15:35</code></pre>
 <div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html">stopCluster</a></span>(<span class="no">cl</span>)</pre></body></html></div>
 <p>As you can see our cluster consists of 3 workers. Hence, this reproduces the results from the last code chunk above. Further note, if the user starts the cluster, the user also has to stop the cluster. A cluster that is created within <em>eval_tibbles</em> by specifying <em>ncpus</em> is also stop within <em>eval_tibbles</em>.</p>
 </div>
@@ -557,9 +557,9 @@ Calculations and Intervals on Original Scale</code></pre>
   )
 }</pre></body></html></div>
 <p>The function <em>ratio</em> exists at the moment only in our global environment. Further we had to load the <em>boot</em> package. Hence, we load the <em>boot</em> package by setting <em>cluster_libraries = c(“boot”)</em> and transfer the function <em>ratio</em> by setting <em>cluster_global_objects = c(“ratio”)</em>.</p>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"returnCity"</span>)
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"bootConfInt"</span>)
-<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>,
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"returnCity"</span>)
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"bootConfInt"</span>)
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>,
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>, <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>,
   <span class="kw">cluster_libraries</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"boot"</span>),
   <span class="kw">cluster_global_objects</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ratio"</span>)
@@ -580,9 +580,9 @@ Calculations and Intervals on Original Scale</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 1
 Number of replications: 10
-Estimated replications per hour: 63685
-Start of the simulation: 2020-05-19 22:19:17
-End of the simulation: 2020-05-19 22:19:18</code></pre>
+Estimated replications per hour: 152858
+Start of the simulation: 2020-09-23 18:15:36
+End of the simulation: 2020-09-23 18:15:36</code></pre>
 <p>Of course, it is possible to set <em>cluster_global_objects=ls()</em>, but then all objects from the global environment are transferred to all workers.</p>
 </div>
 <div id="parameter-envir" class="section level2">
@@ -596,18 +596,18 @@ End of the simulation: 2020-05-19 22:19:18</code></pre>
 <span class="no">someFunc</span> <span class="kw">&lt;-</span> <span class="kw">function</span>() {
   <span class="no">summary</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>) <span class="fu">tibble</span>(<span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span>(<span class="no">x</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">x</span>))
 
-  <span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
-  <span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"summary"</span>, <span class="st">"g"</span>))
+  <span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">100</span>)
+  <span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"summary"</span>, <span class="st">"g"</span>))
 
   <span class="co"># the standard is to use the global</span>
   <span class="co"># environment, hence summary defined outside</span>
   <span class="co"># of someFunc() will be used</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>))
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>))
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"--------------------------------------------------\n"</span>)
   <span class="co"># will use the local defined summary, but g</span>
   <span class="co"># from the global environment, because</span>
   <span class="co"># g is not locally defined.</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">envir</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>()))
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">envir</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span>()))
 }
 <span class="fu">someFunc</span>()</pre></body></html></div>
 <pre><code># A tibble: 2 x 6
@@ -618,9 +618,9 @@ End of the simulation: 2020-05-19 22:19:18</code></pre>
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 1069975
-Start of the simulation: 2020-05-19 22:19:18
-End of the simulation: 2020-05-19 22:19:18
+Estimated replications per hour: 1662024
+Start of the simulation: 2020-09-23 18:15:36
+End of the simulation: 2020-09-23 18:15:36
 --------------------------------------------------
 # A tibble: 2 x 7
   fun       n replications proc        sd   mean   q0.1
@@ -630,30 +630,23 @@ End of the simulation: 2020-05-19 22:19:18
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 693974
-Start of the simulation: 2020-05-19 22:19:18
-End of the simulation: 2020-05-19 22:19:18</code></pre>
+Estimated replications per hour: 1910119
+Start of the simulation: 2020-09-23 18:15:36
+End of the simulation: 2020-09-23 18:15:36</code></pre>
 </div>
 <div id="truth-functionality" class="section level2">
 <h2 class="hasAnchor">
 <a href="#truth-functionality" class="anchor"></a>.truth-functionality</h2>
 <p>Sometimes it is handy to access the parameter constellation that was used during the data generation in the (post) data analyzing phase. Of course, one could write wrapper functions for every data generating function and append the parameter constellation from the data generation as attributes to the data set, but the purpose of this package is to reduce such administrative source code. Hence if the (post) data analyzing function has an argument <em>.truth</em>, then <em>eval_tibbles</em> will manage that hand-over. A brief example should explain this. Suppose we want to estimate the bias of the empirical quantile estimator if the data is normal distributed.</p>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1000</span>), <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">10</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>))
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"quantile"</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.975</span>)
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">1000</span>), <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">10</span>), <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>))
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"quantile"</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.975</span>)
 <span class="no">post_ana</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">q_est</span>, <span class="no">.truth</span>){
   <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(<span class="kw">bias</span> <span class="kw">=</span> <span class="no">q_est</span> - <span class="kw pkg">stats</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span>(<span class="fl">0.975</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="no">.truth</span>$<span class="no">mean</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="no">.truth</span>$<span class="no">sd</span>))
 }
-<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
                    <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>,
                    <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="no">post_ana</span>,
                    <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>))</pre></body></html></div>
-<pre><code>New names:
-* mean -&gt; mean...1
-* mean -&gt; mean...2
-* mean -&gt; mean...3
-* mean -&gt; mean...4
-* mean -&gt; mean...5
-* ...</code></pre>
 <pre><code># A tibble: 8 x 9
   fun    mean    sd     n replications summary_fun proc     probs    bias
   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
@@ -668,32 +661,25 @@ End of the simulation: 2020-05-19 22:19:18</code></pre>
 Number of data generating functions: 8
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 148748
-Start of the simulation: 2020-05-19 22:19:20
-End of the simulation: 2020-05-19 22:19:44</code></pre>
+Estimated replications per hour: 848756
+Start of the simulation: 2020-09-23 18:15:36
+End of the simulation: 2020-09-23 18:15:41</code></pre>
 <p>If we want to do the analysis for different distrubtions we could modify our post data analyzing function, but we can also simply add a <em>.truth</em>-column to the data generating grid. In this case, the information from the <em>.truth</em>-column is directly passed to the <em>.truth</em>-parameter:</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span>(<span class="fl">0.975</span>)),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">qexp</a></span>(<span class="fl">0.975</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>)),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"runif"</span>), <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">qunif</a></span>(<span class="fl">0.975</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>))
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span>(<span class="fl">0.975</span>)),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">qexp</a></span>(<span class="fl">0.975</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>)),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"runif"</span>), <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">qunif</a></span>(<span class="fl">0.975</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>))
 )
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"quantile"</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.975</span>)
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"quantile"</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fl">0.975</span>)
 <span class="no">post_ana</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">q_est</span>, <span class="no">.truth</span>){
   <span class="no">ret</span> <span class="kw">&lt;-</span> <span class="no">q_est</span> - <span class="no">.truth</span>
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">ret</span>) <span class="kw">&lt;-</span> <span class="st">"bias"</span>
   <span class="no">ret</span>
 }
-<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
                    <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>,
                    <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="no">post_ana</span>,
                    <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>))</pre></body></html></div>
-<pre><code>New names:
-* mean -&gt; mean...1
-* mean -&gt; mean...2
-* mean -&gt; mean...3
-* mean -&gt; mean...4
-* mean -&gt; mean...5
-* ...</code></pre>
 <pre><code># A tibble: 6 x 11
   fun    mean     n .truth  rate   max replications summary_fun proc     probs    bias
   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;
@@ -706,16 +692,16 @@ End of the simulation: 2020-05-19 22:19:44</code></pre>
 Number of data generating functions: 6
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 1002360
-Start of the simulation: 2020-05-19 22:19:45
-End of the simulation: 2020-05-19 22:19:49</code></pre>
+Estimated replications per hour: 763125
+Start of the simulation: 2020-09-23 18:15:41
+End of the simulation: 2020-09-23 18:15:46</code></pre>
 <p>In the same fashion one could write a data analyzing function with a parameter <em>.truth</em>. To go even a step further, we store the analytic quantile function in the <em>.truth</em> column:</p>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
                 <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">function</span>(<span class="no">prob</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span>(<span class="no">prob</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>))),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
                 <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">function</span>(<span class="no">prob</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html">qexp</a></span>(<span class="no">prob</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>))),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"runif"</span>), <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"runif"</span>), <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">1000L</span>),
                 <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">function</span>(<span class="no">prob</span>) <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">qunif</a></span>(<span class="no">prob</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">2</span>)))
 )
 <span class="no">bias_quantile</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">prob</span>, <span class="no">.truth</span>) {
@@ -724,33 +710,33 @@ End of the simulation: 2020-05-19 22:19:49</code></pre>
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">ret</span>) <span class="kw">&lt;-</span> <span class="st">"bias"</span>
   <span class="no">ret</span>
 }
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"bias_quantile"</span>, <span class="kw">prob</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.975</span>))
-<span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="st">"bias_quantile"</span>, <span class="kw">prob</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.975</span>))
+<span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">discard_generated_data</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
                    <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">1</span>,
                    <span class="kw">summary_fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">mean</span> <span class="kw">=</span> <span class="no">mean</span>))</pre></body></html></div>
 <pre><code># A tibble: 12 x 11
-   fun    mean     n .truth  rate   max replications summary_fun proc           prob     bias
-   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
- 1 rnorm     0    10 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.9   -0.235  
- 2 rnorm     0    10 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.975 -0.553  
- 3 rnorm     0  1000 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.9   -0.00473
- 4 rnorm     0  1000 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.975 -0.00748
- 5 rexp     NA    10 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.9   -0.291  
- 6 rexp     NA    10 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.975 -1.01   
- 7 rexp     NA  1000 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.9   -0.00120
- 8 rexp     NA  1000 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.975 -0.0220 
- 9 runif    NA    10 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.9   -0.150  
-10 runif    NA    10 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.975 -0.169  
-11 runif    NA  1000 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.9   -0.00142
-12 runif    NA  1000 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.975 -0.00210
+   fun    mean     n .truth  rate   max replications summary_fun proc           prob      bias
+   &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;list&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+ 1 rnorm     0    10 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.9   -0.218   
+ 2 rnorm     0    10 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.975 -0.530   
+ 3 rnorm     0  1000 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.9   -0.00626 
+ 4 rnorm     0  1000 &lt;fn&gt;      NA    NA            1 mean        bias_quantile 0.975 -0.0106  
+ 5 rexp     NA    10 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.9   -0.275   
+ 6 rexp     NA    10 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.975 -0.983   
+ 7 rexp     NA  1000 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.9   -0.00226 
+ 8 rexp     NA  1000 &lt;fn&gt;       1    NA            1 mean        bias_quantile 0.975 -0.0217  
+ 9 runif    NA    10 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.9   -0.150   
+10 runif    NA    10 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.975 -0.173   
+11 runif    NA  1000 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.9   -0.000524
+12 runif    NA  1000 &lt;fn&gt;      NA     2            1 mean        bias_quantile 0.975 -0.00201 
 Number of data generating functions: 6
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 403625
-Start of the simulation: 2020-05-19 22:19:49
-End of the simulation: 2020-05-19 22:19:58</code></pre>
+Estimated replications per hour: 386468
+Start of the simulation: 2020-09-23 18:15:46
+End of the simulation: 2020-09-23 18:15:55</code></pre>
 <p>But one should keep in mind that if one calculates the quantile during the (post) analyzing phase that this is happens on replication level. To be more precise lets look at an excerpt of the pseudo code from the beginning of the vignette:</p>
-<div class="sourceCode" id="cb48"><html><body><pre class="r">6.  for g in  {g_1, ..., g_k} 
+<div class="sourceCode" id="cb46"><html><body><pre class="r">6.  for g in  {g_1, ..., g_k} 
 7.      for r in 1:replications (optionally in a parallel manner) 
 8.          data = g() 
 9.          for f in  {f_1, \ldots, f_L} 
@@ -762,7 +748,7 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 <h1 class="hasAnchor">
 <a href="#some-examples" class="anchor"></a>Some Examples</h1>
 <p>Note, the following code examples will use more computational resources. In order to prevent that these are checked/executed on the CRAN check farm, they are only evaluated if the environment variable <em>NOT_CRAN</em> is set to “true”</p>
-<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="no">EVAL</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="no">EVAL</span> <span class="kw">&lt;-</span> <span class="fl">FALSE</span>
 <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"NOT_CRAN"</span>) <span class="kw">==</span> <span class="st">"true"</span>) {
   <span class="no">EVAL</span> <span class="kw">&lt;-</span> <span class="fl">TRUE</span>
 }</pre></body></html></div>
@@ -770,16 +756,16 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 <h2 class="hasAnchor">
 <a href="#sampling-distribution-of-mean-and-median-for-normal-and-exponential-distributed-data" class="anchor"></a>Sampling distribution of mean and median for normal and exponential distributed data</h2>
 <p>First we define how the data is generated, where the sample size should be 10 and 100:</p>
-<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>)),
-  <span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>))
+<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rnorm"</span>), <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>)),
+  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rexp"</span>), <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10L</span>, <span class="fl">100L</span>))
 )
 <span class="no">dg</span></pre></body></html></div>
 <p>Afterwards we define how we want to analyze the data:</p>
-<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu">expand_tibble</span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mean"</span>, <span class="st">"median"</span>))
+<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="no">pg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mean"</span>, <span class="st">"median"</span>))
 <span class="no">pg</span></pre></body></html></div>
 <p>Finally, we conduct the simulation and visualize the results</p>
-<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">4</span>, <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>)
+<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>, <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">4</span>, <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>)
 
 <span class="no">et</span>$<span class="no">simulation</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">results</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(<span class="no">fun</span>, <span class="no">n</span>), <span class="kw">fill</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(<span class="no">fun</span>, <span class="no">n</span>))) +
@@ -790,7 +776,7 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 <h2 class="hasAnchor">
 <a href="#comparing-bootstrap-confidence-intervals-with-classical-studentized-interval" class="anchor"></a>Comparing bootstrap confidence intervals with classical studentized interval</h2>
 <p>We want to compare the confidence intervals that are generated by <em>boot::boot.ci()</em> and <em>stats::t.test()</em>. Unfortunately, <em>boot::boot.ci()</em> cannot be applied directly to the generated data sets. Therefore, we write a new function:</p>
-<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="no">bootstrap_ci</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">conf.level</span>, <span class="no">R</span> <span class="kw">=</span> <span class="fl">999</span>) {
+<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="no">bootstrap_ci</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">conf.level</span>, <span class="no">R</span> <span class="kw">=</span> <span class="fl">999</span>) {
   <span class="no">b</span> <span class="kw">&lt;-</span> <span class="kw pkg">boot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span>(<span class="no">x</span>, <span class="kw">function</span>(<span class="no">d</span>, <span class="no">i</span>) {
     <span class="no">n</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">i</span>)
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
@@ -801,7 +787,7 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
   <span class="kw pkg">boot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.ci.html">boot.ci</a></span>(<span class="no">b</span>, <span class="kw">conf</span> <span class="kw">=</span> <span class="no">conf.level</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"all"</span>)
 }</pre></body></html></div>
 <p>Furthermore, <em>boot::boot.ci()</em> returns in general more than one confidence interval and the structures returned by <em>boot::boot.ci()</em> and <em>stats::t.test()</em> are also very different. One solution could be to write a function <em>t_test()</em> that calls <em>stats::t.test()</em>, modifies the returned object and additionally modify the function <em>bootstrap_ci</em> so that both function return objects with a unified structure. But instead of that we will implement a function that is later on passed to the argument <em>post_analyze</em> of <em>eval_tibbles</em>:</p>
-<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="no">post_analyze</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">o</span>, <span class="no">.truth</span>) {
+<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="no">post_analyze</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">o</span>, <span class="no">.truth</span>) {
   <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">o</span>) <span class="kw">==</span> <span class="st">"htest"</span>) {
   <span class="co">#post-process the object returned by t.test</span>
     <span class="no">ci</span> <span class="kw">&lt;-</span> <span class="no">o</span>$<span class="no">conf.int</span>
@@ -836,20 +822,20 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 <h3 class="hasAnchor">
 <a href="#define-and-run-the-simulation" class="anchor"></a>Define and run the simulation</h3>
 <p>We want to generate normal-, uniform-, and exponential distributed data:</p>
-<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">0</span>),
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">3</span>),
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span> / <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>))
+<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">0</span>),
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">3</span>),
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span> / <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>))
 )
 <span class="no">dg</span></pre></body></html></div>
 <p>and apply our functions that calculate the confidence intervals to it using two different confidence levels.</p>
-<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="no">pg</span> <span class="kw">&lt;-</span> <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(
+<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="no">pg</span> <span class="kw">&lt;-</span> <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(
   <span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"t.test"</span>,<span class="st">"bootstrap_ci"</span>),
   <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>)
 )
 <span class="no">pg</span></pre></body></html></div>
 <p>Note, that the structure of the objects returned are quite different which addressed by our function <em>post_analyze</em>. The variables <em>type</em> and <em>aspect</em> that are created by <em>post_analyze</em> are to distinguish the different confidence intervals. Since these variables are part of the result objects, <em>eval_tibbles</em> assumes that these variables are results. In order to summarize the results (calculating the mean) over all replications correctly we need to tell eval_tibbles that additional group variables are <em>type</em> and <em>aspect</em>:</p>
-<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>,
+<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>,
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">3</span>, <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>,
   <span class="kw">cluster_global_objects</span> <span class="kw">=</span> <span class="st">"post_analyze"</span>,
   <span class="kw">post_analyze</span> <span class="kw">=</span> <span class="no">post_analyze</span>,
@@ -858,7 +844,7 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 )
 <span class="no">et</span></pre></body></html></div>
 <p>Finally, we can visualize the summarized results:</p>
-<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">et</span>$<span class="no">simulation</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="no">et</span>$<span class="no">simulation</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">fun</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">value</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">type</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">type</span>, <span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">value</span>, <span class="fl">2</span>))) +
   <span class="fu">geom_col</span>(<span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
   <span class="fu">geom_label</span>(<span class="kw">position</span> <span class="kw">=</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>) +
@@ -869,7 +855,7 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 <h3 class="hasAnchor">
 <a href="#a-different-implementation" class="anchor"></a>A different implementation</h3>
 <p>Here we briefly realize the simulation differently by leveraging data analyzing functions with unified return-objects:</p>
-<div class="sourceCode" id="cb59"><html><body><pre class="r"><span class="no">t_test</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">conf.level</span>){
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="no">t_test</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">conf.level</span>){
   <span class="no">tt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="no">x</span>, <span class="kw">conf.level</span> <span class="kw">=</span> <span class="no">conf.level</span>)
 
   <span class="co"># unify return</span>
@@ -896,22 +882,22 @@ End of the simulation: 2020-05-19 22:19:58</code></pre>
 }
 
 <span class="no">dg</span> <span class="kw">&lt;-</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">0</span>),
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">3</span>),
-  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span> / <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>))
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rnorm"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">mean</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">sd</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">0</span>),
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"runif"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">max</span> <span class="kw">=</span> <span class="fl">6</span>, <span class="kw">.truth</span> <span class="kw">=</span> <span class="fl">3</span>),
+  <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(<span class="kw">fun</span> <span class="kw">=</span> <span class="st">"rexp"</span>, <span class="kw">n</span> <span class="kw">=</span> <span class="fl">10L</span>, <span class="kw">rate</span> <span class="kw">=</span> <span class="fl">1</span> / <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>), <span class="kw">.truth</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="fl">3</span>))
 )
 
-<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu">expand_tibble</span>(
+<span class="no">pg</span> <span class="kw">&lt;-</span> <span class="kw pkg">simTool</span><span class="kw ns">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span>(
   <span class="kw">proc</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"t_test"</span>,<span class="st">"bootstrap_ci"</span>),
   <span class="kw">conf.level</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>)
 ) <span class="kw">%&gt;%</span>
   <span class="fu">mutate</span>(<span class="kw">R</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">proc</span> <span class="kw">==</span> <span class="st">"bootstrap_ci"</span>, <span class="fl">100</span>, <span class="fl">NA</span>))
 
-<span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu">eval_tibbles</span>(<span class="no">dg</span>, <span class="no">pg</span>,
+<span class="no">et</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span>(<span class="no">dg</span>, <span class="no">pg</span>,
   <span class="kw">replications</span> <span class="kw">=</span> <span class="fl">10</span>^<span class="fl">2</span>, <span class="kw">ncpus</span> <span class="kw">=</span> <span class="fl">2</span>
 )
 <span class="no">et</span></pre></body></html></div>
-<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">grps</span> <span class="kw">&lt;-</span> <span class="no">et</span>$<span class="no">simulation</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">grps</span> <span class="kw">&lt;-</span> <span class="no">et</span>$<span class="no">simulation</span> <span class="kw">%&gt;%</span>
   <span class="fu">select</span>(-<span class="no">replications</span>) <span class="kw">%&gt;%</span>
   <span class="fu">select</span>(<span class="no">fun</span>:<span class="no">type</span>) <span class="kw">%&gt;%</span>
   <span class="no">names</span>

@@ -3,7 +3,8 @@ unnest_simulation <- function(e) {
   # tidyr::unnest can be extremely slow, which seems to be related to
   # https://github.com/r-lib/vctrs/issues/530
   s <- try(tidyr::unnest(e$simulation, cols = c("results")),
-           silent = TRUE)
+    silent = TRUE
+  )
   if (class(s)[[1]] != "try-error") {
     e$simulation <- s
     return(e)
