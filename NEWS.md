@@ -1,3 +1,9 @@
+
+Version 1.1.7.9000
+=========================
+
+* placeholder for next development-cycle
+
 Version 1.1.7
 =========================
 
