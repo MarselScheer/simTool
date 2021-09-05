@@ -4,7 +4,7 @@
 status](https://github.com/MarselScheer/simTool/workflows/R-CMD-check/badge.svg)](https://github.com/MarselScheer/simTool/actions)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/MarselScheer/simTool/develop.svg)](https://codecov.io/github/MarselScheer/simTool?branch=develop)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -65,9 +65,9 @@ using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
     #> Number of data generating functions: 4
     #> Number of analyzing procedures: 3
     #> Number of replications: 1000
-    #> Estimated replications per hour: 1207113
-    #> Start of the simulation: 2021-09-05 06:48:38
-    #> End of the simulation: 2021-09-05 06:48:41
+    #> Estimated replications per hour: 1214959
+    #> Start of the simulation: 2021-09-05 06:54:43
+    #> End of the simulation: 2021-09-05 06:54:46
 
 ## Installation
 
