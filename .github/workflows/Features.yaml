@@ -1,0 +1,70 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: [feature/**]
+    paths: [DESCRIPTION, .Rbuildignore, R/**, tests/**, inst/**, .github/**]
+
+
+name: Feature-branch-checks
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: true
+      matrix:
+        config:
+          - {os: ubuntu-latest,   r: 'release'}
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: rcmdcheck, covr, tinytest
+
+      - name: Lint
+        run: |
+          out <- lintr::lint_dir()
+          if (0 < length(out)) stop("Linting failure") else print("Linting successful")
+        shell: Rscript {0}
+      
+      - name: Coverage
+        run: |
+          library(tinytest)
+          roxygen2::roxygenize()
+          test_covr <- covr::package_coverage()
+          lowest_covr_value <- min(sapply(test_covr, "[[", "value"))
+          if (lowest_covr_value < 1) stop(sprintf("Coverage of %s (<1) too low", lowest_covr_value))
+        shell: Rscript {0}
+
+      - name: Check
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+        run: |
+          options(crayon.enabled = TRUE)
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
