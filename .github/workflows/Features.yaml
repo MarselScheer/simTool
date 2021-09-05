@@ -37,10 +37,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          extra-packages: rcmdcheck, covr, tinytest
+          extra-packages: rcmdcheck, covr, tinytest, lintr
 
       - name: Lint
         run: |
+          library(tinytest)
           out <- lintr::lint_dir()
           if (0 < length(out)) stop("Linting failure") else print("Linting successful")
         shell: Rscript {0}
