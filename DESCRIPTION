@@ -29,7 +29,9 @@ Suggests:
     broom,
     rmarkdown,
     tinytest,
-    lintr
+    lintr,
+    roxygen2,
+    covr
 License: GPL-3
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
