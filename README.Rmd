@@ -12,23 +12,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r badges, results='asis', echo=FALSE}
-suppressPackageStartupMessages(library(badgecreatr))
-acc <- "MarselScheer"
-repo <- "simTool"
-branch <- "master"
-status <- "active"
-lifecycle <- "Stable"
-badges <- list(
-  badge_travis(ghaccount = acc, ghrepo = repo, branch = branch),
-  badge_lifecycle(lifecycle = lifecycle),
-  badge_projectstatus(status = status),
-  badge_cran_version_ago(packagename = repo),
-  badge_cran_downloads(packagename = repo),
-  badge_license()
-  )
-cat(paste(badges, collapse = " "))
-```
+
+[![R build status](https://github.com/MarselScheer/simTool/workflows/R-CMD-check/badge.svg)](https://github.com/MarselScheer/simTool/actions)
+[![Coverage Status](https://img.shields.io/codecov/c/github/MarselScheer/simTool/develop.svg)](https://codecov.io/github/MarselScheer/simTool?branch=develop)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/simTool)](https://cran.r-project.org/package=simTool)
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/simTool)](https://cran.r-project.org/package=simTool)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 
 # simTool
 
@@ -71,9 +66,7 @@ et
 You can install simTool from github with:
 
 ```{r gh-installation, eval = FALSE}
-install.packages("simTool")
-# install.packages("devtools")
-devtools::install_github("MarselScheer/simTool")
+remotes::install_github("MarselScheer/simTool")
 ```
 
 Or from CRAN with:

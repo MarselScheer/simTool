@@ -28,7 +28,10 @@ Suggests:
     boot,
     broom,
     rmarkdown,
-    tinytest
+    tinytest,
+    lintr,
+    roxygen2,
+    covr
 License: GPL-3
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
