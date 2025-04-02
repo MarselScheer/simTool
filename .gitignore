@@ -44,3 +44,4 @@ man/
 
 # pkgdown generated files
 docs/
+/docker/.env
