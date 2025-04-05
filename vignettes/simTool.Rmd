@@ -559,8 +559,8 @@ post_analyze <- function(o, .truth) {
   #post-process the object returned by boot.ci
     method = c("normal", "basic", "student", "percent", "bca")
     ret = o[method]
-    lower = unlist(purrr::map(ret, ~dplyr::nth(.x, -2)))
-    upper = sapply(ret, dplyr::last)
+    lower = unlist(purrr::map(ret, ~dplyr::nth(.x[1,], -2)))
+    upper = unlist(purrr::map(ret, ~dplyr::nth(.x[1,], -1)))
     type = paste("boot", method, sep = "_")
 
     return(
@@ -657,8 +657,8 @@ bootstrap_ci <- function(x, conf.level, R = 999) {
   ci <- boot::boot.ci(b, conf = conf.level, type = "all")
   method = c("normal", "basic", "student", "percent", "bca")
   ret = ci[method]
-  lower = unlist(purrr::map(ret, ~dplyr::nth(.x, -2)))
-  upper = sapply(ret, dplyr::last)
+  lower = unlist(purrr::map(ret, ~dplyr::nth(.x[1,], -2)))
+  upper = unlist(purrr::map(ret, ~dplyr::nth(.x[1,], -1)))
   type = paste("boot", method, sep = "_")
   
   # unify return

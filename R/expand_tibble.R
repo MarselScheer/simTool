@@ -7,7 +7,7 @@
 #' @param \dots  vectors, factors or a list containing these.
 #' @return See \code{\link{expand.grid}} but instead of a
 #'  \code{\link{data.frame}}
-#'  a \code{\link{tibble}} is returned.
+#'  a \code{\link[tibble:tibble]{tibble}} is returned.
 #' @author  Marsel Scheer
 #' @seealso  \code{\link{expand.grid}}
 #' @examples

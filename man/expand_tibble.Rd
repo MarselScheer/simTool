@@ -12,7 +12,7 @@ expand_tibble(...)
 \value{
 See \code{\link{expand.grid}} but instead of a
  \code{\link{data.frame}}
- a \code{\link{tibble}} is returned.
+ a \code{\link[tibble:tibble]{tibble}} is returned.
 }
 \description{
 Actually a wrapper for \code{\link{expand.grid}}, but

@@ -1,0 +1,38 @@
+services:
+  ide:
+    container_name: ide
+    build:
+      context: ./docker_context
+      dockerfile: ide/Dockerfile
+      args:
+        DOCKER_BUILDKIT: 1
+        USER_ID: 1000
+        GROUP_ID: 1000
+        BASE_IMAGE: rocker/verse:4
+    shm_size: 8gb
+    volumes:
+      - /home/m/docker_fs/repos/simTool:/home/rstudio/simTool
+      - /home/m/docker_fs/repos/orgfiles/:/home/rstudio/docker_fs/repos/orgfiles/
+      - /home/m/docker_fs/dots/.emacs.d.lean:/home/rstudio/.emacs.d
+      - /home/m/docker_fs/dots/.ssh:/home/rstudio/.ssh
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=:0
+      - RUNNING_HOST=local
+      - DISABLE_AUTH=true
+    ports:
+      - 8787:8787
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:0.5.7
+    ports:
+      - 11434:11434
+    volumes:
+      - /home/m/docker_fs/ollama-cache:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
