@@ -47,7 +47,7 @@ using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
       summary_fun = list(mean = mean)
     )
     et
-    #> # A tibble: 12 x 8
+    #> # A tibble: 12 × 8
     #>    fun    rate     n replications summary_fun proc   conf.level coverage
     #>    <chr> <dbl> <int>        <int> <chr>       <chr>       <dbl>    <dbl>
     #>  1 rexp     10    10            1 mean        t.test       0.8     0.754
@@ -65,9 +65,9 @@ using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
     #> Number of data generating functions: 4
     #> Number of analyzing procedures: 3
     #> Number of replications: 1000
-    #> Estimated replications per hour: 1214959
-    #> Start of the simulation: 2021-09-05 06:54:43
-    #> End of the simulation: 2021-09-05 06:54:46
+    #> Estimated replications per hour: 1318457
+    #> Start of the simulation: 2025-04-05 05:37:59.800157
+    #> End of the simulation: 2025-04-05 05:38:02.530619
 
 ## Installation
 
