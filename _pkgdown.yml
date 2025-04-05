@@ -1,6 +1,7 @@
 title: simTool
 url: http://MarselScheer.github.io/simTool
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly
     
