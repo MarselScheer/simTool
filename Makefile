@@ -13,7 +13,7 @@ NAMESPACE: R/*
 	Rscript -e "roxygen2::roxygenize()"
 
 R-cmd-check: NAMESPACE
-	Rscript -e "devtools::check(document=FALSE, vignettes=FALSE, args=c('--as-cran'))"
+	Rscript -e "devtools::check(document=FALSE, args=c('--as-cran'))"
 	# R CMD build .
 	# R CMD check --as-cran --no-manual $(PKGNAME)*.tar.gz
 	# make clean-pkg-build-file
