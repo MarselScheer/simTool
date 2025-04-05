@@ -57,7 +57,7 @@ Scheer</h4>
             
             <h4 data-toc-skip class="date">2025-04-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/fix-pkgdown/vignettes/simTool.Rmd" class="external-link"><code>vignettes/simTool.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/development/vignettes/simTool.Rmd" class="external-link"><code>vignettes/simTool.Rmd</code></a></small>
       <div class="d-none name"><code>simTool.Rmd</code></div>
     </div>
 
@@ -122,9 +122,9 @@ corresponding model terms</li>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 87214
-Start of the simulation: 2025-04-05 13:33:17.152267
-End of the simulation: 2025-04-05 13:33:17.276098</code></pre>
+Estimated replications per hour: 86289
+Start of the simulation: 2025-04-05 14:26:55.713951
+End of the simulation: 2025-04-05 14:26:55.839111</code></pre>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -241,9 +241,9 @@ class <em>eval_tibbles</em>.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 2
-Estimated replications per hour: 79471023
-Start of the simulation: 2025-04-05 13:33:17.744066
-End of the simulation: 2025-04-05 13:33:17.744157</code></pre>
+Estimated replications per hour: 80962436
+Start of the simulation: 2025-04-05 14:26:56.306591
+End of the simulation: 2025-04-05 14:26:56.30668</code></pre>
 <p>As you can see, the function always estimates the number of
 replications that can be done in one hour.</p>
 <div class="section level3">
@@ -266,9 +266,9 @@ conducted.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 3
-Estimated replications per hour: 99557105
-Start of the simulation: 2025-04-05 13:33:17.840691
-End of the simulation: 2025-04-05 13:33:17.840799</code></pre>
+Estimated replications per hour: 99338778
+Start of the simulation: 2025-04-05 14:26:56.403119
+End of the simulation: 2025-04-05 14:26:56.403228</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-discard_generated_data">Parameter <em>discard_generated_data</em><a class="anchor" aria-label="anchor" href="#parameter-discard_generated_data"></a>
@@ -321,9 +321,9 @@ all replications but separately for all data analyzing functions.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 48700819
-Start of the simulation: 2025-04-05 13:33:18.040236
-End of the simulation: 2025-04-05 13:33:18.114157</code></pre>
+Estimated replications per hour: 48240271
+Start of the simulation: 2025-04-05 14:26:56.602116
+End of the simulation: 2025-04-05 14:26:56.676742</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">1000</span>,</span>
@@ -347,9 +347,9 @@ End of the simulation: 2025-04-05 13:33:18.114157</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 44892342
-Start of the simulation: 2025-04-05 13:33:18.142846
-End of the simulation: 2025-04-05 13:33:18.223038</code></pre>
+Estimated replications per hour: 44537471
+Start of the simulation: 2025-04-05 14:26:56.705379
+End of the simulation: 2025-04-05 14:26:56.78621</code></pre>
 <p>Note, by specifying the parameter <em>summary_fun</em> the generated
 data sets and all individual result objects are discarded. In this
 example we discard
@@ -383,9 +383,9 @@ like in the Section <em>A first example</em>.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 1062820
-Start of the simulation: 2025-04-05 13:33:18.317779
-End of the simulation: 2025-04-05 13:33:18.324554</code></pre>
+Estimated replications per hour: 1068045
+Start of the simulation: 2025-04-05 14:26:56.87898
+End of the simulation: 2025-04-05 14:26:56.885721</code></pre>
 <p>The parameter <em>post_analyze</em> (if specified) is applied
 directly after the result was generated (see command line 10). Note,
 <em>purrr::compose</em> can be very handy if your
@@ -411,9 +411,9 @@ post-analyzing-function can be defined by a few single functions:</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 545630
-Start of the simulation: 2025-04-05 13:33:18.452665
-End of the simulation: 2025-04-05 13:33:18.46586</code></pre>
+Estimated replications per hour: 529203
+Start of the simulation: 2025-04-05 14:26:57.014563
+End of the simulation: 2025-04-05 14:26:57.028168</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-group_for_summary">Parameter <em>group_for_summary</em><a class="anchor" aria-label="anchor" href="#parameter-group_for_summary"></a>
@@ -451,9 +451,9 @@ instance</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 641721
-Start of the simulation: 2025-04-05 13:33:18.559466
-End of the simulation: 2025-04-05 13:33:18.576296</code></pre>
+Estimated replications per hour: 641376
+Start of the simulation: 2025-04-05 14:26:57.122872
+End of the simulation: 2025-04-05 14:26:57.13971</code></pre>
 <p>In order to summarize the replications it is necessary to additional
 group the calculations with respect to another variable. This variable
 can be passed to <em>group_for_summary</em></p>
@@ -489,9 +489,9 @@ can be passed to <em>group_for_summary</em></p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 211410
-Start of the simulation: 2025-04-05 13:33:18.681837
-End of the simulation: 2025-04-05 13:33:18.732923</code></pre>
+Estimated replications per hour: 210433
+Start of the simulation: 2025-04-05 14:26:57.244678
+End of the simulation: 2025-04-05 14:26:57.296</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-ncpus-and-cluster_seed">Parameter <em>ncpus</em> and <em>cluster_seed</em><a class="anchor" aria-label="anchor" href="#parameter-ncpus-and-cluster_seed"></a>
@@ -516,9 +516,9 @@ discussed in the next section.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 95799
-Start of the simulation: 2025-04-05 13:33:19.076426
-End of the simulation: 2025-04-05 13:33:19.452209</code></pre>
+Estimated replications per hour: 97748
+Start of the simulation: 2025-04-05 14:26:57.638422
+End of the simulation: 2025-04-05 14:26:58.006715</code></pre>
 <p>As it is stated in command line 7, the replications are parallelized.
 In our case, this means that roughly every CPU conducts 5
 replications.</p>
@@ -553,9 +553,9 @@ network.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 97263
-Start of the simulation: 2025-04-05 13:33:19.787899
-End of the simulation: 2025-04-05 13:33:20.158029</code></pre>
+Estimated replications per hour: 95842
+Start of the simulation: 2025-04-05 14:26:58.344406
+End of the simulation: 2025-04-05 14:26:58.720022</code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 <p>As you can see our cluster consists of 3 workers. Hence, this
@@ -645,9 +645,9 @@ c(“boot”)</em> and transfer the function <em>ratio</em> by setting
 Number of data generating functions: 1
 Number of analyzing procedures: 1
 Number of replications: 10
-Estimated replications per hour: 211116
-Start of the simulation: 2025-04-05 13:33:20.957689
-End of the simulation: 2025-04-05 13:33:21.128211</code></pre>
+Estimated replications per hour: 210764
+Start of the simulation: 2025-04-05 14:26:59.509877
+End of the simulation: 2025-04-05 14:26:59.680685</code></pre>
 <p>Of course, it is possible to set
 <em>cluster_global_objects=ls()</em>, but then all objects from the
 global environment are transferred to all workers.</p>
@@ -690,9 +690,9 @@ parameter <em>envir</em>.</p>
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2476544
-Start of the simulation: 2025-04-05 13:33:21.271641
-End of the simulation: 2025-04-05 13:33:21.273094
+Estimated replications per hour: 2624629
+Start of the simulation: 2025-04-05 14:26:59.81862
+End of the simulation: 2025-04-05 14:26:59.819992
 --------------------------------------------------
  [38;5;246m# A tibble: 2 × 7 [39m
   fun       n replications proc        sd   mean   q0.1
@@ -702,9 +702,9 @@ End of the simulation: 2025-04-05 13:33:21.273094
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 3211974
-Start of the simulation: 2025-04-05 13:33:21.300407
-End of the simulation: 2025-04-05 13:33:21.301528</code></pre>
+Estimated replications per hour: 2995931
+Start of the simulation: 2025-04-05 14:26:59.847666
+End of the simulation: 2025-04-05 14:26:59.848868</code></pre>
 </div>
 <div class="section level3">
 <h3 id="truth-functionality">.truth-functionality<a class="anchor" aria-label="anchor" href="#truth-functionality"></a>
@@ -743,9 +743,9 @@ quantile estimator if the data is normal distributed.</p>
 Number of data generating functions: 8
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 1269290
-Start of the simulation: 2025-04-05 13:33:21.650874
-End of the simulation: 2025-04-05 13:33:24.487104</code></pre>
+Estimated replications per hour: 1274240
+Start of the simulation: 2025-04-05 14:27:00.174552
+End of the simulation: 2025-04-05 14:27:02.999765</code></pre>
 <p>If we want to do the analysis for different distrubtions we could
 modify our post data analyzing function, but we can also simply add a
 <em>.truth</em>-column to the data generating grid. In this case, the
@@ -779,9 +779,9 @@ information from the <em>.truth</em>-column is directly passed to the
 Number of data generating functions: 6
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 3310681
-Start of the simulation: 2025-04-05 13:33:24.824956
-End of the simulation: 2025-04-05 13:33:25.912345</code></pre>
+Estimated replications per hour: 3066382
+Start of the simulation: 2025-04-05 14:27:03.346691
+End of the simulation: 2025-04-05 14:27:04.520713</code></pre>
 <p>In the same fashion one could write a data analyzing function with a
 parameter <em>.truth</em>. To go even a step further, we store the
 analytic quantile function in the <em>.truth</em> column:</p>
@@ -822,9 +822,9 @@ analytic quantile function in the <em>.truth</em> column:</p>
 Number of data generating functions: 6
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 2109163
-Start of the simulation: 2025-04-05 13:33:26.026188
-End of the simulation: 2025-04-05 13:33:27.733026</code></pre>
+Estimated replications per hour: 2114311
+Start of the simulation: 2025-04-05 14:27:04.63244
+End of the simulation: 2025-04-05 14:27:06.335121</code></pre>
 <p>But one should keep in mind that if one calculates the quantile
 during the (post) analyzing phase that this is happens on replication
 level. To be more precise lets look at an excerpt of the pseudo code
@@ -1023,9 +1023,9 @@ are <em>type</em> and <em>aspect</em>:</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 1000
-Estimated replications per hour: 14643
-Start of the simulation: 2025-04-05 13:33:31.416754
-End of the simulation: 2025-04-05 13:37:37.259046</code></pre>
+Estimated replications per hour: 14567
+Start of the simulation: 2025-04-05 14:27:09.995759
+End of the simulation: 2025-04-05 14:31:17.114136</code></pre>
 <p>Finally, we can visualize the summarized results:</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">et</span><span class="op">$</span><span class="va">simulation</span> <span class="op">%&gt;%</span></span>
@@ -1101,9 +1101,9 @@ analyzing functions with unified return-objects:</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 100
-Estimated replications per hour: 153054
-Start of the simulation: 2025-04-05 13:37:38.744685
-End of the simulation: 2025-04-05 13:37:41.096785</code></pre>
+Estimated replications per hour: 151538
+Start of the simulation: 2025-04-05 14:31:18.630054
+End of the simulation: 2025-04-05 14:31:21.005684</code></pre>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="va">et</span><span class="op">$</span><span class="va">simulation</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">replications</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>

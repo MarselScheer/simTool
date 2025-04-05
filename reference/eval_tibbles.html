@@ -36,7 +36,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Workhorse for simulation studies</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/fix-pkgdown/R/eval_tibbles.R" class="external-link"><code>R/eval_tibbles.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/development/R/eval_tibbles.R" class="external-link"><code>R/eval_tibbles.R</code></a></small>
       <div class="d-none name"><code>eval_tibbles.Rd</code></div>
     </div>
 
@@ -240,9 +240,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 14972230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.444058</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.444539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 14131487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:51.684352</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:51.684862</span>
 <span class="r-in"><span><span class="fu">eval_tibbles</span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>, rep <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    fun       n replications proc   results</span>
@@ -266,9 +266,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 23519461</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.497577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.497884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 21899194</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:51.736286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:51.736615</span>
 <span class="r-in"><span><span class="fu">eval_tibbles</span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>,</span></span>
 <span class="r-in"><span>  rep <span class="op">=</span> <span class="fl">2</span>,</span></span>
 <span class="r-in"><span>  post_analyze <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/compose.html" class="external-link">compose</a></span><span class="op">(</span><span class="va">as.data.frame</span>, <span class="va">t</span><span class="op">)</span></span></span>
@@ -291,9 +291,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 1345586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.533248</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.538599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 1362094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:51.771258</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:51.776544</span>
 <span class="r-in"><span><span class="fu">eval_tibbles</span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>, rep <span class="op">=</span> <span class="fl">2</span>, summary_fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    fun       n replications summary_fun proc       min    max  value</span>
@@ -313,9 +313,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 257639</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.570665</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.598611</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 260686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:51.807884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:51.835503</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">regData</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">SD</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -348,9 +348,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 1262464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.636065</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.64462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 1182172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:51.87254</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:51.881676</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">presever_rownames</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">rn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
@@ -422,9 +422,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 276175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:13.852719</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:13.983071</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 285968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:52.067451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:52.193339</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"rexp"</span>, rate <span class="op">=</span> <span class="fl">10</span>, .truth <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">10</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50L</span>, <span class="fl">100L</span><span class="op">)</span><span class="op">)</span>,</span></span>
@@ -457,9 +457,9 @@ tried to unnest it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of data generating functions: 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of analyzing procedures: 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of replications: 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 532337</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 13:33:14.019451</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 13:33:14.087077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated replications per hour: 530022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start of the simulation: 2025-04-05 14:26:52.229343</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> End of the simulation: 2025-04-05 14:26:52.297265</span>
 <span class="r-in"><span><span class="co">### need to remove the locally adapted eval_tibbles()</span></span></span>
 <span class="r-in"><span><span class="co">### otherwise executing the examples would mask</span></span></span>
 <span class="r-in"><span><span class="co">### eval_tibbles from simTool-namespace.</span></span></span>
