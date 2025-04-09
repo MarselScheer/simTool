@@ -31,7 +31,7 @@ start-docker: .env
 
 shell-docker:
 	@echo -------------------- $@ $$(date) --------------------
-	sudo docker exec -it ide /bin/sh -c "/bin/bash && su -l rstudio" || { exit 1; }
+	sudo docker exec -u rstudio -it ide /bin/sh -c "/bin/bash" || { exit 1; }
 	echo
 	echo "Docker container is running..."
 

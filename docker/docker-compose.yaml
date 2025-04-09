@@ -24,7 +24,7 @@ services:
       - 8787:8787
   ollama:
     container_name: ollama
-    image: ollama/ollama:0.5.7
+    image: ollama/ollama:0.6.4
     ports:
       - 11434:11434
     volumes:
