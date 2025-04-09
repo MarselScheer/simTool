@@ -2,8 +2,6 @@
 
 [![R build
 status](https://github.com/MarselScheer/simTool/workflows/R-CMD-check/badge.svg)](https://github.com/MarselScheer/simTool/actions)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/MarselScheer/simTool/develop.svg)](https://codecov.io/github/MarselScheer/simTool?branch=develop)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively

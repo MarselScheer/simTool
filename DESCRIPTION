@@ -35,5 +35,5 @@ Suggests:
 License: GPL-3
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
-URL: http://MarselScheer.github.io/simTool
+URL: https://marselscheer.github.io/simTool/
 BugReports: https://github.com/MarselScheer/simTool/issues
