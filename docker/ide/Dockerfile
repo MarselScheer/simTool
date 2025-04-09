@@ -1,4 +1,8 @@
-FROM rocker/verse:4.1.0
+ARG BASE_IMAGE=
+FROM ${BASE_IMAGE}
+
+ARG USER_ID=
+ARG GROUP_ID=
 
 RUN apt-get update && apt-get install -y \
     ranger \
@@ -17,14 +21,11 @@ RUN apt-get update && apt-get install -y \
 
 USER rstudio
 WORKDIR /home/rstudio
-RUN mkdir -p /tmp/hostfs \
-    && ln -s /tmp/hostfs \
-    && ln -s /tmp/hostfs/.emacs.d \
-    && ln -s /tmp/hostfs/.gitconfig \
-    && ln -s /tmp/hostfs/.ssh \
-    && echo "export DISPLAY=:0" > /home/rstudio/.bashrc \
-    && echo RENV_PATHS_ROOT=~/hostfs/renv/ > /home/rstudio/.Renviron
 
+RUN git config --global user.email "scheer@freescience.de" \
+    && git config --global user.name "Marsel Scheer"
 # last command MUST be USER root?!?
-# otherwise container will directly stop
+# otherwise container RStudio is not available
 USER root
+
+
