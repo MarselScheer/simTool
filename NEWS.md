@@ -1,5 +1,10 @@
 
-Version 1.1.7.9000
+Version 1.1.8.9000
+=========================
+
+* placeholder for next development-cycle
+
+Version 1.1.8
 =========================
 
 * Upcoming R-version does not allow to apply attr() to primitives to assign values. Fix this by decorating primitives if they are used.
