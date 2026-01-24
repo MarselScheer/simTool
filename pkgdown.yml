@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   simTool: simTool.html
-last_built: 2025-04-10T18:38Z
+last_built: 2026-01-24T07:30Z
 urls:
   reference: http://MarselScheer.github.io/simTool/reference
   article: http://MarselScheer.github.io/simTool/articles

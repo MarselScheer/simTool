@@ -55,7 +55,7 @@
                         <h4 data-toc-skip class="author">Marsel
 Scheer</h4>
             
-            <h4 data-toc-skip class="date">2025-04-10</h4>
+            <h4 data-toc-skip class="date">2026-01-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/MarselScheer/simTool/blob/development/vignettes/simTool.Rmd" class="external-link"><code>vignettes/simTool.Rmd</code></a></small>
       <div class="d-none name"><code>simTool.Rmd</code></div>
@@ -94,11 +94,6 @@ corresponding model terms</li>
 <span>  group_for_summary <span class="op">=</span> <span class="st">"term"</span>,</span>
 <span>  replications <span class="op">=</span> <span class="fl">3</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>Warning:  [1m [22mThe `.dots` argument of `group_by()` is deprecated as of dplyr 1.0.0.
- [36mℹ [39m The deprecated feature was likely used in the  [34mdplyr [39m package.
-  Please report the issue at  [3m [34m&lt;https://github.com/tidyverse/dplyr/issues&gt; [39m [23m.
- [90mThis warning is displayed once every 8 hours. [39m
- [90mCall `lifecycle::last_lifecycle_warnings()` to see where this warning was generated. [39m</code></pre>
 <pre><code> [38;5;246m# A tibble: 16 × 12 [39m
    fun         n    SD replications summary_fun proc  formula  term     estimate std.error statistic
     [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;int&gt; [39m [23m  [3m [38;5;246m&lt;int&gt; [39m [23m         [3m [38;5;246m&lt;int&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m        [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m     [3m [38;5;246m&lt;chr&gt; [39m [23m        [3m [38;5;246m&lt;dbl&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m
@@ -122,9 +117,9 @@ corresponding model terms</li>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 75937
-Start of the simulation: 2025-04-10 18:38:43.240327
-End of the simulation: 2025-04-10 18:38:43.382548</code></pre>
+Estimated replications per hour: 117413
+Start of the simulation: 2026-01-24 07:30:16.633815
+End of the simulation: 2026-01-24 07:30:16.725798</code></pre>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -166,7 +161,7 @@ in the first column.</li>
 defining such <em>data.frames</em>.</p>
 <p>We now define the data generation functions for our first
 simulation.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"rexp"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">20L</span><span class="op">)</span>, rate <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"rnorm"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">20L</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
@@ -189,7 +184,7 @@ exponential distributed random variables with <em>rate</em> 1. Since
 <em>rexp</em>.</p>
 <p>Similar, we define the <em>data.frame</em> for data analyzing
 functions.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"mean"</span>, trim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
@@ -209,24 +204,24 @@ i.e. calculating the minimum and the arithmetic mean with
 </h2>
 <p>The workhorse <em>eval_tibbles</em> has the following simplified
 pseudo code:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fl">1.</span>  convert dg to R<span class="sc">-</span>functions  {g_1, ..., g_k} </span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fl">2.</span>  convert pg to R<span class="sc">-</span>functions  {f_1, ..., f_L} </span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fl">3.</span>  initialize result object </span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fl">4.</span>  append dg and pg to the result object </span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fl">5.</span>  t1 <span class="ot">=</span> <span class="fu">current.time</span>() </span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fl">6.</span>  <span class="cf">for</span> g <span class="cf">in</span>  {g_1, ..., g_k} </span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="fl">7.</span>      <span class="cf">for</span> r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">replications</span> (optionally <span class="cf">in</span> a parallel manner) </span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="fl">8.</span>          data <span class="ot">=</span> <span class="fu">g</span>() </span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fl">9.</span>          <span class="cf">for</span> f <span class="cf">in</span>  {f_1, \ldots, f_L} </span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="fl">10.</span>             append <span class="fu">f</span>(data) to the result <span class="fu">object</span> (optionally apply a post<span class="sc">-</span>analyze<span class="sc">-</span><span class="cf">function</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="fl">11.</span>         optionally append data to the result object </span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="fl">12.</span>      optionally summarize the result object over all  </span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>         replications but separately <span class="cf">for</span> f_1, ..., <span class="fu">f_L</span> (and optional group variables)</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="fl">13.</span> t2 <span class="ot">=</span> <span class="fu">current.time</span>() </span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="fl">14.</span> Estimate the number of replications per hour from t1 and t2 </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fl">1.</span>  convert dg to R<span class="sc">-</span>functions  {g_1, ..., g_k} </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fl">2.</span>  convert pg to R<span class="sc">-</span>functions  {f_1, ..., f_L} </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fl">3.</span>  initialize result object </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fl">4.</span>  append dg and pg to the result object </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fl">5.</span>  t1 <span class="ot">=</span> <span class="fu">current.time</span>() </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fl">6.</span>  <span class="cf">for</span> g <span class="cf">in</span>  {g_1, ..., g_k} </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="fl">7.</span>      <span class="cf">for</span> r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">replications</span> (optionally <span class="cf">in</span> a parallel manner) </span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fl">8.</span>          data <span class="ot">=</span> <span class="fu">g</span>() </span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fl">9.</span>          <span class="cf">for</span> f <span class="cf">in</span>  {f_1, \ldots, f_L} </span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fl">10.</span>             append <span class="fu">f</span>(data) to the result <span class="fu">object</span> (optionally apply a post<span class="sc">-</span>analyze<span class="sc">-</span><span class="cf">function</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="fl">11.</span>         optionally append data to the result object </span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="fl">12.</span>      optionally summarize the result object over all  </span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>         replications but separately <span class="cf">for</span> f_1, ..., <span class="fu">f_L</span> (and optional group variables)</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="fl">13.</span> t2 <span class="ot">=</span> <span class="fu">current.time</span>() </span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="fl">14.</span> Estimate the number of replications per hour from t1 and t2 </span></code></pre></div>
 <p>The object returned by <em>eval_tibbles</em> is a <em>list</em> of
 class <em>eval_tibbles</em>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"rnorm"</span>, n <span class="op">=</span> <span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span></span>
 <span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span>data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -241,9 +236,9 @@ class <em>eval_tibbles</em>.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 2
-Estimated replications per hour: 83192806
-Start of the simulation: 2025-04-10 18:38:43.871448
-End of the simulation: 2025-04-10 18:38:43.871534</code></pre>
+Estimated replications per hour: 75876856
+Start of the simulation: 2026-01-24 07:30:17.074415
+End of the simulation: 2026-01-24 07:30:17.07451</code></pre>
 <p>As you can see, the function always estimates the number of
 replications that can be done in one hour.</p>
 <div class="section level3">
@@ -251,7 +246,7 @@ replications that can be done in one hour.</p>
 </h3>
 <p>Of course, this parameter controls the number of replications
 conducted.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span>data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">eg</span></span></code></pre></div>
 <pre><code> [38;5;246m# A tibble: 6 × 6 [39m
@@ -266,15 +261,15 @@ conducted.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 1
 Number of replications: 3
-Estimated replications per hour: 94371840
-Start of the simulation: 2025-04-10 18:38:43.974911
-End of the simulation: 2025-04-10 18:38:43.975025</code></pre>
+Estimated replications per hour: 98689505
+Start of the simulation: 2026-01-24 07:30:17.167239
+End of the simulation: 2026-01-24 07:30:17.167348</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-discard_generated_data">Parameter <em>discard_generated_data</em><a class="anchor" aria-label="anchor" href="#parameter-discard_generated_data"></a>
 </h3>
 <p><em>eval_tibbles</em> saves ALL generated data sets.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span>data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">eg</span><span class="op">$</span><span class="va">simulation</span></span></code></pre></div>
 <pre><code> [38;5;246m# A tibble: 2 × 6 [39m
@@ -282,7 +277,7 @@ End of the simulation: 2025-04-10 18:38:43.975025</code></pre>
    [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;int&gt; [39m [23m         [3m [38;5;246m&lt;int&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m     [3m [38;5;246m&lt;dbl&gt; [39m [23m
  [38;5;250m1 [39m rnorm    10     1            1 min   - [31m0 [39m [31m. [39m [31m554 [39m  
  [38;5;250m2 [39m rnorm    10     2            1 min    0.004 [4m9 [24m [4m9 [24m</code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eg</span><span class="op">$</span><span class="va">generated_data</span></span></code></pre></div>
 <pre><code>[[1]]
  [1]  1.04382239 -0.02157836  1.79342772  1.50162446 -0.55447035  1.88349784  0.79223220  2.83137401
@@ -302,7 +297,7 @@ See command line 11 in the pseudo code.</p>
 </h3>
 <p>As stated in command line 12 we can summarize the result objects over
 all replications but separately for all data analyzing functions.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"runif"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"max"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
@@ -321,10 +316,10 @@ all replications but separately for all data analyzing functions.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 46102510
-Start of the simulation: 2025-04-10 18:38:44.178903
-End of the simulation: 2025-04-10 18:38:44.256989</code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+Estimated replications per hour: 50090711
+Start of the simulation: 2026-01-24 07:30:17.354204
+End of the simulation: 2026-01-24 07:30:17.426074</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  summary_fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span>, sd <span class="op">=</span> <span class="va">sd</span><span class="op">)</span></span>
@@ -347,9 +342,9 @@ End of the simulation: 2025-04-10 18:38:44.256989</code></pre>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 42415620
-Start of the simulation: 2025-04-10 18:38:44.286947
-End of the simulation: 2025-04-10 18:38:44.371821</code></pre>
+Estimated replications per hour: 45995779
+Start of the simulation: 2026-01-24 07:30:17.454743
+End of the simulation: 2026-01-24 07:30:17.533011</code></pre>
 <p>Note, by specifying the parameter <em>summary_fun</em> the generated
 data sets and all individual result objects are discarded. In this
 example we discard
@@ -363,7 +358,7 @@ individual result objects.</p>
 </h3>
 <p>Sometimes the analyzing functions return quite complicated objects
 like in the Section <em>A first example</em>.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"regData"</span>, n <span class="op">=</span> <span class="fl">5L</span>, SD <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"lm"</span>, formula <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -383,14 +378,14 @@ like in the Section <em>A first example</em>.</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 1056536
-Start of the simulation: 2025-04-10 18:38:44.466551
-End of the simulation: 2025-04-10 18:38:44.473366</code></pre>
+Estimated replications per hour: 1043900
+Start of the simulation: 2026-01-24 07:30:17.628306
+End of the simulation: 2026-01-24 07:30:17.635203</code></pre>
 <p>The parameter <em>post_analyze</em> (if specified) is applied
 directly after the result was generated (see command line 10). Note,
 <em>purrr::compose</em> can be very handy if your
 post-analyzing-function can be defined by a few single functions:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"regData"</span>, n <span class="op">=</span> <span class="fl">5L</span>, SD <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"lm"</span>, formula <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -411,16 +406,16 @@ post-analyzing-function can be defined by a few single functions:</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 2
-Estimated replications per hour: 522148
-Start of the simulation: 2025-04-10 18:38:44.604871
-End of the simulation: 2025-04-10 18:38:44.61866</code></pre>
+Estimated replications per hour: 523016
+Start of the simulation: 2026-01-24 07:30:17.80794
+End of the simulation: 2026-01-24 07:30:17.821706</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-group_for_summary">Parameter <em>group_for_summary</em><a class="anchor" aria-label="anchor" href="#parameter-group_for_summary"></a>
 </h3>
 <p>When the result object is a <em>data.frame</em> itself, for
 instance</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">presever_rownames</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">rn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span>  <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
@@ -451,13 +446,13 @@ instance</p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 637629
-Start of the simulation: 2025-04-10 18:38:44.714551
-End of the simulation: 2025-04-10 18:38:44.731488</code></pre>
+Estimated replications per hour: 611918
+Start of the simulation: 2026-01-24 07:30:17.919596
+End of the simulation: 2026-01-24 07:30:17.937245</code></pre>
 <p>In order to summarize the replications it is necessary to additional
 group the calculations with respect to another variable. This variable
 can be passed to <em>group_for_summary</em></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"regData"</span>, n <span class="op">=</span> <span class="fl">5L</span>, SD <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"lm"</span>, formula <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y~x"</span>, <span class="st">"y~I(x^2)"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -489,9 +484,9 @@ can be passed to <em>group_for_summary</em></p>
 Number of data generating functions: 2
 Number of analyzing procedures: 2
 Number of replications: 3
-Estimated replications per hour: 199216
-Start of the simulation: 2025-04-10 18:38:44.839994
-End of the simulation: 2025-04-10 18:38:44.894207</code></pre>
+Estimated replications per hour: 204272
+Start of the simulation: 2026-01-24 07:30:18.04142
+End of the simulation: 2026-01-24 07:30:18.09429</code></pre>
 </div>
 <div class="section level3">
 <h3 id="parameter-ncpus-and-cluster_seed">Parameter <em>ncpus</em> and <em>cluster_seed</em><a class="anchor" aria-label="anchor" href="#parameter-ncpus-and-cluster_seed"></a>
@@ -499,7 +494,7 @@ End of the simulation: 2025-04-10 18:38:44.894207</code></pre>
 <p>By specifying <em>ncpus</em> larger than 1 a cluster objected is
 created for the user and passed to the parameter <em>cluster</em>
 discussed in the next section.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
 <span>  data_grid <span class="op">=</span> <span class="va">dg</span>, proc_grid <span class="op">=</span> <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  ncpus <span class="op">=</span> <span class="fl">2</span>, summary_fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
@@ -516,9 +511,9 @@ discussed in the next section.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 93122
-Start of the simulation: 2025-04-10 18:38:45.24177
-End of the simulation: 2025-04-10 18:38:45.628358</code></pre>
+Estimated replications per hour: 92637
+Start of the simulation: 2026-01-24 07:30:18.438831
+End of the simulation: 2026-01-24 07:30:18.827441</code></pre>
 <p>As it is stated in command line 7, the replications are parallelized.
 In our case, this means that roughly every CPU conducts 5
 replications.</p>
@@ -534,7 +529,7 @@ in order to reproduce the simulation study it is also necessary that
 <p>The user can create a cluster on its own. This also enables the user
 to distribute the replications over different computers in a
 network.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span>
 <span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"localhost"</span>, <span class="fl">2</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"PSOCK"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span></span>
@@ -553,10 +548,10 @@ network.</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 2
 Number of replications: 10
-Estimated replications per hour: 93286
-Start of the simulation: 2025-04-10 18:38:45.981494
-End of the simulation: 2025-04-10 18:38:46.367402</code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+Estimated replications per hour: 92127
+Start of the simulation: 2026-01-24 07:30:19.178495
+End of the simulation: 2026-01-24 07:30:19.569258</code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 <p>As you can see our cluster consists of 3 workers. Hence, this
 reproduces the results from the last code chunk above. Further note, if
@@ -572,7 +567,7 @@ cluster that is created within <em>eval_tibbles</em> by specifying
 requires libraries or objects from the global environment, they must be
 transferred to the cluster.</p>
 <p>Lets look at standard example from the <em>boot</em> package.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
 <span><span class="va">ratio</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">d</span>, <span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">x</span> <span class="op">*</span> <span class="va">w</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">u</span> <span class="op">*</span> <span class="va">w</span><span class="op">)</span></span>
 <span><span class="va">city.boot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">city</span>, <span class="va">ratio</span>,</span>
@@ -602,7 +597,7 @@ Calculations and Intervals on Original Scale</code></pre>
 <p>The following data generating function is extremely boring because it
 always returns the data set <em>city</em> from the library
 <em>boot</em>.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">returnCity</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">city</span></span>
 <span><span class="op">}</span></span>
@@ -621,7 +616,7 @@ environment. Further we had to load the <em>boot</em> package. Hence, we
 load the <em>boot</em> package by setting <em>cluster_libraries =
 c(“boot”)</em> and transfer the function <em>ratio</em> by setting
 <em>cluster_global_objects = c(“ratio”)</em>.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"returnCity"</span><span class="op">)</span></span>
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"bootConfInt"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>,</span>
@@ -645,9 +640,9 @@ c(“boot”)</em> and transfer the function <em>ratio</em> by setting
 Number of data generating functions: 1
 Number of analyzing procedures: 1
 Number of replications: 10
-Estimated replications per hour: 200485
-Start of the simulation: 2025-04-10 18:38:47.192748
-End of the simulation: 2025-04-10 18:38:47.372312</code></pre>
+Estimated replications per hour: 202386
+Start of the simulation: 2026-01-24 07:30:20.39931
+End of the simulation: 2026-01-24 07:30:20.577187</code></pre>
 <p>Of course, it is possible to set
 <em>cluster_global_objects=ls()</em>, but then all objects from the
 global environment are transferred to all workers.</p>
@@ -661,7 +656,7 @@ by applying the <em>R</em>-function <em>get</em>. By default,
 <em>envir=globalenv()</em> and thus <em>get</em> searches the global
 environment of the current R session. An example shows how to use the
 parameter <em>envir</em>.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># masking summary from the base package</span></span>
 <span><span class="va">summary</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">tibble</span><span class="op">(</span>sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html" class="external-link">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">tibble</span><span class="op">(</span>q0.1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
@@ -690,9 +685,9 @@ parameter <em>envir</em>.</p>
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2464418
-Start of the simulation: 2025-04-10 18:38:47.513304
-End of the simulation: 2025-04-10 18:38:47.514765
+Estimated replications per hour: 2071545
+Start of the simulation: 2026-01-24 07:30:20.747182
+End of the simulation: 2026-01-24 07:30:20.74892
 --------------------------------------------------
  [38;5;246m# A tibble: 2 × 7 [39m
   fun       n replications proc        sd   mean   q0.1
@@ -702,9 +697,9 @@ End of the simulation: 2025-04-10 18:38:47.514765
 Number of data generating functions: 1
 Number of analyzing procedures: 2
 Number of replications: 1
-Estimated replications per hour: 2820226
-Start of the simulation: 2025-04-10 18:38:47.543441
-End of the simulation: 2025-04-10 18:38:47.544718</code></pre>
+Estimated replications per hour: 2650429
+Start of the simulation: 2026-01-24 07:30:20.779642
+End of the simulation: 2026-01-24 07:30:20.781</code></pre>
 </div>
 <div class="section level3">
 <h3 id="truth-functionality">.truth-functionality<a class="anchor" aria-label="anchor" href="#truth-functionality"></a>
@@ -719,7 +714,7 @@ analyzing function has an argument <em>.truth</em>, then
 <em>eval_tibbles</em> will manage that hand-over. A brief example should
 explain this. Suppose we want to estimate the bias of the empirical
 quantile estimator if the data is normal distributed.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rnorm"</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1000</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">10</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">100L</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="st">"quantile"</span>, probs <span class="op">=</span> <span class="fl">0.975</span><span class="op">)</span></span>
 <span><span class="va">post_ana</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">q_est</span>, <span class="va">.truth</span><span class="op">)</span><span class="op">{</span></span>
@@ -743,15 +738,15 @@ quantile estimator if the data is normal distributed.</p>
 Number of data generating functions: 8
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 1240334
-Start of the simulation: 2025-04-10 18:38:47.898772
-End of the simulation: 2025-04-10 18:38:50.801214</code></pre>
+Estimated replications per hour: 1140459
+Start of the simulation: 2026-01-24 07:30:21.134018
+End of the simulation: 2026-01-24 07:30:24.29064</code></pre>
 <p>If we want to do the analysis for different distrubtions we could
 modify our post data analyzing function, but we can also simply add a
 <em>.truth</em>-column to the data generating grid. In this case, the
 information from the <em>.truth</em>-column is directly passed to the
 <em>.truth</em>-parameter:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rnorm"</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">100L</span><span class="op">)</span>, .truth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rexp"</span><span class="op">)</span>, rate <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">100L</span><span class="op">)</span>, .truth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Exponential.html" class="external-link">qexp</a></span><span class="op">(</span><span class="fl">0.975</span>, rate <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -779,13 +774,13 @@ information from the <em>.truth</em>-column is directly passed to the
 Number of data generating functions: 6
 Number of analyzing procedures: 1
 Number of replications: 1000
-Estimated replications per hour: 2848878
-Start of the simulation: 2025-04-10 18:38:51.152488
-End of the simulation: 2025-04-10 18:38:52.416143</code></pre>
+Estimated replications per hour: 2725648
+Start of the simulation: 2026-01-24 07:30:24.662288
+End of the simulation: 2026-01-24 07:30:25.983075</code></pre>
 <p>In the same fashion one could write a data analyzing function with a
 parameter <em>.truth</em>. To go even a step further, we store the
 analytic quantile function in the <em>.truth</em> column:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rnorm"</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">1000L</span><span class="op">)</span>, </span>
 <span>                .truth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">prob</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="va">prob</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -822,18 +817,18 @@ analytic quantile function in the <em>.truth</em> column:</p>
 Number of data generating functions: 6
 Number of analyzing procedures: 2
 Number of replications: 1000
-Estimated replications per hour: 2092500
-Start of the simulation: 2025-04-10 18:38:52.529637
-End of the simulation: 2025-04-10 18:38:54.250067</code></pre>
+Estimated replications per hour: 1945234
+Start of the simulation: 2026-01-24 07:30:26.112397
+End of the simulation: 2026-01-24 07:30:27.963073</code></pre>
 <p>But one should keep in mind that if one calculates the quantile
 during the (post) analyzing phase that this is happens on replication
 level. To be more precise lets look at an excerpt of the pseudo code
 from the beginning of the vignette:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fl">6.</span>  <span class="cf">for</span> g <span class="cf">in</span>  {g_1, ..., g_k} </span>
-<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="fl">7.</span>      <span class="cf">for</span> r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">replications</span> (optionally <span class="cf">in</span> a parallel manner) </span>
-<span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a><span class="fl">8.</span>          data <span class="ot">=</span> <span class="fu">g</span>() </span>
-<span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a><span class="fl">9.</span>          <span class="cf">for</span> f <span class="cf">in</span>  {f_1, \ldots, f_L} </span>
-<span id="cb47-5"><a href="#cb47-5" tabindex="-1"></a><span class="fl">10.</span>             append <span class="fu">f</span>(data) to the result <span class="fu">object</span> (optionally apply a post<span class="sc">-</span>analyze<span class="sc">-</span><span class="cf">function</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="fl">6.</span>  <span class="cf">for</span> g <span class="cf">in</span>  {g_1, ..., g_k} </span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="fl">7.</span>      <span class="cf">for</span> r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">replications</span> (optionally <span class="cf">in</span> a parallel manner) </span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a><span class="fl">8.</span>          data <span class="ot">=</span> <span class="fu">g</span>() </span>
+<span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a><span class="fl">9.</span>          <span class="cf">for</span> f <span class="cf">in</span>  {f_1, \ldots, f_L} </span>
+<span id="cb46-5"><a href="#cb46-5" tabindex="-1"></a><span class="fl">10.</span>             append <span class="fu">f</span>(data) to the result <span class="fu">object</span> (optionally apply a post<span class="sc">-</span>analyze<span class="sc">-</span><span class="cf">function</span>)</span></code></pre></div>
 <p>No matter if one extend the data analyzing function <em>f_1, …
 f_L</em> or the post-analyze-function with an argument <em>.truth</em>
 the calculation are made for every single replication during step 10.
@@ -847,7 +842,7 @@ Hence, the operations are not vectorized!</p>
 resources. In order to prevent that these are checked/executed on the
 CRAN check farm, they are only evaluated if the environment variable
 <em>NOT_CRAN</em> is set to “true”</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">EVAL</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NOT_CRAN"</span><span class="op">)</span> <span class="op">==</span> <span class="st">"true"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">EVAL</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
@@ -858,7 +853,7 @@ distributed data<a class="anchor" aria-label="anchor" href="#sampling-distributi
 </h3>
 <p>First we define how the data is generated, where the sample size
 should be 10 and 100:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rnorm"</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">100L</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rexp"</span><span class="op">)</span>, rate <span class="op">=</span> <span class="fl">1</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">100L</span><span class="op">)</span><span class="op">)</span></span>
@@ -872,7 +867,7 @@ should be 10 and 100:</p>
  [38;5;250m3 [39m rexp      [31mNA [39m    10     1
  [38;5;250m4 [39m rexp      [31mNA [39m   100     1</code></pre>
 <p>Afterwards we define how we want to analyze the data:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>proc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"median"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pg</span></span></code></pre></div>
 <pre><code> [38;5;246m# A tibble: 2 × 1 [39m
@@ -881,14 +876,14 @@ should be 10 and 100:</p>
  [38;5;250m1 [39m mean  
  [38;5;250m2 [39m median</code></pre>
 <p>Finally, we conduct the simulation and visualize the results</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">et</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>, replications <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, ncpus <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">et</span><span class="op">$</span><span class="va">simulation</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">results</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html" class="external-link">interaction</a></span><span class="op">(</span><span class="va">fun</span>, <span class="va">n</span><span class="op">)</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html" class="external-link">interaction</a></span><span class="op">(</span><span class="va">fun</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_density</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span> <span class="va">proc</span><span class="op">)</span></span></code></pre></div>
-<p><img src="simTool_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p><img src="simTool_files/figure-html/unnamed-chunk-27-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="comparing-bootstrap-confidence-intervals-with-classical-studentized-interval">Comparing bootstrap confidence intervals with classical studentized
@@ -898,7 +893,7 @@ interval<a class="anchor" aria-label="anchor" href="#comparing-bootstrap-confide
 <em>boot::boot.ci()</em> and <em>stats::t.test()</em>. Unfortunately,
 <em>boot::boot.ci()</em> cannot be applied directly to the generated
 data sets. Therefore, we write a new function:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bootstrap_ci</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">conf.level</span>, <span class="va">R</span> <span class="op">=</span> <span class="fl">999</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">x</span>, <span class="kw">function</span><span class="op">(</span><span class="va">d</span>, <span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
@@ -918,7 +913,7 @@ additionally modify the function <em>bootstrap_ci</em> so that both
 function return objects with a unified structure. But instead of that we
 will implement a function that is later on passed to the argument
 <em>post_analyze</em> of <em>eval_tibbles</em>:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">post_analyze</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">o</span>, <span class="va">.truth</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">o</span><span class="op">)</span> <span class="op">==</span> <span class="st">"htest"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co">#post-process the object returned by t.test</span></span>
@@ -959,7 +954,7 @@ can be achieved by using the parameter <em>group_for_summary</em> of
 </h4>
 <p>We want to generate normal-, uniform-, and exponential distributed
 data:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
 <span>  <span class="fu">simTool</span><span class="fu">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"rnorm"</span>, n <span class="op">=</span> <span class="fl">10L</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, .truth <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>  <span class="fu">simTool</span><span class="fu">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"runif"</span>, n <span class="op">=</span> <span class="fl">10L</span>, max <span class="op">=</span> <span class="fl">6</span>, .truth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
@@ -974,7 +969,7 @@ data:</p>
  [38;5;250m3 [39m rexp     10     [31mNA [39m  [31mNA [39m      1.73     [31mNA [39m  0.577</code></pre>
 <p>and apply our functions that calculate the confidence intervals to it
 using two different confidence levels.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu">simTool</span><span class="fu">::</span><span class="fu"><a href="../reference/expand_tibble.html">expand_tibble</a></span><span class="op">(</span></span>
 <span>  proc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"t.test"</span>,<span class="st">"bootstrap_ci"</span><span class="op">)</span>,</span>
 <span>  conf.level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.95</span><span class="op">)</span></span>
@@ -996,7 +991,7 @@ intervals. Since these variables are part of the result objects,
 to summarize the results (calculating the mean) over all replications
 correctly we need to tell eval_tibbles that additional group variables
 are <em>type</em> and <em>aspect</em>:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">et</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/eval_tibbles.html">eval_tibbles</a></span><span class="op">(</span><span class="va">dg</span>, <span class="va">pg</span>,</span>
 <span>  replications <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span>, ncpus <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  cluster_global_objects <span class="op">=</span> <span class="st">"post_analyze"</span>,</span>
@@ -1023,25 +1018,25 @@ are <em>type</em> and <em>aspect</em>:</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 1000
-Estimated replications per hour: 14284
-Start of the simulation: 2025-04-10 18:38:57.935326
-End of the simulation: 2025-04-10 18:43:09.959719</code></pre>
+Estimated replications per hour: 14467
+Start of the simulation: 2026-01-24 07:30:31.978134
+End of the simulation: 2026-01-24 07:34:40.804925</code></pre>
 <p>Finally, we can visualize the summarized results:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">et</span><span class="op">$</span><span class="va">simulation</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">fun</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">type</span>, fill <span class="op">=</span> <span class="va">type</span>, label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">value</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_label</span><span class="op">(</span>position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">facet_grid</span><span class="op">(</span><span class="va">aspect</span> <span class="op">~</span> <span class="va">conf.level</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="simTool_files/figure-html/unnamed-chunk-33-1.png" width="1248"></p>
+<p><img src="simTool_files/figure-html/unnamed-chunk-33-1.png" class="r-plt" alt="" width="1248"></p>
 </div>
 <div class="section level4">
 <h4 id="a-different-implementation">A different implementation<a class="anchor" aria-label="anchor" href="#a-different-implementation"></a>
 </h4>
 <p>Here we briefly realize the simulation differently by leveraging data
 analyzing functions with unified return-objects:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_test</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">conf.level</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">x</span>, conf.level <span class="op">=</span> <span class="va">conf.level</span><span class="op">)</span></span>
 <span>  </span>
@@ -1101,10 +1096,10 @@ analyzing functions with unified return-objects:</p>
 Number of data generating functions: 3
 Number of analyzing procedures: 4
 Number of replications: 100
-Estimated replications per hour: 149210
-Start of the simulation: 2025-04-10 18:43:11.464511
-End of the simulation: 2025-04-10 18:43:13.877217</code></pre>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+Estimated replications per hour: 146215
+Start of the simulation: 2026-01-24 07:34:42.505909
+End of the simulation: 2026-01-24 07:34:44.96802</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grps</span> <span class="op">&lt;-</span> <span class="va">et</span><span class="op">$</span><span class="va">simulation</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">replications</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">fun</span><span class="op">:</span><span class="va">type</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -1116,6 +1111,11 @@ End of the simulation: 2025-04-10 18:43:13.877217</code></pre>
 <span>  <span class="fu">group_by</span><span class="op">(</span>.dots <span class="op">=</span> <span class="va">grps</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>coverage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span>,</span>
 <span>            ci_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">ci_length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>Warning:  [1m [22mThe `.dots` argument of `group_by()` is deprecated as of dplyr 1.0.0.
+ [36mℹ [39m The deprecated feature was likely used in the  [34mdplyr [39m package.
+  Please report the issue at  [3m [34m&lt;https://github.com/tidyverse/dplyr/issues&gt; [39m [23m.
+ [90mThis warning is displayed once per session. [39m
+ [90mCall `lifecycle::last_lifecycle_warnings()` to see where this warning was generated. [39m</code></pre>
 <pre><code> [1m [22m`summarise()` has grouped output by 'fun', 'n', 'mean', 'sd', '.truth', 'max', 'rate', 'proc',
 'conf.level', 'R'. You can override using the `.groups` argument.</code></pre>
 <pre><code> [38;5;246m# A tibble: 36 × 13 [39m
@@ -1147,7 +1147,7 @@ End of the simulation: 2025-04-10 18:43:13.877217</code></pre>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
