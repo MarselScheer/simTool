@@ -64,9 +64,9 @@ using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
     #> Number of data generating functions: 4
     #> Number of analyzing procedures: 3
     #> Number of replications: 1000
-    #> Estimated replications per hour: 1329200
-    #> Start of the simulation: 2025-04-10 18:09:19.481191
-    #> End of the simulation: 2025-04-10 18:09:22.189585
+    #> Estimated replications per hour: 1328974
+    #> Start of the simulation: 2026-01-24 07:30:30.279282
+    #> End of the simulation: 2026-01-24 07:30:32.988137
 
 ## Installation
 
