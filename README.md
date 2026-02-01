@@ -2,7 +2,7 @@
 
 [![R build
 status](https://github.com/MarselScheer/simTool/workflows/R-CMD-check/badge.svg)](https://github.com/MarselScheer/simTool/actions)
-[![codecov](https://codecov.io/gh/MarselScheer/simTool/branch/development/graph/badge.svg?token=aCoLwwqLrB)](https://codecov.io/gh/MarselScheer/simTool)
+[![codecov](https://codecov.io/gh/MarselScheer/simTool/branch/development/graph/badge.svg?token=aCoLwwqLrB)](https://app.codecov.io/gh/MarselScheer/simTool/)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -64,9 +64,9 @@ using confidence levels 0.8, 0.9, 0.95 are applied. This is repeated
     #> Number of data generating functions: 4
     #> Number of analyzing procedures: 3
     #> Number of replications: 1000
-    #> Estimated replications per hour: 1328974
-    #> Start of the simulation: 2026-01-24 07:30:30.279282
-    #> End of the simulation: 2026-01-24 07:30:32.988137
+    #> Estimated replications per hour: 1342837
+    #> Start of the simulation: 2026-01-24 11:03:38.998282
+    #> End of the simulation: 2026-01-24 11:03:41.679172
 
 ## Installation
 
