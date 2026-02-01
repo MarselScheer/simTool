@@ -1,4 +1,9 @@
 
+Version 1.1.9
+=========================
+
+* address deprecated .dots argument of group_by() due to upcoming dplyr version 1.2.0
+
 Version 1.1.8
 =========================
 

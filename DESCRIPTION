@@ -1,7 +1,7 @@
 Package: simTool
 Type: Package
 Title: Conduct Simulation Studies with a Minimal Amount of Source Code
-Version: 1.1.8
+Version: 1.1.9
 Authors@R: person("Marsel", "Scheer", role = c("aut", "cre"), email = "scheer@freescience.de")
 Maintainer: Marsel Scheer <scheer@freescience.de>
 Description: Tool for statistical simulations that have two components. 
@@ -34,6 +34,6 @@ Suggests:
     covr
 License: GPL-3
 VignetteBuilder: knitr
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 URL: https://marselscheer.github.io/simTool/
 BugReports: https://github.com/MarselScheer/simTool/issues
