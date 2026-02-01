@@ -51,9 +51,9 @@ et
 #> Number of data generating functions: 4
 #> Number of analyzing procedures: 3
 #> Number of replications: 1000
-#> Estimated replications per hour: 1329200
-#> Start of the simulation: 2025-04-10 18:09:19.481191
-#> End of the simulation: 2025-04-10 18:09:22.189585
+#> Estimated replications per hour: 1342837
+#> Start of the simulation: 2026-01-24 11:03:38.998282
+#> End of the simulation: 2026-01-24 11:03:41.679172
 ```
 
 ## Installation

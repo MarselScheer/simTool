@@ -180,9 +180,9 @@ eval_tibbles(dg, pg, rep = 2, simplify = FALSE)
 #> Number of data generating functions: 2
 #> Number of analyzing procedures: 3
 #> Number of replications: 2
-#> Estimated replications per hour: 13859104
-#> Start of the simulation: 2026-01-24 07:30:12.076642
-#> End of the simulation: 2026-01-24 07:30:12.077162
+#> Estimated replications per hour: 14157988
+#> Start of the simulation: 2026-02-01 14:30:09.047215
+#> End of the simulation: 2026-02-01 14:30:09.047723
 eval_tibbles(dg, pg, rep = 2)
 #> # A tibble: 16 × 5
 #>    fun       n replications proc   results
@@ -206,9 +206,9 @@ eval_tibbles(dg, pg, rep = 2)
 #> Number of data generating functions: 2
 #> Number of analyzing procedures: 3
 #> Number of replications: 2
-#> Estimated replications per hour: 22843410
-#> Start of the simulation: 2026-01-24 07:30:12.121196
-#> End of the simulation: 2026-01-24 07:30:12.121511
+#> Estimated replications per hour: 23760022
+#> Start of the simulation: 2026-02-01 14:30:09.089757
+#> End of the simulation: 2026-02-01 14:30:09.09006
 eval_tibbles(dg, pg,
   rep = 2,
   post_analyze = purrr::compose(as.data.frame, t)
@@ -231,9 +231,9 @@ eval_tibbles(dg, pg,
 #> Number of data generating functions: 2
 #> Number of analyzing procedures: 3
 #> Number of replications: 2
-#> Estimated replications per hour: 719040
-#> Start of the simulation: 2026-01-24 07:30:12.153512
-#> End of the simulation: 2026-01-24 07:30:12.163525
+#> Estimated replications per hour: 820713
+#> Start of the simulation: 2026-02-01 14:30:09.120234
+#> End of the simulation: 2026-02-01 14:30:09.129007
 eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 #> # A tibble: 12 × 8
 #>    fun       n replications summary_fun proc       min    max  value
@@ -253,9 +253,9 @@ eval_tibbles(dg, pg, rep = 2, summary_fun = list(mean = mean, sd = sd))
 #> Number of data generating functions: 2
 #> Number of analyzing procedures: 3
 #> Number of replications: 2
-#> Estimated replications per hour: 281331
-#> Start of the simulation: 2026-01-24 07:30:12.197389
-#> End of the simulation: 2026-01-24 07:30:12.222981
+#> Estimated replications per hour: 307650
+#> Start of the simulation: 2026-02-01 14:30:09.16036
+#> End of the simulation: 2026-02-01 14:30:09.183763
 
 regData <- function(n, SD) {
   data.frame(
@@ -288,9 +288,9 @@ eg
 #> Number of data generating functions: 2
 #> Number of analyzing procedures: 2
 #> Number of replications: 3
-#> Estimated replications per hour: 1147726
-#> Start of the simulation: 2026-01-24 07:30:12.263807
-#> End of the simulation: 2026-01-24 07:30:12.273217
+#> Estimated replications per hour: 1237934
+#> Start of the simulation: 2026-02-01 14:30:09.231213
+#> End of the simulation: 2026-02-01 14:30:09.239937
 
 presever_rownames <- function(mat) {
   rn <- rownames(mat)
@@ -359,9 +359,9 @@ et
 #> Number of data generating functions: 4
 #> Number of analyzing procedures: 3
 #> Number of replications: 10
-#> Estimated replications per hour: 669158
-#> Start of the simulation: 2026-01-24 07:30:12.575608
-#> End of the simulation: 2026-01-24 07:30:12.629407
+#> Estimated replications per hour: 639267
+#> Start of the simulation: 2026-02-01 14:30:09.501666
+#> End of the simulation: 2026-02-01 14:30:09.55798
 
 dg <- dplyr::bind_rows(
   expand_tibble(fun = "rexp", rate = 10, .truth = 1 / 10, n = c(50L, 100L)),
@@ -394,9 +394,9 @@ et
 #> Number of data generating functions: 4
 #> Number of analyzing procedures: 3
 #> Number of replications: 10
-#> Estimated replications per hour: 750337
-#> Start of the simulation: 2026-01-24 07:30:12.6658
-#> End of the simulation: 2026-01-24 07:30:12.713779
+#> Estimated replications per hour: 769993
+#> Start of the simulation: 2026-02-01 14:30:09.596486
+#> End of the simulation: 2026-02-01 14:30:09.64324
 ### need to remove the locally adapted eval_tibbles()
 ### otherwise executing the examples would mask
 ### eval_tibbles from simTool-namespace.

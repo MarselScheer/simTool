@@ -49,9 +49,9 @@ eval_tibbles(
     Number of data generating functions: 2
     Number of analyzing procedures: 2
     Number of replications: 3
-    Estimated replications per hour: 117413
-    Start of the simulation: 2026-01-24 07:30:16.633815
-    End of the simulation: 2026-01-24 07:30:16.725798
+    Estimated replications per hour: 122175
+    Start of the simulation: 2026-02-01 14:30:12.845667
+    End of the simulation: 2026-02-01 14:30:12.934064
 
 ## Introduction
 
@@ -174,9 +174,9 @@ eg
     Number of data generating functions: 2
     Number of analyzing procedures: 1
     Number of replications: 2
-    Estimated replications per hour: 75876856
-    Start of the simulation: 2026-01-24 07:30:17.074415
-    End of the simulation: 2026-01-24 07:30:17.07451
+    Estimated replications per hour: 83886080
+    Start of the simulation: 2026-02-01 14:30:13.277104
+    End of the simulation: 2026-02-01 14:30:13.27719
 
 As you can see, the function always estimates the number of replications
 that can be done in one hour.
@@ -203,8 +203,8 @@ eg
     Number of analyzing procedures: 1
     Number of replications: 3
     Estimated replications per hour: 98689505
-    Start of the simulation: 2026-01-24 07:30:17.167239
-    End of the simulation: 2026-01-24 07:30:17.167348
+    Start of the simulation: 2026-02-01 14:30:13.367208
+    End of the simulation: 2026-02-01 14:30:13.367318
 
 ### Parameter *discard_generated_data*
 
@@ -265,9 +265,9 @@ eval_tibbles(
     Number of data generating functions: 3
     Number of analyzing procedures: 2
     Number of replications: 1000
-    Estimated replications per hour: 50090711
-    Start of the simulation: 2026-01-24 07:30:17.354204
-    End of the simulation: 2026-01-24 07:30:17.426074
+    Estimated replications per hour: 52156427
+    Start of the simulation: 2026-02-01 14:30:13.550125
+    End of the simulation: 2026-02-01 14:30:13.619148
 
 ``` r
 eval_tibbles(
@@ -294,9 +294,9 @@ eval_tibbles(
     Number of data generating functions: 3
     Number of analyzing procedures: 2
     Number of replications: 1000
-    Estimated replications per hour: 45995779
-    Start of the simulation: 2026-01-24 07:30:17.454743
-    End of the simulation: 2026-01-24 07:30:17.533011
+    Estimated replications per hour: 47464327
+    Start of the simulation: 2026-02-01 14:30:13.646593
+    End of the simulation: 2026-02-01 14:30:13.72244
 
 Note, by specifying the parameter *summary_fun* the generated data sets
 and all individual result objects are discarded. In this example we
@@ -330,9 +330,9 @@ eval_tibbles(
     Number of data generating functions: 2
     Number of analyzing procedures: 2
     Number of replications: 2
-    Estimated replications per hour: 1043900
-    Start of the simulation: 2026-01-24 07:30:17.628306
-    End of the simulation: 2026-01-24 07:30:17.635203
+    Estimated replications per hour: 1062633
+    Start of the simulation: 2026-02-01 14:30:13.81296
+    End of the simulation: 2026-02-01 14:30:13.819736
 
 The parameter *post_analyze* (if specified) is applied directly after
 the result was generated (see command line 10). Note, *purrr::compose*
@@ -362,9 +362,9 @@ eval_tibbles(
     Number of data generating functions: 2
     Number of analyzing procedures: 2
     Number of replications: 2
-    Estimated replications per hour: 523016
-    Start of the simulation: 2026-01-24 07:30:17.80794
-    End of the simulation: 2026-01-24 07:30:17.821706
+    Estimated replications per hour: 540097
+    Start of the simulation: 2026-02-01 14:30:13.987709
+    End of the simulation: 2026-02-01 14:30:14.00104
 
 ### Parameter *group_for_summary*
 
@@ -403,9 +403,9 @@ eval_tibbles(
     Number of data generating functions: 2
     Number of analyzing procedures: 2
     Number of replications: 3
-    Estimated replications per hour: 611918
-    Start of the simulation: 2026-01-24 07:30:17.919596
-    End of the simulation: 2026-01-24 07:30:17.937245
+    Estimated replications per hour: 626257
+    Start of the simulation: 2026-02-01 14:30:14.097683
+    End of the simulation: 2026-02-01 14:30:14.114928
 
 In order to summarize the replications it is necessary to additional
 group the calculations with respect to another variable. This variable
@@ -445,9 +445,9 @@ eval_tibbles(
     Number of data generating functions: 2
     Number of analyzing procedures: 2
     Number of replications: 3
-    Estimated replications per hour: 204272
-    Start of the simulation: 2026-01-24 07:30:18.04142
-    End of the simulation: 2026-01-24 07:30:18.09429
+    Estimated replications per hour: 210868
+    Start of the simulation: 2026-02-01 14:30:14.216754
+    End of the simulation: 2026-02-01 14:30:14.267971
 
 ### Parameter *ncpus* and *cluster_seed*
 
@@ -474,9 +474,9 @@ eval_tibbles(
     Number of data generating functions: 3
     Number of analyzing procedures: 2
     Number of replications: 10
-    Estimated replications per hour: 92637
-    Start of the simulation: 2026-01-24 07:30:18.438831
-    End of the simulation: 2026-01-24 07:30:18.827441
+    Estimated replications per hour: 96025
+    Start of the simulation: 2026-02-01 14:30:14.617123
+    End of the simulation: 2026-02-01 14:30:14.992023
 
 As it is stated in command line 7, the replications are parallelized. In
 our case, this means that roughly every CPU conducts 5 replications.
@@ -512,9 +512,9 @@ eval_tibbles(
     Number of data generating functions: 3
     Number of analyzing procedures: 2
     Number of replications: 10
-    Estimated replications per hour: 92127
-    Start of the simulation: 2026-01-24 07:30:19.178495
-    End of the simulation: 2026-01-24 07:30:19.569258
+    Estimated replications per hour: 96961
+    Start of the simulation: 2026-02-01 14:30:15.350815
+    End of the simulation: 2026-02-01 14:30:15.722096
 
 ``` r
 stopCluster(cl)
@@ -615,9 +615,9 @@ eval_tibbles(dg, pg,
     Number of data generating functions: 1
     Number of analyzing procedures: 1
     Number of replications: 10
-    Estimated replications per hour: 202386
-    Start of the simulation: 2026-01-24 07:30:20.39931
-    End of the simulation: 2026-01-24 07:30:20.577187
+    Estimated replications per hour: 213533
+    Start of the simulation: 2026-02-01 14:30:16.533123
+    End of the simulation: 2026-02-01 14:30:16.701715
 
 Of course, it is possible to set *cluster_global_objects=ls()*, but then
 all objects from the global environment are transferred to all workers.
@@ -661,9 +661,9 @@ someFunc()
     Number of data generating functions: 1
     Number of analyzing procedures: 2
     Number of replications: 1
-    Estimated replications per hour: 2071545
-    Start of the simulation: 2026-01-24 07:30:20.747182
-    End of the simulation: 2026-01-24 07:30:20.74892
+    Estimated replications per hour: 2541574
+    Start of the simulation: 2026-02-01 14:30:16.86277
+    End of the simulation: 2026-02-01 14:30:16.864186
     --------------------------------------------------
      [38;5;246m# A tibble: 2 × 7 [39m
       fun       n replications proc        sd   mean   q0.1
@@ -673,9 +673,9 @@ someFunc()
     Number of data generating functions: 1
     Number of analyzing procedures: 2
     Number of replications: 1
-    Estimated replications per hour: 2650429
-    Start of the simulation: 2026-01-24 07:30:20.779642
-    End of the simulation: 2026-01-24 07:30:20.781
+    Estimated replications per hour: 3067132
+    Start of the simulation: 2026-02-01 14:30:16.890403
+    End of the simulation: 2026-02-01 14:30:16.891577
 
 ### .truth-functionality
 
@@ -716,9 +716,9 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
     Number of data generating functions: 8
     Number of analyzing procedures: 1
     Number of replications: 1000
-    Estimated replications per hour: 1140459
-    Start of the simulation: 2026-01-24 07:30:21.134018
-    End of the simulation: 2026-01-24 07:30:24.29064
+    Estimated replications per hour: 1189372
+    Start of the simulation: 2026-02-01 14:30:17.228915
+    End of the simulation: 2026-02-01 14:30:20.255721
 
 If we want to do the analysis for different distrubtions we could modify
 our post data analyzing function, but we can also simply add a
@@ -756,9 +756,9 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
     Number of data generating functions: 6
     Number of analyzing procedures: 1
     Number of replications: 1000
-    Estimated replications per hour: 2725648
-    Start of the simulation: 2026-01-24 07:30:24.662288
-    End of the simulation: 2026-01-24 07:30:25.983075
+    Estimated replications per hour: 2841267
+    Start of the simulation: 2026-02-01 14:30:20.622362
+    End of the simulation: 2026-02-01 14:30:21.889402
 
 In the same fashion one could write a data analyzing function with a
 parameter *.truth*. To go even a step further, we store the analytic
@@ -803,9 +803,9 @@ eval_tibbles(dg, pg, replications = 10^3, discard_generated_data = TRUE,
     Number of data generating functions: 6
     Number of analyzing procedures: 2
     Number of replications: 1000
-    Estimated replications per hour: 1945234
-    Start of the simulation: 2026-01-24 07:30:26.112397
-    End of the simulation: 2026-01-24 07:30:27.963073
+    Estimated replications per hour: 1988195
+    Start of the simulation: 2026-02-01 14:30:22.014817
+    End of the simulation: 2026-02-01 14:30:23.825505
 
 But one should keep in mind that if one calculates the quantile during
 the (post) analyzing phase that this is happens on replication level. To
@@ -1030,9 +1030,9 @@ et
     Number of data generating functions: 3
     Number of analyzing procedures: 4
     Number of replications: 1000
-    Estimated replications per hour: 14467
-    Start of the simulation: 2026-01-24 07:30:31.978134
-    End of the simulation: 2026-01-24 07:34:40.804925
+    Estimated replications per hour: 14700
+    Start of the simulation: 2026-02-01 14:30:27.687527
+    End of the simulation: 2026-02-01 14:34:32.582255
 
 Finally, we can visualize the summarized results:
 
@@ -1114,9 +1114,9 @@ et
     Number of data generating functions: 3
     Number of analyzing procedures: 4
     Number of replications: 100
-    Estimated replications per hour: 146215
-    Start of the simulation: 2026-01-24 07:34:42.505909
-    End of the simulation: 2026-01-24 07:34:44.96802
+    Estimated replications per hour: 150803
+    Start of the simulation: 2026-02-01 14:34:34.207481
+    End of the simulation: 2026-02-01 14:34:36.594687
 
 ``` r
 grps <- et$simulation %>% 
